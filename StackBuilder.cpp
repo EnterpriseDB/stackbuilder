@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.2 2007/02/19 14:22:23 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,6 +17,7 @@
 
 // Application headers
 #include "Wizard.h"
+#include "images/background.xpm"
 
 IMPLEMENT_APP(StackBuilder)
 
@@ -53,7 +54,7 @@ bool StackBuilder::OnInit()
 		applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
 
 	// Create and run the wizard
-	wxBitmap bitmap = wxBitmap(wxT("background.bmp"), wxBITMAP_TYPE_BMP);
+	wxBitmap bitmap = wxBitmap(background_xpm);
     Wizard wizard(NULL, bitmap, applicationListUrl, mirrorListUrl);
 	bool retval = wizard.RunWizard(wizard.GetFirstPage()); 
 
