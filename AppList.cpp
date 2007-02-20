@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -131,7 +131,6 @@ bool AppList::PopulateTreeCtrl()
 	wxTreeItemId node, root, category, application;
 	bool found;
 
-	m_treectrl->DeleteAllItems();
 	root = m_treectrl->AddRoot(_("Categories"), 3);
 
 	for (unsigned int i=0; i<m_apps.GetCount(); i++)
@@ -170,6 +169,7 @@ bool AppList::PopulateTreeCtrl()
 	return true;
 }
 
+// Check to see if any downloads have been selected.
 bool AppList::HaveDownloads()
 {
 	for (unsigned int i=0; i<m_apps.GetCount(); i++)
@@ -178,4 +178,21 @@ bool AppList::HaveDownloads()
 			return true;
 	}
 	return false;
+}
+
+// Figure out what order to download and install
+void AppList::RankDownloads()
+{
+
+}
+
+// Clear the list, but unlink the tree items first.
+void AppList::DeleteAllItems()
+{
+	for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	{
+		m_treectrl->SetItemData(m_apps[i].m_treeitem, NULL);
+		m_apps[i].m_treeitem = 0;
+	}
+	m_apps.Clear();
 }

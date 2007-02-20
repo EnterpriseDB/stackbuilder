@@ -3,7 +3,7 @@
 // Purpose:     A mirror object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Mirror.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: Mirror.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,6 +27,8 @@ public:
 	wxString hostname;
 	wxString path;
 	long port;
+
+	wxTreeItemId m_treeitem;
 };
 
 #endif

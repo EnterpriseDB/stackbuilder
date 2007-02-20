@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,11 +16,18 @@
 
 // Application headers
 #include "MirrorSelectionPage.h"
+#include "MirrorList.h"
 #include "images/bullet.xpm"
 
-MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent) 
+BEGIN_EVENT_TABLE(MirrorSelectionPage, wxWizardPageSimple)
+    EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		MirrorSelectionPage::OnWizardPageChanging)
+END_EVENT_TABLE()
+
+MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, MirrorList *mirrorlist) 
 	: wxWizardPageSimple(parent)
 {
+	m_mirrorlist = mirrorlist;
+
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
 	mainSizer->Add(0, 10);
@@ -39,7 +46,20 @@ MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent)
     mainSizer->Fit(this);
 }
 
-bool MirrorSelectionPage::TransferDataFromWindow()
+void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
-    return true;
+	// If we're going backwards, clear the tree view
+	if (!event.GetDirection())
+	{
+		m_mirrorlist->DeleteAllItems();
+		m_mirrortree->DeleteAllItems();
+		return;
+	}
+
+	if (!m_mirrortree)
+	{
+		wxLogError(_("You must select a mirror before you continue."));
+		event.Veto();
+		return;
+	}
 }

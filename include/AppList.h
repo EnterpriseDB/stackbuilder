@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -34,6 +34,8 @@ public:
 	App *GetItem(unsigned int index) { return &m_apps[index]; };
 	size_t Count() { return m_apps.Count(); };
 	void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
+	void RankDownloads();
+	void DeleteAllItems();
 
 private:
 	AppArray m_apps;

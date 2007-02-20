@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -24,7 +24,7 @@ class IntroductionPage : public wxWizardPageSimple
 {
 public:
     IntroductionPage(wxWizard *parent, AppList *applist);
-    virtual bool TransferDataFromWindow();
+    virtual void OnWizardPageChanging(wxWizardEvent& event);
 
 private:
 	bool FindPgServers();
@@ -32,6 +32,8 @@ private:
 
     wxComboBox *m_installation;
 	AppList *m_applist;
+
+	DECLARE_EVENT_TABLE()
 };
 
 #endif

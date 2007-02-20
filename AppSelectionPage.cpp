@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:        AppSelectionPage.h
+// Name:        AppSelectionPage.cpp
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -34,6 +34,7 @@ END_EVENT_TABLE()
 BEGIN_EVENT_TABLE(AppSelectionPage, wxWizardPageSimple)
 	EVT_TREE_SEL_CHANGED(wxID_ANY,			AppSelectionPage::OnTreeItemSelected)
 	EVT_TREE_ITEM_ACTIVATED(wxID_ANY,       AppSelectionPage::OnTreeItemActivated)
+    EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		AppSelectionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
 
@@ -100,13 +101,25 @@ AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorLis
     mainSizer->Fit(this);
 }
 
-bool AppSelectionPage::TransferDataFromWindow()
+void AppSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
+	// If we're going backwards, clear the tree view
+	if (!event.GetDirection())
+	{
+		m_applist->DeleteAllItems();
+		m_apptree->DeleteAllItems();
+		return;
+	}
+
 	if (!m_applist->HaveDownloads())
 	{
 		wxLogError(_("You must select at least one package to install before you continue."));
-		return false;
+		event.Veto();
+		return;
 	}
+
+    m_mirrorlist->SetTree(((MirrorSelectionPage *)GetNext())->GetTreeCtrl());
+	m_applist->RankDownloads();
 
 	// Get the mirror list, parse it and build the tree
 	bool retval;
@@ -118,14 +131,20 @@ bool AppSelectionPage::TransferDataFromWindow()
 	}
 
 	if (!retval)
-		return false;
+	{
+		event.Veto();
+		return;
+	}
 
-	retval = m_mirrorlist->PopulateTreeCtrl(((MirrorSelectionPage *)GetNext())->GetTreeCtrl());
+	retval = m_mirrorlist->PopulateTreeCtrl();
 
 	if (!retval)
-		return false;
+	{
+		return;
+		event.Veto();
+	}
 
-    return true;
+    return;
 }
 
 void AppSelectionPage::OnTreeItemSelected(wxTreeEvent &evt)

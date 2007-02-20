@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,10 @@
 // Application headers
 #include "IntroductionPage.h"
 #include "AppSelectionPage.h"
+
+BEGIN_EVENT_TABLE(IntroductionPage, wxWizardPageSimple)
+    EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		IntroductionPage::OnWizardPageChanging)
+END_EVENT_TABLE()
 
 IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist) 
 	: wxWizardPageSimple(parent)
@@ -59,12 +63,13 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     mainSizer->Fit(this);
 }
 
-bool IntroductionPage::TransferDataFromWindow()
+void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
 	if (m_installation->GetValue().IsEmpty())
 	{
 		wxLogError(_("You must select an installation option before you continue."));
-		return false;
+		event.Veto();
+		return;
 	}
 
 	m_applist->SetTree(((AppSelectionPage *)GetNext())->GetTreeCtrl());
@@ -79,14 +84,20 @@ bool IntroductionPage::TransferDataFromWindow()
 	}
 
 	if (!retval)
-		return false;
+	{
+		event.Veto();
+		return;
+	}
 
 	retval = m_applist->PopulateTreeCtrl();
 
 	if (!retval)
-		return false;
+	{
+		return;
+		event.Veto();
+	}
 
-    return true;
+    return;
 }
 
 bool IntroductionPage::FindPgServers()

@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,6 @@ class InstallationPage : public wxWizardPageSimple
 {
 public:
     InstallationPage(wxWizard *parent);
-    virtual bool TransferDataFromWindow();
 
 private:
 

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -109,41 +109,53 @@ bool MirrorList::LoadMirrorList()
 	return true;
 }
 
-bool MirrorList::PopulateTreeCtrl(wxTreeCtrl *tree)
+bool MirrorList::PopulateTreeCtrl()
 {
 	wxTreeItemIdValue cookie;
 	wxTreeItemId node, root, country, mirror;
 	bool found;
 
-	tree->DeleteAllItems();
-	root = tree->AddRoot(_("Countries"), 0);
+	root = m_treectrl->AddRoot(_("Countries"), 0);
 
 	for (unsigned int i=0; i<m_mirrors.GetCount(); i++)
 	{
 		found = false;
 
-		node = tree->GetFirstChild(root, cookie);
+		node = m_treectrl->GetFirstChild(root, cookie);
 
 		while (node)
 		{
-			if (tree->GetItemText(node) == m_mirrors[i].country)
+			if (m_treectrl->GetItemText(node) == m_mirrors[i].country)
 			{
 				country = node;
 				found = true;
 				break;
 			}
-			node = tree->GetNextChild(root, cookie);
+			node = m_treectrl->GetNextChild(root, cookie);
 		}
 
 		if (!found)
-			country = tree->AppendItem(root, m_mirrors[i].country, 0);
+			country = m_treectrl->AppendItem(root, m_mirrors[i].country, 0);
 
-	    mirror = tree->AppendItem(country, m_mirrors[i].hostname, 0, -1, &m_mirrors[i]);
-		tree->SortChildren(country);
+	    mirror = m_treectrl->AppendItem(country, m_mirrors[i].hostname, 0, -1, &m_mirrors[i]);
+		m_mirrors[i].m_treeitem = mirror;
+
+		m_treectrl->SortChildren(country);
 	}
 
-	tree->SortChildren(root);
-	tree->Expand(root);
+	m_treectrl->SortChildren(root);
+	m_treectrl->Expand(root);
 
 	return true;
+}
+
+// Clear the list, but unlink the tree items first.
+void MirrorList::DeleteAllItems()
+{
+	for (unsigned int i=0; i<m_mirrors.GetCount(); i++)
+	{
+		m_treectrl->SetItemData(m_mirrors[i].m_treeitem, NULL);
+		m_mirrors[i].m_treeitem = 0;
+	}
+	m_mirrors.Clear();
 }

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: MirrorList.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -29,11 +29,14 @@ class MirrorList
 public:
 	MirrorList(const wxString &mirrorListUrl) { m_mirrorListUrl = mirrorListUrl; };
 	bool LoadMirrorList();
-	bool PopulateTreeCtrl(wxTreeCtrl *tree);
+	bool PopulateTreeCtrl();
+	void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
+	void DeleteAllItems();
 
 private:
 	MirrorArray m_mirrors;
 	wxString m_mirrorListUrl;
+	wxTreeCtrl *m_treectrl;
 };
 
 #endif
