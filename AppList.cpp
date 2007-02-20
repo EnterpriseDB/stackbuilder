@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.3 2007/02/20 12:20:24 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ bool AppList::PopulateTreeCtrl()
 		else
 			application = m_treectrl->AppendItem(category, wxString::Format(_("%s v%s"), m_apps[i].name, m_apps[i].version), 0, -1, &m_apps[i]);
 
-		m_apps[i].SelectForDownload(false);
+		m_apps[i].SelectForDownload(false, false);
 		m_apps[i].m_tree = m_treectrl;
         m_apps[i].m_treeitem = application;
 	}
@@ -183,7 +183,14 @@ bool AppList::HaveDownloads()
 // Figure out what order to download and install
 void AppList::RankDownloads()
 {
+	int rank = 1;
+	for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	{
+		if (!m_apps[i].IsSelectedForDownload() || m_apps[i].sequence > 0)
+			continue;
 
+		rank = m_apps[i].RankDependencies(rank);	
+	}
 }
 
 // Clear the list, but unlink the tree items first.
@@ -195,4 +202,15 @@ void AppList::DeleteAllItems()
 		m_apps[i].m_treeitem = 0;
 	}
 	m_apps.Clear();
+}
+
+
+App *AppList::GetItem(const wxString &appid)
+{
+	for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	{
+		if (m_apps[i].id == appid)
+			return &m_apps[i];
+	}
+	return NULL;
 }

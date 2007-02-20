@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.2 2007/02/20 12:20:24 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -24,6 +24,7 @@ App::App(AppList *applist)
 	m_applist = applist; 
 	sequence = 0; 
 	download = false; 
+	isDependency = false;
 	m_tree = NULL; 
 };
 
@@ -89,7 +90,7 @@ wxString App::GetInstalledVersion()
 	return ver;
 }
 
-void App::SelectForDownload(bool select)
+void App::SelectForDownload(bool select, bool isdep)
 {
 	// If this item doesn't have a checkbox image, we cannot select it.
 	if (!m_tree || m_tree->GetItemImage(m_treeitem) >= 2)
@@ -99,12 +100,16 @@ void App::SelectForDownload(bool select)
 	if (!select)
 	{
 		download = false;
+		isDependency = false;
 		m_tree->SetItemImage(m_treeitem, 0);
 		return;
 	}
 	else
 	{
 		download = true;
+		if (isdep)
+			isDependency = true;
+
 		m_tree->SetItemImage(m_treeitem, 1);
 
 		// Select all dependencies
@@ -113,8 +118,23 @@ void App::SelectForDownload(bool select)
 			for (unsigned int y=0; y < m_applist->Count(); y++)
 			{
 				if (m_applist->GetItem(y)->id == dependencies[x])
-					m_applist->GetItem(y)->SelectForDownload(true);
+					m_applist->GetItem(y)->SelectForDownload(true, true);
 			}
 		}
 	}
+}
+
+// Figure out what order to download and install
+int App::RankDependencies(int rank)
+{
+	// Iterate through the dependencies, setting the sequence as required
+	for (unsigned int i=0; i<dependencies.GetCount(); i++)
+	{
+		if (!m_applist->GetItem(i)->IsSelectedForDownload() || m_applist->GetItem(i)->sequence > 0)
+			continue;
+
+		rank = m_applist->GetItem(dependencies[i])->RankDependencies(rank);
+	}
+	sequence = rank;
+	return sequence + 1;
 }

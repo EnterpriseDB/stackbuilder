@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.3 2007/02/20 12:20:24 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -56,12 +56,17 @@ void AppTreeCtrl::OnLeftClick(wxMouseEvent &evt)
 			if (GetItemImage(node) == 0)
 			{
 				SetItemImage(node, 1);
-				app->SelectForDownload(true);
+				app->SelectForDownload(true, false);
 			}
 			else if (GetItemImage(node) == 1)
 			{
+				if (app->IsSelectedAsDependency())
+				{
+					if (wxMessageBox(_("This application was automatically selected because another seleciton is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
+						return;
+				}
 				SetItemImage(node, 0);
-				app->SelectForDownload(false);
+				app->SelectForDownload(false, false);
 			}
 		}
 	}
@@ -173,12 +178,17 @@ void AppSelectionPage::OnTreeItemActivated(wxTreeEvent &evt)
 		if (m_apptree->GetItemImage(node) == 0)
 		{
 			m_apptree->SetItemImage(node, 1);
-			app->SelectForDownload(true);
+			app->SelectForDownload(true, false);
 		}
 		else if (m_apptree->GetItemImage(node) == 1)
 		{
+			if (app->IsSelectedAsDependency())
+			{
+				if (wxMessageBox(_("This application was automatically selected because another seleciton is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
+					return;
+			}
 			m_apptree->SetItemImage(node, 0);
-			app->SelectForDownload(false);
+			app->SelectForDownload(false, false);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.2 2007/02/20 12:20:24 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,8 +28,10 @@ public:
 	bool IsVersionInstalled();
     bool WorksWithDB(ServerData *server);
 	wxString GetInstalledVersion();
-	void SelectForDownload(bool select);
+	void SelectForDownload(bool select, bool isdep);
 	bool IsSelectedForDownload() { return download; };
+	bool IsSelectedAsDependency() { return isDependency; };
+	int RankDependencies(int rank);
 
 	wxString id;
 	wxString name;
@@ -50,7 +52,7 @@ public:
 	int sequence;
 
 private:
-	bool download;
+	bool download, isDependency;
 	AppList *m_applist;
 };
 
