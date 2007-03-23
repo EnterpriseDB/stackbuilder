@@ -3,7 +3,7 @@
 // Purpose:     A mirror object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Mirror.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: Mirror.h,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,8 @@
 class Mirror : public wxTreeItemData
 {
 public:
+    Mirror() { port = 0; };
+
 	bool IsValid();
 
 	wxString country;

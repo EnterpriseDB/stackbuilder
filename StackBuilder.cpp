@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.2 2007/02/19 14:22:23 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -55,8 +55,8 @@ bool StackBuilder::OnInit()
 
 	// Create and run the wizard
 	wxBitmap bitmap = wxBitmap(background_xpm);
-    Wizard wizard(NULL, bitmap, applicationListUrl, mirrorListUrl);
-	bool retval = wizard.RunWizard(wizard.GetFirstPage()); 
+    wizard = new Wizard(NULL, bitmap, applicationListUrl, mirrorListUrl);
+	bool retval = wizard->RunWizard(wizard->GetFirstPage()); 
 
 	return retval;
 }
@@ -68,11 +68,13 @@ void StackBuilder::OnWizardCancelled(wxWizardEvent &evt)
 		evt.Veto();
 		return;
 	}
+    wizard->Destroy();
 	this->Exit();
 }
 
 void StackBuilder::OnWizardFinished(wxWizardEvent &evt)
 {
-	wxMessageBox(_("The wizard finished!!"));
+	wxMessageBox(_("Installation tasks completed!"));
+    wizard->Destroy();
 	this->Exit();
 }

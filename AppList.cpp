@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.3 2007/02/20 12:20:24 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.4 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,7 @@
 // Application headers
 #include "App.h"
 #include "AppList.h"
+#include "Mirror.h"
 
 // Define the AppArray type
 WX_DEFINE_OBJARRAY(AppArray);
@@ -186,7 +187,13 @@ void AppList::RankDownloads()
 	int rank = 1;
 	for (unsigned int i=0; i<m_apps.GetCount(); i++)
 	{
-		if (!m_apps[i].IsSelectedForDownload() || m_apps[i].sequence > 0)
+		if (!m_apps[i].IsSelectedForDownload())
+        {
+            m_apps[i].sequence = 0;
+            continue;
+        }
+
+        if (m_apps[i].sequence > 0)
 			continue;
 
 		rank = m_apps[i].RankDependencies(rank);	
@@ -213,4 +220,26 @@ App *AppList::GetItem(const wxString &appid)
 			return &m_apps[i];
 	}
 	return NULL;
+}
+
+bool AppList::DownloadFiles(const wxString& downloadPath, const Mirror *mirror)
+{
+    unsigned int x = 1;
+
+    // Loop round once for every app. For each loop, search the 
+    // applist for a matching download.
+    while(x <= m_apps.GetCount())
+    {
+	    for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	    {
+            if (m_apps[i].sequence == x)
+            {
+                if (!m_apps[i].Download(downloadPath, mirror))
+                    return false;
+            }
+	    }
+        x++;
+    }
+
+    return true;
 }

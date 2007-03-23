@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.3 2007/02/20 12:20:24 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.4 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -145,8 +145,8 @@ void AppSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 
 	if (!retval)
 	{
-		return;
 		event.Veto();
+        return;
 	}
 
     return;

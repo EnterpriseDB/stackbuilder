@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.3 2007/02/20 12:20:24 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.4 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -21,6 +21,7 @@
 
 // Application headers
 #include "App.h"
+#include "Mirror.h"
 
 WX_DECLARE_OBJARRAY(App, AppArray);
 
@@ -37,6 +38,7 @@ public:
 	void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
 	void RankDownloads();
 	void DeleteAllItems();
+    bool DownloadFiles(const wxString& downloadPath, const Mirror *mirror);
 
 private:
 	AppArray m_apps;

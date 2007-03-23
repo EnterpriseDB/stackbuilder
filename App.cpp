@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.2 2007/02/20 12:20:24 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -12,12 +12,17 @@
 
 // wxWindows headers
 #include <wx/wx.h>
+#include <wx/progdlg.h>
+#include <wx/stream.h>
 #include <wx/treectrl.h>
+#include <wx/url.h>
+#include <wx/wfstream.h>
 #include <wx/msw/registry.h>
 
 // Application headers
 #include "App.h"
 #include "AppList.h"
+#include "Mirror.h"
 
 App::App(AppList *applist) 
 { 
@@ -137,4 +142,119 @@ int App::RankDependencies(int rank)
 	}
 	sequence = rank;
 	return sequence + 1;
+}
+
+bool App::Download(const wxString& downloadPath, const Mirror *mirror)
+{
+    GetFilename(downloadPath);
+
+    wxProgressDialog *pd = new wxProgressDialog(wxString::Format(_("Downloading %s"), wxFileName(mirrorpath).GetFullName()),
+                                                _("Connecting to server..."),
+                                                100,
+                                                NULL, 
+                                                wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
+    pd->Show();
+
+    wxURL url(wxString::Format(wxT("%s://%s%s%s/%s"), 
+              mirror->protocol, 
+              mirror->hostname, 
+              (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
+              mirror->path, 
+              mirrorpath));
+
+	wxURLError err = url.GetError();
+    if (err != wxURL_NOERR)
+	{
+		wxString msg;
+		switch (err)
+		{
+			case wxURL_SNTXERR:
+				msg = _("Could not parse the URL.");
+				break;
+			case wxURL_NOPROTO:
+				msg = _("Unsupported protocol specified.");
+				break;
+			case wxURL_NOHOST:
+				msg = _("No hostname specified in URL.");
+				break;
+			case wxURL_NOPATH:
+				msg = _("No path specified in URL.");
+				break;
+			case wxURL_CONNERR:
+				msg = _("A connection error occurred.");
+				break;
+			case wxURL_PROTOERR:
+				msg = _("A protocol error occurred.");
+				break;
+		}
+		wxLogError(wxString::Format(_("Failed to open %s\n\nError: %s"), url.BuildURI(), msg));
+        pd->Show(false);
+        delete pd;
+        return false;
+	}
+
+    wxInputStream *ip = url.GetInputStream();
+
+	if (!ip || !ip->IsOk())
+	{
+		wxLogError(wxString::Format(_("Failed to open %s\n\nError: The URL specified could not be opened."), url.BuildURI()));
+        pd->Show(false);
+        if (ip)
+            delete ip;
+        delete pd;
+		return false;
+	}
+
+    wxFFileOutputStream *op = new wxFFileOutputStream(file.GetFullPath());
+
+    size_t total = ip->GetSize();
+    size_t downloaded = 0;
+    bool abort = false;
+    wxString msg;
+
+    while(!ip->Eof())
+    {
+        op->PutC(ip->GetC());
+        downloaded++;
+
+        if (downloaded % 1024 == 0)
+        {
+            if (total)
+                msg = wxString::Format(_("Downloaded %d of %d KB"), downloaded/1024, total/1024);
+            else
+                msg = wxString::Format(_("Downloaded %d KB"), downloaded/1024);
+
+            if (!pd->Pulse(msg, &abort))
+            {
+                op->Close();
+                wxRemoveFile(file.GetFullPath());
+                delete ip;
+                delete op;
+                pd->Show(false);
+                delete pd;
+                return false;
+            }
+        }
+    }
+    op->Close();
+    delete ip;
+    delete op;
+    pd->Show(false);
+    delete pd;
+    return true;
+}
+
+void App::GetFilename(const wxString& downloadPath)
+{
+    wxFileName svrFile(mirrorpath);
+
+    file = downloadPath + wxT("/") + svrFile.GetFullName();
+
+    int ver = 1;
+
+    while(file.FileExists())
+    {
+        file = downloadPath + wxT("/") + svrFile.GetName() + wxString::Format(wxT("-%d."), ver) + svrFile.GetExt();
+        ver++;
+    }
 }

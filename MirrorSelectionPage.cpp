@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,6 +18,7 @@
 #include "MirrorSelectionPage.h"
 #include "MirrorList.h"
 #include "images/bullet.xpm"
+#include "images/mirror.xpm"
 
 BEGIN_EVENT_TABLE(MirrorSelectionPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		MirrorSelectionPage::OnWizardPageChanging)
@@ -39,6 +40,7 @@ MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, MirrorList *mirrorlis
     m_mirrortree = new wxTreeCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE);
 	m_treeimages = new wxImageList(16, 16, true, 1);
 	m_treeimages->Add(wxIcon(bullet_xpm));
+    m_treeimages->Add(wxIcon(mirror_xpm));
 	m_mirrortree->SetImageList(m_treeimages);
 	mainSizer->Add(m_mirrortree, 1, wxALL | wxEXPAND, 5);
 
@@ -56,10 +58,13 @@ void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 		return;
 	}
 
-	if (!m_mirrortree)
+    wxTreeItemId id = m_mirrortree->GetSelection();
+	if (!id || m_mirrortree->GetItemImage(id) != 1)
 	{
 		wxLogError(_("You must select a mirror before you continue."));
 		event.Veto();
 		return;
 	}
+
+    m_mirrorlist->SetSelectedMirror((Mirror *)m_mirrortree->GetItemData(m_mirrortree->GetSelection()));
 }

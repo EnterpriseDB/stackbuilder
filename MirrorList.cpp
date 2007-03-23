@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -137,7 +137,8 @@ bool MirrorList::PopulateTreeCtrl()
 		if (!found)
 			country = m_treectrl->AppendItem(root, m_mirrors[i].country, 0);
 
-	    mirror = m_treectrl->AppendItem(country, m_mirrors[i].hostname, 0, -1, &m_mirrors[i]);
+        wxString label = m_mirrors[i].hostname + wxT(" (") + m_mirrors[i].protocol.Upper() + wxT(")");
+	    mirror = m_treectrl->AppendItem(country, label, 1, -1, &m_mirrors[i]);
 		m_mirrors[i].m_treeitem = mirror;
 
 		m_treectrl->SortChildren(country);

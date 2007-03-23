@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.2 2007/02/20 12:20:24 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.3 2007/03/23 14:35:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,11 @@
 
 // wxWindows headers
 #include <wx/wx.h>
+#include <wx/filename.h>
 #include <wx/treectrl.h>
+
+// App headers
+#include "Mirror.h"
 
 class AppList;
 
@@ -32,6 +36,7 @@ public:
 	bool IsSelectedForDownload() { return download; };
 	bool IsSelectedAsDependency() { return isDependency; };
 	int RankDependencies(int rank);
+    bool Download(const wxString& downloadPath, const Mirror *mirror);
 
 	wxString id;
 	wxString name;
@@ -52,7 +57,10 @@ public:
 	int sequence;
 
 private:
+    void GetFilename(const wxString& downloadPath);
+
 	bool download, isDependency;
+    wxFileName file;
 	AppList *m_applist;
 };
 
