@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.4 2007/03/23 21:19:07 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,7 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 
     if (!wxDir::Exists(m_downloadPath))
 	{
-        wxLogError(_("The download directory does no exist. Please select a valid directory."));
+        wxLogError(_("The download directory does not exist. Please select a valid directory."));
 		event.Veto();
 		return;
 	}

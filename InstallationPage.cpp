@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.3 2007/03/23 21:19:07 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -30,19 +30,17 @@ InstallationPage::InstallationPage(wxWizard *parent)
 
 	mainSizer->Add(0, 20);
 
-    mainSizer->Add(
-        new wxStaticText(this, wxID_ANY,
-                         _("Please click the \"Finish\" button to start the installations.")),
-        0, wxALL, 5
-	);
+	st = new wxStaticText(this, wxID_ANY, _("Please click the \"Finish\" button to start the installations."));
+	st->Wrap(400);
+    mainSizer->Add(st, 0, wxALL, 5);
 
 	mainSizer->Add(0, 20);
 
-    mainSizer->Add(
-        new wxStaticText(this, wxID_ANY,
-						 _("Note: You must allow all installations to run to completion. If you are\n prompted to restart the computer, click \"No\" or \"Restart Later\" and\nmanually restart you computer when all the installation have finished.")),
-        0, wxALL, 5
-	);
+    st = new wxStaticText(this, wxID_ANY, _("Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."));
+	st->Wrap(400);
+    mainSizer->Add(st, 0, wxALL, 5);
+
+	mainSizer->Add(0, 20);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);

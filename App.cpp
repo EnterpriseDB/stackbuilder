@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.4 2007/03/23 21:19:07 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -30,6 +30,7 @@ App::App(AppList *applist)
 	sequence = 0; 
 	download = false; 
 	isDependency = false;
+    downloaded = false;
 	m_tree = NULL; 
 };
 
@@ -148,6 +149,12 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 {
     GetFilename(downloadPath);
 
+    // If this file has already been downloaded, don't bother getting it again.
+    // GetFilename would have set this flag if it found a matching filename and
+    // the checksum was correct.
+    if (downloaded)
+        return true;
+
     wxProgressDialog *pd = new wxProgressDialog(wxString::Format(_("Downloading %s"), wxFileName(mirrorpath).GetFullName()),
                                                 _("Connecting to server..."),
                                                 100,
@@ -208,16 +215,25 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     wxFFileOutputStream *op = new wxFFileOutputStream(file.GetFullPath());
 
     size_t total = ip->GetSize();
-    size_t downloaded = 0;
+    size_t downloaded = 0, chunk = 0;
+    long count = 0;
+    unsigned short buffer[4097];
+
     bool abort = false;
     wxString msg;
 
-    while(!ip->Eof())
-    {
-        op->PutC(ip->GetC());
-        downloaded++;
+    op->PutC(ip->GetC());
+    downloaded++;
 
-        if (downloaded % 1024 == 0)
+    while(!ip->Eof() && ip->LastRead() != 0)
+    {
+        ip->Read(buffer, 4096);
+        chunk = ip->LastRead();
+        op->Write(buffer, chunk);
+        downloaded += chunk;
+        count++;
+
+        if (count == 4)
         {
             if (total)
                 msg = wxString::Format(_("Downloaded %d of %d KB"), downloaded/1024, total/1024);
@@ -234,6 +250,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
                 delete pd;
                 return false;
             }
+        count = 0;
         }
     }
     op->Close();
