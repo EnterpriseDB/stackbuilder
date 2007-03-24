@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MD5.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Mirror.cpp"
 				>
 			</File>
@@ -254,6 +258,10 @@
 			</File>
 			<File
 				RelativePath=".\include\IntroductionPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\MD5.h"
 				>
 			</File>
 			<File

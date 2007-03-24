@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.4 2007/03/23 21:19:07 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.5 2007/03/24 20:58:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -12,6 +12,7 @@
 
 // wxWindows headers
 #include <wx/wx.h>
+#include <wx/busyinfo.h>
 #include <wx/progdlg.h>
 #include <wx/stream.h>
 #include <wx/treectrl.h>
@@ -22,6 +23,7 @@
 // Application headers
 #include "App.h"
 #include "AppList.h"
+#include "MD5.h"
 #include "Mirror.h"
 
 App::App(AppList *applist) 
@@ -258,6 +260,28 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     delete op;
     pd->Show(false);
     delete pd;
+
+    // Having downloaded the file, now verify the checksum
+    wxString tmpsum;
+    
+    {
+        wxBusyInfo wait(wxString::Format(_("Verifying checksum for: %s"), file.GetFullName()));
+        tmpsum = md5sum(file.GetFullPath());
+    }
+
+    if (tmpsum.Lower() == checksum.Lower())
+    {
+        downloaded = true;
+        return true;
+    }
+    else
+    {
+        downloaded = false;
+        wxLogError(_("Checksum verification failed for: %s! Deleting file..."), file.GetFullName());
+        wxRemoveFile(file.GetFullPath());
+        return false;
+    }
+
     return true;
 }
 
@@ -271,7 +295,25 @@ void App::GetFilename(const wxString& downloadPath)
 
     while(file.FileExists())
     {
+        // Check the file to see if it's checksum matches ours. If
+        // if does, keep the filename and set the 'Downloaded' flag
+        wxString tmpsum;
+        
+        {
+            wxBusyInfo wait(wxString::Format(_("Checking existing file: %s"), file.GetFullName()));
+            tmpsum = md5sum(file.GetFullPath());
+        }
+
+        if (tmpsum.Lower() == checksum.Lower())
+        {
+            downloaded = true;
+            return;
+        }
+
+        // OK, the file is no good, so generate an incremented filename.
         file = downloadPath + wxT("/") + svrFile.GetName() + wxString::Format(wxT("-%d."), ver) + svrFile.GetExt();
         ver++;
     }
+
+    downloaded = false;
 }

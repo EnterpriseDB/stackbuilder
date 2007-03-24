@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.4 2007/03/24 20:58:05 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ public:
 private:
     void GetFilename(const wxString& downloadPath);
 
-	bool download, isDependency;
+	bool download, isDependency, downloaded;
     wxFileName file;
 	AppList *m_applist;
 };
