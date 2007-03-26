@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.5 2007/03/24 20:58:04 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.6 2007/03/26 08:08:55 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -44,15 +44,17 @@ bool App::IsValid()
 			!category.IsEmpty() && 
 			!format.IsEmpty() && 
 			!checksum.IsEmpty() && 
-			!mirrorpath.IsEmpty()); 
+			!mirrorpath.IsEmpty() &&
+            !versionkey.IsEmpty()); 
 }
 
 bool App::IsInstalled()
 {
-	// If the regkey for this app id exists, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\Applications"));
 
-	if (!key->Exists() || !key->HasValue(id.c_str()))
+	// If the regkey for this app id exists, it's installed.
+	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+
+	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
 		return false;
 
 	return true;
@@ -61,13 +63,13 @@ bool App::IsInstalled()
 bool App::IsVersionInstalled()
 {
 	// If the regkey for this app id exists AND it contains our version number, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\Applications\\"));
+	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
-	if (!key->Exists() || !key->HasValue(id))
+	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
 		return false;
 
 	wxString ver;
-	key->QueryValue(id, ver);
+	key->QueryValue(versionkey.AfterLast('\\'), ver);
 	if (ver != version)
 		return false;
 
@@ -88,13 +90,13 @@ bool App::WorksWithDB(ServerData *server)
 wxString App::GetInstalledVersion()
 {
 	// If the regkey for this app id exists AND it contains our version number, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\Applications\\"));
+	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
-	if (!key->Exists() || !key->HasValue(id))
+	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
 		return wxEmptyString;
 
 	wxString ver;
-	key->QueryValue(id, ver);
+	key->QueryValue(versionkey.AfterLast('\\'), ver);
 	return ver;
 }
 

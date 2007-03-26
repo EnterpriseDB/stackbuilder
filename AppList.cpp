@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.4 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.5 2007/03/26 08:08:55 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -114,6 +114,8 @@ bool AppList::LoadAppList(ServerData *server)
 					newApplication->mirrorpath = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("dependency"))
 					newApplication->dependencies.Add(properties->GetNodeContent());
+				else if (properties->GetName() == wxT("versionkey"))
+					newApplication->versionkey = properties->GetNodeContent();
 
 				properties = properties->GetNext();
 			}
