@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.5 2007/03/26 08:08:55 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.6 2007/03/26 08:46:57 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,6 +22,8 @@
 #include "Mirror.h"
 
 class AppList;
+
+#define round(x) ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 
 class App : public wxTreeItemData
 {

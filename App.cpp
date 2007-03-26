@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.6 2007/03/26 08:08:55 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.7 2007/03/26 08:46:57 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,6 +15,7 @@
 #include <wx/busyinfo.h>
 #include <wx/progdlg.h>
 #include <wx/stream.h>
+#include <wx/timer.h>
 #include <wx/treectrl.h>
 #include <wx/url.h>
 #include <wx/wfstream.h>
@@ -226,10 +227,11 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     bool abort = false;
     wxString msg;
 
-    op->PutC(ip->GetC());
-    downloaded++;
+    wxStopWatch sw;
+    long updateTime = 100;
+    long speed = 0;
 
-    while(!ip->Eof() && ip->LastRead() != 0)
+    do
     {
         ip->Read(buffer, 4096);
         chunk = ip->LastRead();
@@ -237,12 +239,19 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
         downloaded += chunk;
         count++;
 
-        if (count == 4)
+        if (sw.Time() >= updateTime)
         {
+            // Calculate the download speed
+            if (updateTime >= 1000)
+                speed = round((downloaded/1024) / (updateTime/1000));
+
+            // Set the next time to update the progress dialog
+            updateTime += 100;
+
             if (total)
-                msg = wxString::Format(_("Downloaded %d of %d KB"), downloaded/1024, total/1024);
+                msg = wxString::Format(_("Downloaded %d of %d KB (%d KB/Sec)"), downloaded/1024, total/1024, speed);
             else
-                msg = wxString::Format(_("Downloaded %d KB"), downloaded/1024);
+                msg = wxString::Format(_("Downloaded %d KB (%d KB/Sec)"), downloaded/1024, speed);
 
             if (!pd->Pulse(msg, &abort))
             {
@@ -256,7 +265,8 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
             }
         count = 0;
         }
-    }
+    } while (!ip->Eof() && ip->LastRead() != 0);
+
     op->Close();
     delete ip;
     delete op;
