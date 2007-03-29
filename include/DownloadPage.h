@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.h,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.h,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,9 +18,8 @@
 #include <wx/wizard.h>
 #include <wx/button.h>
 
-// Application headers
-#include "AppList.h"
-#include "MirrorList.h"
+class AppList;
+class MirrorList;
 
 class DownloadPage : public wxWizardPageSimple
 {

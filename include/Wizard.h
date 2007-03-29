@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.h,v 1.1 2007/02/19 09:57:00 dpage Exp $
+// RCS-ID:      $Id: Wizard.h,v 1.2 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,9 +17,8 @@
 #include <wx/wx.h>
 #include <wx/wizard.h>
 
-// Application headers
-#include "AppList.h"
-#include "MirrorList.h"
+class AppList;
+class MirrorList;
 
 class Wizard : public wxWizard
 {

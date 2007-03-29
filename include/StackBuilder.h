@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.h,v 1.2 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.h,v 1.3 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,15 +19,6 @@ class Wizard;
 
 #define DEFAULT_MIRROR_LIST_URL wxT("http://www.postgresql.org/mirrors.xml")
 #define DEFAULT_APPLICATION_LIST_URL wxT("http://www.postgresql.org/files/stackbuilder/applications.xml")
-
-class ServerData : public wxClientData
-{
-public:
-	long port;
-	wxString description;
-	long majorVer;
-	long minorVer;
-};
 
 class StackBuilder : public wxApp
 {

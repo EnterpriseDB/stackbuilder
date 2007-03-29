@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.5 2007/03/26 08:08:55 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.6 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,13 +22,13 @@
 #include "AppList.h"
 #include "Mirror.h"
 
+class Server;
+
 // Define the AppArray type
 WX_DEFINE_OBJARRAY(AppArray);
 
-bool AppList::LoadAppList(ServerData *server)
+bool AppList::LoadAppList()
 {
-	m_server = server;
-
     wxURL url(m_applicationListUrl);
 	wxURLError err = url.GetError();
     if (err != wxURL_NOERR)
@@ -85,7 +85,7 @@ bool AppList::LoadAppList(ServerData *server)
 	{
 		if (application->GetName() == wxT("application")) 
 		{
-			App *newApplication = new App(this);
+			App *newApplication = new App(this, m_server);
 			properties = application->GetChildren();
 
 			while (properties)
@@ -100,8 +100,10 @@ bool AppList::LoadAppList(ServerData *server)
 					newApplication->version = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("category"))
 					newApplication->category = properties->GetNodeContent();
-				else if (properties->GetName() == wxT("dbversion"))
-					newApplication->dbversion = properties->GetNodeContent();
+				else if (properties->GetName() == wxT("pgversion"))
+					newApplication->pgversion = properties->GetNodeContent();
+				else if (properties->GetName() == wxT("edbversion"))
+					newApplication->edbversion = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("format"))
 					newApplication->format = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("installoptions"))
@@ -119,7 +121,12 @@ bool AppList::LoadAppList(ServerData *server)
 
 				properties = properties->GetNext();
 			}
-			if (newApplication->IsValid() && newApplication->WorksWithDB(m_server))
+
+            // Cleanup the mirrorpath
+            if (newApplication->mirrorpath.StartsWith(wxT("/")))
+                newApplication->mirrorpath = newApplication->mirrorpath.Right(newApplication->mirrorpath.Length() -1);
+
+			if (newApplication->IsValid() && newApplication->WorksWithDB())
 				m_apps.Add(newApplication);
 		}
 		application = application->GetNext();
@@ -237,6 +244,28 @@ bool AppList::DownloadFiles(const wxString& downloadPath, const Mirror *mirror)
             if (m_apps[i].sequence == x)
             {
                 if (!m_apps[i].Download(downloadPath, mirror))
+                    return false;
+            }
+	    }
+        x++;
+    }
+
+    return true;
+}
+
+bool AppList::InstallApps()
+{
+    unsigned int x = 1;
+
+    // Loop round once for every app. For each loop, search the 
+    // applist for a matching download.
+    while(x <= m_apps.GetCount())
+    {
+	    for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	    {
+            if (m_apps[i].sequence == x)
+            {
+                if (!m_apps[i].Install())
                     return false;
             }
 	    }

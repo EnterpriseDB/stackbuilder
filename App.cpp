@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.7 2007/03/26 08:46:57 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.8 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -26,14 +26,17 @@
 #include "AppList.h"
 #include "MD5.h"
 #include "Mirror.h"
+#include "Server.h"
 
-App::App(AppList *applist) 
+App::App(AppList *applist, Server *server) 
 { 
 	m_applist = applist; 
+    m_server = server;
 	sequence = 0; 
 	download = false; 
 	isDependency = false;
     downloaded = false;
+    installed = false;
 	m_tree = NULL; 
 };
 
@@ -77,12 +80,31 @@ bool App::IsVersionInstalled()
 	return true;
 }
 
-bool App::WorksWithDB(ServerData *server)
+bool App::WorksWithDB()
 {
-	if (dbversion.Trim() == wxEmptyString || !server)
+    wxString tmpversion;
+
+    if (!m_server)
+        return true;
+
+    switch (m_server->serverType)
+    {
+        case SVR_POSTGRESQL:
+            tmpversion = pgversion;
+            break;
+
+        case SVR_ENTERPRISEDB:
+            tmpversion = edbversion;
+            break;
+
+        default:
+            tmpversion = wxEmptyString;
+    }
+
+	if (tmpversion.Trim() == wxEmptyString)
 		return true;
 
-	if (dbversion.Trim() == wxString::Format(wxT("%d.%d"), server->majorVer, server->minorVer))
+	if (tmpversion.Trim() == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
 		return true;
 
 	return false;
@@ -171,7 +193,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
               mirror->protocol, 
               mirror->hostname, 
               (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
-              mirror->path, 
+              mirror->rootpath, 
               mirrorpath));
 
 	wxURLError err = url.GetError();
@@ -328,4 +350,89 @@ void App::GetFilename(const wxString& downloadPath)
     }
 
     downloaded = false;
+}
+
+bool App::Install()
+{
+    // Have we already installed this package in this session?
+    if (installed)
+        return true;
+
+    wxString cmd;
+
+    // MSI or EXE?
+    if (format.Lower() == wxT("msi"))
+        cmd = wxT("msiexec /i ") + file.GetFullPath();
+    else
+        cmd = file.GetFullPath();
+
+    // Install or upgrade?
+    if (IsInstalled())
+    {
+        if (!upgradeoptions.IsEmpty())
+            cmd += wxT(" ") + SubstituteFlags(upgradeoptions);
+    }
+    else
+    {
+        if (!installoptions.IsEmpty())
+            cmd += wxT(" ") + SubstituteFlags(installoptions);
+    }
+
+    // Now run the installation
+    long retval = wxExecute(cmd, wxEXEC_SYNC);
+
+    if (retval == 0)
+    {
+        installed = true;
+        return true;
+    }
+    else
+    {
+        int response = wxMessageBox(wxString::Format(_("The installation of %s returned an error.\n\n Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n\nNote that ignoring this error may result in failure of any later installations that depend on this one."), this->name), 
+                                                     _("Installation error"), 
+                                                     wxOK | wxCANCEL | wxICON_EXCLAMATION);
+
+        if (response == wxCANCEL)
+            return false;
+        else
+        {
+            installed = true;
+            return true;
+        }
+    }
+}
+
+wxString App::SubstituteFlags(const wxString &options)
+{
+    wxString retval = options;
+
+    // Do we have any server options?
+    if (!m_server)
+    {
+        retval.Replace(wxT("$LOCAL"), wxT("0"));
+        retval.Replace(wxT("$PATH"), wxEmptyString);
+        retval.Replace(wxT("$DATA"), wxEmptyString);
+        retval.Replace(wxT("$VERSION"), wxEmptyString);
+        retval.Replace(wxT("$PORT"), wxEmptyString);
+        retval.Replace(wxT("$SERVICE"), wxEmptyString);
+        retval.Replace(wxT("$ACCOUNT"), wxEmptyString);
+        retval.Replace(wxT("$SUPER"), wxEmptyString);
+        retval.Replace(wxT("$ENCODING"), wxEmptyString);
+        retval.Replace(wxT("$LOCALE"), wxEmptyString);
+    }
+    else
+    {
+        retval.Replace(wxT("$LOCAL"), wxT("1"));
+        retval.Replace(wxT("$PATH"), m_server->installationPath);
+        retval.Replace(wxT("$DATA"), m_server->dataDirectory);
+        retval.Replace(wxT("$VERSION"), m_server->serverVersion);
+        retval.Replace(wxT("$PORT"), wxString::Format(wxT("%ld"), m_server->port));
+        retval.Replace(wxT("$SERVICE"), m_server->serviceId);
+        retval.Replace(wxT("$ACCOUNT"), m_server->serviceAccount);
+        retval.Replace(wxT("$SUPER"), m_server->superuserName);
+        retval.Replace(wxT("$ENCODING"), m_server->encoding);
+        retval.Replace(wxT("$LOCALE"), m_server->locale);
+    }
+
+    return retval;
 }

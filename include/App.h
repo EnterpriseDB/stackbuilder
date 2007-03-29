@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.6 2007/03/26 08:46:57 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.7 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,34 +18,35 @@
 #include <wx/filename.h>
 #include <wx/treectrl.h>
 
-// App headers
-#include "Mirror.h"
-
+class Mirror;
 class AppList;
+class Server;
 
 #define round(x) ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 
 class App : public wxTreeItemData
 {
 public:
-	App(AppList *applist);
+	App(AppList *applist, Server *server);
 	bool IsValid();
 	bool IsInstalled();
 	bool IsVersionInstalled();
-    bool WorksWithDB(ServerData *server);
+    bool WorksWithDB();
 	wxString GetInstalledVersion();
 	void SelectForDownload(bool select, bool isdep);
 	bool IsSelectedForDownload() { return download; };
 	bool IsSelectedAsDependency() { return isDependency; };
 	int RankDependencies(int rank);
     bool Download(const wxString& downloadPath, const Mirror *mirror);
+    bool Install();
 
 	wxString id;
 	wxString name;
 	wxString description;
 	wxString version;
 	wxString category;
-	wxString dbversion;
+	wxString pgversion;
+	wxString edbversion;
 	wxString format;
 	wxString installoptions;
 	wxString upgradeoptions;
@@ -61,10 +62,12 @@ public:
 
 private:
     void GetFilename(const wxString& downloadPath);
+    wxString SubstituteFlags(const wxString &options);
 
-	bool download, isDependency, downloaded;
+	bool download, isDependency, downloaded, installed;
     wxFileName file;
 	AppList *m_applist;
+    Server *m_server;
 };
 
 #endif

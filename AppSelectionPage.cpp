@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.4 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.5 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,6 +19,7 @@
 
 // Application headers
 #include "AppSelectionPage.h"
+#include "App.h"
 #include "AppList.h"
 #include "MirrorList.h"
 #include "MirrorSelectionPage.h"

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.h,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: MirrorList.h,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,8 +19,7 @@
 #include <wx/treectrl.h>
 #include <wx/xml/xml.h>
 
-// Application headers
-#include "Mirror.h"
+class Mirror;
 
 WX_DECLARE_OBJARRAY(Mirror, MirrorArray);
 

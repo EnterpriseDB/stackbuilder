@@ -277,6 +277,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\Server.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\StackBuilder.h"
 				>
 			</File>

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.4 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.5 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,9 +19,9 @@
 #include <wx/treectrl.h>
 #include <wx/xml/xml.h>
 
-// Application headers
-#include "App.h"
-#include "Mirror.h"
+class App;
+class Mirror;
+class Server;
 
 WX_DECLARE_OBJARRAY(App, AppArray);
 
@@ -29,21 +29,23 @@ class AppList
 {
 public:
 	AppList(const wxString &applicationListUrl) { m_applicationListUrl = applicationListUrl; };
-	bool LoadAppList(ServerData *server);
+	bool LoadAppList();
 	bool PopulateTreeCtrl();
     bool HaveDownloads();
 	App *GetItem(unsigned int index) { return &m_apps[index]; };
     App *GetItem(const wxString &appid);
 	size_t Count() { return m_apps.Count(); };
 	void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
+	void SetServer(Server *server) { m_server = server; };
 	void RankDownloads();
 	void DeleteAllItems();
     bool DownloadFiles(const wxString& downloadPath, const Mirror *mirror);
+    bool InstallApps();
 
 private:
 	AppArray m_apps;
 	wxString m_applicationListUrl;
-	ServerData *m_server;
+	Server *m_server;
 	wxTreeCtrl *m_treectrl;
 };
 

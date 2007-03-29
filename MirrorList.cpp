@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -94,15 +94,22 @@ bool MirrorList::LoadMirrorList()
 				else if (properties->GetName() == wxT("hostname"))
 					newMirror->hostname = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("path"))
-					newMirror->path = properties->GetNodeContent();
+					newMirror->rootpath = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("port"))
 					properties->GetNodeContent().ToLong(&newMirror->port);
 
 				properties = properties->GetNext();
 			}
+
+
+            // Cleanup the path
+            if (newMirror->rootpath.EndsWith(wxT("/")))
+                newMirror->rootpath = newMirror->rootpath.Left(newMirror->rootpath.Length() -1);
+
 			if (newMirror->IsValid())
 				m_mirrors.Add(newMirror);
 		}
+
 		mirror = mirror->GetNext();
 	}
 

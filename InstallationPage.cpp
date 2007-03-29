@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.3 2007/03/23 21:19:07 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,10 +16,17 @@
 
 // Application headers
 #include "InstallationPage.h"
+#include "AppList.h"
 
-InstallationPage::InstallationPage(wxWizard *parent) 
+BEGIN_EVENT_TABLE(InstallationPage, wxWizardPageSimple)
+    EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		InstallationPage::OnWizardPageChanging)
+END_EVENT_TABLE()
+
+InstallationPage::InstallationPage(wxWizard *parent, AppList *applist) 
 	: wxWizardPageSimple(parent)
 {
+    m_applist = applist;
+
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
 	mainSizer->Add(0, 10);
@@ -44,4 +51,17 @@ InstallationPage::InstallationPage(wxWizard *parent)
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);
+}
+
+void InstallationPage::OnWizardPageChanging(wxWizardEvent& event)
+{
+	// If we're going backwards, just bail out
+	if (!event.GetDirection())
+		return;
+
+    if (!m_applist->InstallApps())
+    {
+    	event.Veto();
+		return;
+	}
 }

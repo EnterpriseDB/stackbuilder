@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,8 @@
 // Application headers
 #include "IntroductionPage.h"
 #include "AppSelectionPage.h"
+#include "AppList.h"
+#include "Server.h"
 
 BEGIN_EVENT_TABLE(IntroductionPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		IntroductionPage::OnWizardPageChanging)
@@ -74,6 +76,7 @@ void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 	}
 
 	m_applist->SetTree(((AppSelectionPage *)GetNext())->GetTreeCtrl());
+    m_applist->SetServer((Server *)m_installation->GetClientObject(m_installation->GetSelection()));
 
 	// Get the app list, parse it and build the tree
 	bool retval;
@@ -81,7 +84,7 @@ void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 		wxWindowDisabler disableAll;
 		wxBusyInfo info(_("Downloading application list..."));
 		wxTheApp->Yield();
-		retval = m_applist->LoadAppList((ServerData *)m_installation->GetClientObject(m_installation->GetSelection()));
+		retval = m_applist->LoadAppList();
 	}
 
 	if (!retval)
@@ -120,21 +123,29 @@ bool IntroductionPage::FindPgServers()
 		while (flag != false)
 		{
             wxString keyName, guid;
-			ServerData *data = new ServerData();
+			Server *data = new Server();
+            data->serverType = SVR_POSTGRESQL;
 
 			// Get the service data
+            data->serviceId = svcName;
 			keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Services\\%s"), svcName);
 		    wxRegKey *svcKey = new wxRegKey(keyName);
 		    svcKey->QueryValue(wxT("Display Name"), data->description);
             svcKey->QueryValue(wxT("Port"), &data->port);
+            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+            svcKey->QueryValue(wxT("Encoding"), data->encoding);
+            svcKey->QueryValue(wxT("Locale"), data->locale);
 
 			// Get the version number from installation record
 			svcKey->QueryValue(wxT("Product Code"), guid);
 			keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Installations\\%s"), guid);
 		    wxRegKey *instKey = new wxRegKey(keyName);
-			instKey->QueryValue(wxT("Version"), temp);
-			temp.BeforeFirst('.').ToLong(&data->majorVer);
-			temp.AfterFirst('.').ToLong(&data->minorVer);
+			instKey->QueryValue(wxT("Version"), data->serverVersion);
+			data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+			data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+            instKey->QueryValue(wxT("Base Directory"), data->installationPath);
 
 			// Build the user description
 			temp.Printf(_("%s on port %d"), data->description, data->port);
@@ -173,21 +184,28 @@ bool IntroductionPage::FindEdbServers()
 		while (flag != false)
 		{
             wxString keyName, guid;
-			ServerData *data = new ServerData();
+			Server *data = new Server();
+            data->serverType = SVR_ENTERPRISEDB;
 
 			// Get the service data
 			keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services\\%s"), svcName);
 		    wxRegKey *svcKey = new wxRegKey(keyName);
 		    svcKey->QueryValue(wxT("Display Name"), data->description);
             svcKey->QueryValue(wxT("Port"), &data->port);
+            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+            svcKey->QueryValue(wxT("Encoding"), data->encoding);
+            svcKey->QueryValue(wxT("Locale"), data->locale);
 
 			// Get the version number from installation record
 			svcKey->QueryValue(wxT("Product Code"), guid);
 			keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Installations\\%s"), guid);
 		    wxRegKey *instKey = new wxRegKey(keyName);
-			instKey->QueryValue(wxT("Version"), temp);
-			temp.BeforeFirst('.').ToLong(&data->majorVer);
-			temp.AfterFirst('.').ToLong(&data->minorVer);
+			instKey->QueryValue(wxT("Version"), data->serverVersion);
+			data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+			data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+            instKey->QueryValue(wxT("Base Directory"), data->installationPath);
 
 			// Build the user description
 			temp.Printf(_("%s on port %d"), data->description, data->port);

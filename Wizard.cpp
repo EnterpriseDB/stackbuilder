@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListU
 	m_page2 = new AppSelectionPage(this, m_applist, m_mirrorlist);
 	m_page3 = new MirrorSelectionPage(this, m_mirrorlist);
 	m_page4 = new DownloadPage(this, m_applist, m_mirrorlist);
-	m_page5 = new InstallationPage(this);
+	m_page5 = new InstallationPage(this, m_applist);
 
 	// Join 'em all up
 	wxWizardPageSimple::Chain(m_page1, m_page2);

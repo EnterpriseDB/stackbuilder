@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.h,v 1.2 2007/02/20 10:52:04 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.h,v 1.3 2007/03/29 11:39:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,9 +19,8 @@
 #include <wx/imaglist.h>
 #include <wx/treectrl.h>
 
-// Application headers
-#include "AppList.h"
-#include "MirrorList.h"
+class AppList;
+class MirrorList;
 
 class AppTreeCtrl : public wxTreeCtrl
 {
