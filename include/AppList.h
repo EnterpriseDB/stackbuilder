@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.5 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.6 2007/03/29 15:08:53 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@ WX_DECLARE_OBJARRAY(App, AppArray);
 class AppList
 {
 public:
-	AppList(const wxString &applicationListUrl) { m_applicationListUrl = applicationListUrl; };
+	AppList(const wxString &applicationListUrl) { m_applicationListUrl = applicationListUrl; errors = 0; };
 	bool LoadAppList();
 	bool PopulateTreeCtrl();
     bool HaveDownloads();
@@ -41,12 +41,15 @@ public:
 	void DeleteAllItems();
     bool DownloadFiles(const wxString& downloadPath, const Mirror *mirror);
     bool InstallApps();
+    void IncrementErrorCount() { errors++; };
+    int GetErrorCount() { return errors; };
 
 private:
 	AppArray m_apps;
 	wxString m_applicationListUrl;
 	Server *m_server;
 	wxTreeCtrl *m_treectrl;
+    int errors;
 };
 
 #endif

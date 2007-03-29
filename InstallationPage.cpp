@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.5 2007/03/29 15:08:53 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@
 
 // Application headers
 #include "InstallationPage.h"
+#include "CompletionPage.h"
 #include "AppList.h"
 
 BEGIN_EVENT_TABLE(InstallationPage, wxWizardPageSimple)
@@ -64,4 +65,6 @@ void InstallationPage::OnWizardPageChanging(wxWizardEvent& event)
     	event.Veto();
 		return;
 	}
+
+    ((CompletionPage *)GetNext())->ShowErrorWarning(m_applist->GetErrorCount());
 }

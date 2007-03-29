@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.8 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.9 2007/03/29 15:08:53 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -381,7 +381,7 @@ bool App::Install()
     // Now run the installation
     long retval = wxExecute(cmd, wxEXEC_SYNC);
 
-    if (retval == 0)
+    if (retval == 0) // Installed OK
     {
         installed = true;
         return true;
@@ -392,10 +392,11 @@ bool App::Install()
                                                      _("Installation error"), 
                                                      wxOK | wxCANCEL | wxICON_EXCLAMATION);
 
-        if (response == wxCANCEL)
+        if (response == wxCANCEL) // USer cancelled the installations
             return false;
-        else
+        else // User skipped this installation
         {
+            m_applist->IncrementErrorCount();
             installed = true;
             return true;
         }
