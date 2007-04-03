@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.9 2007/03/29 15:08:53 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.10 2007/04/03 15:25:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -139,6 +139,11 @@ void App::SelectForDownload(bool select, bool isdep)
 	}
 	else
 	{
+        // If this item is already selected, bail out to avoid
+        // the possiblity of hitting an infinite loop.
+        if (download)
+            return;
+
 		download = true;
 		if (isdep)
 			isDependency = true;
@@ -158,18 +163,34 @@ void App::SelectForDownload(bool select, bool isdep)
 }
 
 // Figure out what order to download and install
-int App::RankDependencies(int rank)
+int App::RankDependencies(int rank, unsigned int depth)
 {
-	// Iterate through the dependencies, setting the sequence as required
-	for (unsigned int i=0; i<dependencies.GetCount(); i++)
-	{
-		if (!m_applist->GetItem(i)->IsSelectedForDownload() || m_applist->GetItem(i)->sequence > 0)
-			continue;
+    // Only recurse if we've not gone too deep
+    if (depth < m_applist->Count())
+    {
+	    // Iterate through the dependencies, setting the sequence as required
+	    for (unsigned int i=0; i<dependencies.GetCount(); i++)
+	    {
+            App *dep = m_applist->GetItem(dependencies[i]); 
+		    if (!dep->IsSelectedForDownload() || dep->sequence > 0)
+			    continue;
 
-		rank = m_applist->GetItem(dependencies[i])->RankDependencies(rank);
-	}
-	sequence = rank;
-	return sequence + 1;
+            depth++;
+		    rank = dep->RankDependencies(rank, depth);
+	    }
+    }
+
+    depth--;
+
+    // The sequence might already be set if we've gone through a 
+    // circular dependency. In that case, don't reset it.
+    if (!sequence)
+    {
+	    sequence = rank;
+	    return sequence + 1;
+    }
+    else
+        return rank;
 }
 
 bool App::Download(const wxString& downloadPath, const Mirror *mirror)

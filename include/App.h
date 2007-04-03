@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.7 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.8 2007/04/03 15:25:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ public:
 	void SelectForDownload(bool select, bool isdep);
 	bool IsSelectedForDownload() { return download; };
 	bool IsSelectedAsDependency() { return isDependency; };
-	int RankDependencies(int rank);
+	int RankDependencies(int rank, unsigned int depth = 0);
     bool Download(const wxString& downloadPath, const Mirror *mirror);
     bool Install();
 

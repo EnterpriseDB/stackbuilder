@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.6 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.7 2007/04/03 15:25:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -194,18 +194,24 @@ bool AppList::HaveDownloads()
 void AppList::RankDownloads()
 {
 	int rank = 1;
+
+    // Clear any existing rankings
+	for (unsigned int i=0; i<m_apps.GetCount(); i++)
+        m_apps[i].sequence = 0;
+
+    // For each app in the list, if it's selected for download,
+    // scan to the bottom of the dependency tree and rank the 
+    // downloads from the bottom level back up. If a package has
+    // already been ranked, we can ignore it as we must have 
+    // ranked it and it's dependencies already.
 	for (unsigned int i=0; i<m_apps.GetCount(); i++)
 	{
-		if (!m_apps[i].IsSelectedForDownload())
-        {
-            m_apps[i].sequence = 0;
-            continue;
-        }
-
-        if (m_apps[i].sequence > 0)
+        // If the app isn't selected for download, or has already
+        // been ranked, ignore it.
+        if (!m_apps[i].IsSelectedForDownload() || m_apps[i].sequence > 0)
 			continue;
 
-		rank = m_apps[i].RankDependencies(rank);	
+		rank = m_apps[i].RankDependencies(rank, 0);	
 	}
 }
 
