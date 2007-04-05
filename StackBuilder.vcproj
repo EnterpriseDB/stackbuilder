@@ -55,6 +55,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(WXWIN)/include;include/"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -132,6 +133,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="$(WXWIN)/include;include/"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -257,6 +259,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\Config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\DownloadPage.h"
 				>
 			</File>
@@ -285,6 +291,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\Server.h"
 				>
 			</File>
@@ -302,6 +312,14 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\..\..\SVN-Trees\pgadmin3-1.6\src\include\images\pgAdmin3.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\StackBuilder.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
