@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.5 2007/04/13 09:20:02 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 
 	mainSizer->Add(0, 20);
 
-    st = new wxStaticText(this, wxID_ANY, _("To begin, please select the PostgreSQL or EnterpriseDB installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."));
+    st = new wxStaticText(this, wxID_ANY, _("To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."));
 	st->Wrap(400);
     mainSizer->Add(st, 0, wxALL, 5);
 
