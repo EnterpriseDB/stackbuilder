@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.6 2007/04/13 09:20:27 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.7 2007/04/13 10:32:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,18 +54,20 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     // Get the download path
 	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
 
+    wxString path;
     wxStandardPaths sp;
+
 	if (!key->Exists() || !key->HasValue(wxT("Download Path")))
-		m_downloadPath = sp.GetTempDir();
+		path = sp.GetTempDir();
     else
-        key->QueryValue(wxT("Download Path"), m_downloadPath);
+        key->QueryValue(wxT("Download Path"), path);
 
     delete key;
 
     // Add the path textbox and browse button
     wxBoxSizer *pathSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    m_path = new wxTextCtrl(this, wxID_ANY, m_downloadPath, wxDefaultPosition, wxSize(300, -1), wxTE_READONLY);
+    m_path = new wxTextCtrl(this, wxID_ANY, path, wxDefaultPosition, wxSize(300, -1));
 	pathSizer->Add(m_path, 0, wxALL | wxALIGN_CENTER, 2);
 
     m_browse = new wxButton(this, BTN_BROWSE, wxT("..."), wxDefaultPosition, wxSize(25, -1));
@@ -79,13 +81,10 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
 
 void DownloadPage::OnBrowse(wxCommandEvent& WXUNUSED(event))
 {
-    wxDirDialog *dd = new wxDirDialog(this, _("Select a download directory"), m_downloadPath);
+    wxDirDialog *dd = new wxDirDialog(this, _("Select a download directory"), m_path->GetValue());
 
     if (dd->ShowModal() != wxID_CANCEL)
-    {
-        m_downloadPath = dd->GetPath();
-        m_path->SetValue(m_downloadPath);
-    }
+        m_path->SetValue(dd->GetPath());
 
     delete dd;
 }
@@ -96,7 +95,7 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 	if (!event.GetDirection())
 		return;
 
-    if (!wxDir::Exists(m_downloadPath))
+    if (!wxDir::Exists(m_path->GetValue()))
 	{
         wxLogError(_("The download directory does not exist. Please select a valid directory."));
 		event.Veto();
@@ -105,10 +104,10 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 
     // Store the download location for next time
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
-    key->SetValue(wxT("Download Path"), m_downloadPath);
+    key->SetValue(wxT("Download Path"), m_path->GetValue());
     delete key;
 
-    if (!m_applist->DownloadFiles(m_downloadPath, m_mirrorlist->GetSelectedMirror()))
+    if (!m_applist->DownloadFiles(m_path->GetValue(), m_mirrorlist->GetSelectedMirror()))
     {
     	event.Veto();
 		return;

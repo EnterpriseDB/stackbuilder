@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.h,v 1.4 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.h,v 1.5 2007/04/13 10:32:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -31,8 +31,7 @@ private:
     void OnBrowse(wxCommandEvent& WXUNUSED(event));
 
     wxTextCtrl *m_path;
-    wxButton *m_browse;
-    wxString m_downloadPath; 
+    wxButton *m_browse; 
     AppList *m_applist;
     MirrorList *m_mirrorlist;
 
