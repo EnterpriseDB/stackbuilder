@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.5 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.6 2007/04/13 14:17:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -101,6 +101,7 @@ AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorLis
 	mainSizer->Add(0, 10);
 
 	m_description = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY | wxTE_MULTILINE);
+    m_description->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
     mainSizer->Add(m_description, 1, wxALL | wxEXPAND, 5);
 
     SetSizer(mainSizer);

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.8 2007/04/13 11:20:47 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.9 2007/04/13 14:17:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -173,7 +173,11 @@ bool AppList::PopulateTreeCtrl()
 		m_apps[i].SelectForDownload(false, false);
 		m_apps[i].m_tree = m_treectrl;
         m_apps[i].m_treeitem = application;
+
+        m_treectrl->SortChildren(category);
 	}
+
+    m_treectrl->SortChildren(root);
 	m_treectrl->ExpandAll();
 
 	return true;

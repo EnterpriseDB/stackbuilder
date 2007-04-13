@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.8 2007/04/13 11:20:47 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.9 2007/04/13 14:17:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -53,6 +53,7 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     mainSizer->Add(st, 0, wxALL, 5);
 
     m_summary = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+    m_summary->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	mainSizer->Add(m_summary, 4, wxALL | wxEXPAND, 5);
 
 	mainSizer->Add(0, 10);
