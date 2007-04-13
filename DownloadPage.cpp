@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.5 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.6 2007/04/13 09:20:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -60,6 +60,8 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     else
         key->QueryValue(wxT("Download Path"), m_downloadPath);
 
+    delete key;
+
     // Add the path textbox and browse button
     wxBoxSizer *pathSizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -100,6 +102,11 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 		event.Veto();
 		return;
 	}
+
+    // Store the download location for next time
+    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+    key->SetValue(wxT("Download Path"), m_downloadPath);
+    delete key;
 
     if (!m_applist->DownloadFiles(m_downloadPath, m_mirrorlist->GetSelectedMirror()))
     {
