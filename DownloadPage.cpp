@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.7 2007/04/13 10:32:27 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.8 2007/04/13 11:20:47 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@
 #include <wx/button.h>
 #include <wx/dir.h>
 #include <wx/dirdlg.h>
+#include <wx/settings.h>
 #include <wx/stdpaths.h>
 #include <wx/msw/registry.h>
 
@@ -41,11 +42,20 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
 
 	mainSizer->Add(0, 10);
 
-	wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Select the download directory if required, and then click the Next button to begin downloading the packages you have selected."));
+	wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."));
 	st->Wrap(400);
     mainSizer->Add(st, 0, wxALL, 5);
 
-	mainSizer->Add(0, 80);
+	mainSizer->Add(0, 10);
+
+    st = new wxStaticText(this, wxID_ANY, _("Selected packages:"));
+	st->Wrap(350);
+    mainSizer->Add(st, 0, wxALL, 5);
+
+    m_summary = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDefaultSize);
+	mainSizer->Add(m_summary, 4, wxALL | wxEXPAND, 5);
+
+	mainSizer->Add(0, 10);
 
     st = new wxStaticText(this, wxID_ANY, _("Download directory:"));
 	st->Wrap(350);

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.7 2007/04/03 15:25:28 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.8 2007/04/13 11:20:47 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -279,4 +279,26 @@ bool AppList::InstallApps()
     }
 
     return true;
+}
+
+wxArrayString AppList::GetSummary()
+{
+    wxArrayString summary;
+    unsigned int x = 1;
+
+    // Loop round once for every app. For each loop, search the 
+    // applist for a matching download.
+    while(x <= m_apps.GetCount())
+    {
+	    for (unsigned int i=0; i<m_apps.GetCount(); i++)
+	    {
+            if (m_apps[i].sequence == x)
+            {
+                summary.Add(m_apps[i].name + wxT(" v") + m_apps[i].version);
+            }
+	    }
+        x++;
+    }
+
+    return summary;
 }

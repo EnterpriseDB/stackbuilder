@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.3 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.4 2007/04/13 11:20:47 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,10 @@
 
 // Application headers
 #include "MirrorSelectionPage.h"
+#include "AppList.h"
 #include "MirrorList.h"
+#include "DownloadPage.h"
+
 #include "images/bullet.xpm"
 #include "images/mirror.xpm"
 
@@ -24,9 +27,10 @@ BEGIN_EVENT_TABLE(MirrorSelectionPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		MirrorSelectionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
-MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, MirrorList *mirrorlist) 
+MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist) 
 	: wxWizardPageSimple(parent)
 {
+    m_applist = applist;
 	m_mirrorlist = mirrorlist;
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -67,4 +71,7 @@ void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 	}
 
     m_mirrorlist->SetSelectedMirror((Mirror *)m_mirrortree->GetItemData(m_mirrortree->GetSelection()));
+
+    // Stuff the summary in the next page
+    ((DownloadPage *)GetNext())->SetSummary(m_applist->GetSummary());
 }

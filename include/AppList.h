@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.6 2007/03/29 15:08:53 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.7 2007/04/13 11:20:47 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -43,6 +43,7 @@ public:
     bool InstallApps();
     void IncrementErrorCount() { errors++; };
     int GetErrorCount() { return errors; };
+    wxArrayString GetSummary();
 
 private:
 	AppArray m_apps;

@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.h,v 1.5 2007/04/13 10:32:27 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.h,v 1.6 2007/04/13 11:20:47 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -26,11 +26,13 @@ class DownloadPage : public wxWizardPageSimple
 public:
     DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist);
     virtual void OnWizardPageChanging(wxWizardEvent& event);
+    void SetSummary(const wxArrayString &s) { m_summary->Clear(); m_summary->InsertItems(s, 0); }
 
 private:
     void OnBrowse(wxCommandEvent& WXUNUSED(event));
 
     wxTextCtrl *m_path;
+    wxListBox *m_summary;
     wxButton *m_browse; 
     AppList *m_applist;
     MirrorList *m_mirrorlist;
