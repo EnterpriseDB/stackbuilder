@@ -3,7 +3,7 @@
 // Purpose:     Configurable macros
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Config.h,v 1.1 2007/04/05 15:38:38 dpage Exp $
+// RCS-ID:      $Id: Config.h,v 1.2 2007/04/26 15:53:20 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,6 +17,6 @@
 
 // Download locations
 #define DEFAULT_MIRROR_LIST_URL wxT("http://www.postgresql.org/mirrors.xml")
-#define DEFAULT_APPLICATION_LIST_URL wxT("http://www.postgresql.org/files/stackbuilder/applications.xml")
+#define DEFAULT_APPLICATION_LIST_URL wxT("http://www.postgresql.org/applications.xml")
 
 #endif
