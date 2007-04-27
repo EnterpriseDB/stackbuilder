@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.5 2007/03/29 15:08:53 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.6 2007/04/27 14:51:18 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
 
 	mainSizer->Add(0, 20);
 
-	st = new wxStaticText(this, wxID_ANY, _("Please click the \"Finish\" button to start the installations."));
+	st = new wxStaticText(this, wxID_ANY, _("Please click the \"Next\" button to start the installations."));
 	st->Wrap(400);
     mainSizer->Add(st, 0, wxALL, 5);
 
