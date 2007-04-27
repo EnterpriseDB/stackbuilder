@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.10 2007/04/03 15:25:28 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.11 2007/04/27 14:57:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -383,9 +383,9 @@ bool App::Install()
 
     // MSI or EXE?
     if (format.Lower() == wxT("msi"))
-        cmd = wxT("msiexec /i ") + file.GetFullPath();
+        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\"");
     else
-        cmd = file.GetFullPath();
+        cmd = wxT("\"") + file.GetFullPath() + wxT("\"");
 
     // Install or upgrade?
     if (IsInstalled())
