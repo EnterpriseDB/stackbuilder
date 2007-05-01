@@ -269,7 +269,7 @@ msgstr ""
 
 #: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189
 msgid ""
-"This application was automatically selected because another seleciton is "
+"This application was automatically selected because another selection is "
 "dependent upon it.\n"
 "If you do not install this application others may not install or work "
 "correctly.\n"
@@ -306,7 +306,7 @@ msgstr ""
 #: CompletionPage.cpp:44
 msgid ""
 "You may run this wizard again at any time to add to or upgrade the software "
-"in your stack. If you with to remove any software, please use the Add/Remove "
+"in your stack. If you wish to remove any software, please use the Add/Remove "
 "Programs Control Panel applet."
 msgstr ""
 

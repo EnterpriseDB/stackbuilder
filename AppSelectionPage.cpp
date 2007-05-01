@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.6 2007/04/13 14:17:08 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.7 2007/05/01 14:21:44 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ void AppTreeCtrl::OnLeftClick(wxMouseEvent &evt)
 			{
 				if (app->IsSelectedAsDependency())
 				{
-					if (wxMessageBox(_("This application was automatically selected because another seleciton is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
+					if (wxMessageBox(_("This application was automatically selected because another selection is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
 						return;
 				}
 				SetItemImage(node, 0);
@@ -186,7 +186,7 @@ void AppSelectionPage::OnTreeItemActivated(wxTreeEvent &evt)
 		{
 			if (app->IsSelectedAsDependency())
 			{
-				if (wxMessageBox(_("This application was automatically selected because another seleciton is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
+				if (wxMessageBox(_("This application was automatically selected because another selection is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
 					return;
 			}
 			m_apptree->SetItemImage(node, 0);

@@ -1,0 +1,364 @@
+# French translations for PACKAGE package
+# Traductions françaises du paquet PACKAGE.
+# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Guillaume Lelarge <guillaume@lelarge.info>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-01 12:03+0100\n"
+"PO-Revision-Date: 2007-05-01 15:40+0100\n"
+"Last-Translator: Guillaume Lelarge <gleu@wanadoo.fr>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: CompletionPage.cpp:58
+#, c-format
+msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
+msgstr "%d installations ont été laissées de côté - vous pouvez essayer d'installer manuellement les paquets en utilisant les fichiers téléchargés."
+
+#: IntroductionPage.cpp:151
+#: IntroductionPage.cpp:211
+#, c-format
+msgid "%s on port %d"
+msgstr "%s sur le port %d"
+
+#: AppList.cpp:171
+#, c-format
+msgid "%s v%s"
+msgstr "%s v%s"
+
+#: AppList.cpp:167
+#, c-format
+msgid "%s v%s (installed)"
+msgstr "%s v%s (installé)"
+
+#: AppList.cpp:169
+#, c-format
+msgid "%s v%s (v%s installed)"
+msgstr "%s v%s (v%s installé)"
+
+#: IntroductionPage.cpp:57
+#: IntroductionPage.cpp:58
+msgid "<remote server>"
+msgstr "<serveur distant>"
+
+#: App.cpp:239
+#: AppList.cpp:52
+#: MirrorList.cpp:49
+msgid "A connection error occurred."
+msgstr "Une erreur de connexion est survenue."
+
+#: App.cpp:242
+#: AppList.cpp:55
+#: MirrorList.cpp:52
+msgid "A protocol error occurred."
+msgstr "Une erreur de protocole est survenue."
+
+#: InstallationPage.cpp:35
+msgid "All the installation files have now been successfully downloaded."
+msgstr "Tous les fichiers d'installation ont bien été téléchargés."
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+msgid "Are you sure you want to close the Stack Builder wizard?"
+msgstr "Êtes-vous sûr de vouloir quitter l'assistant Stack Builder ?"
+
+#: MD5.cpp:271
+#, c-format
+msgid "Cannot open input file %s to generate hash!"
+msgstr "Impossible d'ouvrir le fichier %s en entrée pour générer le hachage."
+
+#: AppList.cpp:144
+msgid "Categories"
+msgstr "Catégories"
+
+#: App.cpp:358
+#, c-format
+msgid "Checking existing file: %s"
+msgstr "Vérification du fichier existant : %s"
+
+#: App.cpp:335
+#, c-format
+msgid "Checksum verification failed for: %s! Deleting file..."
+msgstr "Échec lors de la vérification de la somme de contrôle pour %s ! Suppression du fichier..."
+
+#: App.cpp:207
+msgid "Connecting to server..."
+msgstr "Connexion au serveur..."
+
+#: App.cpp:227
+#: AppList.cpp:40
+#: MirrorList.cpp:37
+msgid "Could not parse the URL."
+msgstr "Impossible d'analyser l'URL."
+
+#: MirrorList.cpp:125
+msgid "Countries"
+msgstr "Pays"
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+msgid "Deselect application"
+msgstr "Désélectionner l'application"
+
+#: DownloadPage.cpp:61
+msgid "Download directory:"
+msgstr "Répertoire de téléchargement :"
+
+#: App.cpp:297
+#, c-format
+msgid "Downloaded %d KB (%d KB/Sec)"
+msgstr "%d Ko téléchargés (%d Ko/sec)"
+
+#: App.cpp:295
+#, c-format
+msgid "Downloaded %d of %d KB (%d KB/Sec)"
+msgstr "%d Ko téléchargés sur %d (%d Ko/sec)"
+
+#: App.cpp:206
+#, c-format
+msgid "Downloading %s"
+msgstr "Téléchargement de %s"
+
+#: IntroductionPage.cpp:85
+msgid "Downloading application list..."
+msgstr "Téléchargement de la liste des applications..."
+
+#: AppSelectionPage.cpp:135
+msgid "Downloading mirror list..."
+msgstr "Téléchargement de la liste des miroirs..."
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+msgid "Exit wizard?"
+msgstr "Quitter l'assistant ?"
+
+#: App.cpp:245
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Échec lors de l'ouverture de %s\n"
+"\n"
+"Erreur : %s"
+
+#: App.cpp:255
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Échec lors de l'ouverture de %s\n"
+"\n"
+"Erreur : l'URL spécifiée n'a pas pu être ouverte."
+
+#: AppList.cpp:58
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Échec lors de l'ouverture de la liste des applications : %s\n"
+"\n"
+"Erreur : %s"
+
+#: AppList.cpp:66
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Échec lors de l'ouverture de la liste des applications : %s\n"
+"\n"
+"Erreur : l'URL indiquée n'a pas pu être ouverte."
+
+#: MirrorList.cpp:55
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Échec lors de l'ouverture de la liste des miroirs : %s\n"
+"\n"
+"Erreur : %s"
+
+#: MirrorList.cpp:63
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Échec lors de l'ouverture de la liste des miroirs : %s\n"
+"\n"
+"Erreur : l'URL indiquée n'a pas pu être ouverte."
+
+#: AppList.cpp:73
+#, c-format
+msgid "Failed to parse the application list: %s"
+msgstr "Échec lors de l'analyse de la liste des applications : %s"
+
+#: MirrorList.cpp:70
+#, c-format
+msgid "Failed to parse the mirror list: %s"
+msgstr "Échec lors de l'analyse de la liste des miroirs : %s"
+
+#: CompletionPage.cpp:27
+msgid "Installation complete!"
+msgstr "Installation terminée !"
+
+#: App.cpp:413
+msgid "Installation error"
+msgstr "Erreur d'installation"
+
+#: CompletionPage.cpp:33
+msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
+msgstr "L'installation des paquets sélectionnés est terminée. Les fichiers téléchargés ont été conservés pour permettre de futures installations ou mises à jour (certains paquets demandent les fichiers d'installation originaux lors de leur mise à jour)."
+
+#: App.cpp:233
+#: AppList.cpp:46
+#: MirrorList.cpp:43
+msgid "No hostname specified in URL."
+msgstr "Pas d'hôte dans l'URL."
+
+#: App.cpp:236
+#: AppList.cpp:49
+#: MirrorList.cpp:46
+msgid "No path specified in URL."
+msgstr "Pas de chemin dans l'URL."
+
+#: InstallationPage.cpp:47
+msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
+msgstr "Note : vous devez permettre l'exécution complète des toutes les installations. S'il vous est demandé de redémarrer l'ordinateur, cliquez sur « Non » ou sur « Redémarrer plus tard ». Vous redémarrerez manuellement votre ordinateur quand toutes les installations seront terminées."
+
+#: InstallationPage.cpp:41
+msgid "Please click the \"Next\" button to start the installations."
+msgstr "Cliquer sur le bouton « Suivant » pour commencer les installations."
+
+#: MirrorSelectionPage.cpp:40
+msgid "Please select a mirror site to download from."
+msgstr "Sélectionner un site miroir de téléchargement."
+
+#: AppSelectionPage.cpp:88
+msgid "Please select the applications you would like to install."
+msgstr "Sélectionner les applications que vous souhaitez installer."
+
+#: Wizard.cpp:29
+msgid "PostgreSQL & EnterpriseDB Stack Builder"
+msgstr "PostgreSQL & EnterpriseDB Stack Builder"
+
+#: DownloadPage.cpp:45
+msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
+msgstr "Vérifiez vos sélections et choisissez un répertoire de téléchargement si nécessaire. Puis, cliquez sur le bouton « Suivant » pour commencer le téléchargement des paquets sélectionnés."
+
+#: DownloadPage.cpp:95
+msgid "Select a download directory"
+msgstr "Sélectionner un répertoire de téléchargement"
+
+#: DownloadPage.cpp:51
+msgid "Selected packages:"
+msgstr "Paquets sélectionnés :"
+
+#: StackBuilder.cpp:37
+msgid "Stack Builder"
+msgstr "Stack Builder"
+
+#: DownloadPage.cpp:111
+msgid "The download directory does not exist. Please select a valid directory."
+msgstr "Le répertoire de téléchargement n'existe pas. Merci de sélectionner un répertoire valide."
+
+#: App.cpp:412
+#, c-format
+msgid ""
+"The installation of %s returned an error.\n"
+"\n"
+" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
+"\n"
+"Note that ignoring this error may result in failure of any later installations that depend on this one."
+msgstr ""
+"L'installation de %s a renvoyé une erreur.\n"
+"\n"
+" Cliquer sur le bouton « OK » pour ignorer cette erreur et continuer avec le reste des installations. Cliquer sur « Annuler » pour annuler le reste.\n"
+"\n"
+"Notez qu'ignorer cette erreur pourrait résulter en des échecs des installations suivantes qui pourraient dépendre de ce paquet."
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+msgid ""
+"This application was automatically selected because another selection is dependent upon it.\n"
+"If you do not install this application others may not install or work correctly.\n"
+"\n"
+"Are you sure you wish to continue?"
+msgstr ""
+"Cette application a été automatiquement sélectionnée parce qu'un autre paquet en dépend.\n"
+"Si vous ne voulez pas installer cette application, d'autres paquets pourraient ne pas s'installer ou fonctionner correctement.\n"
+"\n"
+"Êtes-vous sûr de vouloir continuer ?"
+
+#: IntroductionPage.cpp:45
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
+msgstr "Cet assistant vous aide à installer des logiciels complémentaires à votre installation de PostgreSQL ou d'EnterpriseDB."
+
+#: IntroductionPage.cpp:51
+msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
+msgstr "Pour commencer, sélectionner l'installation pour laquelle vous installez les logiciels de cette liste. Si vous installez du logiciel à utiliser avec un serveur distant, sélectionner l'option <serveur distant>."
+
+#: App.cpp:230
+#: AppList.cpp:43
+#: MirrorList.cpp:40
+msgid "Unsupported protocol specified."
+msgstr "Protocole spécifié non supporté."
+
+#: App.cpp:323
+#, c-format
+msgid "Verifying checksum for: %s"
+msgstr "Vérification de la somme de contrôle pour %s"
+
+#: IntroductionPage.cpp:39
+msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
+msgstr "Bienvenue dans le PostgreSQL && EnterpriseDB Stack Builder !"
+
+#: CompletionPage.cpp:44
+msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
+msgstr "Vous pouvez exécuter cet assistant à tout moment pour ajouter ou mettre à jour les logiciels installés. Si vous souhaitez supprimer un logiciel, merci d'utiliser l'outil « Ajouter/Supprimer des programmes » du panneau de configuration."
+
+#: MirrorSelectionPage.cpp:68
+msgid "You must select a mirror before you continue."
+msgstr "Vous devez sélectionner un miroir avant de continuer."
+
+#: IntroductionPage.cpp:73
+msgid "You must select an installation option before you continue."
+msgstr "Vous devez sélectionner une option d'installation avant de continuer."
+
+#: AppSelectionPage.cpp:123
+msgid "You must select at least one package to install before you continue."
+msgstr "Vous devez sélectionner au moins un paquet à installer avant de continuer."
+
+#: StackBuilder.cpp:44
+msgid "download the application list from the specified URL"
+msgstr "télécharger la liste d'applications à partir de l'URL indiquée"
+
+#: StackBuilder.cpp:43
+msgid "download the mirror list from the specified URL"
+msgstr "télécharger la liste de miroirs à partir de l'URL indiquée"
+
+#: StackBuilder.cpp:42
+msgid "show this help message"
+msgstr "affiche ce message d'aide"
+
+#: StackBuilder.cpp:45
+msgid "use the specified language in the UI"
+msgstr "utilise la langue précisée dans l'interface"
+

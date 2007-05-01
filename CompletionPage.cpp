@@ -3,7 +3,7 @@
 // Purpose:     CompletionPage page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: CompletionPage.cpp,v 1.1 2007/03/29 15:08:53 dpage Exp $
+// RCS-ID:      $Id: CompletionPage.cpp,v 1.2 2007/05/01 14:21:44 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ CompletionPage::CompletionPage(wxWizard *parent)
 
 	mainSizer->Add(0, 20);
 
-    st = new wxStaticText(this, wxID_ANY, _("You may run this wizard again at any time to add to or upgrade the software in your stack. If you with to remove any software, please use the Add/Remove Programs Control Panel applet."));
+    st = new wxStaticText(this, wxID_ANY, _("You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."));
 	st->Wrap(400);
     mainSizer->Add(st, 0, wxALL, 5);
 
