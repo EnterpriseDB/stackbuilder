@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stackbuilder\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-05-01 23:01+0100\n"
+"PO-Revision-Date: 2007-05-02 16:12+0100\n"
 "Last-Translator: Magnus Hagander <magnus@hagander.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,39 +20,52 @@ msgstr "%d installationer inte genomförda - du kan prova att installera dessa m
 
 #: IntroductionPage.cpp:151
 #: IntroductionPage.cpp:211
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
 #, c-format
 msgid "%s on port %d"
 msgstr "%s på port %d"
 
 #: AppList.cpp:171
+#: AppList.cpp:173
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
 #: AppList.cpp:167
+#: AppList.cpp:169
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (installerad)"
 
 #: AppList.cpp:169
+#: AppList.cpp:171
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s installerad)"
 
 #: IntroductionPage.cpp:57
 #: IntroductionPage.cpp:58
+#: IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
 msgid "<remote server>"
 msgstr "<fjärrserver>"
 
 #: App.cpp:239
 #: AppList.cpp:52
 #: MirrorList.cpp:49
+#: App.cpp:242
+#: AppList.cpp:54
+#: MirrorList.cpp:51
 msgid "A connection error occurred."
 msgstr "Ett anslutningsproblem uppstod."
 
 #: App.cpp:242
 #: AppList.cpp:55
 #: MirrorList.cpp:52
+#: App.cpp:245
+#: AppList.cpp:57
+#: MirrorList.cpp:54
 msgid "A protocol error occurred."
 msgstr "Ett protokollfel uppstod."
 
@@ -65,36 +78,49 @@ msgstr "Alla installationsfilerna har nu laddats ned."
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "Är du säker på att du vill stänga Stackbuilder?"
 
+#: ProxyDialog.cpp:101
+#: ProxyDialog.cpp:108
+msgid "Both the proxy server and port must be specified."
+msgstr "Både proxyserver och port måste anges."
+
 #: MD5.cpp:271
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Kan inte öppna filen %s för att skapa hash!"
 
 #: AppList.cpp:144
+#: AppList.cpp:146
 msgid "Categories"
 msgstr "Kategorier"
 
 #: App.cpp:358
+#: App.cpp:361
 #, c-format
 msgid "Checking existing file: %s"
 msgstr "Kontrollerar existerande fil: %s"
 
 #: App.cpp:335
+#: App.cpp:338
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
 msgstr "Verifiering av checksumma misslyckades för: %s! Raderar filen..."
 
 #: App.cpp:207
+#: App.cpp:208
 msgid "Connecting to server..."
 msgstr "Ansluter till server..."
 
 #: App.cpp:227
 #: AppList.cpp:40
 #: MirrorList.cpp:37
+#: App.cpp:230
+#: AppList.cpp:42
+#: MirrorList.cpp:39
 msgid "Could not parse the URL."
 msgstr "Kunde inte tolka URL."
 
 #: MirrorList.cpp:125
+#: MirrorList.cpp:127
 msgid "Countries"
 msgstr "Länder"
 
@@ -108,21 +134,25 @@ msgid "Download directory:"
 msgstr "Nedladdningskatalog:"
 
 #: App.cpp:297
+#: App.cpp:300
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr "Laddat ned %d KB (%d KB/sek)"
 
 #: App.cpp:295
+#: App.cpp:298
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr "Laddat ned %d av %d KB (%d KB/sek)"
 
 #: App.cpp:206
+#: App.cpp:207
 #, c-format
 msgid "Downloading %s"
 msgstr "Laddar ned %s"
 
 #: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:95
 msgid "Downloading application list..."
 msgstr "Laddar ned applikationslista..."
 
@@ -135,7 +165,12 @@ msgstr "Laddar ned spegellista..."
 msgid "Exit wizard?"
 msgstr "Avsluta?"
 
+#: ProxyDialog.cpp:62
+msgid "FTP proxy"
+msgstr "FTP-proxy"
+
 #: App.cpp:245
+#: App.cpp:248
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -147,6 +182,7 @@ msgstr ""
 "Fel: %s"
 
 #: App.cpp:255
+#: App.cpp:258
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -158,6 +194,7 @@ msgstr ""
 "Fel: Angiven URL kunde inte öppnas."
 
 #: AppList.cpp:58
+#: AppList.cpp:60
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -169,6 +206,7 @@ msgstr ""
 "Fel: %s"
 
 #: AppList.cpp:66
+#: AppList.cpp:68
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -180,6 +218,7 @@ msgstr ""
 "Fel: Angiven URL kunde inte öppnas."
 
 #: MirrorList.cpp:55
+#: MirrorList.cpp:57
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -191,6 +230,7 @@ msgstr ""
 "Fel: %s"
 
 #: MirrorList.cpp:63
+#: MirrorList.cpp:65
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -202,20 +242,27 @@ msgstr ""
 "Fel: Angiven URL kunde inte öppnas."
 
 #: AppList.cpp:73
+#: AppList.cpp:75
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "Misslyckades med att tolka applikationslistan: %s"
 
 #: MirrorList.cpp:70
+#: MirrorList.cpp:72
 #, c-format
 msgid "Failed to parse the mirror list: %s"
 msgstr "Misslyckades med att tolka spegellistan: %s"
+
+#: ProxyDialog.cpp:53
+msgid "HTTP proxy"
+msgstr "HTTP-proxy"
 
 #: CompletionPage.cpp:27
 msgid "Installation complete!"
 msgstr "Installationen komplett!"
 
 #: App.cpp:413
+#: App.cpp:416
 msgid "Installation error"
 msgstr "Installationsfel"
 
@@ -223,15 +270,29 @@ msgstr "Installationsfel"
 msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
 msgstr "Installation av valda paket är slutförd. De nedladdade filerna finns kvar för att möjliggöra vidare installationer eller uppgraderingar (vissa paket kräver originalfilerna för att kunna uppdateras)."
 
+#: ProxyDialog.cpp:93
+msgid "Invalid FTP port specified."
+msgstr "Felaktig FTP-port angiven."
+
+#: ProxyDialog.cpp:86
+msgid "Invalid HTTP port specified."
+msgstr "Felaktig HTTP-port angiven."
+
 #: App.cpp:233
 #: AppList.cpp:46
 #: MirrorList.cpp:43
+#: App.cpp:236
+#: AppList.cpp:48
+#: MirrorList.cpp:45
 msgid "No hostname specified in URL."
 msgstr "Inget servernamn angivet i URL."
 
 #: App.cpp:236
 #: AppList.cpp:49
 #: MirrorList.cpp:46
+#: App.cpp:239
+#: AppList.cpp:51
+#: MirrorList.cpp:48
 msgid "No path specified in URL."
 msgstr "Ingen sökväg angiven i URL."
 
@@ -251,9 +312,19 @@ msgstr "Välj spegelsite att ladda ned från."
 msgid "Please select the applications you would like to install."
 msgstr "Välj applikationer att installera."
 
+#: ProxyDialog.cpp:57
+#: ProxyDialog.cpp:66
+msgid "Port"
+msgstr "Port"
+
 #: Wizard.cpp:29
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
+
+#: IntroductionPage.cpp:72
+#: IntroductionPage.cpp:237
+msgid "Proxy servers"
+msgstr "Proxyservrar"
 
 #: DownloadPage.cpp:45
 msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
@@ -276,6 +347,7 @@ msgid "The download directory does not exist. Please select a valid directory."
 msgstr "Nedladdningskatalogen existerar inte. Välj en giltig katalog."
 
 #: App.cpp:412
+#: App.cpp:415
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
@@ -304,25 +376,32 @@ msgstr ""
 "Är du säker på att du vill fortsätta?"
 
 #: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:49
 msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
 msgstr "Denna guide hjälper dig att installera extra programvara för att komplettera din installation av PostgreSQL eller EnterpriseDB."
 
 #: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:55
 msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
 msgstr "För att börja, välj den installation som du vill installera för i listan nedan. Om du installerar programvara som skall användas på en annan server, välj <fjärrserver>."
 
 #: App.cpp:230
 #: AppList.cpp:43
 #: MirrorList.cpp:40
+#: App.cpp:233
+#: AppList.cpp:45
+#: MirrorList.cpp:42
 msgid "Unsupported protocol specified."
 msgstr "Osupportat protokoll valt."
 
 #: App.cpp:323
+#: App.cpp:326
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr "Verifierar checksumma för: %s"
 
 #: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:43
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr "Välkommen till PostgreSQL && EnterpriseDB Stack Builder!"
 
@@ -335,6 +414,7 @@ msgid "You must select a mirror before you continue."
 msgstr "Du måste välja en spegelserver innan du kan fortsätta."
 
 #: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:83
 msgid "You must select an installation option before you continue."
 msgstr "Du måste välja en instalation innan du kan fortsätta."
 
