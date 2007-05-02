@@ -1,14 +1,14 @@
-# PostgreSQL/EnterpriseDB Application Stack Builder
-# (c) EnterpriseDB
-# This file is distributed under the BSD licence.
-# Dave Page <dave.page@enterprisedb.com>, 2007.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: StackBuilder\n"
-"Report-Msgid-Bugs-To: dave.page@enterprisedb.com\n"
-"POT-Creation-Date: 2007-05-01 11:39+0100\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-02 13:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,35 +23,39 @@ msgid ""
 "packages using the downloaded files."
 msgstr ""
 
-#: IntroductionPage.cpp:151 IntroductionPage.cpp:211
+#: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
 #, c-format
 msgid "%s on port %d"
 msgstr ""
 
-#: AppList.cpp:171
+#: AppList.cpp:171 AppList.cpp:173
 #, c-format
 msgid "%s v%s"
 msgstr ""
 
-#: AppList.cpp:167
+#: AppList.cpp:167 AppList.cpp:169
 #, c-format
 msgid "%s v%s (installed)"
 msgstr ""
 
-#: AppList.cpp:169
+#: AppList.cpp:169 AppList.cpp:171
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr ""
 
-#: IntroductionPage.cpp:57 IntroductionPage.cpp:58
+#: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
 msgid "<remote server>"
 msgstr ""
 
-#: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49
+#: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
+#: MirrorList.cpp:51
 msgid "A connection error occurred."
 msgstr ""
 
-#: App.cpp:242 AppList.cpp:55 MirrorList.cpp:52
+#: App.cpp:242 AppList.cpp:55 MirrorList.cpp:52 App.cpp:245 AppList.cpp:57
+#: MirrorList.cpp:54
 msgid "A protocol error occurred."
 msgstr ""
 
@@ -59,8 +63,12 @@ msgstr ""
 msgid "All the installation files have now been successfully downloaded."
 msgstr ""
 
-#: StackBuilder.cpp:75
+#: StackBuilder.cpp:75 StackBuilder.cpp:79
 msgid "Are you sure you want to close the Stack Builder wizard?"
+msgstr ""
+
+#: ProxyDialog.cpp:101 ProxyDialog.cpp:108
+msgid "Both the proxy server and port must be specified."
 msgstr ""
 
 #: MD5.cpp:271
@@ -68,29 +76,30 @@ msgstr ""
 msgid "Cannot open input file %s to generate hash!"
 msgstr ""
 
-#: AppList.cpp:144
+#: AppList.cpp:144 AppList.cpp:146
 msgid "Categories"
 msgstr ""
 
-#: App.cpp:358
+#: App.cpp:358 App.cpp:361
 #, c-format
 msgid "Checking existing file: %s"
 msgstr ""
 
-#: App.cpp:335
+#: App.cpp:335 App.cpp:338
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
 msgstr ""
 
-#: App.cpp:207
+#: App.cpp:207 App.cpp:208
 msgid "Connecting to server..."
 msgstr ""
 
-#: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37
+#: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
+#: MirrorList.cpp:39
 msgid "Could not parse the URL."
 msgstr ""
 
-#: MirrorList.cpp:125
+#: MirrorList.cpp:125 MirrorList.cpp:127
 msgid "Countries"
 msgstr ""
 
@@ -102,22 +111,22 @@ msgstr ""
 msgid "Download directory:"
 msgstr ""
 
-#: App.cpp:297
+#: App.cpp:297 App.cpp:300
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr ""
 
-#: App.cpp:295
+#: App.cpp:295 App.cpp:298
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr ""
 
-#: App.cpp:206
+#: App.cpp:206 App.cpp:207
 #, c-format
 msgid "Downloading %s"
 msgstr ""
 
-#: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:85 IntroductionPage.cpp:95
 msgid "Downloading application list..."
 msgstr ""
 
@@ -125,11 +134,15 @@ msgstr ""
 msgid "Downloading mirror list..."
 msgstr ""
 
-#: StackBuilder.cpp:75
+#: StackBuilder.cpp:75 StackBuilder.cpp:79
 msgid "Exit wizard?"
 msgstr ""
 
-#: App.cpp:245
+#: ProxyDialog.cpp:62
+msgid "FTP proxy"
+msgstr ""
+
+#: App.cpp:245 App.cpp:248
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -137,7 +150,7 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: App.cpp:255
+#: App.cpp:255 App.cpp:258
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -145,7 +158,7 @@ msgid ""
 "Error: The URL specified could not be opened."
 msgstr ""
 
-#: AppList.cpp:58
+#: AppList.cpp:58 AppList.cpp:60
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -153,7 +166,7 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: AppList.cpp:66
+#: AppList.cpp:66 AppList.cpp:68
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -161,7 +174,7 @@ msgid ""
 "Error: The URL specified could not be opened."
 msgstr ""
 
-#: MirrorList.cpp:55
+#: MirrorList.cpp:55 MirrorList.cpp:57
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -169,7 +182,7 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: MirrorList.cpp:63
+#: MirrorList.cpp:63 MirrorList.cpp:65
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -177,21 +190,25 @@ msgid ""
 "Error: The URL specified could not be opened."
 msgstr ""
 
-#: AppList.cpp:73
+#: AppList.cpp:73 AppList.cpp:75
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr ""
 
-#: MirrorList.cpp:70
+#: MirrorList.cpp:70 MirrorList.cpp:72
 #, c-format
 msgid "Failed to parse the mirror list: %s"
+msgstr ""
+
+#: ProxyDialog.cpp:53
+msgid "HTTP proxy"
 msgstr ""
 
 #: CompletionPage.cpp:27
 msgid "Installation complete!"
 msgstr ""
 
-#: App.cpp:413
+#: App.cpp:413 App.cpp:416
 msgid "Installation error"
 msgstr ""
 
@@ -202,11 +219,21 @@ msgid ""
 "require the original installation files when being upgraded)."
 msgstr ""
 
-#: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43
+#: ProxyDialog.cpp:93
+msgid "Invalid FTP port specified."
+msgstr ""
+
+#: ProxyDialog.cpp:86
+msgid "Invalid HTTP port specified."
+msgstr ""
+
+#: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
+#: MirrorList.cpp:45
 msgid "No hostname specified in URL."
 msgstr ""
 
-#: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46
+#: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
+#: MirrorList.cpp:48
 msgid "No path specified in URL."
 msgstr ""
 
@@ -229,8 +256,16 @@ msgstr ""
 msgid "Please select the applications you would like to install."
 msgstr ""
 
+#: ProxyDialog.cpp:57 ProxyDialog.cpp:66
+msgid "Port"
+msgstr ""
+
 #: Wizard.cpp:29
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
+msgstr ""
+
+#: IntroductionPage.cpp:72 IntroductionPage.cpp:237
+msgid "Proxy servers"
 msgstr ""
 
 #: DownloadPage.cpp:45
@@ -255,7 +290,7 @@ msgstr ""
 msgid "The download directory does not exist. Please select a valid directory."
 msgstr ""
 
-#: App.cpp:412
+#: App.cpp:412 App.cpp:415
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
@@ -277,29 +312,30 @@ msgid ""
 "Are you sure you wish to continue?"
 msgstr ""
 
-#: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:45 IntroductionPage.cpp:49
 msgid ""
 "This wizard will help you install additional software to complement your "
 "PostgreSQL or EnterpriseDB installation."
 msgstr ""
 
-#: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:51 IntroductionPage.cpp:55
 msgid ""
 "To begin, please select the installation you are installing software for "
 "from the list below. If you are installing software to use with a remote "
 "server, please select the <remote server> option."
 msgstr ""
 
-#: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40
+#: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
+#: MirrorList.cpp:42
 msgid "Unsupported protocol specified."
 msgstr ""
 
-#: App.cpp:323
+#: App.cpp:323 App.cpp:326
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr ""
 
-#: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:39 IntroductionPage.cpp:43
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr ""
 
@@ -314,7 +350,7 @@ msgstr ""
 msgid "You must select a mirror before you continue."
 msgstr ""
 
-#: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:73 IntroductionPage.cpp:83
 msgid "You must select an installation option before you continue."
 msgstr ""
 
