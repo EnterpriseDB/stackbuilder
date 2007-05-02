@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.5 2007/04/13 09:20:02 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.6 2007/05/02 12:44:43 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,8 +22,12 @@
 #include "AppSelectionPage.h"
 #include "AppList.h"
 #include "Server.h"
+#include "ProxyDialog.h"
+
+const int BTN_PROXIES=1002;
 
 BEGIN_EVENT_TABLE(IntroductionPage, wxWizardPageSimple)
+    EVT_BUTTON(BTN_PROXIES,                 IntroductionPage::OnProxies)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,		IntroductionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
@@ -61,6 +65,12 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 	FindEdbServers();
 
 	mainSizer->Add(m_installation, 0, wxALL | wxALIGN_CENTER, 5);
+
+    mainSizer->AddStretchSpacer();
+
+    // Add the Proxy config button
+    m_proxies = new wxButton(this, BTN_PROXIES, _("Proxy servers"));
+	mainSizer->Add(m_proxies, 0, wxALL | wxALIGN_RIGHT, 5);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);
@@ -220,4 +230,11 @@ bool IntroductionPage::FindEdbServers()
 	}
 
 	return success;
+}
+
+void IntroductionPage::OnProxies(wxCommandEvent& WXUNUSED(event))
+{
+    ProxyDialog *pd = new ProxyDialog(this, _("Proxy servers"));
+    pd->ShowModal();
+    delete pd;
 }

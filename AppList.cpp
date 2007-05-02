@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.9 2007/04/13 14:17:08 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.10 2007/05/02 12:44:43 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -21,6 +21,7 @@
 #include "App.h"
 #include "AppList.h"
 #include "Mirror.h"
+#include "ProxyDialog.h"
 
 class Server;
 
@@ -30,6 +31,7 @@ WX_DEFINE_OBJARRAY(AppArray);
 bool AppList::LoadAppList()
 {
     wxURL url(m_applicationListUrl);
+    url.SetProxy(ProxyDialog::GetProxy(wxT("http")));
 	wxURLError err = url.GetError();
     if (err != wxURL_NOERR)
 	{

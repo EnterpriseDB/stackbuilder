@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.11 2007/04/27 14:57:28 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.12 2007/05/02 12:44:43 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,6 +27,7 @@
 #include "MD5.h"
 #include "Mirror.h"
 #include "Server.h"
+#include "ProxyDialog.h"
 
 App::App(AppList *applist, Server *server) 
 { 
@@ -216,6 +217,8 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
               (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
               mirror->rootpath, 
               mirrorpath));
+
+    url.SetProxy(ProxyDialog::GetProxy(mirror->protocol));
 
 	wxURLError err = url.GetError();
     if (err != wxURL_NOERR)

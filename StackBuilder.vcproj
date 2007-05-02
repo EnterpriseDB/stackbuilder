@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ProxyDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StackBuilder.cpp"
 				>
 			</File>
@@ -288,6 +292,10 @@
 			</File>
 			<File
 				RelativePath=".\include\MirrorSelectionPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\ProxyDialog.h"
 				>
 			</File>
 			<File

@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.h,v 1.3 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.h,v 1.4 2007/05/02 12:44:43 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@
 // wxWindows headers
 #include <wx/wx.h>
 #include <wx/wizard.h>
+#include <wx/button.h>
 
 class AppList;
 
@@ -28,8 +29,10 @@ public:
 private:
 	bool FindPgServers();
 	bool FindEdbServers();
+    void OnProxies(wxCommandEvent& event);
 
     wxComboBox *m_installation;
+    wxButton *m_proxies;
 	AppList *m_applist;
 
 	DECLARE_EVENT_TABLE()

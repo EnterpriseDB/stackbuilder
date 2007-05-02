@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.4 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.5 2007/05/02 12:44:43 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,7 @@
 // Application headers
 #include "Mirror.h"
 #include "MirrorList.h"
+#include "ProxyDialog.h"
 
 // Define the MirrorArray type
 WX_DEFINE_OBJARRAY(MirrorArray);
@@ -27,6 +28,7 @@ WX_DEFINE_OBJARRAY(MirrorArray);
 bool MirrorList::LoadMirrorList()
 {
     wxURL url(m_mirrorListUrl);
+    url.SetProxy(ProxyDialog::GetProxy(wxT("http")));
 	wxURLError err = url.GetError();
     if (err != wxURL_NOERR)
 	{
