@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.12 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.13 2007/05/02 13:45:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ bool App::IsValid()
 			!category.IsEmpty() && 
 			!format.IsEmpty() && 
 			!checksum.IsEmpty() && 
-			!mirrorpath.IsEmpty() &&
+			!(mirrorpath.IsEmpty() && alturl.IsEmpty()) &&
             !versionkey.IsEmpty()); 
 }
 
@@ -211,14 +211,20 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
                                                 wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
     pd->Show();
 
-    wxURL url(wxString::Format(wxT("%s://%s%s%s/%s"), 
-              mirror->protocol, 
-              mirror->hostname, 
-              (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
-              mirror->rootpath, 
-              mirrorpath));
+    wxString theUrl;
+    if (alturl.IsEmpty())
+        theUrl = wxString::Format(wxT("%s://%s%s%s/%s"), 
+                                  mirror->protocol, 
+                                  mirror->hostname, 
+                                  (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
+                                  mirror->rootpath, 
+                                  mirrorpath);
+    else
+        theUrl = alturl;
 
-    url.SetProxy(ProxyDialog::GetProxy(mirror->protocol));
+    wxURL url(theUrl);
+
+    url.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
 
 	wxURLError err = url.GetError();
     if (err != wxURL_NOERR)
@@ -345,7 +351,18 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 
 void App::GetFilename(const wxString& downloadPath)
 {
-    wxFileName svrFile(mirrorpath);
+    wxString thePath;
+    if (!alturl.IsEmpty())
+        thePath = alturl;
+    else
+        thePath = mirrorpath;
+
+    // NOTE: If we're using the alturl here, the protocol will
+    //       become the drive, and the hostname etc. part of
+    //       the path in the wxFileName. That's not a problem
+    //       now, but might need to be fixed if this code is
+    //       hacked in the future.
+    wxFileName svrFile(thePath);
 
     file = downloadPath + wxT("/") + svrFile.GetFullName();
 

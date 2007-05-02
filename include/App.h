@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.8 2007/04/03 15:25:28 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.9 2007/05/02 13:45:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,6 +54,7 @@ public:
 	wxString mirrorpath;
 	wxArrayString dependencies;
     wxString versionkey;
+    wxString alturl;
 
 	wxTreeItemId m_treeitem;
 	wxTreeCtrl *m_tree;

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.10 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.11 2007/05/02 13:45:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -120,6 +120,8 @@ bool AppList::LoadAppList()
 					newApplication->dependencies.Add(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("versionkey"))
 					newApplication->versionkey = properties->GetNodeContent();
+				else if (properties->GetName() == wxT("alturl"))
+					newApplication->alturl = properties->GetNodeContent();
 
 				properties = properties->GetNext();
 			}
