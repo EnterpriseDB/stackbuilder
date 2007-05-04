@@ -1,0 +1,438 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-05-04 10:36+0200\n"
+"Last-Translator: Daeron <AREpko@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: CompletionPage.cpp:58
+#, c-format
+msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
+msgstr "%d утановок были пропущены - Вы можете захотеть поставить их пакеты вручную используя выкачанные файлы."
+
+#: IntroductionPage.cpp:151
+#: IntroductionPage.cpp:211
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
+#, c-format
+msgid "%s on port %d"
+msgstr "%s на порту %d"
+
+#: AppList.cpp:171
+#: AppList.cpp:173
+#, fuzzy, c-format
+msgid "%s v%s"
+msgstr "%s из%s"
+
+#: AppList.cpp:167
+#: AppList.cpp:169
+#, fuzzy, c-format
+msgid "%s v%s (installed)"
+msgstr "%s из%s (установленно)"
+
+#: AppList.cpp:169
+#: AppList.cpp:171
+#, fuzzy, c-format
+msgid "%s v%s (v%s installed)"
+msgstr "%s из%s (из%s установленно)"
+
+#: IntroductionPage.cpp:57
+#: IntroductionPage.cpp:58
+#: IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
+msgid "<remote server>"
+msgstr "<удаленный сервер>"
+
+#: App.cpp:239
+#: AppList.cpp:52
+#: MirrorList.cpp:49
+#: App.cpp:242
+#: AppList.cpp:54
+#: MirrorList.cpp:51
+msgid "A connection error occurred."
+msgstr "Возникла ошибка подсоединения."
+
+#: App.cpp:242
+#: AppList.cpp:55
+#: MirrorList.cpp:52
+#: App.cpp:245
+#: AppList.cpp:57
+#: MirrorList.cpp:54
+msgid "A protocol error occurred."
+msgstr "Возникла ошибка протокола"
+
+#: InstallationPage.cpp:35
+msgid "All the installation files have now been successfully downloaded."
+msgstr "Все файлы для установки успешно выкачаны."
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+msgid "Are you sure you want to close the Stack Builder wizard?"
+msgstr "Вы уверены что хотите закрыть мастер Stack Builder?"
+
+#: ProxyDialog.cpp:101
+#: ProxyDialog.cpp:108
+msgid "Both the proxy server and port must be specified."
+msgstr "Должны быть указаны адрес и порт прокси сервера."
+
+#: MD5.cpp:271
+#, fuzzy, c-format
+msgid "Cannot open input file %s to generate hash!"
+msgstr "Невозможно открыть файл %s для генерации хеша!"
+
+#: AppList.cpp:144
+#: AppList.cpp:146
+msgid "Categories"
+msgstr "Категории"
+
+#: App.cpp:358
+#: App.cpp:361
+#, c-format
+msgid "Checking existing file: %s"
+msgstr "Проверка существования файла: %s"
+
+#: App.cpp:335
+#: App.cpp:338
+#, c-format
+msgid "Checksum verification failed for: %s! Deleting file..."
+msgstr "Файл %s не прошел проверку контрольной суммы! Удаляем файл..."
+
+#: App.cpp:207
+#: App.cpp:208
+msgid "Connecting to server..."
+msgstr "Подсоединение к серверу..."
+
+#: App.cpp:227
+#: AppList.cpp:40
+#: MirrorList.cpp:37
+#: App.cpp:230
+#: AppList.cpp:42
+#: MirrorList.cpp:39
+msgid "Could not parse the URL."
+msgstr "Невозможно определить URL."
+
+#: MirrorList.cpp:125
+#: MirrorList.cpp:127
+msgid "Countries"
+msgstr "Страны"
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+msgid "Deselect application"
+msgstr "Снять выбор приложений"
+
+#: DownloadPage.cpp:61
+msgid "Download directory:"
+msgstr "Загрузка каталога:"
+
+#: App.cpp:297
+#: App.cpp:300
+#, c-format
+msgid "Downloaded %d KB (%d KB/Sec)"
+msgstr "Загружено %d КБ (%d КБ/Сек)"
+
+#: App.cpp:295
+#: App.cpp:298
+#, c-format
+msgid "Downloaded %d of %d KB (%d KB/Sec)"
+msgstr "Загружено %d из %d КБ (%d КБ/Сек)"
+
+#: App.cpp:206
+#: App.cpp:207
+#, c-format
+msgid "Downloading %s"
+msgstr "Загрузка %s"
+
+#: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:95
+msgid "Downloading application list..."
+msgstr "Загрузка списка приложений..."
+
+#: AppSelectionPage.cpp:135
+msgid "Downloading mirror list..."
+msgstr "Загрузка списка зеркал..."
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+msgid "Exit wizard?"
+msgstr "Покинуть мастер?"
+
+#: ProxyDialog.cpp:62
+msgid "FTP proxy"
+msgstr "FTP прокси"
+
+#: App.cpp:245
+#: App.cpp:248
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Невозможно открыть %s\n"
+"\n"
+"Ошибка: %s"
+
+#: App.cpp:255
+#: App.cpp:258
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Невозможно открыть %s\n"
+"\n"
+"Ошибка: Указанный URL не может быть открыт."
+
+#: AppList.cpp:58
+#: AppList.cpp:60
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Невозможно открыть список приложений: %s\n"
+"\n"
+"Ошибка: %s"
+
+#: AppList.cpp:66
+#: AppList.cpp:68
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Невозможно открыть список приложений: %s\n"
+"\n"
+"Ошибка: Указанный URL не может быть открыт."
+
+#: MirrorList.cpp:55
+#: MirrorList.cpp:57
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"Невозможно открыть список зеркал: %s\n"
+"\n"
+"Ошибка: %s"
+
+#: MirrorList.cpp:63
+#: MirrorList.cpp:65
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"Невозможно открыть список зеркал: %s\n"
+"\n"
+"Ошибка: Указанный URL не может быть открыт."
+
+#: AppList.cpp:73
+#: AppList.cpp:75
+#, c-format
+msgid "Failed to parse the application list: %s"
+msgstr "Невозможно разобрать список приложений: %s"
+
+#: MirrorList.cpp:70
+#: MirrorList.cpp:72
+#, c-format
+msgid "Failed to parse the mirror list: %s"
+msgstr "Невозможно разобрать список зеркал: %s"
+
+#: ProxyDialog.cpp:53
+msgid "HTTP proxy"
+msgstr "HTTP прокси"
+
+#: CompletionPage.cpp:27
+msgid "Installation complete!"
+msgstr "Установка завершена!"
+
+#: App.cpp:413
+#: App.cpp:416
+msgid "Installation error"
+msgstr "Ошибка установки"
+
+#: CompletionPage.cpp:33
+msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
+msgstr "Установка выбранных пакетов завершена. Загруженные файлы были сохранены для будующих установок или обновлений (некоторые пакеты требуют изначальных файлов установки для обновления)."
+
+#: ProxyDialog.cpp:93
+msgid "Invalid FTP port specified."
+msgstr "Указан неправильный порт FTP."
+
+#: ProxyDialog.cpp:86
+msgid "Invalid HTTP port specified."
+msgstr "Указан неправильный порт HTTP."
+
+#: App.cpp:233
+#: AppList.cpp:46
+#: MirrorList.cpp:43
+#: App.cpp:236
+#: AppList.cpp:48
+#: MirrorList.cpp:45
+msgid "No hostname specified in URL."
+msgstr "Не указано имя хоста в URL."
+
+#: App.cpp:236
+#: AppList.cpp:49
+#: MirrorList.cpp:46
+#: App.cpp:239
+#: AppList.cpp:51
+#: MirrorList.cpp:48
+msgid "No path specified in URL."
+msgstr "Не указан путь в URL."
+
+#: InstallationPage.cpp:47
+msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
+msgstr "Внимание: Вы должны разрешить запуск всех установок для завершения. Если будет задан вопрос о перезагрузке компьютера, нажмите \"Нет\" или \"Перегрузить позже\" и вручную перезагрузите компьютер после завершения всех установок."
+
+#: InstallationPage.cpp:41
+msgid "Please click the \"Next\" button to start the installations."
+msgstr "Нажмите на кнопку \"Далее\" для начала установки."
+
+#: MirrorSelectionPage.cpp:40
+msgid "Please select a mirror site to download from."
+msgstr "Пожалуйста, укажите зеркало сайта, с которого выполнять загрузку."
+
+#: AppSelectionPage.cpp:88
+msgid "Please select the applications you would like to install."
+msgstr "Пожалуйста, выбирите приложения которые Вы хотите установить."
+
+#: ProxyDialog.cpp:57
+#: ProxyDialog.cpp:66
+msgid "Port"
+msgstr "Порт"
+
+#: Wizard.cpp:29
+msgid "PostgreSQL & EnterpriseDB Stack Builder"
+msgstr "PostgreSQL & EnterpriseDB Stack Builder"
+
+#: IntroductionPage.cpp:72
+#: IntroductionPage.cpp:237
+msgid "Proxy servers"
+msgstr "Прокси сервера"
+
+#: DownloadPage.cpp:45
+msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
+msgstr "Просмотрите Ваш выбор и выбирете директорию, если нужно, и нажмите на кнопку Далее для начала загрузки пакетов, которые Вы выбрали."
+
+#: DownloadPage.cpp:95
+msgid "Select a download directory"
+msgstr "Выбирете директорию загрузки"
+
+#: DownloadPage.cpp:51
+msgid "Selected packages:"
+msgstr "Выбранные пакеты:"
+
+#: StackBuilder.cpp:37
+msgid "Stack Builder"
+msgstr "Stack Builder"
+
+#: DownloadPage.cpp:111
+msgid "The download directory does not exist. Please select a valid directory."
+msgstr "Директория загрузки не существует. Пожалуйста, выбирите правильную директорию."
+
+#: App.cpp:412
+#: App.cpp:415
+#, c-format
+msgid ""
+"The installation of %s returned an error.\n"
+"\n"
+" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
+"\n"
+"Note that ignoring this error may result in failure of any later installations that depend on this one."
+msgstr ""
+"Установка %s завершилась с ошибкой.\n"
+"\n"
+" Нажмите на кнопку ОК для игнорирования этой ошибки и продолжения всех оставшихся приложений, или нажмите на отмену для прерывания оставшихся приложений.\n"
+"\n"
+"Помните, что игнорирование этой ошибки может привести к сбоям при даьнейших установко пакетов, зависящих от этого."
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+msgid ""
+"This application was automatically selected because another selection is dependent upon it.\n"
+"If you do not install this application others may not install or work correctly.\n"
+"\n"
+"Are you sure you wish to continue?"
+msgstr ""
+"Это приложение было автоматически выбрано так как другое выбранное приложение зависит от него.\n"
+"Если Вы выберете не устанавливать это приложение, то другие могут не установиться или работать правильно.\n"
+"\n"
+"Вы уверены, что хотите продолжить?"
+
+#: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:49
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
+msgstr "Этот мастер поможет установить допоолнительные приложения для установленных PostgreSQL или  EnterpriseDB."
+
+#: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:55
+msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
+msgstr "Для начала, выберете приложения для установки из списка ниже. Если вы хотите устнавливать приложения с удаленного сервера, поставьте выберете опцию <удаленный сервер>."
+
+#: App.cpp:230
+#: AppList.cpp:43
+#: MirrorList.cpp:40
+#: App.cpp:233
+#: AppList.cpp:45
+#: MirrorList.cpp:42
+msgid "Unsupported protocol specified."
+msgstr "Выбран неподдерживаемый протокол."
+
+#: App.cpp:323
+#: App.cpp:326
+#, c-format
+msgid "Verifying checksum for: %s"
+msgstr "Ошибка контрольной суммы для: %s"
+
+#: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:43
+msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
+msgstr "Добро пожаловать в  PostgreSQL && EnterpriseDB Stack Builder!"
+
+#: CompletionPage.cpp:44
+#, fuzzy
+msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
+msgstr "Вы можете запускать этот мастер всегда, когда хотите установить новое или обновить старые приложения в Вашем стек. Если Вы хотите удалить любое приложение, используйте Добавить/Удалить Программы из Панели управления."
+
+#: MirrorSelectionPage.cpp:68
+msgid "You must select a mirror before you continue."
+msgstr "Вы должны выбрать зеркало перед продолжением."
+
+#: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:83
+msgid "You must select an installation option before you continue."
+msgstr "Вы должны выбрать опции устанвоки перед продолжением."
+
+#: AppSelectionPage.cpp:123
+msgid "You must select at least one package to install before you continue."
+msgstr "Вы должны выбрать как мимнимум один пакет для продолжения."
+
+#: StackBuilder.cpp:44
+msgid "download the application list from the specified URL"
+msgstr "загрузка списка приложений с указанного URL"
+
+#: StackBuilder.cpp:43
+msgid "download the mirror list from the specified URL"
+msgstr "загрузка списка зеркал с указанного URL"
+
+#: StackBuilder.cpp:42
+msgid "show this help message"
+msgstr "показать сообщение помощи"
+
+#: StackBuilder.cpp:45
+#, fuzzy
+msgid "use the specified language in the UI"
+msgstr "использовать указанный язык в пользовательском интерфейсе"
+
