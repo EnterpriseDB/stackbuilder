@@ -3,7 +3,7 @@
 // Purpose:     Proxy server configuration dialog
 // Author:      Dave Page
 // Created:     2007-05-02
-// RCS-ID:      $Id: ProxyDialog.cpp,v 1.1 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: ProxyDialog.cpp,v 1.2 2007/05/08 08:04:38 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ ProxyDialog::ProxyDialog(wxWindow *parent, const wxString& title)
 : wxDialog(parent, wxID_ANY, title)
 {
     // Get the proxy settings
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+	wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
 
     wxString http_host, http_port, ftp_host, ftp_port;
 
@@ -111,7 +111,7 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
     }
 
     // Store the settings
-    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
 
     key->SetValue(wxT("HTTP proxy host"), m_http_host->GetValue());
     key->SetValue(wxT("HTTP proxy port"), m_http_port->GetValue());
@@ -131,7 +131,7 @@ void ProxyDialog::OnCancel(wxCommandEvent& event)
 wxString ProxyDialog::GetProxy(const wxString &protocol)
 {
     // Get the proxy settings
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+	wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
 
     wxString host, port;
 

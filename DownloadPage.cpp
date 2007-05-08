@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.9 2007/04/13 14:17:08 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.10 2007/05/08 08:04:38 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     mainSizer->Add(st, 0, wxALL, 5);
 
     // Get the download path
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+	wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
 
     wxString path;
     wxStandardPaths sp;
@@ -114,7 +114,7 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 	}
 
     // Store the download location for next time
-    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Stack Builder\\"));
+    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
     key->SetValue(wxT("Download Path"), m_path->GetValue());
     delete key;
 
