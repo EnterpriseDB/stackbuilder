@@ -3,7 +3,7 @@
 // Purpose:     Proxy server configuration dialog
 // Author:      Dave Page
 // Created:     2007-05-02
-// RCS-ID:      $Id: ProxyDialog.cpp,v 1.2 2007/05/08 08:04:38 dpage Exp $
+// RCS-ID:      $Id: ProxyDialog.cpp,v 1.3 2007/05/15 13:46:59 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -112,6 +112,8 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
 
     // Store the settings
     wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
+    if (!key->Exists())
+        key->Create();
 
     key->SetValue(wxT("HTTP proxy host"), m_http_host->GetValue());
     key->SetValue(wxT("HTTP proxy port"), m_http_port->GetValue());

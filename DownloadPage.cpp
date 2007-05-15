@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.10 2007/05/08 08:04:38 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.11 2007/05/15 13:46:59 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -115,6 +115,9 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 
     // Store the download location for next time
     wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
+    if (!key->Exists())
+        key->Create();
+
     key->SetValue(wxT("Download Path"), m_path->GetValue());
     delete key;
 
