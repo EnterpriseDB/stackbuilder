@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.11 2007/05/02 13:45:28 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.12 2007/05/15 14:05:40 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -95,13 +95,13 @@ bool AppList::LoadAppList()
 				if (properties->GetName() == wxT("id"))
 					newApplication->id = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("name"))
-					newApplication->name = properties->GetNodeContent();
+					newApplication->name = DeHTMLise(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("description"))
-					newApplication->description = properties->GetNodeContent();
+					newApplication->description = DeHTMLise(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("version"))
 					newApplication->version = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("category"))
-					newApplication->category = properties->GetNodeContent();
+					newApplication->category = DeHTMLise(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("pgversion"))
 					newApplication->pgversion = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("edbversion"))
@@ -109,15 +109,15 @@ bool AppList::LoadAppList()
 				else if (properties->GetName() == wxT("format"))
 					newApplication->format = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("installoptions"))
-					newApplication->installoptions = properties->GetNodeContent();
+					newApplication->installoptions = DeHTMLise(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("upgradeoptions"))
-					newApplication->upgradeoptions = properties->GetNodeContent();
+					newApplication->upgradeoptions = DeHTMLise(properties->GetNodeContent());
 				else if (properties->GetName() == wxT("checksum"))
 					newApplication->checksum = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("mirrorpath"))
 					newApplication->mirrorpath = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("dependency"))
-					newApplication->dependencies.Add(properties->GetNodeContent());
+					newApplication->dependencies.Add(DeHTMLise(properties->GetNodeContent()));
 				else if (properties->GetName() == wxT("versionkey"))
 					newApplication->versionkey = properties->GetNodeContent();
 				else if (properties->GetName() == wxT("alturl"))
@@ -137,6 +137,17 @@ bool AppList::LoadAppList()
 	}
 
 	return true;
+}
+
+wxString AppList::DeHTMLise(const wxString &string)
+{
+    wxString ret = string;
+
+    ret.Replace(wxT("&quot;"), wxT("\""));
+    ret.Replace(wxT("&lt;"), wxT("<"));
+    ret.Replace(wxT("&gt"), wxT(">"));
+
+    return ret;
 }
 
 bool AppList::PopulateTreeCtrl()
