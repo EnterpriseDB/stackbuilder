@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.13 2007/05/02 13:45:28 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.14 2007/09/24 15:50:50 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -196,7 +196,8 @@ int App::RankDependencies(int rank, unsigned int depth)
 
 bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 {
-    GetFilename(downloadPath);
+    if (!CheckFilename(downloadPath))
+        return false;
 
     // If this file has already been downloaded, don't bother getting it again.
     // GetFilename would have set this flag if it found a matching filename and
@@ -349,7 +350,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     return true;
 }
 
-void App::GetFilename(const wxString& downloadPath)
+bool App::CheckFilename(const wxString& downloadPath)
 {
     wxString thePath;
     if (!alturl.IsEmpty())
@@ -366,9 +367,7 @@ void App::GetFilename(const wxString& downloadPath)
 
     file = downloadPath + wxT("/") + svrFile.GetFullName();
 
-    int ver = 1;
-
-    while(file.FileExists())
+    if (file.FileExists())
     {
         // Check the file to see if it's checksum matches ours. If
         // if does, keep the filename and set the 'Downloaded' flag
@@ -382,15 +381,20 @@ void App::GetFilename(const wxString& downloadPath)
         if (tmpsum.Lower() == checksum.Lower())
         {
             downloaded = true;
-            return;
+            return true;
         }
 
-        // OK, the file is no good, so generate an incremented filename.
-        file = downloadPath + wxT("/") + svrFile.GetName() + wxString::Format(wxT("-%d."), ver) + svrFile.GetExt();
-        ver++;
+        // OK, the file is no good, so rename it
+        wxDateTime now = wxDateTime::Now();
+        if (!wxRenameFile(file.GetFullPath(), file.GetFullPath() + wxT("-") + now.Format(wxT("%Y%m%d%H%M%S"))))
+        {
+            wxLogError(_("Failed to rename the file\n\n%s\n\nto\n\n%s"), file.GetFullPath(), file.GetFullPath() + wxT("-") + now.Format(wxT("%Y%m%d%H%M%S")));
+            return false;
+        }
     }
 
     downloaded = false;
+    return true;
 }
 
 bool App::Install()

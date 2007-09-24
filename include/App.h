@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.9 2007/05/02 13:45:29 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.10 2007/09/24 15:50:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ public:
 	int sequence;
 
 private:
-    void GetFilename(const wxString& downloadPath);
+    bool CheckFilename(const wxString& downloadPath);
     wxString SubstituteFlags(const wxString &options);
 
 	bool download, isDependency, downloaded, installed;
