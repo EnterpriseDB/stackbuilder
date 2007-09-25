@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.14 2007/09/24 15:50:50 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.15 2007/09/25 12:10:45 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -365,7 +365,7 @@ bool App::CheckFilename(const wxString& downloadPath)
     //       hacked in the future.
     wxFileName svrFile(thePath);
 
-    file = downloadPath + wxT("/") + svrFile.GetFullName();
+    file = downloadPath + wxT("/") + id + wxT(".") + svrFile.GetExt();
 
     if (file.FileExists())
     {
