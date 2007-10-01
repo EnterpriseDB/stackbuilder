@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.5 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.6 2007/10/01 09:56:56 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -123,6 +123,12 @@ bool MirrorList::PopulateTreeCtrl()
 	wxTreeItemIdValue cookie;
 	wxTreeItemId node, root, country, mirror;
 	bool found;
+#ifdef WIN32
+ 	wxTreeItemId localCountryNode = NULL;
+ 	wxChar localCountry[128];
+ 	memset(localCountry, 0, sizeof(localCountry));
+ 	GetLocaleInfo(0, LOCALE_SENGCOUNTRY, localCountry, 128);
+#endif
 
 	root = m_treectrl->AddRoot(_("Countries"), 0);
 
@@ -150,11 +156,24 @@ bool MirrorList::PopulateTreeCtrl()
 	    mirror = m_treectrl->AppendItem(country, label, 1, -1, &m_mirrors[i]);
 		m_mirrors[i].m_treeitem = mirror;
 
+#ifdef WIN32
+		if (!m_mirrors[i].country.Cmp(wxString(localCountry)))
+		{
+			m_treectrl->Expand(node);
+		    localCountryNode = node;
+		}
+#endif
+
 		m_treectrl->SortChildren(country);
 	}
 
 	m_treectrl->SortChildren(root);
 	m_treectrl->Expand(root);
+
+#ifdef WIN32
+	if (localCountryNode)
+		m_treectrl->SelectItem(localCountryNode);
+#endif
 
 	return true;
 }
