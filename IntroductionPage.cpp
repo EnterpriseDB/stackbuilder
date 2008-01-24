@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.6 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.7 2008/01/24 14:38:25 h-saito Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -42,21 +42,23 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 
 	wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"));
 	st->Wrap(350);
-    mainSizer->Add(st, 0, wxALL | wxALIGN_CENTER, 5);
+    mainSizer->Add(st, 0, wxALL | wxALIGN_CENTER | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+//	mainSizer->Add(0, 20);
 
 	st = new wxStaticText(this, wxID_ANY, _("This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+	mainSizer->SetItemMinSize(st, 400, 40);
+//	mainSizer->Add(0, 20);
 
     st = new wxStaticText(this, wxID_ANY, _("To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL| wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+	mainSizer->SetItemMinSize(st, 400, 60);
+//	mainSizer->Add(0, 20);
 
     m_installation = new wxComboBox(this, wxID_ANY, _("<remote server>"), wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN | wxCB_READONLY);
     unsigned int item = m_installation->Append(_("<remote server>"));

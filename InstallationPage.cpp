@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.6 2007/04/27 14:51:18 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.7 2008/01/24 14:38:25 h-saito Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -34,21 +34,24 @@ InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
 
 	wxStaticText *st = new wxStaticText(this, wxID_ANY, _("All the installation files have now been successfully downloaded."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+	mainSizer->SetItemMinSize(st, 400, 40);
+//	mainSizer->Add(0, 20);
 
 	st = new wxStaticText(this, wxID_ANY, _("Please click the \"Next\" button to start the installations."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+	mainSizer->SetItemMinSize(st, 400, 40);
+//	mainSizer->Add(0, 20);
 
     st = new wxStaticText(this, wxID_ANY, _("Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 20);
+	mainSizer->SetItemMinSize(st, 400, 60);
+//	mainSizer->Add(0, 20);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);

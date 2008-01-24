@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.11 2007/05/15 13:46:59 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.12 2008/01/24 14:38:25 h-saito Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -44,9 +44,10 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
 
 	wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."));
 	st->Wrap(400);
-    mainSizer->Add(st, 0, wxALL, 5);
+    mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-	mainSizer->Add(0, 10);
+	mainSizer->SetItemMinSize(st, 400, 60);
+//	mainSizer->Add(0, 10);
 
     st = new wxStaticText(this, wxID_ANY, _("Selected packages:"));
 	st->Wrap(350);

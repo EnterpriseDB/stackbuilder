@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.6 2007/04/13 11:20:47 dpage Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.7 2008/01/24 14:38:25 h-saito Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,13 @@ Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListU
 	wxWizardPageSimple::Chain(m_page4, m_page5);
 	wxWizardPageSimple::Chain(m_page5, m_page6);
 
-    // Allow the wizard to size itself around the pages
-    GetPageAreaSizer()->Add(m_page1);
+	// Allow the wizard to size itself around the pages
+	/*
+	 * Since a problem is in correspondence of Japanese font size, it is made fixed 
+	 * size. However, in the future version of wxWidgets, an original code is desirable. 
+	 * GetPageAreaSizer()->Add(m_page1);
+	 */
+	GetPageAreaSizer()->Add(420, 0);
+
 	SetBorder(0);
 }
