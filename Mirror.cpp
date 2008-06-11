@@ -3,7 +3,7 @@
 // Purpose:     A mirror object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Mirror.cpp,v 1.2 2007/03/23 14:35:52 dpage Exp $
+// RCS-ID:      $Id: Mirror.cpp,v 1.3 2008/06/11 10:58:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,5 +28,5 @@ bool Mirror::IsValid()
     if (hostname == wxEmptyString)
         return false;
 
-	return true;
+    return true;
 }

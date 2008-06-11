@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.7 2008/01/24 14:38:25 h-saito Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.8 2008/06/11 10:58:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -26,36 +26,36 @@
 #include "CompletionPage.h"
 
 Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListUrl, const wxString &mirrorListUrl)
-	: wxWizard(frame, wxID_ANY, _("PostgreSQL & EnterpriseDB Stack Builder"),
-	bitmap, wxDefaultPosition,
+    : wxWizard(frame, wxID_ANY, _("PostgreSQL & EnterpriseDB Stack Builder"),
+    bitmap, wxDefaultPosition,
       wxDEFAULT_DIALOG_STYLE)
 {
-	// Create the application & mirror lists
-	m_applist = new AppList(applicationListUrl);
-	m_mirrorlist = new MirrorList(mirrorListUrl);
+    // Create the application & mirror lists
+    m_applist = new AppList(applicationListUrl);
+    m_mirrorlist = new MirrorList(mirrorListUrl);
 
     // Add the pages
     m_page1 = new IntroductionPage(this, m_applist);
-	m_page2 = new AppSelectionPage(this, m_applist, m_mirrorlist);
-	m_page3 = new MirrorSelectionPage(this, m_applist, m_mirrorlist);
-	m_page4 = new DownloadPage(this, m_applist, m_mirrorlist);
-	m_page5 = new InstallationPage(this, m_applist);
-	m_page6 = new CompletionPage(this);
+    m_page2 = new AppSelectionPage(this, m_applist, m_mirrorlist);
+    m_page3 = new MirrorSelectionPage(this, m_applist, m_mirrorlist);
+    m_page4 = new DownloadPage(this, m_applist, m_mirrorlist);
+    m_page5 = new InstallationPage(this, m_applist);
+    m_page6 = new CompletionPage(this);
 
-	// Join 'em all up
-	wxWizardPageSimple::Chain(m_page1, m_page2);
-	wxWizardPageSimple::Chain(m_page2, m_page3);
-	wxWizardPageSimple::Chain(m_page3, m_page4);
-	wxWizardPageSimple::Chain(m_page4, m_page5);
-	wxWizardPageSimple::Chain(m_page5, m_page6);
+    // Join 'em all up
+    wxWizardPageSimple::Chain(m_page1, m_page2);
+    wxWizardPageSimple::Chain(m_page2, m_page3);
+    wxWizardPageSimple::Chain(m_page3, m_page4);
+    wxWizardPageSimple::Chain(m_page4, m_page5);
+    wxWizardPageSimple::Chain(m_page5, m_page6);
 
-	// Allow the wizard to size itself around the pages
-	/*
-	 * Since a problem is in correspondence of Japanese font size, it is made fixed 
-	 * size. However, in the future version of wxWidgets, an original code is desirable. 
-	 * GetPageAreaSizer()->Add(m_page1);
-	 */
-	GetPageAreaSizer()->Add(420, 0);
+    // Allow the wizard to size itself around the pages
+    /*
+     * Since a problem is in correspondence of Japanese font size, it is made fixed 
+     * size. However, in the future version of wxWidgets, an original code is desirable. 
+     * GetPageAreaSizer()->Add(m_page1);
+     */
+    GetPageAreaSizer()->Add(420, 0);
 
-	SetBorder(0);
+    SetBorder(0);
 }

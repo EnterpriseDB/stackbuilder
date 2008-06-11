@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.5 2007/05/01 11:17:09 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.6 2008/06/11 10:58:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -30,85 +30,85 @@ END_EVENT_TABLE()
 // The Application!
 bool StackBuilder::OnInit()
 {
-	wxString mirrorListUrl;
-	wxString applicationListUrl;
-	wxString language;
+    wxString mirrorListUrl;
+    wxString applicationListUrl;
+    wxString language;
 
-	SetAppName(_("Stack Builder"));
+    SetAppName(_("Stack Builder"));
 
-	// Command line options
-	static const wxCmdLineEntryDesc cmdLineDesc[] = 
-	{
-		{wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-		{wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
-		{wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
+    // Command line options
+    static const wxCmdLineEntryDesc cmdLineDesc[] = 
+    {
+        {wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
+        {wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
+        {wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("l"), wxT("language"), _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
-		{wxCMD_LINE_NONE}
-	};
+        {wxCMD_LINE_NONE}
+    };
 
-	wxCmdLineParser cmdParser(cmdLineDesc, argc, argv);
-	if (cmdParser.Parse() != 0) 
-		return false;
+    wxCmdLineParser cmdParser(cmdLineDesc, argc, argv);
+    if (cmdParser.Parse() != 0) 
+        return false;
 
-	if (!cmdParser.Found(wxT("m"), &mirrorListUrl))
-		mirrorListUrl = DEFAULT_MIRROR_LIST_URL;
+    if (!cmdParser.Found(wxT("m"), &mirrorListUrl))
+        mirrorListUrl = DEFAULT_MIRROR_LIST_URL;
 
-	if (!cmdParser.Found(wxT("a"), &applicationListUrl))
-		applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
+    if (!cmdParser.Found(wxT("a"), &applicationListUrl))
+        applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
 
-	if (!cmdParser.Found(wxT("l"), &language))
-		language = wxEmptyString;
+    if (!cmdParser.Found(wxT("l"), &language))
+        language = wxEmptyString;
 
     // Hack for the PostgreSQL installer - it might ask for the default language
     if (language == wxT("DEFAULT"))
         language = wxEmptyString;
 
-	// Initialize our locale and load the language catalog...
-	initializeLocale(argv[0], language);
+    // Initialize our locale and load the language catalog...
+    initializeLocale(argv[0], language);
 
-	// Create and run the wizard
-	wxBitmap bitmap = wxBitmap(background_xpm);
+    // Create and run the wizard
+    wxBitmap bitmap = wxBitmap(background_xpm);
     wizard = new Wizard(NULL, bitmap, applicationListUrl, mirrorListUrl);
-	bool retval = wizard->RunWizard(wizard->GetFirstPage()); 
+    bool retval = wizard->RunWizard(wizard->GetFirstPage()); 
 
-	return retval;
+    return retval;
 }
 
 void StackBuilder::OnWizardCancelled(wxWizardEvent &evt)
 {
-	if (wxMessageBox(_("Are you sure you want to close the Stack Builder wizard?"), _("Exit wizard?"), wxICON_QUESTION | wxYES_NO) == wxNO)
-	{
-		evt.Veto();
-		return;
-	}
+    if (wxMessageBox(_("Are you sure you want to close the Stack Builder wizard?"), _("Exit wizard?"), wxICON_QUESTION | wxYES_NO) == wxNO)
+    {
+        evt.Veto();
+        return;
+    }
     wizard->Destroy();
-	this->Exit();
+    this->Exit();
 }
 
 void StackBuilder::OnWizardFinished(wxWizardEvent &evt)
 {
     wizard->Destroy();
-	this->Exit();
+    this->Exit();
 }
 
 void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
 {
-	wxString appPath = wxPathOnly(argv0);
+    wxString appPath = wxPathOnly(argv0);
     wxString i18nPath;
 
-	// Figure out where the pgadmin3 language catalog is located
-	if( appPath.IsEmpty())
-		appPath = wxT(".");
+    // Figure out where the pgadmin3 language catalog is located
+    if( appPath.IsEmpty())
+        appPath = wxT(".");
 
-	if(wxDir::Exists(appPath + wxT("/i18n")))
-		i18nPath = appPath + wxT("/i18n");
-	else if(wxDir::Exists(appPath + wxT("/../StackBuilder/i18n")))
-		i18nPath = appPath + wxT("/../StackBuilder/i18n");
-	else if(wxDir::Exists(appPath + wxT("/../i18n")))
-		i18nPath = appPath + wxT("/../i18n");
+    if(wxDir::Exists(appPath + wxT("/i18n")))
+        i18nPath = appPath + wxT("/i18n");
+    else if(wxDir::Exists(appPath + wxT("/../StackBuilder/i18n")))
+        i18nPath = appPath + wxT("/../StackBuilder/i18n");
+    else if(wxDir::Exists(appPath + wxT("/../i18n")))
+        i18nPath = appPath + wxT("/../i18n");
 
-	wxLocale *locale = new wxLocale();
-	locale->AddCatalogLookupPathPrefix(i18nPath);
+    wxLocale *locale = new wxLocale();
+    locale->AddCatalogLookupPathPrefix(i18nPath);
 
     const wxLanguageInfo *langInfo;
 
@@ -117,6 +117,6 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
     else
         langInfo = wxLocale::GetLanguageInfo(wxLANGUAGE_DEFAULT);
 
-	if(locale->Init(langInfo->Language), wxLOCALE_LOAD_DEFAULT)
-		locale->AddCatalog(wxT("StackBuilder"));
+    if(locale->Init(langInfo->Language), wxLOCALE_LOAD_DEFAULT)
+        locale->AddCatalog(wxT("StackBuilder"));
 }

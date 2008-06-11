@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.15 2007/09/25 12:10:45 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.16 2008/06/11 10:58:04 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,10 @@
 #include <wx/treectrl.h>
 #include <wx/url.h>
 #include <wx/wfstream.h>
+
+#ifdef __WXMSW__
 #include <wx/msw/registry.h>
+#endif
 
 // Application headers
 #include "App.h"
@@ -31,54 +34,63 @@
 
 App::App(AppList *applist, Server *server) 
 { 
-	m_applist = applist; 
+    m_applist = applist; 
     m_server = server;
-	sequence = 0; 
-	download = false; 
-	isDependency = false;
+    sequence = 0; 
+    download = false; 
+    isDependency = false;
     downloaded = false;
     installed = false;
-	m_tree = NULL; 
+    m_tree = NULL; 
 };
 
 bool App::IsValid() 
 { 
-	return (!id.IsEmpty() && 
-		    !name.IsEmpty() && 
-			!version.IsEmpty() && 
-			!category.IsEmpty() && 
-			!format.IsEmpty() && 
-			!checksum.IsEmpty() && 
-			!(mirrorpath.IsEmpty() && alturl.IsEmpty()) &&
+    return (!id.IsEmpty() && 
+            !name.IsEmpty() && 
+            !version.IsEmpty() && 
+            !category.IsEmpty() && 
+            !format.IsEmpty() && 
+            !checksum.IsEmpty() && 
+            !(mirrorpath.IsEmpty() && alturl.IsEmpty()) &&
             !versionkey.IsEmpty()); 
 }
 
 bool App::IsInstalled()
 {
+#ifdef __WXMSW__
+    // If the regkey for this app id exists, it's installed.
+    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
-	// If the regkey for this app id exists, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+        return false;
 
-	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
-		return false;
-
-	return true;
+    return true;
+#else
+    // TODO: Fix for *nix
+    return false;
+#endif
 }
 
 bool App::IsVersionInstalled()
 {
-	// If the regkey for this app id exists AND it contains our version number, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+#ifdef __WXMSW__
+    // If the regkey for this app id exists AND it contains our version number, it's installed.
+    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
-	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
-		return false;
+    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+        return false;
 
-	wxString ver;
-	key->QueryValue(versionkey.AfterLast('\\'), ver);
-	if (ver != version)
-		return false;
+    wxString ver;
+    key->QueryValue(versionkey.AfterLast('\\'), ver);
+    if (ver != version)
+        return false;
 
-	return true;
+    return true;
+#else
+    // TODO: Fix for *nix
+    return false; 
+#endif
 }
 
 bool App::WorksWithDB()
@@ -102,65 +114,70 @@ bool App::WorksWithDB()
             tmpversion = wxEmptyString;
     }
 
-	if (tmpversion.Trim() == wxEmptyString)
-		return true;
+    if (tmpversion.Trim() == wxEmptyString)
+        return true;
 
-	if (tmpversion.Trim() == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
-		return true;
+    if (tmpversion.Trim() == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
+        return true;
 
-	return false;
+    return false;
 }
 
 wxString App::GetInstalledVersion()
 {
-	// If the regkey for this app id exists AND it contains our version number, it's installed.
-	wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+#ifdef __WXMSW__
+    // If the regkey for this app id exists AND it contains our version number, it's installed.
+    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
-	if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
-		return wxEmptyString;
+    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+        return wxEmptyString;
 
-	wxString ver;
-	key->QueryValue(versionkey.AfterLast('\\'), ver);
-	return ver;
+    wxString ver;
+    key->QueryValue(versionkey.AfterLast('\\'), ver);
+    return ver;
+#else
+    // TODO: Fix for *nix
+    return wxEmptyString;
+#endif
 }
 
 void App::SelectForDownload(bool select, bool isdep)
 {
-	// If this item doesn't have a checkbox image, we cannot select it.
-	if (!m_tree || m_tree->GetItemImage(m_treeitem) >= 2)
-		return;
+    // If this item doesn't have a checkbox image, we cannot select it.
+    if (!m_tree || m_tree->GetItemImage(m_treeitem) >= 2)
+        return;
 
-	// Deselect item if required.
-	if (!select)
-	{
-		download = false;
-		isDependency = false;
-		m_tree->SetItemImage(m_treeitem, 0);
-		return;
-	}
-	else
-	{
+    // Deselect item if required.
+    if (!select)
+    {
+        download = false;
+        isDependency = false;
+        m_tree->SetItemImage(m_treeitem, 0);
+        return;
+    }
+    else
+    {
         // If this item is already selected, bail out to avoid
         // the possiblity of hitting an infinite loop.
         if (download)
             return;
 
-		download = true;
-		if (isdep)
-			isDependency = true;
+        download = true;
+        if (isdep)
+            isDependency = true;
 
-		m_tree->SetItemImage(m_treeitem, 1);
+        m_tree->SetItemImage(m_treeitem, 1);
 
-		// Select all dependencies
-		for (unsigned int x=0; x < dependencies.Count(); x++)
-		{
-			for (unsigned int y=0; y < m_applist->Count(); y++)
-			{
-				if (m_applist->GetItem(y)->id == dependencies[x])
-					m_applist->GetItem(y)->SelectForDownload(true, true);
-			}
-		}
-	}
+        // Select all dependencies
+        for (unsigned int x=0; x < dependencies.Count(); x++)
+        {
+            for (unsigned int y=0; y < m_applist->Count(); y++)
+            {
+                if (m_applist->GetItem(y)->id == dependencies[x])
+                    m_applist->GetItem(y)->SelectForDownload(true, true);
+            }
+        }
+    }
 }
 
 // Figure out what order to download and install
@@ -169,16 +186,16 @@ int App::RankDependencies(int rank, unsigned int depth)
     // Only recurse if we've not gone too deep
     if (depth < m_applist->Count())
     {
-	    // Iterate through the dependencies, setting the sequence as required
-	    for (unsigned int i=0; i<dependencies.GetCount(); i++)
-	    {
+        // Iterate through the dependencies, setting the sequence as required
+        for (unsigned int i=0; i<dependencies.GetCount(); i++)
+        {
             App *dep = m_applist->GetItem(dependencies[i]); 
-		    if (!dep->IsSelectedForDownload() || dep->sequence > 0)
-			    continue;
+            if (!dep->IsSelectedForDownload() || dep->sequence > 0)
+                continue;
 
             depth++;
-		    rank = dep->RankDependencies(rank, depth);
-	    }
+            rank = dep->RankDependencies(rank, depth);
+        }
     }
 
     depth--;
@@ -187,8 +204,8 @@ int App::RankDependencies(int rank, unsigned int depth)
     // circular dependency. In that case, don't reset it.
     if (!sequence)
     {
-	    sequence = rank;
-	    return sequence + 1;
+        sequence = rank;
+        return sequence + 1;
     }
     else
         return rank;
@@ -205,7 +222,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     if (downloaded)
         return true;
 
-    wxProgressDialog *pd = new wxProgressDialog(wxString::Format(_("Downloading %s"), wxFileName(mirrorpath).GetFullName()),
+    wxProgressDialog *pd = new wxProgressDialog(wxString::Format(_("Downloading %s"), wxFileName(mirrorpath).GetFullName().c_str()),
                                                 _("Connecting to server..."),
                                                 100,
                                                 NULL, 
@@ -215,11 +232,11 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     wxString theUrl;
     if (alturl.IsEmpty())
         theUrl = wxString::Format(wxT("%s://%s%s%s/%s"), 
-                                  mirror->protocol, 
-                                  mirror->hostname, 
-                                  (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port)), 
-                                  mirror->rootpath, 
-                                  mirrorpath);
+                                  mirror->protocol.c_str(), 
+                                  mirror->hostname.c_str(), 
+                                  (mirror->port == 0 ? (wxChar)"" : wxString::Format(wxT(":%d"), mirror->port)).c_str(), 
+                                  mirror->rootpath.c_str(), 
+                                  mirrorpath.c_str());
     else
         theUrl = alturl;
 
@@ -227,48 +244,48 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 
     url.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
 
-	wxURLError err = url.GetError();
+    wxURLError err = url.GetError();
     if (err != wxURL_NOERR)
-	{
-		wxString msg;
-		switch (err)
-		{
-			case wxURL_SNTXERR:
-				msg = _("Could not parse the URL.");
-				break;
-			case wxURL_NOPROTO:
-				msg = _("Unsupported protocol specified.");
-				break;
-			case wxURL_NOHOST:
-				msg = _("No hostname specified in URL.");
-				break;
-			case wxURL_NOPATH:
-				msg = _("No path specified in URL.");
-				break;
-			case wxURL_CONNERR:
-				msg = _("A connection error occurred.");
-				break;
-			case wxURL_PROTOERR:
-				msg = _("A protocol error occurred.");
-				break;
-		}
-		wxLogError(wxString::Format(_("Failed to open %s\n\nError: %s"), url.BuildURI(), msg));
+    {
+        wxString msg;
+        switch (err)
+        {
+            case wxURL_SNTXERR:
+                msg = _("Could not parse the URL.");
+                break;
+            case wxURL_NOPROTO:
+                msg = _("Unsupported protocol specified.");
+                break;
+            case wxURL_NOHOST:
+                msg = _("No hostname specified in URL.");
+                break;
+            case wxURL_NOPATH:
+                msg = _("No path specified in URL.");
+                break;
+            case wxURL_CONNERR:
+                msg = _("A connection error occurred.");
+                break;
+            case wxURL_PROTOERR:
+                msg = _("A protocol error occurred.");
+                break;
+        }
+        wxLogError(_("Failed to open %s\n\nError: %s"), url.BuildURI().c_str(), msg.c_str());
         pd->Show(false);
         delete pd;
         return false;
-	}
+    }
 
     wxInputStream *ip = url.GetInputStream();
 
-	if (!ip || !ip->IsOk())
-	{
-		wxLogError(wxString::Format(_("Failed to open %s\n\nError: The URL specified could not be opened."), url.BuildURI()));
+    if (!ip || !ip->IsOk())
+    {
+        wxLogError(_("Failed to open %s\n\nError: The URL specified could not be opened."), url.BuildURI().c_str());
         pd->Show(false);
         if (ip)
             delete ip;
         delete pd;
-		return false;
-	}
+        return false;
+    }
 
     wxFFileOutputStream *op = new wxFFileOutputStream(file.GetFullPath());
 
@@ -330,7 +347,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     wxString tmpsum;
     
     {
-        wxBusyInfo wait(wxString::Format(_("Verifying checksum for: %s"), file.GetFullName()));
+        wxBusyInfo wait(wxString::Format(_("Verifying checksum for: %s"), file.GetFullName().c_str()));
         tmpsum = md5sum(file.GetFullPath());
     }
 
@@ -342,7 +359,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     else
     {
         downloaded = false;
-        wxLogError(_("Checksum verification failed for: %s! Deleting file..."), file.GetFullName());
+        wxLogError(_("Checksum verification failed for: %s! Deleting file..."), file.GetFullName().c_str());
         wxRemoveFile(file.GetFullPath());
         return false;
     }
@@ -374,7 +391,7 @@ bool App::CheckFilename(const wxString& downloadPath)
         wxString tmpsum;
         
         {
-            wxBusyInfo wait(wxString::Format(_("Checking existing file: %s"), file.GetFullName()));
+            wxBusyInfo wait(wxString::Format(_("Checking existing file: %s"), file.GetFullName().c_str()));
             tmpsum = md5sum(file.GetFullPath());
         }
 
@@ -388,7 +405,7 @@ bool App::CheckFilename(const wxString& downloadPath)
         wxDateTime now = wxDateTime::Now();
         if (!wxRenameFile(file.GetFullPath(), file.GetFullPath() + wxT("-") + now.Format(wxT("%Y%m%d%H%M%S"))))
         {
-            wxLogError(_("Failed to rename the file\n\n%s\n\nto\n\n%s"), file.GetFullPath(), file.GetFullPath() + wxT("-") + now.Format(wxT("%Y%m%d%H%M%S")));
+            wxLogError(_("Failed to rename the file\n\n%s\n\nto\n\n%s-%s"), file.GetFullPath().c_str(), file.GetFullPath().c_str(), now.Format(wxT("%Y%m%d%H%M%S")).c_str());
             return false;
         }
     }
@@ -433,7 +450,7 @@ bool App::Install()
     }
     else
     {
-        int response = wxMessageBox(wxString::Format(_("The installation of %s returned an error.\n\n Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n\nNote that ignoring this error may result in failure of any later installations that depend on this one."), this->name), 
+        int response = wxMessageBox(wxString::Format(_("The installation of %s returned an error.\n\n Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n\nNote that ignoring this error may result in failure of any later installations that depend on this one."), this->name.c_str()), 
                                                      _("Installation error"), 
                                                      wxOK | wxCANCEL | wxICON_EXCLAMATION);
 
