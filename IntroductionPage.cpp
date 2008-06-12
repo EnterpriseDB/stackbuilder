@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.8 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.9 2008/06/12 13:59:36 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -30,8 +30,8 @@
 const int BTN_PROXIES=1002;
 
 BEGIN_EVENT_TABLE(IntroductionPage, wxWizardPageSimple)
-    EVT_BUTTON(BTN_PROXIES,                 IntroductionPage::OnProxies)
-    EVT_WIZARD_PAGE_CHANGING(wxID_ANY,        IntroductionPage::OnWizardPageChanging)
+    EVT_BUTTON(BTN_PROXIES,            IntroductionPage::OnProxies)
+    EVT_WIZARD_PAGE_CHANGING(wxID_ANY, IntroductionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
 IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist) 
@@ -44,7 +44,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     mainSizer->Add(0, 10);
 
     wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"));
-    st->Wrap(350);
+    st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxALIGN_CENTER | wxFIXED_MINSIZE, 5);
 
     st = new wxStaticText(this, wxID_ANY, _("This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."));
@@ -79,7 +79,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 
 void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
-    if (m_installation->GetValue().IsEmpty())
+    if (m_installation->GetSelection() == wxNOT_FOUND)
     {
         wxLogError(_("You must select an installation option before you continue."));
         event.Veto();
