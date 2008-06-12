@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.16 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.17 2008/06/12 12:58:54 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -234,7 +234,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
         theUrl = wxString::Format(wxT("%s://%s%s%s/%s"), 
                                   mirror->protocol.c_str(), 
                                   mirror->hostname.c_str(), 
-                                  (mirror->port == 0 ? (wxChar)"" : wxString::Format(wxT(":%d"), mirror->port)).c_str(), 
+                                  (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port).c_str()), 
                                   mirror->rootpath.c_str(), 
                                   mirrorpath.c_str());
     else
