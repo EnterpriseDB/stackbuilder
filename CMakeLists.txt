@@ -1,7 +1,7 @@
 ################################################################################
 # Initial setup
 ################################################################################
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 IF(COMMAND cmake_policy)
     CMAKE_POLICY(SET CMP0003 NEW)
@@ -82,18 +82,26 @@ ENDIF(NOT wxWidgets_FOUND)
 
 INCLUDE(${wxWidgets_USE_FILE})
 
-# Get the wxWidgets version
-EXECUTE_PROCESS(
-    COMMAND sh "${wxWidgets_CONFIG_EXECUTABLE}" --version
-    OUTPUT_VARIABLE wxWidgets_VERSION
-    RESULT_VARIABLE RET
-    ERROR_QUIET
-)
-STRING(STRIP ${wxWidgets_VERSION} wxWidgets_VERSION)
+IF(NOT WIN32)
+    # Get the wxWidgets version
+    EXECUTE_PROCESS(
+        COMMAND sh "${wxWidgets_CONFIG_EXECUTABLE}" --version
+        OUTPUT_VARIABLE wxWidgets_VERSION
+        RESULT_VARIABLE RET
+        ERROR_QUIET
+    )
+    STRING(STRIP ${wxWidgets_VERSION} wxWidgets_VERSION)
 
-IF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
-    MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x (${wxWidgets_VERSION} found)")
-ENDIF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
+    IF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
+        MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x (${wxWidgets_VERSION} found)")
+    ENDIF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
+ELSE(NOT WIN32)
+    IF(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
+        MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x")
+    ELSE(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
+        SET(wxWidgets_VERSION "2.8.x")
+    ENDIF(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
+ENDIF(NOT WIN32)
 
 ################################################################################
 # Compile translations
