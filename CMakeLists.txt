@@ -41,6 +41,8 @@ ENDIF(APPLE)
 PROJECT(stackbuilder)
 
 SET(VERSION 1.0.0)
+
+# CPack stuff
 SET(CPACK_PACKAGE_VERSION_MAJOR 1)
 SET(CPACK_PACKAGE_VERSION_MINOR 0)
 SET(CPACK_PACKAGE_VERSION_PATCH 0)
@@ -51,6 +53,16 @@ SET(CPACK_GENERATOR TGZ)
 SET(CPACK_SOURCE_GENERATOR TGZ)
 SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${VERSION}")
 SET(CPACK_SOURCE_IGNORE_FILES "${PROJECT_NAME}-${VERSION}.tar.gz" "_CPack_Packages")
+
+# OS X bundle stuff
+SET(MACOSX_BUNDLE_INFO_STRING "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
+SET(MACOSX_BUNDLE_ICON_FILE "")
+SET(MACOSX_BUNDLE_GUI_IDENTIFIER "com.enterprisedb.stackbuilder")
+SET(MACOSX_BUNDLE_VERSION "${VERSION}")
+SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION}")
+SET(MACOSX_BUNDLE_LONG_VERSION_STRING "${VERSION}")
+SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
+SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2007 - 2008, EnterpriseDB UK")
 
 ################################################################################
 # Find wxWidgets
@@ -78,6 +90,10 @@ EXECUTE_PROCESS(
     ERROR_QUIET
 )
 STRING(STRIP ${wxWidgets_VERSION} wxWidgets_VERSION)
+
+IF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
+    MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x (${wxWidgets_VERSION} found)")
+ENDIF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
 
 ################################################################################
 # Let's rock!
