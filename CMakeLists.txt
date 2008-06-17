@@ -96,6 +96,49 @@ IF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
 ENDIF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
 
 ################################################################################
+# Compile translations
+################################################################################
+FIND_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
+
+# Add a custom output for each po file we need to compile
+IF(MSGFMT_EXECUTABLE)
+
+    FILE(GLOB_RECURSE _pofiles i18n/??_??/StackBuilder.po)
+
+    FOREACH(_pofile ${_pofiles})
+        GET_FILENAME_COMPONENT(_dir ${_pofile} PATH)
+        GET_FILENAME_COMPONENT(_lang ${_dir} NAME)
+
+        SET(_out "${_dir}/StackBuilder.${_lang}.mo")
+
+        ADD_CUSTOM_COMMAND(
+            OUTPUT ${_out}
+            COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
+            DEPENDS ${_pofile}
+        )
+
+        INSTALL(
+            FILES ${_out}
+            DESTINATION share/i18n/${_lang}/
+            RENAME StackBuilder.mo
+        )
+
+        IF(EXISTS "${_dir}/wxstd.mo")
+            INSTALL(
+                FILES "${_dir}/wxstd.mo"
+                DESTINATION share/i18n/${_lang}/
+            )
+        ENDIF(EXISTS "${_dir}/wxstd.mo")
+
+        SET(_translations ${_translations} ${_out})
+
+    ENDFOREACH(_pofile)
+
+ELSE(MSGFMT_EXECUTABLE)
+    MESSAGE(STATUS "Could not find msgfmt - skipping message catalogue compilation")
+ENDIF(MSGFMT_EXECUTABLE)
+
+################################################################################
 # Let's rock!
 ################################################################################
 INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR}
@@ -106,7 +149,7 @@ FILE(GLOB _cpp_files *.cpp)
 FILE(GLOB _h_files include/*.h)
 FILE(GLOB _xpm_files include/images/*.xpm)
 
-SET(_srcs ${_cpp_files} ${_h_files} ${_xpm_files})
+SET(_srcs ${_cpp_files} ${_h_files} ${_xpm_files} ${_translations})
  
 IF(WIN32)
     SET(_srcs ${_srcs} stackbuilder.rc)
