@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.9 2008/06/12 13:59:36 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.10 2008/06/25 12:15:38 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -142,22 +142,47 @@ bool IntroductionPage::FindPgServers()
             data->serviceId = svcName;
             keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Services\\%s"), svcName.c_str());
             wxRegKey *svcKey = new wxRegKey(keyName);
-            svcKey->QueryValue(wxT("Display Name"), data->description);
-            svcKey->QueryValue(wxT("Port"), &data->port);
-            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-            svcKey->QueryValue(wxT("Encoding"), data->encoding);
-            svcKey->QueryValue(wxT("Locale"), data->locale);
+			if (svcKey->HasValue(wxT("Display Name")))
+                svcKey->QueryValue(wxT("Display Name"), data->description);
+			else
+				data->description = _("Unknown server");
+			if (svcKey->HasValue(wxT("Port")))
+                svcKey->QueryValue(wxT("Port"), &data->port);
+			else
+				data->port = 0;
+			if (svcKey->HasValue(wxT("Data Directory")))
+                svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+			if (svcKey->HasValue(wxT("Database Superuser")))
+                svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+			if (svcKey->HasValue(wxT("Service Account")))
+                svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+			if (svcKey->HasValue(wxT("Encoding")))
+                svcKey->QueryValue(wxT("Encoding"), data->encoding);
+			if (svcKey->HasValue(wxT("Locale")))
+                svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-            svcKey->QueryValue(wxT("Product Code"), guid);
-            keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Installations\\%s"), guid.c_str());
-            wxRegKey *instKey = new wxRegKey(keyName);
-            instKey->QueryValue(wxT("Version"), data->serverVersion);
-            data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-            data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-            instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+			if (svcKey->HasValue(wxT("Product Code")))
+                svcKey->QueryValue(wxT("Product Code"), guid);
+
+			if (!guid.IsEmpty())
+			{
+                keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Installations\\%s"), guid.c_str());
+                wxRegKey *instKey = new wxRegKey(keyName);
+				if (instKey->HasValue(wxT("Version")))
+				{
+                    instKey->QueryValue(wxT("Version"), data->serverVersion);
+                    data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+				}
+				else
+				{
+					data->majorVer = 0;
+					data->minorVer = 0;
+				}
+				if (instKey->HasValue(wxT("Base Directory")))
+                    instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+			}
 
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
@@ -202,27 +227,53 @@ bool IntroductionPage::FindEdbServers()
         {
             wxString keyName, guid;
             Server *data = new Server();
-            data->serverType = SVR_ENTERPRISEDB;
+            data->serverType = SVR_POSTGRESQL;
 
             // Get the service data
+            data->serviceId = svcName;
             keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services\\%s"), svcName.c_str());
             wxRegKey *svcKey = new wxRegKey(keyName);
-            svcKey->QueryValue(wxT("Display Name"), data->description);
-            svcKey->QueryValue(wxT("Port"), &data->port);
-            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-            svcKey->QueryValue(wxT("Encoding"), data->encoding);
-            svcKey->QueryValue(wxT("Locale"), data->locale);
+			if (svcKey->HasValue(wxT("Display Name")))
+                svcKey->QueryValue(wxT("Display Name"), data->description);
+			else
+				data->description = _("Unknown server");
+			if (svcKey->HasValue(wxT("Port")))
+                svcKey->QueryValue(wxT("Port"), &data->port);
+			else
+				data->port = 0;
+			if (svcKey->HasValue(wxT("Data Directory")))
+                svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+			if (svcKey->HasValue(wxT("Database Superuser")))
+                svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+			if (svcKey->HasValue(wxT("Service Account")))
+                svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+			if (svcKey->HasValue(wxT("Encoding")))
+                svcKey->QueryValue(wxT("Encoding"), data->encoding);
+			if (svcKey->HasValue(wxT("Locale")))
+                svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-            svcKey->QueryValue(wxT("Product Code"), guid);
-            keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Installations\\%s"), guid.c_str());
-            wxRegKey *instKey = new wxRegKey(keyName);
-            instKey->QueryValue(wxT("Version"), data->serverVersion);
-            data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-            data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-            instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+			if (svcKey->HasValue(wxT("Product Code")))
+                svcKey->QueryValue(wxT("Product Code"), guid);
+
+			if (!guid.IsEmpty())
+			{
+                keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Installations\\%s"), guid.c_str());
+                wxRegKey *instKey = new wxRegKey(keyName);
+				if (instKey->HasValue(wxT("Version")))
+				{
+                    instKey->QueryValue(wxT("Version"), data->serverVersion);
+                    data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+				}
+				else
+				{
+					data->majorVer = 0;
+					data->minorVer = 0;
+				}
+				if (instKey->HasValue(wxT("Base Directory")))
+                    instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+			}
 
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
