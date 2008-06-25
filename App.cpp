@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.17 2008/06/12 12:58:54 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.18 2008/06/25 12:14:54 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -472,6 +472,7 @@ wxString App::SubstituteFlags(const wxString &options)
     // Do we have any server options?
     if (!m_server)
     {
+		retval.Replace(wxT("$LOCALE"), wxEmptyString); // Locale first, otherwise LOCAL will match!
         retval.Replace(wxT("$LOCAL"), wxT("0"));
         retval.Replace(wxT("$PATH"), wxEmptyString);
         retval.Replace(wxT("$DATA"), wxEmptyString);
@@ -481,10 +482,10 @@ wxString App::SubstituteFlags(const wxString &options)
         retval.Replace(wxT("$ACCOUNT"), wxEmptyString);
         retval.Replace(wxT("$SUPER"), wxEmptyString);
         retval.Replace(wxT("$ENCODING"), wxEmptyString);
-        retval.Replace(wxT("$LOCALE"), wxEmptyString);
     }
     else
     {
+        retval.Replace(wxT("$LOCALE"), m_server->locale); // Locale first, otherwise LOCAL will match!
         retval.Replace(wxT("$LOCAL"), wxT("1"));
         retval.Replace(wxT("$PATH"), m_server->installationPath);
         retval.Replace(wxT("$DATA"), m_server->dataDirectory);
@@ -494,7 +495,6 @@ wxString App::SubstituteFlags(const wxString &options)
         retval.Replace(wxT("$ACCOUNT"), m_server->serviceAccount);
         retval.Replace(wxT("$SUPER"), m_server->superuserName);
         retval.Replace(wxT("$ENCODING"), m_server->encoding);
-        retval.Replace(wxT("$LOCALE"), m_server->locale);
     }
 
     return retval;
