@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.18 2008/06/25 12:14:54 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.19 2008/07/18 20:12:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -19,6 +19,7 @@
 #include <wx/treectrl.h>
 #include <wx/url.h>
 #include <wx/wfstream.h>
+#include <wx/protocol/http.h>
 
 #ifdef __WXMSW__
 #include <wx/msw/registry.h>
@@ -240,6 +241,10 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     else
         theUrl = alturl;
 
+// If the download fails becuase of a redirect (HTTP/30x), we
+// reset theUrl and try again from here.
+tryDownload:
+
     wxURL url(theUrl);
 
     url.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
@@ -276,6 +281,20 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     }
 
     wxInputStream *ip = url.GetInputStream();
+
+	// Handle http redirects if required
+	if (url.GetScheme() == wxT("http"))
+	{
+		wxHTTP *http = (wxHTTP *)&url.GetProtocol();
+
+		if (http->GetResponse() == 301 || http->GetResponse() == 302)
+		{
+			theUrl = http->GetHeader(wxT("Location"));
+
+			// Try again
+			goto tryDownload;
+		}
+	}
 
     if (!ip || !ip->IsOk())
     {
@@ -382,7 +401,7 @@ bool App::CheckFilename(const wxString& downloadPath)
     //       hacked in the future.
     wxFileName svrFile(thePath);
 
-    file = downloadPath + wxT("/") + id + wxT(".") + svrFile.GetExt();
+    file = downloadPath + wxT("/") + id + wxT(".") + format;
 
     if (file.FileExists())
     {
