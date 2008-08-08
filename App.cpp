@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.20 2008/08/08 12:53:46 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.21 2008/08/08 13:24:17 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -121,14 +121,17 @@ bool App::WorksWithDB()
 	if (tmpversion.EndsWith(wxT("+")))
 	{
 		// Apps may specify 8.3+ to denote they require server version 8.3 or above.
-		double appversion = 0, svrversion = 0;
-		
+		long appMajor = 0, appMinor = 0;
+
 		tmpversion = tmpversion.RemoveLast();
-		tmpversion.ToDouble(&appversion);
-		
-		svrversion = m_server->majorVer + (m_server->minorVer/10);
-		
-		if (svrversion >= appversion)
+		tmpversion.BeforeFirst('.').ToLong(&appMajor);
+
+		if (m_server->majorVer > appMajor)
+			return true;
+
+        tmpversion.AfterFirst('.').ToLong(&appMinor);
+
+		if (m_server->majorVer == appMajor && m_server->minorVer >= appMinor)
 			return true;
 	}
 	else
