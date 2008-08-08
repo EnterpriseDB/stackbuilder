@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.5 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.6 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -55,14 +55,6 @@ MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, AppList *applist, Mir
 
 void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
-    // If we're going backwards, clear the tree view
-    if (!event.GetDirection())
-    {
-        m_mirrorlist->DeleteAllItems();
-        m_mirrortree->DeleteAllItems();
-        return;
-    }
-
     wxTreeItemId id = m_mirrortree->GetSelection();
     if (!id || m_mirrortree->GetItemImage(id) != 1)
     {
@@ -72,7 +64,4 @@ void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
     }
 
     m_mirrorlist->SetSelectedMirror((Mirror *)m_mirrortree->GetItemData(m_mirrortree->GetSelection()));
-
-    // Stuff the summary in the next page
-    ((DownloadPage *)GetNext())->SetSummary(m_applist->GetSummary());
 }

@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.8 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.9 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -34,13 +34,14 @@ Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListU
     m_applist = new AppList(applicationListUrl);
     m_mirrorlist = new MirrorList(mirrorListUrl);
 
-    // Add the pages
-    m_page1 = new IntroductionPage(this, m_applist);
-    m_page2 = new AppSelectionPage(this, m_applist, m_mirrorlist);
-    m_page3 = new MirrorSelectionPage(this, m_applist, m_mirrorlist);
-    m_page4 = new DownloadPage(this, m_applist, m_mirrorlist);
-    m_page5 = new InstallationPage(this, m_applist);
+    // Add the pages. Do this in reverse order, so we can 
+	// pass pointers to later pages to earlier ones.
     m_page6 = new CompletionPage(this);
+    m_page5 = new InstallationPage(this, m_applist);
+    m_page4 = new DownloadPage(this, m_applist, m_mirrorlist);
+    m_page3 = new MirrorSelectionPage(this, m_applist, m_mirrorlist);
+    m_page2 = new AppSelectionPage(this, m_applist, m_mirrorlist, m_page3, m_page4);
+	m_page1 = new IntroductionPage(this, m_applist);
 
     // Join 'em all up
     wxWizardPageSimple::Chain(m_page1, m_page2);

@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.13 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.14 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -204,6 +204,17 @@ bool AppList::HaveDownloads()
     for (unsigned int i=0; i<m_apps.GetCount(); i++)
     {
         if (m_apps[i].IsSelectedForDownload() == true)
+            return true;
+    }
+    return false;
+}
+
+// Check to see if any downloads are coming from mirrors.
+bool AppList::UsingMirrors()
+{
+    for (unsigned int i=0; i<m_apps.GetCount(); i++)
+    {
+        if (m_apps[i].IsSelectedForDownload() == true && m_apps[i].alturl == wxEmptyString)
             return true;
     }
     return false;

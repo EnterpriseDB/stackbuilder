@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.h,v 1.3 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.h,v 1.4 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -36,9 +36,10 @@ private:
 class AppSelectionPage : public wxWizardPageSimple
 {
 public:
-    AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist);
+    AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist, wxWizardPageSimple *mirrorpage, wxWizardPageSimple *downloadpage);
     virtual void OnWizardPageChanging(wxWizardEvent& event);
 	wxTreeCtrl *GetTreeCtrl() { return m_apptree; };
+	void ReChain();
 
 private:
 	void OnTreeItemSelected(wxTreeEvent &evt);
@@ -49,6 +50,7 @@ private:
 	wxTextCtrl *m_description;
 	AppList *m_applist;
 	MirrorList *m_mirrorlist;
+	wxWizardPageSimple *m_mirrorpage, *m_downloadpage;
 
 	DECLARE_EVENT_TABLE()
 };

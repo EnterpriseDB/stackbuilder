@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.7 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.8 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -124,10 +124,10 @@ bool MirrorList::PopulateTreeCtrl()
     wxTreeItemId node, root, country, mirror;
     bool found;
 #ifdef WIN32
-     wxTreeItemId localCountryNode = NULL;
-     wxChar localCountry[128];
-     memset(localCountry, 0, sizeof(localCountry));
-     GetLocaleInfo(0, LOCALE_SENGCOUNTRY, localCountry, 128);
+    wxTreeItemId localCountryNode = NULL;
+    wxChar localCountry[128];
+    memset(localCountry, 0, sizeof(localCountry));
+    GetLocaleInfo(0, LOCALE_SENGCOUNTRY, localCountry, 128);
 #endif
 
     root = m_treectrl->AddRoot(_("Countries"), 0);

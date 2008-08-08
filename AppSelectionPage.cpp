@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.8 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.9 2008/08/08 14:54:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,6 +22,7 @@
 #include "App.h"
 #include "AppList.h"
 #include "MirrorList.h"
+#include "DownloadPage.h"
 #include "MirrorSelectionPage.h"
 #include "images/bullet.xpm"
 #include "images/checked.xpm"
@@ -71,15 +72,21 @@ void AppTreeCtrl::OnLeftClick(wxMouseEvent &evt)
             }
         }
     }
+
+	// Reset the next page if required.
+	((AppSelectionPage *)GetParent())->ReChain();
+
     evt.Skip();
 }
 
 
-AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist) 
+AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist, wxWizardPageSimple *mirrorpage, wxWizardPageSimple *downloadpage) 
     : wxWizardPageSimple(parent)
 {
     m_applist = applist;
     m_mirrorlist = mirrorlist;
+	m_mirrorpage = mirrorpage;
+	m_downloadpage = downloadpage;
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -125,31 +132,45 @@ void AppSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
         return;
     }
 
-    m_mirrorlist->SetTree(((MirrorSelectionPage *)GetNext())->GetTreeCtrl());
-    m_applist->RankDownloads();
+	// Rank the downloads
+	m_applist->RankDownloads();
 
-    // Get the mirror list, parse it and build the tree
-    bool retval;
-    {
-        wxWindowDisabler disableAll;
-        wxBusyInfo info(_("Downloading mirror list..."));
-        wxTheApp->Yield();
-        retval = m_mirrorlist->LoadMirrorList();
-    }
+	// We only bother to populate the mirror list if we need it.
+	if (GetNext() == m_mirrorpage)
+	{
+		wxTreeCtrl *mirrortree = ((MirrorSelectionPage *)m_mirrorpage)->GetTreeCtrl();
+		m_mirrorlist->SetTree(mirrortree);
 
-    if (!retval)
-    {
-        event.Veto();
-        return;
-    }
+		// Clear everything down first in case we've done this before.
+        m_mirrorlist->DeleteAllItems();
+        mirrortree->DeleteAllItems();
 
-    retval = m_mirrorlist->PopulateTreeCtrl();
+		// Get the mirror list, parse it and build the tree
+		bool retval;
+		{
+			wxWindowDisabler disableAll;
+			wxBusyInfo info(_("Downloading mirror list..."));
+			wxTheApp->Yield();
+			retval = m_mirrorlist->LoadMirrorList();
+		}
 
-    if (!retval)
-    {
-        event.Veto();
-        return;
-    }
+		if (!retval)
+		{
+			event.Veto();
+			return;
+		}
+
+		retval = m_mirrorlist->PopulateTreeCtrl();
+
+		if (!retval)
+		{
+			event.Veto();
+			return;
+		}
+	}
+
+	// Stuff the summary in the next page
+	((DownloadPage *)m_downloadpage)->SetSummary(m_applist->GetSummary());
 
     return;
 }
@@ -193,5 +214,20 @@ void AppSelectionPage::OnTreeItemActivated(wxTreeEvent &evt)
             app->SelectForDownload(false, false);
         }
     }
+
+	// Reset the next page if required.
+	ReChain();
 }
 
+void AppSelectionPage::ReChain()
+{
+	// Make sure we go to the appropriate page next
+	// Do this here because it's too late at OnWizardPageChanging
+	if (m_applist->UsingMirrors())
+	{
+		Chain(this, m_mirrorpage);
+		Chain(m_mirrorpage, m_downloadpage);
+	}
+	else
+		Chain(this, m_downloadpage);
+}
