@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.21 2008/08/08 13:24:17 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.22 2008/08/08 15:49:34 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -247,6 +247,8 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
                                                 100,
                                                 NULL, 
                                                 wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
+	pd->SetSize(500, -1);
+	pd->CentreOnParent();
     pd->Show();
 
     wxString theUrl;
