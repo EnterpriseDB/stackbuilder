@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.19 2008/07/18 20:12:27 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.20 2008/08/08 12:53:46 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -104,22 +104,38 @@ bool App::WorksWithDB()
     switch (m_server->serverType)
     {
         case SVR_POSTGRESQL:
-            tmpversion = pgversion;
+            tmpversion = pgversion.Trim();
             break;
 
         case SVR_ENTERPRISEDB:
-            tmpversion = edbversion;
+            tmpversion = edbversion.Trim();
             break;
 
         default:
             tmpversion = wxEmptyString;
     }
 
-    if (tmpversion.Trim() == wxEmptyString)
+    if (tmpversion == wxEmptyString)
         return true;
 
-    if (tmpversion.Trim() == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
-        return true;
+	if (tmpversion.EndsWith(wxT("+")))
+	{
+		// Apps may specify 8.3+ to denote they require server version 8.3 or above.
+		double appversion = 0, svrversion = 0;
+		
+		tmpversion = tmpversion.RemoveLast();
+		tmpversion.ToDouble(&appversion);
+		
+		svrversion = m_server->majorVer + (m_server->minorVer/10);
+		
+		if (svrversion >= appversion)
+			return true;
+	}
+	else
+	{
+		if (tmpversion == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
+			return true;
+	}
 
     return false;
 }
