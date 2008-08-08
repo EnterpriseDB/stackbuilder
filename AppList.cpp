@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.14 2008/08/08 14:54:29 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.15 2008/08/08 15:15:20 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -193,7 +193,7 @@ bool AppList::PopulateTreeCtrl()
     }
 
     m_treectrl->SortChildren(root);
-    m_treectrl->ExpandAll();
+    m_treectrl->Expand(root);
 
     return true;
 }
