@@ -40,10 +40,10 @@ ENDIF(APPLE)
 ################################################################################
 PROJECT(stackbuilder)
 
-SET(VERSION 1.0.0)
+SET(VERSION 2.0.0)
 
 # CPack stuff
-SET(CPACK_PACKAGE_VERSION_MAJOR 1)
+SET(CPACK_PACKAGE_VERSION_MAJOR 2)
 SET(CPACK_PACKAGE_VERSION_MINOR 0)
 SET(CPACK_PACKAGE_VERSION_PATCH 0)
 SET(CPACK_PACKAGE_NAME "StackBuilder")
@@ -147,6 +147,30 @@ ELSE(MSGFMT_EXECUTABLE)
 ENDIF(MSGFMT_EXECUTABLE)
 
 ################################################################################
+# Set the platform
+################################################################################
+SET(_platform "unknown")
+IF(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    SET(_platform "osx")
+ELSE(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+    IF(CMAKE_SYSTEM_NAME MATCHES "Linux")
+        IF(CMAKE_SIZEOF_VOID_P EQUAL 64)
+            SET(_platform "linux-x64")
+        ELSE(CMAKE_SIZEOF_VOID_P EQUAL 64)
+            SET(_platform "linux")
+        ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 64)
+    ELSE(CMAKE_SYSTEM_NAME MATCHES "Linux")
+        IF(CMAKE_SYSTEM_NAME MATCHES "Windows")
+            SET(_platform "windows")
+        ELSE(CMAKE_SYSTEM_NAME MATCHES "Windows")
+            MESSAGE(FATAL_ERROR "Unsupported platform: ${CMAKE_SYSTEM_NAME}")
+        ENDIF(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    ENDIF(CMAKE_SYSTEM_NAME MATCHES "Linux")
+ENDIF(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+
+ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=${_platform}")
+
+################################################################################
 # Let's rock!
 ################################################################################
 INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR}
@@ -180,6 +204,8 @@ MESSAGE(STATUS " ")
 MESSAGE(STATUS "  Project                     : ${PROJECT_NAME}")
 MESSAGE(STATUS "  Description                 : ${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
 MESSAGE(STATUS "  Version                     : ${VERSION}")
+MESSAGE(STATUS " ")
+MESSAGE(STATUS "  Installer platform          : ${_platform}")
 MESSAGE(STATUS " ")
 MESSAGE(STATUS "  wxWidgets version           : ${wxWidgets_VERSION}")
 MESSAGE(STATUS "  wxWidgets config binary     : ${wxWidgets_CONFIG_EXECUTABLE}")
