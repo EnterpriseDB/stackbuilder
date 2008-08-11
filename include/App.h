@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.10 2007/09/24 15:50:52 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.11 2008/08/11 12:08:10 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -32,6 +32,7 @@ public:
 	bool IsInstalled();
 	bool IsVersionInstalled();
     bool WorksWithDB();
+	bool WorksWithPlatform();
 	wxString GetInstalledVersion();
 	void SelectForDownload(bool select, bool isdep);
 	bool IsSelectedForDownload() { return download; };
@@ -41,6 +42,7 @@ public:
     bool Install();
 
 	wxString id;
+	wxString platform;
 	wxString name;
 	wxString description;
 	wxString version;

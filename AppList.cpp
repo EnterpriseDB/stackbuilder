@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.15 2008/08/08 15:15:20 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.16 2008/08/11 12:08:07 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -94,6 +94,8 @@ bool AppList::LoadAppList()
             {
                 if (properties->GetName() == wxT("id"))
                     newApplication->id = properties->GetNodeContent();
+                else if (properties->GetName() == wxT("platform"))
+                    newApplication->platform = DeHTMLise(properties->GetNodeContent());
                 else if (properties->GetName() == wxT("name"))
                     newApplication->name = DeHTMLise(properties->GetNodeContent());
                 else if (properties->GetName() == wxT("description"))
@@ -130,7 +132,7 @@ bool AppList::LoadAppList()
             if (newApplication->mirrorpath.StartsWith(wxT("/")))
                 newApplication->mirrorpath = newApplication->mirrorpath.Right(newApplication->mirrorpath.Length() -1);
 
-            if (newApplication->IsValid() && newApplication->WorksWithDB())
+            if (newApplication->IsValid() && newApplication->WorksWithDB() && newApplication->WorksWithPlatform())
                 m_apps.Add(newApplication);
         }
         application = application->GetNext();

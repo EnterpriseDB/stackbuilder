@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.22 2008/08/08 15:49:34 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.23 2008/08/11 12:08:07 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -141,6 +141,14 @@ bool App::WorksWithDB()
 	}
 
     return false;
+}
+
+bool App::WorksWithPlatform()
+{
+	if (platform != STACKBUILDER_PLATFORM)
+		return false;
+
+	return true;
 }
 
 wxString App::GetInstalledVersion()
@@ -460,25 +468,39 @@ bool App::Install()
     if (installed)
         return true;
 
-    wxString cmd;
-
-    // MSI or EXE?
-    if (format.Lower() == wxT("msi"))
-        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\"");
-    else
-        cmd = wxT("\"") + file.GetFullPath() + wxT("\"");
+    wxString cmd, args;
 
     // Install or upgrade?
     if (IsInstalled())
     {
         if (!upgradeoptions.IsEmpty())
-            cmd += wxT(" ") + SubstituteFlags(upgradeoptions);
+            args = SubstituteFlags(upgradeoptions);
     }
     else
     {
         if (!installoptions.IsEmpty())
-            cmd += wxT(" ") + SubstituteFlags(installoptions);
+            args = SubstituteFlags(installoptions);
     }
+
+#ifdef __WXMSW__
+    // MSI or EXE?
+    if (format.Lower() == wxT("msi"))
+        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;
+    else
+        cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
+#else
+#ifdef __WXMAC__
+	// On the Mac, having unpacked the appbundle, we must read the 
+	// CFBundleExecutable value from installer.app/Contents/Info.plist
+	// and then execute that.
+
+	// TODO....
+#else
+	// Everything is executed directly on *nix, as we cannot support RPM/DEB in any 
+	// non-distro specific way.
+    cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
+#endif
+#endif
 
     // Now run the installation
     long retval = wxExecute(cmd, wxEXEC_SYNC);
@@ -494,7 +516,7 @@ bool App::Install()
                                                      _("Installation error"), 
                                                      wxOK | wxCANCEL | wxICON_EXCLAMATION);
 
-        if (response == wxCANCEL) // USer cancelled the installations
+        if (response == wxCANCEL) // User cancelled the installations
             return false;
         else // User skipped this installation
         {

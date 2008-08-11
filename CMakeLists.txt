@@ -168,7 +168,7 @@ ELSE(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     ENDIF(CMAKE_SYSTEM_NAME MATCHES "Linux")
 ENDIF(CMAKE_SYSTEM_NAME MATCHES "Darwin")
 
-ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=${_platform}")
+ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=wxT(\"${_platform}\")")
 
 ################################################################################
 # Let's rock!
