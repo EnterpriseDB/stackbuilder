@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.14 2008/08/13 11:05:41 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.15 2008/08/13 16:38:35 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     m_path = new wxTextCtrl(this, wxID_ANY, path, wxDefaultPosition, wxSize(300, -1));
     pathSizer->Add(m_path, 0, wxALL | wxALIGN_CENTER, 2);
 
-    m_browse = new wxButton(this, BTN_BROWSE, wxT("..."), wxDefaultPosition, wxSize(25, -1));
+    m_browse = new wxButton(this, BTN_BROWSE, wxT("..."), wxDefaultPosition, wxSize(35, -1));
     pathSizer->Add(m_browse, 0, wxALL | wxALIGN_CENTER, 2);
 
     mainSizer->Add(pathSizer, 0, wxALL | wxALIGN_CENTER, 5);

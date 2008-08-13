@@ -3,7 +3,7 @@
 // Purpose:     CompletionPage page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: CompletionPage.cpp,v 1.4 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: CompletionPage.cpp,v 1.5 2008/08/13 16:38:35 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -32,16 +32,18 @@ CompletionPage::CompletionPage(wxWizard *parent)
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 60);
+    mainSizer->SetItemMinSize(st, 400, 70);
 
     stStatus = new wxStaticText(this, wxID_ANY, wxEmptyString);
     mainSizer->Add(stStatus, 0, wxALL | wxFIXED_MINSIZE, 5);
 
+	mainSizer->SetItemMinSize(stStatus, 400, 35);
+	
     st = new wxStaticText(this, wxID_ANY, _("You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."));
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 60);
+    mainSizer->SetItemMinSize(st, 400, 70);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);

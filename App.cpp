@@ -3,12 +3,20 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.25 2008/08/13 11:06:16 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.26 2008/08/13 16:38:35 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "StackBuilder.h"
+
+#ifdef __WXMAC__
+#include <errno.h>
+
+// We're going to use auto_ptr...
+#include <memory>
+using namespace std;
+#endif
 
 // wxWindows headers
 #include <wx/wx.h>
@@ -20,7 +28,12 @@
 #include <wx/treectrl.h>
 #include <wx/url.h>
 #include <wx/wfstream.h>
+#include <wx/zipstrm.h>
 #include <wx/protocol/http.h>
+
+#ifdef __WXMAC__
+#include <wx/xml/xml.h>
+#endif
 
 #ifdef __WXMSW__
 #include <wx/msw/registry.h>
@@ -477,8 +490,13 @@ bool App::CheckFilename(const wxString& downloadPath)
     //       hacked in the future.
     wxFileName svrFile(thePath);
 
+#ifndef __WXMAC__
     file = downloadPath + wxT("/") + id + wxT(".") + format;
-
+#else
+	// On Mac, installers are always bundles, so they must be zipped for transport
+    file = downloadPath + wxT("/") + id + wxT(".") + format + wxT(".zip");	
+#endif
+	
     if (file.FileExists())
     {
         // Check the file to see if it's checksum matches ours. If
@@ -532,16 +550,77 @@ bool App::Install()
 #ifdef __WXMSW__
     // MSI or EXE?
     if (format.Lower() == wxT("msi"))
-        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;
+        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;	
     else
         cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
 #else
 #ifdef __WXMAC__
-	// On the Mac, having unpacked the appbundle, we must read the 
-	// CFBundleExecutable value from installer.app/Contents/Info.plist
-	// and then execute that.
+	// Unpack the downloaded file
+	
+	// Create a directory to put it in. This is a little ugly, but 
+	// wxWidgets only allows us to create a temp file
+	wxString macTmpPath = wxFileName::CreateTempFileName(wxT("/tmp/"));
+	wxRemoveFile(macTmpPath);
+	wxMkdir(macTmpPath);
+	
+	// Prepare to extract
+	auto_ptr<wxZipEntry> entry;
+	
+    wxFFileInputStream in(file.GetFullPath());
+    wxZipInputStream zip(in);
+	
+    while (entry.reset(zip.GetNextEntry()), entry.get() != NULL)
+    {
+        // Get the filename
+		if (entry->GetName().StartsWith(wxT("__MACOSX")))
+			continue;
+			
+        if (entry->GetName().EndsWith(wxT("/")))
+		{
+			if (!wxMkdir(macTmpPath + wxT("/") + entry->GetName()))
+			{
+				wxLogError(_("Failed to create the installer appbundle directory: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
+				return false;
+			}
+		}
+		else
+		{
+			// Must be an actual file, so extract it
+			wxFFileOutputStream out(macTmpPath + wxT("/") + entry->GetName());
+			if (!out.IsOk())
+			{
+				wxLogError(_("Failed to write the installer appbundle file: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
+				return false;
+			}
+			zip >> out;
+			out.Close();
+			chmod(wxString::Format(wxT("%s/%s"), macTmpPath.c_str(), entry->GetName().c_str()).ToAscii(), entry->GetMode());
+		}
 
-	// TODO....
+    }
+	
+	// If this is a pkg or mpkg, just throw it at open. Note that you cannot pass arguments
+	// to this type of installer
+	wxString installer = macTmpPath + wxT("/") + file.GetFullPath().AfterLast('/').BeforeLast('.');
+	
+	if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
+        cmd = wxT("open \"") + installer + wxT("\"");	
+	else
+	{
+		// On the Mac, having unpacked an appbundle, we must read the 
+	    // CFBundleExecutable value from installer.app/Contents/Info.plist
+	    // and then execute that.
+		wxString exe = GetBundleExecutable(installer);
+		
+		if (exe.IsEmpty())
+		{
+			wxLogError(_("Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"), installer.c_str());
+			return false;
+		}
+		
+		cmd = wxT("\"") + installer + wxT("/Contents/MacOS/") + exe + wxT("\" ") + args;
+	}
+    
 #else
 	// Everything is executed directly on *nix, as we cannot support RPM/DEB in any 
 	// non-distro specific way.
@@ -550,6 +629,9 @@ bool App::Install()
 #endif
 
     // Now run the installation
+	if (cmd.IsEmpty())
+		return false;
+	
     long retval = wxExecute(cmd, wxEXEC_SYNC);
 
     if (retval == 0) // Installed OK
@@ -608,3 +690,58 @@ wxString App::SubstituteFlags(const wxString &options)
 
     return retval;
 }
+
+#ifdef __WXMAC__
+wxString App::GetBundleExecutable(const wxString &bundle)
+{
+    wxFileInputStream ip(bundle + wxT("/Contents/Info.plist"));
+	
+    if (!ip || !ip.IsOk())
+        return wxEmptyString;
+	
+    wxXmlDocument xml;
+    if (!xml.Load(ip))
+        return wxEmptyString;
+	
+    // Iterate through the applications and build the list
+    wxXmlNode *dict, *properties;
+    dict = xml.GetRoot()->GetChildren();
+	bool next = false;
+	
+    while (dict) 
+    {
+        if (dict->GetName() == wxT("dict")) 
+        {
+            properties = dict->GetChildren();
+			
+            while (properties)
+            {
+				// Look for the key with the value CFBundleExecutable
+				// When we've found it, the next string should be our value
+				if (!next)
+				{
+					if (properties->GetName() == wxT("key"))
+					{
+						if (properties->GetNodeContent().Lower() == wxT("cfbundleexecutable"))
+							next = true;
+					}
+				}
+				else
+				{
+					if (properties->GetName() == wxT("string"))
+					{
+						return properties->GetNodeContent();
+					}					
+				}
+						
+                properties = properties->GetNext();
+            }
+        }
+		
+        dict = dict->GetNext();
+    }
+	
+    return wxEmptyString;
+}
+#endif
+
