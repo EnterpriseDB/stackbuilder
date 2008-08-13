@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.23 2008/08/11 12:08:07 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.24 2008/08/13 10:44:18 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -13,6 +13,7 @@
 // wxWindows headers
 #include <wx/wx.h>
 #include <wx/busyinfo.h>
+#include <wx/fileconf.h>
 #include <wx/progdlg.h>
 #include <wx/stream.h>
 #include <wx/timer.h>
@@ -59,22 +60,42 @@ bool App::IsValid()
 
 bool App::IsInstalled()
 {
+	wxString ver;
+	
 #ifdef __WXMSW__
     // If the regkey for this app id exists, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
     if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
         return false;
-
-    return true;
+	
+    // Also consider the app not installed if the value exists but is empty
+    key->QueryValue(versionkey.AfterLast('\\'), ver);
 #else
-    // TODO: Fix for *nix
-    return false;
+	// Check for the registry
+	if (!wxFile::Exists(REGISTRY_FILE))
+		return false;
+	
+	wxFileStream fst(REGISTRY_FILE);
+	wxFileConfig *cnf = new wxFileConfig(fst);
+		
+	if (!cnf->HasEntry(versionkey))
+		return false;
+    
+	// Also consider the app not installed if the value exists but is empty
+	ver = cnf->Read(versionkey, wxEmptyString);
 #endif
+
+	if (ver == wxEmptyString)
+        return false;
+		
+	return true;
 }
 
 bool App::IsVersionInstalled()
 {
+	wxString ver;
+	
 #ifdef __WXMSW__
     // If the regkey for this app id exists AND it contains our version number, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
@@ -82,16 +103,26 @@ bool App::IsVersionInstalled()
     if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
         return false;
 
-    wxString ver;
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+#else
+	// Check for the registry
+	if (!wxFile::Exists(REGISTRY_FILE))
+		return false;
+	
+	wxFileStream fst(REGISTRY_FILE);
+	wxFileConfig *cnf = new wxFileConfig(fst);
+	
+	if (!cnf->HasEntry(versionkey))
+		return false;
+    
+	// Also consider the app not installed if the value exists but is empty
+	ver = cnf->Read(versionkey, wxEmptyString);
+#endif
+	
     if (ver != version)
         return false;
-
-    return true;
-#else
-    // TODO: Fix for *nix
-    return false; 
-#endif
+	
+	return true;
 }
 
 bool App::WorksWithDB()
@@ -153,6 +184,8 @@ bool App::WorksWithPlatform()
 
 wxString App::GetInstalledVersion()
 {
+    wxString ver;
+	
 #ifdef __WXMSW__
     // If the regkey for this app id exists AND it contains our version number, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
@@ -160,13 +193,21 @@ wxString App::GetInstalledVersion()
     if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
         return wxEmptyString;
 
-    wxString ver;
     key->QueryValue(versionkey.AfterLast('\\'), ver);
-    return ver;
 #else
-    // TODO: Fix for *nix
-    return wxEmptyString;
+	// Check for the registry
+	if (!wxFile::Exists(REGISTRY_FILE))
+		return wxEmptyString;
+	
+	wxFileStream fst(REGISTRY_FILE);
+	wxFileConfig *cnf = new wxFileConfig(fst);
+	
+	if (!cnf->HasEntry(versionkey))
+		return wxEmptyString;
+    
+	ver = cnf->Read(versionkey, wxEmptyString);
 #endif
+    return ver;
 }
 
 void App::SelectForDownload(bool select, bool isdep)

@@ -3,7 +3,7 @@
 // Purpose:     Configurable macros
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Config.h,v 1.3 2008/08/11 13:43:23 dpage Exp $
+// RCS-ID:      $Id: Config.h,v 1.4 2008/08/13 10:44:20 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -18,5 +18,10 @@
 // Download locations
 #define DEFAULT_MIRROR_LIST_URL wxT("http://www.postgresql.org/mirrors.xml")
 #define DEFAULT_APPLICATION_LIST_URL wxT("http://www.postgresql.org/applications-v2.xml")
+
+// The registry file
+#ifndef __WXMSW__
+#define REGISTRY_FILE wxT("/etc/postgres-reg.ini")
+#endif
 
 #endif

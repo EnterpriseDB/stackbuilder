@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.11 2008/08/08 11:10:51 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.12 2008/08/13 10:44:18 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -204,12 +204,12 @@ bool IntroductionPage::FindPgServers()
 
     return success;
 #else
-	if (wxFile::Exists(wxT("/etc/postgres-reg.ini")))
+	if (wxFile::Exists(REGISTRY_FILE))
 	{
 		wxString version, locale;
 		long cookie;
 		
-		wxFileStream fst(wxT("/etc/postgres-reg.ini"));
+		wxFileStream fst(REGISTRY_FILE);
 		wxFileConfig *cnf = new wxFileConfig(fst);
 		
 		cnf->SetPath(wxT("/PostgreSQL"));
@@ -353,12 +353,12 @@ bool IntroductionPage::FindEdbServers()
 
     return success;
 #else
-	if (wxFile::Exists(wxT("/etc/postgres-reg.ini")))
+	if (wxFile::Exists(REGISTRY_FILE))
 	{
 		wxString version, locale;
 		long cookie;
 		
-		wxFileStream fst(wxT("/etc/postgres-reg.ini"));
+		wxFileStream fst(REGISTRY_FILE);
 		wxFileConfig *cnf = new wxFileConfig(fst);
 		
 		cnf->SetPath(wxT("/EnterpriseDB"));
