@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.12 2008/08/13 10:44:18 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.13 2008/08/13 10:46:26 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL| wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 60);
+    mainSizer->SetItemMinSize(st, 400, 65);
 
     m_installation = new wxComboBox(this, wxID_ANY, _("<remote server>"), wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN | wxCB_READONLY);
     unsigned int item = m_installation->Append(_("<remote server>"));
