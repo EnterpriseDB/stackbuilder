@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.24 2008/08/13 10:44:18 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.25 2008/08/13 11:06:16 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -71,6 +71,7 @@ bool App::IsInstalled()
 	
     // Also consider the app not installed if the value exists but is empty
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+	delete key;
 #else
 	// Check for the registry
 	if (!wxFile::Exists(REGISTRY_FILE))
@@ -84,6 +85,7 @@ bool App::IsInstalled()
     
 	// Also consider the app not installed if the value exists but is empty
 	ver = cnf->Read(versionkey, wxEmptyString);
+	delete cnf;
 #endif
 
 	if (ver == wxEmptyString)
@@ -104,6 +106,7 @@ bool App::IsVersionInstalled()
         return false;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+	delete key;
 #else
 	// Check for the registry
 	if (!wxFile::Exists(REGISTRY_FILE))
@@ -117,6 +120,7 @@ bool App::IsVersionInstalled()
     
 	// Also consider the app not installed if the value exists but is empty
 	ver = cnf->Read(versionkey, wxEmptyString);
+	delete cnf;
 #endif
 	
     if (ver != version)
@@ -194,6 +198,7 @@ wxString App::GetInstalledVersion()
         return wxEmptyString;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+	delete key;
 #else
 	// Check for the registry
 	if (!wxFile::Exists(REGISTRY_FILE))
@@ -206,6 +211,7 @@ wxString App::GetInstalledVersion()
 		return wxEmptyString;
     
 	ver = cnf->Read(versionkey, wxEmptyString);
+	delete cnf;
 #endif
     return ver;
 }
