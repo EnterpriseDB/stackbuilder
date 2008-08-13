@@ -3,7 +3,7 @@
 // Purpose:     Proxy server configuration dialog
 // Author:      Dave Page
 // Created:     2007-05-02
-// RCS-ID:      $Id: ProxyDialog.cpp,v 1.4 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: ProxyDialog.cpp,v 1.5 2008/08/13 11:44:37 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -12,6 +12,7 @@
 
 // wxWindows headers
 #include <wx/wx.h>
+#include <wx/fileconf.h>
 
 #ifdef __WXMSW__
 #include <wx/msw/registry.h>
@@ -51,7 +52,14 @@ ProxyDialog::ProxyDialog(wxWindow *parent, const wxString& title)
 
     delete key;
 #else
-    // TODO: Fix for *nix
+	wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+	
+	http_host = cnf->Read(wxT("HttpProxyHost"), wxEmptyString);
+	http_port = cnf->Read(wxT("HttpProxyPort"), wxEmptyString);
+	ftp_host = cnf->Read(wxT("FtpProxyHost"), wxEmptyString);
+	ftp_port = cnf->Read(wxT("FtpProxyPort"), wxEmptyString);
+	
+	delete cnf;
 #endif
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -130,7 +138,14 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
 
     delete key;
 #else
-    // TODO: Fix for *nix
+	wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+	
+	cnf->Write(wxT("HttpProxyHost"), m_http_host->GetValue()), 
+	cnf->Write(wxT("HttpProxyPort"), m_http_port->GetValue()), 
+	cnf->Write(wxT("FtpProxyHost"), m_ftp_host->GetValue()), 
+	cnf->Write(wxT("FtpProxyPort"), m_ftp_port->GetValue()), 
+	
+	delete cnf;
 #endif
 
     this->EndModal(wxOK);
@@ -167,7 +182,20 @@ wxString ProxyDialog::GetProxy(const wxString &protocol)
             key->QueryValue(wxT("HTTP proxy port"), port);
     }
 #else
-    // TODO: Fix for *nix
+	wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+	
+    if (protocol.Lower() == wxT("ftp"))
+    {
+		host = cnf->Read(wxT("FtpProxyHost"), wxEmptyString);
+		port = cnf->Read(wxT("FtpProxyPort"), wxEmptyString);
+	}
+	else
+	{
+		host = cnf->Read(wxT("HttpProxyHost"), wxEmptyString);
+		port = cnf->Read(wxT("HttpProxyPort"), wxEmptyString);
+	}
+	
+	delete cnf;
 #endif
 
     if (!host.IsEmpty() && !port.IsEmpty() && port.IsNumber())

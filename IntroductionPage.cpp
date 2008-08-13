@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.13 2008/08/13 10:46:26 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.14 2008/08/13 11:44:37 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -418,6 +418,7 @@ bool IntroductionPage::FindEdbServers()
 void IntroductionPage::OnProxies(wxCommandEvent& WXUNUSED(event))
 {
     ProxyDialog *pd = new ProxyDialog(this, _("Proxy servers"));
+	pd->CenterOnParent();
     pd->ShowModal();
     delete pd;
 }
