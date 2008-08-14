@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.26 2008/08/13 16:38:35 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.27 2008/08/14 09:42:23 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -604,7 +604,7 @@ bool App::Install()
 	wxString installer = macTmpPath + wxT("/") + file.GetFullPath().AfterLast('/').BeforeLast('.');
 	
 	if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
-        cmd = wxT("open \"") + installer + wxT("\"");	
+        cmd = wxT("open -W \"") + installer + wxT("\"");	
 	else
 	{
 		// On the Mac, having unpacked an appbundle, we must read the 
