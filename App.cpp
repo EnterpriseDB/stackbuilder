@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.29 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.30 2008/08/14 16:04:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -674,8 +674,13 @@ bool App::Install()
     // Now run the installation
     if (cmd.IsEmpty())
         return false;
-   
+  
+#ifdef __WXMSW__ 
     long retval = wxExecute(cmd.Trim(), wxEXEC_SYNC);
+#else
+    // wxExecute can sometime fail to call wait() for some reason, leading to zombies
+    long retval = ExecProcess(cmd.Trim());
+#endif
 
     if (retval == 0) // Installed OK
     {
@@ -788,3 +793,22 @@ wxString App::GetBundleExecutable(const wxString &bundle)
 }
 #endif
 
+#ifndef __WXMSW__
+int App::ExecProcess(const wxString &cmd)
+{
+    wxString res;
+    FILE *f=popen(cmd.ToAscii(), "r");
+
+    if (f)
+    {
+        char buffer[1024];
+        int cnt;
+        while ((cnt = fread(buffer, 1, 1024, f)) > 0)
+        {
+            res += wxString::FromAscii(buffer);
+        }
+        return pclose(f);
+    }
+    return -1;
+}
+#endif

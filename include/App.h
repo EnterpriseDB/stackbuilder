@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.13 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.14 2008/08/14 16:04:29 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -66,9 +66,11 @@ public:
 private:
     bool CheckFilename(const wxString& downloadPath);
     wxString SubstituteFlags(const wxString &options);
-    
 #ifdef __WXMAC__
     wxString GetBundleExecutable(const wxString &bundle);
+#endif
+#ifndef __WXMSW__
+    int ExecProcess(const wxString &cmd);
 #endif
 
     bool download, isDependency, downloaded, installed;
