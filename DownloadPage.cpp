@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.15 2008/08/13 16:38:35 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.16 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -80,9 +80,9 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
 
     delete key;
 #else
-	wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-	path = cnf->Read(wxT("DownloadPath"), sp.GetTempDir());
-	delete cnf;
+    wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+    path = cnf->Read(wxT("DownloadPath"), sp.GetTempDir());
+    delete cnf;
 #endif
 
     // Add the path textbox and browse button
@@ -132,9 +132,9 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
     key->SetValue(wxT("Download Path"), m_path->GetValue());
     delete key;
 #else
-	wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-	cnf->Write(wxT("DownloadPath"), m_path->GetValue()), 
-	delete cnf;
+    wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+    cnf->Write(wxT("DownloadPath"), m_path->GetValue()), 
+    delete cnf;
 #endif
 
     if (!m_applist->DownloadFiles(m_path->GetValue(), m_mirrorlist->GetSelectedMirror()))

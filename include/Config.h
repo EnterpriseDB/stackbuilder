@@ -3,7 +3,7 @@
 // Purpose:     Configurable macros
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Config.h,v 1.5 2008/08/14 10:36:28 dpage Exp $
+// RCS-ID:      $Id: Config.h,v 1.6 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -26,3 +26,4 @@
 #endif
 
 #endif
+

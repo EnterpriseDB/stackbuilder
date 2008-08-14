@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.15 2008/08/13 16:38:35 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.16 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -121,11 +121,11 @@ void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 bool IntroductionPage::FindPgServers()
 {
     bool success = false;
-	bool flag = false;
-	long cookie = 0;
-	long port = 0;	
-	wxString temp;
-	
+    bool flag = false;
+    long cookie = 0;
+    long port = 0;    
+    wxString temp;
+    
 #ifdef __WXMSW__
 
 
@@ -148,47 +148,47 @@ bool IntroductionPage::FindPgServers()
             data->serviceId = svcName;
             keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Services\\%s"), svcName.c_str());
             wxRegKey *svcKey = new wxRegKey(keyName);
-			if (svcKey->HasValue(wxT("Display Name")))
+            if (svcKey->HasValue(wxT("Display Name")))
                 svcKey->QueryValue(wxT("Display Name"), data->description);
-			else
-				data->description = _("Unknown server");
-			if (svcKey->HasValue(wxT("Port")))
+            else
+                data->description = _("Unknown server");
+            if (svcKey->HasValue(wxT("Port")))
                 svcKey->QueryValue(wxT("Port"), &data->port);
-			else
-				data->port = 0;
-			if (svcKey->HasValue(wxT("Data Directory")))
+            else
+                data->port = 0;
+            if (svcKey->HasValue(wxT("Data Directory")))
                 svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-			if (svcKey->HasValue(wxT("Database Superuser")))
+            if (svcKey->HasValue(wxT("Database Superuser")))
                 svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-			if (svcKey->HasValue(wxT("Service Account")))
+            if (svcKey->HasValue(wxT("Service Account")))
                 svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-			if (svcKey->HasValue(wxT("Encoding")))
+            if (svcKey->HasValue(wxT("Encoding")))
                 svcKey->QueryValue(wxT("Encoding"), data->encoding);
-			if (svcKey->HasValue(wxT("Locale")))
+            if (svcKey->HasValue(wxT("Locale")))
                 svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-			if (svcKey->HasValue(wxT("Product Code")))
+            if (svcKey->HasValue(wxT("Product Code")))
                 svcKey->QueryValue(wxT("Product Code"), guid);
 
-			if (!guid.IsEmpty())
-			{
+            if (!guid.IsEmpty())
+            {
                 keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Installations\\%s"), guid.c_str());
                 wxRegKey *instKey = new wxRegKey(keyName);
-				if (instKey->HasValue(wxT("Version")))
-				{
+                if (instKey->HasValue(wxT("Version")))
+                {
                     instKey->QueryValue(wxT("Version"), data->serverVersion);
                     data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
                     data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-				}
-				else
-				{
-					data->majorVer = 0;
-					data->minorVer = 0;
-				}
-				if (instKey->HasValue(wxT("Base Directory")))
+                }
+                else
+                {
+                    data->majorVer = 0;
+                    data->minorVer = 0;
+                }
+                if (instKey->HasValue(wxT("Base Directory")))
                     instKey->QueryValue(wxT("Base Directory"), data->installationPath);
-			}
+            }
 
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
@@ -204,62 +204,62 @@ bool IntroductionPage::FindPgServers()
 
     return success;
 #else
-	if (wxFile::Exists(REGISTRY_FILE))
-	{
-		wxString version, locale;
-		long cookie;
-		
-		wxFileStream fst(REGISTRY_FILE);
-		wxFileConfig *cnf = new wxFileConfig(fst);
-		
-		cnf->SetPath(wxT("/PostgreSQL"));
-		flag = cnf->GetFirstGroup(version, cookie);
-		while (flag)
-		{
-			// If there is no Version entry, this is probably an uninstalled server
-			if (cnf->Read(version + wxT("/Version"), wxEmptyString) != wxEmptyString)
-			{
-				Server *data = new Server();
-				data->serverType = SVR_POSTGRESQL;
-				
-				// Server version
-				data->serverVersion = version;
-				data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-				data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-			
-				// And the rest of the data
-				data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
-				data->port = cnf->Read(version + wxT("/Port"), 0L);
-				data->dataDirectory = cnf->Read(version + wxT("/DataDirectory"), wxEmptyString);
-				data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
-				data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
-				data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
-				
-				// Separate the locale and encoding if possible
-				locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
-				
-				if (locale.Find('.') == wxNOT_FOUND)
-				{
-					data->locale = locale;
-				}
-				else
-				{
-					data->locale = locale.BeforeFirst('.');
-					data->encoding = locale.AfterFirst('.');
-				}
-				
-				// Build the user description
-				temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
-				
-				// Add the item
-				m_installation->Append(temp, data);
-				success = true;
-			}
-			
-			flag = cnf->GetNextGroup(version, cookie);
-		}
-		
-		delete cnf;
+    if (wxFile::Exists(REGISTRY_FILE))
+    {
+        wxString version, locale;
+        long cookie;
+        
+        wxFileStream fst(REGISTRY_FILE);
+        wxFileConfig *cnf = new wxFileConfig(fst);
+        
+        cnf->SetPath(wxT("/PostgreSQL"));
+        flag = cnf->GetFirstGroup(version, cookie);
+        while (flag)
+        {
+            // If there is no Version entry, this is probably an uninstalled server
+            if (cnf->Read(version + wxT("/Version"), wxEmptyString) != wxEmptyString)
+            {
+                Server *data = new Server();
+                data->serverType = SVR_POSTGRESQL;
+                
+                // Server version
+                data->serverVersion = version;
+                data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+            
+                // And the rest of the data
+                data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
+                data->port = cnf->Read(version + wxT("/Port"), 0L);
+                data->dataDirectory = cnf->Read(version + wxT("/DataDirectory"), wxEmptyString);
+                data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
+                data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
+                data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
+                
+                // Separate the locale and encoding if possible
+                locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
+                
+                if (locale.Find('.') == wxNOT_FOUND)
+                {
+                    data->locale = locale;
+                }
+                else
+                {
+                    data->locale = locale.BeforeFirst('.');
+                    data->encoding = locale.AfterFirst('.');
+                }
+                
+                // Build the user description
+                temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
+                
+                // Add the item
+                m_installation->Append(temp, data);
+                success = true;
+            }
+            
+            flag = cnf->GetNextGroup(version, cookie);
+        }
+        
+        delete cnf;
     }
 
     return success;
@@ -272,11 +272,11 @@ bool IntroductionPage::FindPgServers()
 bool IntroductionPage::FindEdbServers()
 {
     bool success = false;
-	bool flag = false;
-	long cookie = 0;
-	long port = 0;	
-	wxString temp;
-	
+    bool flag = false;
+    long cookie = 0;
+    long port = 0;    
+    wxString temp;
+    
 #ifdef __WXMSW__
     // Add local servers.
     wxRegKey *rootKey = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services"));
@@ -297,47 +297,47 @@ bool IntroductionPage::FindEdbServers()
             data->serviceId = svcName;
             keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services\\%s"), svcName.c_str());
             wxRegKey *svcKey = new wxRegKey(keyName);
-			if (svcKey->HasValue(wxT("Display Name")))
+            if (svcKey->HasValue(wxT("Display Name")))
                 svcKey->QueryValue(wxT("Display Name"), data->description);
-			else
-				data->description = _("Unknown server");
-			if (svcKey->HasValue(wxT("Port")))
+            else
+                data->description = _("Unknown server");
+            if (svcKey->HasValue(wxT("Port")))
                 svcKey->QueryValue(wxT("Port"), &data->port);
-			else
-				data->port = 0;
-			if (svcKey->HasValue(wxT("Data Directory")))
+            else
+                data->port = 0;
+            if (svcKey->HasValue(wxT("Data Directory")))
                 svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-			if (svcKey->HasValue(wxT("Database Superuser")))
+            if (svcKey->HasValue(wxT("Database Superuser")))
                 svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-			if (svcKey->HasValue(wxT("Service Account")))
+            if (svcKey->HasValue(wxT("Service Account")))
                 svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-			if (svcKey->HasValue(wxT("Encoding")))
+            if (svcKey->HasValue(wxT("Encoding")))
                 svcKey->QueryValue(wxT("Encoding"), data->encoding);
-			if (svcKey->HasValue(wxT("Locale")))
+            if (svcKey->HasValue(wxT("Locale")))
                 svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-			if (svcKey->HasValue(wxT("Product Code")))
+            if (svcKey->HasValue(wxT("Product Code")))
                 svcKey->QueryValue(wxT("Product Code"), guid);
 
-			if (!guid.IsEmpty())
-			{
+            if (!guid.IsEmpty())
+            {
                 keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Installations\\%s"), guid.c_str());
                 wxRegKey *instKey = new wxRegKey(keyName);
-				if (instKey->HasValue(wxT("Version")))
-				{
+                if (instKey->HasValue(wxT("Version")))
+                {
                     instKey->QueryValue(wxT("Version"), data->serverVersion);
                     data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
                     data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-				}
-				else
-				{
-					data->majorVer = 0;
-					data->minorVer = 0;
-				}
-				if (instKey->HasValue(wxT("Base Directory")))
+                }
+                else
+                {
+                    data->majorVer = 0;
+                    data->minorVer = 0;
+                }
+                if (instKey->HasValue(wxT("Base Directory")))
                     instKey->QueryValue(wxT("Base Directory"), data->installationPath);
-			}
+            }
 
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
@@ -353,64 +353,64 @@ bool IntroductionPage::FindEdbServers()
 
     return success;
 #else
-	if (wxFile::Exists(REGISTRY_FILE))
-	{
-		wxString version, locale;
-		long cookie;
-		
-		wxFileStream fst(REGISTRY_FILE);
-		wxFileConfig *cnf = new wxFileConfig(fst);
-		
-		cnf->SetPath(wxT("/EnterpriseDB"));
-		flag = cnf->GetFirstGroup(version, cookie);
-		while (flag)
-		{
-			// If there is no Version entry, this is probably an uninstalled server
-			if (cnf->Read(version + wxT("/Version"), wxEmptyString) != wxEmptyString)
-			{
-				Server *data = new Server();
-				data->serverType = SVR_ENTERPRISEDB;
-				
-				// Server version
-				data->serverVersion = version;
-				data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-				data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-				
-				// And the rest of the data
-				data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
-				data->port = cnf->Read(version + wxT("/Port"), 0L);
-				data->dataDirectory = cnf->Read(version + wxT("/DataDirectory"), wxEmptyString);
-				data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
-				data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
-				data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
-				
-				// Separate the locale and encoding if possible
-				locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
-				
-				if (locale.Find('.') == wxNOT_FOUND)
-				{
-					data->locale = locale;
-				}
-				else
-				{
-					data->locale = locale.BeforeFirst('.');
-					data->encoding = locale.AfterFirst('.');
-				}
-				
-				// Build the user description
-				temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
-				
-				// Add the item
-				m_installation->Append(temp, data);
-				success = true;
-			}
-			
-			flag = cnf->GetNextGroup(version, cookie);
-		}
-		
-		delete cnf;
+    if (wxFile::Exists(REGISTRY_FILE))
+    {
+        wxString version, locale;
+        long cookie;
+        
+        wxFileStream fst(REGISTRY_FILE);
+        wxFileConfig *cnf = new wxFileConfig(fst);
+        
+        cnf->SetPath(wxT("/EnterpriseDB"));
+        flag = cnf->GetFirstGroup(version, cookie);
+        while (flag)
+        {
+            // If there is no Version entry, this is probably an uninstalled server
+            if (cnf->Read(version + wxT("/Version"), wxEmptyString) != wxEmptyString)
+            {
+                Server *data = new Server();
+                data->serverType = SVR_ENTERPRISEDB;
+                
+                // Server version
+                data->serverVersion = version;
+                data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                
+                // And the rest of the data
+                data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
+                data->port = cnf->Read(version + wxT("/Port"), 0L);
+                data->dataDirectory = cnf->Read(version + wxT("/DataDirectory"), wxEmptyString);
+                data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
+                data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
+                data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
+                
+                // Separate the locale and encoding if possible
+                locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
+                
+                if (locale.Find('.') == wxNOT_FOUND)
+                {
+                    data->locale = locale;
+                }
+                else
+                {
+                    data->locale = locale.BeforeFirst('.');
+                    data->encoding = locale.AfterFirst('.');
+                }
+                
+                // Build the user description
+                temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
+                
+                // Add the item
+                m_installation->Append(temp, data);
+                success = true;
+            }
+            
+            flag = cnf->GetNextGroup(version, cookie);
+        }
+        
+        delete cnf;
     }
-	
+    
     return success;
 #endif
 }
@@ -418,7 +418,8 @@ bool IntroductionPage::FindEdbServers()
 void IntroductionPage::OnProxies(wxCommandEvent& WXUNUSED(event))
 {
     ProxyDialog *pd = new ProxyDialog(this, _("Proxy servers"));
-	pd->CenterOnParent();
+    pd->CenterOnParent();
     pd->ShowModal();
     delete pd;
 }
+

@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.6 2008/08/08 14:54:29 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.7 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -65,3 +65,4 @@ void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 
     m_mirrorlist->SetSelectedMirror((Mirror *)m_mirrortree->GetItemData(m_mirrortree->GetSelection()));
 }
+

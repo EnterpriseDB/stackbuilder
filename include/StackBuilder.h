@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.h,v 1.7 2008/08/14 10:36:28 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.h,v 1.8 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -29,13 +29,14 @@ public:
     virtual bool OnInit();
 
 private:
-	void OnWizardCancelled(wxWizardEvent &evt);
-	void OnWizardFinished(wxWizardEvent &evt);
+    void OnWizardCancelled(wxWizardEvent &evt);
+    void OnWizardFinished(wxWizardEvent &evt);
     void initializeLocale(wxChar *argv0, const wxString &lang);
 
     Wizard *wizard;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif
+

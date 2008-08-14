@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.9 2008/08/13 16:38:35 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.10 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -68,3 +68,4 @@ void InstallationPage::OnWizardPageChanging(wxWizardEvent& event)
 
     ((CompletionPage *)GetNext())->ShowErrorWarning(m_applist->GetErrorCount());
 }
+

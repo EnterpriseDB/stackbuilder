@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.7 2008/08/14 10:36:27 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.8 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ bool StackBuilder::OnInit()
         {wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
         {wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
-		{wxCMD_LINE_OPTION, wxT("d"), wxT("download-counter"), _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
+        {wxCMD_LINE_OPTION, wxT("d"), wxT("download-counter"), _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("l"), wxT("language"), _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_NONE}
     };
@@ -59,16 +59,16 @@ bool StackBuilder::OnInit()
 
     if (!cmdParser.Found(wxT("a"), &applicationListUrl))
         applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
-	
-	// If we're using an alternate application list, we don't want to log anything
-	// unless an alternate download counter is specified as well
+    
+    // If we're using an alternate application list, we don't want to log anything
+    // unless an alternate download counter is specified as well
     if (!cmdParser.Found(wxT("d"), &downloadCounterUrl))
-	{
-		if (applicationListUrl == DEFAULT_APPLICATION_LIST_URL)
-			downloadCounterUrl = DEFAULT_DOWNLOAD_COUNTER_URL;
-		else
-			downloadCounterUrl = wxEmptyString;
-	}
+    {
+        if (applicationListUrl == DEFAULT_APPLICATION_LIST_URL)
+            downloadCounterUrl = DEFAULT_DOWNLOAD_COUNTER_URL;
+        else
+            downloadCounterUrl = wxEmptyString;
+    }
 
     if (!cmdParser.Found(wxT("l"), &language))
         language = wxEmptyString;
@@ -134,3 +134,4 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
     if(locale->Init(langInfo->Language), wxLOCALE_LOAD_DEFAULT)
         locale->AddCatalog(wxT("StackBuilder"));
 }
+

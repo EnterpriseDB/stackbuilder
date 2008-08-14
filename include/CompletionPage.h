@@ -3,7 +3,7 @@
 // Purpose:     Completion page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: CompletionPage.h,v 1.1 2007/03/29 15:08:53 dpage Exp $
+// RCS-ID:      $Id: CompletionPage.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,3 +28,4 @@ private:
 };
 
 #endif
+

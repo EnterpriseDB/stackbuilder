@@ -3,7 +3,7 @@
 // Purpose:     A server object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Server.h,v 1.1 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: Server.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -25,10 +25,10 @@ enum ServerType
 class Server : public wxClientData
 {
 public:
-	long port;
-	wxString description;
-	long majorVer;
-	long minorVer;
+    long port;
+    wxString description;
+    long majorVer;
+    long minorVer;
     int serverType;
 
     wxString installationPath;
@@ -42,3 +42,4 @@ public:
 };
 
 #endif
+

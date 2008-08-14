@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of mirrors
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorList.cpp,v 1.8 2008/08/08 14:54:29 dpage Exp $
+// RCS-ID:      $Id: MirrorList.cpp,v 1.9 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -188,3 +188,4 @@ void MirrorList::DeleteAllItems()
     }
     m_mirrors.Clear();
 }
+

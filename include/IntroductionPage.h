@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.h,v 1.4 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.h,v 1.5 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,15 +27,16 @@ public:
     virtual void OnWizardPageChanging(wxWizardEvent& event);
 
 private:
-	bool FindPgServers();
-	bool FindEdbServers();
+    bool FindPgServers();
+    bool FindEdbServers();
     void OnProxies(wxCommandEvent& event);
 
     wxComboBox *m_installation;
     wxButton *m_proxies;
-	AppList *m_applist;
+    AppList *m_applist;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif
+

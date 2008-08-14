@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.h,v 1.3 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.h,v 1.4 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,8 @@ public:
 private:
     AppList *m_applist;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif
+

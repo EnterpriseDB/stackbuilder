@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.16 2008/08/11 12:08:07 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.17 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -334,3 +334,4 @@ wxArrayString AppList::GetSummary()
 
     return summary;
 }
+

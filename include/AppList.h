@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.9 2008/08/08 14:54:29 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.10 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,18 +28,18 @@ WX_DECLARE_OBJARRAY(App, AppArray);
 class AppList
 {
 public:
-	AppList(const wxString &applicationListUrl) { m_applicationListUrl = applicationListUrl; errors = 0; };
-	bool LoadAppList();
-	bool PopulateTreeCtrl();
+    AppList(const wxString &applicationListUrl) { m_applicationListUrl = applicationListUrl; errors = 0; };
+    bool LoadAppList();
+    bool PopulateTreeCtrl();
     bool HaveDownloads();
-	bool UsingMirrors();
-	App *GetItem(unsigned int index) { return &m_apps[index]; };
+    bool UsingMirrors();
+    App *GetItem(unsigned int index) { return &m_apps[index]; };
     App *GetItem(const wxString &appid);
-	size_t Count() { return m_apps.Count(); };
-	void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
-	void SetServer(Server *server) { m_server = server; };
-	void RankDownloads();
-	void DeleteAllItems();
+    size_t Count() { return m_apps.Count(); };
+    void SetTree(wxTreeCtrl *tree) { m_treectrl = tree; };
+    void SetServer(Server *server) { m_server = server; };
+    void RankDownloads();
+    void DeleteAllItems();
     bool DownloadFiles(const wxString& downloadPath, const Mirror *mirror);
     bool InstallApps();
     void IncrementErrorCount() { errors++; };
@@ -49,11 +49,12 @@ public:
 private:
     wxString DeHTMLise(const wxString &string);
 
-	AppArray m_apps;
-	wxString m_applicationListUrl;
-	Server *m_server;
-	wxTreeCtrl *m_treectrl;
+    AppArray m_apps;
+    wxString m_applicationListUrl;
+    Server *m_server;
+    wxTreeCtrl *m_treectrl;
     int errors;
 };
 
 #endif
+

@@ -3,7 +3,7 @@
 // Purpose:     Proxy server configuration dialog
 // Author:      Dave Page
 // Created:     2007-05-02
-// RCS-ID:      $Id: ProxyDialog.h,v 1.1 2007/05/02 12:44:43 dpage Exp $
+// RCS-ID:      $Id: ProxyDialog.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -35,3 +35,4 @@ private:
 };
 
 #endif
+

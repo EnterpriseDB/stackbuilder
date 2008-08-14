@@ -3,12 +3,12 @@
 // Purpose:     MD5 functions
 // Author:      Colin Plumb, adapted/stolen by Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MD5.h,v 1.1 2007/03/24 20:58:05 dpage Exp $
+// RCS-ID:      $Id: MD5.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 //
 // Notes:       This code implements the MD5 message-digest algorithm.
-//              The algorithm is due to Ron Rivest.	This code was
+//              The algorithm is due to Ron Rivest.    This code was
 //              written by Colin Plumb in 1993, no copyright is claimed.
 /////////////////////////////////////////////////////////////////////////////
 
@@ -20,11 +20,7 @@
 // wxWindows headers
 #include <wx/wx.h>
 
-#ifdef __alpha
 typedef unsigned int uint32;
-#else
-typedef unsigned long uint32;
-#endif
 
 struct MD5Context {
         uint32 buf[4];
@@ -44,3 +40,4 @@ wxString md5sum(const wxString& filename);
 typedef struct MD5Context MD5_CTX;
 
 #endif
+

@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.12 2008/08/13 16:38:35 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.13 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,54 +27,55 @@ class Server;
 class App : public wxTreeItemData
 {
 public:
-	App(AppList *applist, Server *server);
-	bool IsValid();
-	bool IsInstalled();
-	bool IsVersionInstalled();
+    App(AppList *applist, Server *server);
+    bool IsValid();
+    bool IsInstalled();
+    bool IsVersionInstalled();
     bool WorksWithDB();
-	bool WorksWithPlatform();
-	wxString GetInstalledVersion();
-	void SelectForDownload(bool select, bool isdep);
-	bool IsSelectedForDownload() { return download; };
-	bool IsSelectedAsDependency() { return isDependency; };
-	int RankDependencies(int rank, unsigned int depth = 0);
+    bool WorksWithPlatform();
+    wxString GetInstalledVersion();
+    void SelectForDownload(bool select, bool isdep);
+    bool IsSelectedForDownload() { return download; };
+    bool IsSelectedAsDependency() { return isDependency; };
+    int RankDependencies(int rank, unsigned int depth = 0);
     bool Download(const wxString& downloadPath, const Mirror *mirror);
     bool Install();
 
-	wxString id;
-	wxString platform;
-	wxString name;
-	wxString description;
-	wxString version;
-	wxString category;
-	wxString pgversion;
-	wxString edbversion;
-	wxString format;
-	wxString installoptions;
-	wxString upgradeoptions;
-	wxString checksum;
-	wxString mirrorpath;
-	wxArrayString dependencies;
+    wxString id;
+    wxString platform;
+    wxString name;
+    wxString description;
+    wxString version;
+    wxString category;
+    wxString pgversion;
+    wxString edbversion;
+    wxString format;
+    wxString installoptions;
+    wxString upgradeoptions;
+    wxString checksum;
+    wxString mirrorpath;
+    wxArrayString dependencies;
     wxString versionkey;
     wxString alturl;
 
-	wxTreeItemId m_treeitem;
-	wxTreeCtrl *m_tree;
+    wxTreeItemId m_treeitem;
+    wxTreeCtrl *m_tree;
 
-	int sequence;
+    int sequence;
 
 private:
     bool CheckFilename(const wxString& downloadPath);
     wxString SubstituteFlags(const wxString &options);
-	
+    
 #ifdef __WXMAC__
-	wxString GetBundleExecutable(const wxString &bundle);
+    wxString GetBundleExecutable(const wxString &bundle);
 #endif
 
-	bool download, isDependency, downloaded, installed;
+    bool download, isDependency, downloaded, installed;
     wxFileName file;
-	AppList *m_applist;
+    AppList *m_applist;
     Server *m_server;
 };
 
 #endif
+

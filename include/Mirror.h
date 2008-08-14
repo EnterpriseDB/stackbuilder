@@ -3,7 +3,7 @@
 // Purpose:     A mirror object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Mirror.h,v 1.4 2007/03/29 11:39:40 dpage Exp $
+// RCS-ID:      $Id: Mirror.h,v 1.5 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,15 +22,16 @@ class Mirror : public wxTreeItemData
 public:
     Mirror() { port = 0; };
 
-	bool IsValid();
+    bool IsValid();
 
-	wxString country;
-	wxString protocol;
-	wxString hostname;
-	wxString rootpath;
-	long port;
+    wxString country;
+    wxString protocol;
+    wxString hostname;
+    wxString rootpath;
+    long port;
 
-	wxTreeItemId m_treeitem;
+    wxTreeItemId m_treeitem;
 };
 
 #endif
+

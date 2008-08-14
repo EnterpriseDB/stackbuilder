@@ -3,7 +3,7 @@
 // Purpose:     MD5 functions
 // Author:      Colin Plumb, adapted/stolen by Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MD5.cpp,v 1.2 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: MD5.cpp,v 1.3 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 //
@@ -37,15 +37,14 @@
 /*
  * Note: this code is harmless on little-endian machines.
  */
-void byteReverse(buf, longs)
-    unsigned char *buf; unsigned longs;
+void byteReverse(unsigned char *buf, unsigned int longs)
 {
     uint32 t;
     do {
-    t = (uint32) ((unsigned) buf[3] << 8 | buf[2]) << 16 |
-        ((unsigned) buf[1] << 8 | buf[0]);
-    *(uint32 *) buf = t;
-    buf += 4;
+        t = (uint32) ((unsigned int) buf[3] << 8 | buf[2]) << 16 |
+            ((unsigned int) buf[1] << 8 | buf[0]);
+        *(uint32 *) buf = t;
+        buf += 4;
     } while (--longs);
 }
 #endif
@@ -291,3 +290,4 @@ wxString md5sum(const wxString& filename)
 
     return retval;
 }
+

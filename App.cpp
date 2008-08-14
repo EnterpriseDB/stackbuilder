@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.28 2008/08/14 10:36:27 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.29 2008/08/14 15:54:08 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -73,44 +73,44 @@ bool App::IsValid()
 
 bool App::IsInstalled()
 {
-	wxString ver;
-	
+    wxString ver;
+    
 #ifdef __WXMSW__
     // If the regkey for this app id exists, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
 
     if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
         return false;
-	
+    
     // Also consider the app not installed if the value exists but is empty
     key->QueryValue(versionkey.AfterLast('\\'), ver);
-	delete key;
+    delete key;
 #else
-	// Check for the registry
-	if (!wxFile::Exists(REGISTRY_FILE))
-		return false;
-	
-	wxFileStream fst(REGISTRY_FILE);
-	wxFileConfig *cnf = new wxFileConfig(fst);
-		
-	if (!cnf->HasEntry(versionkey))
-		return false;
+    // Check for the registry
+    if (!wxFile::Exists(REGISTRY_FILE))
+        return false;
     
-	// Also consider the app not installed if the value exists but is empty
-	ver = cnf->Read(versionkey, wxEmptyString);
-	delete cnf;
+    wxFileStream fst(REGISTRY_FILE);
+    wxFileConfig *cnf = new wxFileConfig(fst);
+        
+    if (!cnf->HasEntry(versionkey))
+        return false;
+    
+    // Also consider the app not installed if the value exists but is empty
+    ver = cnf->Read(versionkey, wxEmptyString);
+    delete cnf;
 #endif
 
-	if (ver == wxEmptyString)
+    if (ver == wxEmptyString)
         return false;
-		
-	return true;
+        
+    return true;
 }
 
 bool App::IsVersionInstalled()
 {
-	wxString ver;
-	
+    wxString ver;
+    
 #ifdef __WXMSW__
     // If the regkey for this app id exists AND it contains our version number, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
@@ -119,27 +119,27 @@ bool App::IsVersionInstalled()
         return false;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);
-	delete key;
+    delete key;
 #else
-	// Check for the registry
-	if (!wxFile::Exists(REGISTRY_FILE))
-		return false;
-	
-	wxFileStream fst(REGISTRY_FILE);
-	wxFileConfig *cnf = new wxFileConfig(fst);
-	
-	if (!cnf->HasEntry(versionkey))
-		return false;
+    // Check for the registry
+    if (!wxFile::Exists(REGISTRY_FILE))
+        return false;
     
-	// Also consider the app not installed if the value exists but is empty
-	ver = cnf->Read(versionkey, wxEmptyString);
-	delete cnf;
+    wxFileStream fst(REGISTRY_FILE);
+    wxFileConfig *cnf = new wxFileConfig(fst);
+    
+    if (!cnf->HasEntry(versionkey))
+        return false;
+    
+    // Also consider the app not installed if the value exists but is empty
+    ver = cnf->Read(versionkey, wxEmptyString);
+    delete cnf;
 #endif
-	
+    
     if (ver != version)
         return false;
-	
-	return true;
+    
+    return true;
 }
 
 bool App::WorksWithDB()
@@ -166,43 +166,43 @@ bool App::WorksWithDB()
     if (tmpversion == wxEmptyString)
         return true;
 
-	if (tmpversion.EndsWith(wxT("+")))
-	{
-		// Apps may specify 8.3+ to denote they require server version 8.3 or above.
-		long appMajor = 0, appMinor = 0;
+    if (tmpversion.EndsWith(wxT("+")))
+    {
+        // Apps may specify 8.3+ to denote they require server version 8.3 or above.
+        long appMajor = 0, appMinor = 0;
 
-		tmpversion = tmpversion.RemoveLast();
-		tmpversion.BeforeFirst('.').ToLong(&appMajor);
+        tmpversion = tmpversion.RemoveLast();
+        tmpversion.BeforeFirst('.').ToLong(&appMajor);
 
-		if (m_server->majorVer > appMajor)
-			return true;
+        if (m_server->majorVer > appMajor)
+            return true;
 
         tmpversion.AfterFirst('.').ToLong(&appMinor);
 
-		if (m_server->majorVer == appMajor && m_server->minorVer >= appMinor)
-			return true;
-	}
-	else
-	{
-		if (tmpversion == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
-			return true;
-	}
+        if (m_server->majorVer == appMajor && m_server->minorVer >= appMinor)
+            return true;
+    }
+    else
+    {
+        if (tmpversion == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
+            return true;
+    }
 
     return false;
 }
 
 bool App::WorksWithPlatform()
 {
-	if (platform != STACKBUILDER_PLATFORM)
-		return false;
+    if (platform != STACKBUILDER_PLATFORM)
+        return false;
 
-	return true;
+    return true;
 }
 
 wxString App::GetInstalledVersion()
 {
     wxString ver;
-	
+    
 #ifdef __WXMSW__
     // If the regkey for this app id exists AND it contains our version number, it's installed.
     wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
@@ -211,20 +211,20 @@ wxString App::GetInstalledVersion()
         return wxEmptyString;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);
-	delete key;
+    delete key;
 #else
-	// Check for the registry
-	if (!wxFile::Exists(REGISTRY_FILE))
-		return wxEmptyString;
-	
-	wxFileStream fst(REGISTRY_FILE);
-	wxFileConfig *cnf = new wxFileConfig(fst);
-	
-	if (!cnf->HasEntry(versionkey))
-		return wxEmptyString;
+    // Check for the registry
+    if (!wxFile::Exists(REGISTRY_FILE))
+        return wxEmptyString;
     
-	ver = cnf->Read(versionkey, wxEmptyString);
-	delete cnf;
+    wxFileStream fst(REGISTRY_FILE);
+    wxFileConfig *cnf = new wxFileConfig(fst);
+    
+    if (!cnf->HasEntry(versionkey))
+        return wxEmptyString;
+    
+    ver = cnf->Read(versionkey, wxEmptyString);
+    delete cnf;
 #endif
     return ver;
 }
@@ -301,9 +301,9 @@ int App::RankDependencies(int rank, unsigned int depth)
 
 bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 {
-	// Ensure we only log the download once
-	bool haveLogged = false;
-	
+    // Ensure we only log the download once
+    bool haveLogged = false;
+    
     if (!CheckFilename(downloadPath))
         return false;
 
@@ -318,8 +318,8 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
                                                 100,
                                                 NULL, 
                                                 wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
-	pd->SetSize(500, -1);
-	pd->CentreOnParent();
+    pd->SetSize(500, -1);
+    pd->CentreOnParent();
     pd->Show();
 
     wxString theUrl;
@@ -365,9 +365,9 @@ tryDownload:
         delete pd;
         return false;
     }
-	
+    
     wxInputStream *ip = url.GetInputStream();
-	
+    
     err = url.GetError();
     if (err != wxURL_NOERR)
     {
@@ -398,34 +398,34 @@ tryDownload:
         delete pd;
         return false;
     }
-	
-	// Log the download
-	if (!haveLogged)
-	{
-		wxString theCounterUrl = downloadCounterUrl + wxT("?sb=1&url=") + url.BuildURI();
-		
-		wxURL counterUrl(theCounterUrl);
-		counterUrl.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
-		wxInputStream *dummy = counterUrl.GetInputStream();
-		if (dummy)
-			delete dummy;
-		
-		haveLogged = true;
-	}
+    
+    // Log the download
+    if (!haveLogged)
+    {
+        wxString theCounterUrl = downloadCounterUrl + wxT("?sb=1&url=") + url.BuildURI();
+        
+        wxURL counterUrl(theCounterUrl);
+        counterUrl.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
+        wxInputStream *dummy = counterUrl.GetInputStream();
+        if (dummy)
+            delete dummy;
+        
+        haveLogged = true;
+    }
 
-	// Handle http redirects if required
-	if (url.GetScheme() == wxT("http"))
-	{
-		wxHTTP *http = (wxHTTP *)&url.GetProtocol();
+    // Handle http redirects if required
+    if (url.GetScheme() == wxT("http"))
+    {
+        wxHTTP *http = (wxHTTP *)&url.GetProtocol();
 
-		if (http->GetResponse() == 301 || http->GetResponse() == 302)
-		{
-			theUrl = http->GetHeader(wxT("Location"));
+        if (http->GetResponse() == 301 || http->GetResponse() == 302)
+        {
+            theUrl = http->GetHeader(wxT("Location"));
 
-			// Try again
-			goto tryDownload;
-		}
-	}
+            // Try again
+            goto tryDownload;
+        }
+    }
 
     if (!ip || !ip->IsOk())
     {
@@ -535,10 +535,10 @@ bool App::CheckFilename(const wxString& downloadPath)
 #ifndef __WXMAC__
     file = downloadPath + wxT("/") + id + wxT(".") + format;
 #else
-	// On Mac, installers are always bundles, so they must be zipped for transport
-    file = downloadPath + wxT("/") + id + wxT(".") + format + wxT(".zip");	
+    // On Mac, installers are always bundles, so they must be zipped for transport
+    file = downloadPath + wxT("/") + id + wxT(".") + format + wxT(".zip");    
 #endif
-	
+    
     if (file.FileExists())
     {
         // Check the file to see if it's checksum matches ours. If
@@ -592,89 +592,90 @@ bool App::Install()
 #ifdef __WXMSW__
     // MSI or EXE?
     if (format.Lower() == wxT("msi"))
-        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;	
+        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;    
     else
         cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
 #else
 #ifdef __WXMAC__
-	// Unpack the downloaded file
-	
-	// Create a directory to put it in. This is a little ugly, but 
-	// wxWidgets only allows us to create a temp file
-	wxString macTmpPath = wxFileName::CreateTempFileName(wxT("/tmp/"));
-	wxRemoveFile(macTmpPath);
-	wxMkdir(macTmpPath);
-	
-	// Prepare to extract
-	auto_ptr<wxZipEntry> entry;
-	
+    // Unpack the downloaded file
+    
+    // Create a directory to put it in. This is a little ugly, but 
+    // wxWidgets only allows us to create a temp file
+    wxString macTmpPath = wxFileName::CreateTempFileName(wxT("/tmp/"));
+    wxRemoveFile(macTmpPath);
+    wxMkdir(macTmpPath);
+    
+    // Prepare to extract
+    auto_ptr<wxZipEntry> entry;
+    
     wxFFileInputStream in(file.GetFullPath());
     wxZipInputStream zip(in);
-	
+    
     while (entry.reset(zip.GetNextEntry()), entry.get() != NULL)
     {
         // Get the filename
-		if (entry->GetName().StartsWith(wxT("__MACOSX")))
-			continue;
-			
+        if (entry->GetName().StartsWith(wxT("__MACOSX")))
+            continue;
+            
         if (entry->GetName().EndsWith(wxT("/")))
-		{
-			if (!wxMkdir(macTmpPath + wxT("/") + entry->GetName()))
-			{
-				wxLogError(_("Failed to create the installer appbundle directory: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
-				return false;
-			}
-		}
-		else
-		{
-			// Must be an actual file, so extract it
-			wxFFileOutputStream out(macTmpPath + wxT("/") + entry->GetName());
-			if (!out.IsOk())
-			{
-				wxLogError(_("Failed to write the installer appbundle file: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
-				return false;
-			}
-			zip >> out;
-			out.Close();
-			chmod(wxString::Format(wxT("%s/%s"), macTmpPath.c_str(), entry->GetName().c_str()).ToAscii(), entry->GetMode());
-		}
+        {
+            if (!wxMkdir(macTmpPath + wxT("/") + entry->GetName()))
+            {
+                wxLogError(_("Failed to create the installer appbundle directory: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
+                return false;
+            }
+        }
+        else
+        {
+            // Must be an actual file, so extract it
+            wxFFileOutputStream out(macTmpPath + wxT("/") + entry->GetName());
+            if (!out.IsOk())
+            {
+                wxLogError(_("Failed to write the installer appbundle file: %s/%s"), macTmpPath.c_str(), entry->GetName().c_str());
+                return false;
+            }
+            zip >> out;
+            out.Close();
+            chmod(wxString::Format(wxT("%s/%s"), macTmpPath.c_str(), entry->GetName().c_str()).ToAscii(), entry->GetMode());
+        }
 
     }
-	
-	// If this is a pkg or mpkg, just throw it at open. Note that you cannot pass arguments
-	// to this type of installer
-	wxString installer = macTmpPath + wxT("/") + file.GetFullPath().AfterLast('/').BeforeLast('.');
-	
-	if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
-        cmd = wxT("open -W \"") + installer + wxT("\"");	
-	else
-	{
-		// On the Mac, having unpacked an appbundle, we must read the 
-	    // CFBundleExecutable value from installer.app/Contents/Info.plist
-	    // and then execute that.
-		wxString exe = GetBundleExecutable(installer);
-		
-		if (exe.IsEmpty())
-		{
-			wxLogError(_("Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"), installer.c_str());
-			return false;
-		}
-		
-		cmd = wxT("\"") + installer + wxT("/Contents/MacOS/") + exe + wxT("\" ") + args;
-	}
+    
+    // If this is a pkg or mpkg, just throw it at open. Note that you cannot pass arguments
+    // to this type of installer
+    wxString installer = macTmpPath + wxT("/") + file.GetFullPath().AfterLast('/').BeforeLast('.');
+    
+    if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
+        cmd = wxT("open -W \"") + installer + wxT("\"");    
+    else
+    {
+        // On the Mac, having unpacked an appbundle, we must read the 
+        // CFBundleExecutable value from installer.app/Contents/Info.plist
+        // and then execute that.
+        wxString exe = GetBundleExecutable(installer);
+        
+        if (exe.IsEmpty())
+        {
+            wxLogError(_("Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"), installer.c_str());
+            return false;
+        }
+        
+        cmd = wxT("\"") + installer + wxT("/Contents/MacOS/") + exe + wxT("\" ") + args;
+    }
     
 #else
-	// Everything is executed directly on *nix, as we cannot support RPM/DEB in any 
-	// non-distro specific way.
+    // Everything is executed directly on *nix, as we cannot support RPM/DEB in any 
+    // non-distro specific way.
+    chmod(file.GetFullPath().ToAscii(), S_IRUSR | S_IWUSR | S_IXUSR);
     cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
 #endif
 #endif
 
     // Now run the installation
-	if (cmd.IsEmpty())
-		return false;
-	
-    long retval = wxExecute(cmd, wxEXEC_SYNC);
+    if (cmd.IsEmpty())
+        return false;
+   
+    long retval = wxExecute(cmd.Trim(), wxEXEC_SYNC);
 
     if (retval == 0) // Installed OK
     {
@@ -705,7 +706,7 @@ wxString App::SubstituteFlags(const wxString &options)
     // Do we have any server options?
     if (!m_server)
     {
-		retval.Replace(wxT("$LOCALE"), wxEmptyString); // Locale first, otherwise LOCAL will match!
+        retval.Replace(wxT("$LOCALE"), wxEmptyString); // Locale first, otherwise LOCAL will match!
         retval.Replace(wxT("$LOCAL"), wxT("0"));
         retval.Replace(wxT("$PATH"), wxEmptyString);
         retval.Replace(wxT("$DATA"), wxEmptyString);
@@ -737,52 +738,52 @@ wxString App::SubstituteFlags(const wxString &options)
 wxString App::GetBundleExecutable(const wxString &bundle)
 {
     wxFileInputStream ip(bundle + wxT("/Contents/Info.plist"));
-	
+    
     if (!ip || !ip.IsOk())
         return wxEmptyString;
-	
+    
     wxXmlDocument xml;
     if (!xml.Load(ip))
         return wxEmptyString;
-	
+    
     // Iterate through the applications and build the list
     wxXmlNode *dict, *properties;
     dict = xml.GetRoot()->GetChildren();
-	bool next = false;
-	
+    bool next = false;
+    
     while (dict) 
     {
         if (dict->GetName() == wxT("dict")) 
         {
             properties = dict->GetChildren();
-			
+            
             while (properties)
             {
-				// Look for the key with the value CFBundleExecutable
-				// When we've found it, the next string should be our value
-				if (!next)
-				{
-					if (properties->GetName() == wxT("key"))
-					{
-						if (properties->GetNodeContent().Lower() == wxT("cfbundleexecutable"))
-							next = true;
-					}
-				}
-				else
-				{
-					if (properties->GetName() == wxT("string"))
-					{
-						return properties->GetNodeContent();
-					}					
-				}
-						
+                // Look for the key with the value CFBundleExecutable
+                // When we've found it, the next string should be our value
+                if (!next)
+                {
+                    if (properties->GetName() == wxT("key"))
+                    {
+                        if (properties->GetNodeContent().Lower() == wxT("cfbundleexecutable"))
+                            next = true;
+                    }
+                }
+                else
+                {
+                    if (properties->GetName() == wxT("string"))
+                    {
+                        return properties->GetNodeContent();
+                    }                    
+                }
+                        
                 properties = properties->GetNext();
             }
         }
-		
+        
         dict = dict->GetNext();
     }
-	
+    
     return wxEmptyString;
 }
 #endif
