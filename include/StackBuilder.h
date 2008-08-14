@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.h,v 1.6 2008/08/13 10:44:20 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.h,v 1.7 2008/08/14 10:36:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -17,6 +17,9 @@
 
 // App headers
 #include "Config.h"
+
+// Keep this as a global, rather than passing it through lots of places
+extern wxString downloadCounterUrl;
 
 class Wizard;
 

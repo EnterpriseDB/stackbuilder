@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.6 2008/06/11 10:58:04 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.7 2008/08/14 10:36:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -27,6 +27,9 @@ BEGIN_EVENT_TABLE(StackBuilder, wxApp)
     EVT_WIZARD_FINISHED(wxID_ANY, StackBuilder::OnWizardFinished)
 END_EVENT_TABLE()
 
+// This is declared an extern in StackBuilder.h
+wxString downloadCounterUrl; 
+
 // The Application!
 bool StackBuilder::OnInit()
 {
@@ -42,6 +45,7 @@ bool StackBuilder::OnInit()
         {wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
         {wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
+		{wxCMD_LINE_OPTION, wxT("d"), wxT("download-counter"), _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("l"), wxT("language"), _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_NONE}
     };
@@ -55,6 +59,16 @@ bool StackBuilder::OnInit()
 
     if (!cmdParser.Found(wxT("a"), &applicationListUrl))
         applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
+	
+	// If we're using an alternate application list, we don't want to log anything
+	// unless an alternate download counter is specified as well
+    if (!cmdParser.Found(wxT("d"), &downloadCounterUrl))
+	{
+		if (applicationListUrl == DEFAULT_APPLICATION_LIST_URL)
+			downloadCounterUrl = DEFAULT_DOWNLOAD_COUNTER_URL;
+		else
+			downloadCounterUrl = wxEmptyString;
+	}
 
     if (!cmdParser.Found(wxT("l"), &language))
         language = wxEmptyString;

@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.27 2008/08/14 09:42:23 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.28 2008/08/14 10:36:27 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -301,6 +301,9 @@ int App::RankDependencies(int rank, unsigned int depth)
 
 bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 {
+	// Ensure we only log the download once
+	bool haveLogged = false;
+	
     if (!CheckFilename(downloadPath))
         return false;
 
@@ -356,6 +359,33 @@ tryDownload:
             case wxURL_NOPATH:
                 msg = _("No path specified in URL.");
                 break;
+        }
+        wxLogError(_("Failed to open %s\n\nError: %s"), url.BuildURI().c_str(), msg.c_str());
+        pd->Show(false);
+        delete pd;
+        return false;
+    }
+	
+    wxInputStream *ip = url.GetInputStream();
+	
+    err = url.GetError();
+    if (err != wxURL_NOERR)
+    {
+        wxString msg;
+        switch (err)
+        {
+            case wxURL_SNTXERR:
+                msg = _("Could not parse the URL.");
+                break;
+            case wxURL_NOPROTO:
+                msg = _("Unsupported protocol specified.");
+                break;
+            case wxURL_NOHOST:
+                msg = _("Invalid hostname specified in URL.");
+                break;
+            case wxURL_NOPATH:
+                msg = _("Invalid path specified in URL.");
+                break;
             case wxURL_CONNERR:
                 msg = _("A connection error occurred.");
                 break;
@@ -368,8 +398,20 @@ tryDownload:
         delete pd;
         return false;
     }
-
-    wxInputStream *ip = url.GetInputStream();
+	
+	// Log the download
+	if (!haveLogged)
+	{
+		wxString theCounterUrl = downloadCounterUrl + wxT("?sb=1&url=") + url.BuildURI();
+		
+		wxURL counterUrl(theCounterUrl);
+		counterUrl.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
+		wxInputStream *dummy = counterUrl.GetInputStream();
+		if (dummy)
+			delete dummy;
+		
+		haveLogged = true;
+	}
 
 	// Handle http redirects if required
 	if (url.GetScheme() == wxT("http"))
