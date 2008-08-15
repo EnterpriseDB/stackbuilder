@@ -190,9 +190,7 @@ ENDIF(WIN32)
 ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
 TARGET_LINK_LIBRARIES(stackbuilder ${wxWidgets_LIBRARIES} )
 
-INSTALL(
-    FILES "stackbuilder"
-    DESTINATION bin/
+INSTALL(TARGETS stackbuilder DESTINATION bin)
 )
 
 ################################################################################
