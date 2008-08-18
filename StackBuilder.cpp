@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.8 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.9 2008/08/18 10:39:14 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -101,6 +101,7 @@ void StackBuilder::OnWizardCancelled(wxWizardEvent &evt)
 
 void StackBuilder::OnWizardFinished(wxWizardEvent &evt)
 {
+    wizard->SetReturnCode(0);
     wizard->Destroy();
     this->Exit();
 }
