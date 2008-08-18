@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.16 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.17 2008/08/18 19:33:10 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -103,6 +103,13 @@ void IntroductionPage::OnWizardPageChanging(wxWizardEvent& event)
 
     if (!retval)
     {
+        event.Veto();
+        return;
+    }
+
+    if (!m_applist->Count())
+    {
+        wxLogError(_("There are currently no applications available for your platform."));
         event.Veto();
         return;
     }
