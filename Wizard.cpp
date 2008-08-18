@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.10 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.11 2008/08/18 20:18:22 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -25,11 +25,16 @@
 #include "InstallationPage.h"
 #include "CompletionPage.h"
 
+#include "images/StackBuilder.xpm"
+
 Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListUrl, const wxString &mirrorListUrl)
     : wxWizard(frame, wxID_ANY, _("PostgreSQL & EnterpriseDB Stack Builder"),
     bitmap, wxDefaultPosition,
       wxDEFAULT_DIALOG_STYLE)
 {
+    // Set the app icon
+    SetIcon(wxIcon(StackBuilder_xpm));
+
     // Create the application & mirror lists
     m_applist = new AppList(applicationListUrl);
     m_mirrorlist = new MirrorList(mirrorListUrl);
