@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.30 2008/08/14 16:04:29 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.31 2008/08/18 09:42:53 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -680,6 +680,10 @@ bool App::Install()
 #else
     // wxExecute can sometime fail to call wait() for some reason, leading to zombies
     long retval = ExecProcess(cmd.Trim());
+#endif
+
+#ifdef __WXMAC__
+    ExecProcess(wxT("rm -rf ") + macTmpPath);
 #endif
 
     if (retval == 0) // Installed OK
