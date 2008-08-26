@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.10 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.11 2008/08/26 09:42:37 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 70);
+    mainSizer->SetItemMinSize(st, 400, 80);
 
     SetSizer(mainSizer);
     mainSizer->Fit(this);

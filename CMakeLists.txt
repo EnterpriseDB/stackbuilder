@@ -119,11 +119,22 @@ IF(MSGFMT_EXECUTABLE)
 
         SET(_out "${_dir}/StackBuilder.${_lang}.mo")
 
-        ADD_CUSTOM_COMMAND(
-            OUTPUT ${_out}
-            COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
-            DEPENDS ${_pofile}
-        )
+        IF(APPLE)
+            ADD_CUSTOM_COMMAND(
+                OUTPUT ${_out}
+                COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
+                COMMAND mkdir -p stackbuilder.app/Contents/Resources/i18n/${_lang}
+                COMMAND cp ${_out} stackbuilder.app/Contents/Resources/i18n/${_lang}/StackBuilder.mo
+                COMMAND cp ${_dir}/wxstd.mo stackbuilder.app/Contents/Resources/i18n/${_lang}/wxstd.mo 
+                DEPENDS ${_pofile}
+            )
+        ELSE(APPLE)
+            ADD_CUSTOM_COMMAND(
+                OUTPUT ${_out}
+                COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
+                DEPENDS ${_pofile}
+            )
+        ENDIF(APPLE)
 
         INSTALL(
             FILES ${_out}

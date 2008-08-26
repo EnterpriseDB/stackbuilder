@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.17 2008/08/18 19:33:10 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.18 2008/08/26 09:42:37 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 40);
+    mainSizer->SetItemMinSize(st, 400, 50);
 
     st = new wxStaticText(this, wxID_ANY, _("To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."));
     st->Wrap(400);

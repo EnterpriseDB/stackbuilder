@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.9 2008/08/18 10:39:14 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.10 2008/08/26 09:42:37 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -121,6 +121,8 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
         i18nPath = appPath + wxT("/../StackBuilder/i18n");
     else if(wxDir::Exists(appPath + wxT("/../i18n")))
         i18nPath = appPath + wxT("/../i18n");
+    else if(wxDir::Exists(appPath + wxT("/../Resources/i18n")))
+        i18nPath = appPath + wxT("/../Resources/i18n");
 
     wxLocale *locale = new wxLocale();
     locale->AddCatalogLookupPathPrefix(i18nPath);
@@ -131,6 +133,9 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
         langInfo = wxLocale::FindLanguageInfo(lang);
     else
         langInfo = wxLocale::GetLanguageInfo(wxLANGUAGE_DEFAULT);
+
+    if (!langInfo)
+        return;
 
     if(locale->Init(langInfo->Language), wxLOCALE_LOAD_DEFAULT)
         locale->AddCatalog(wxT("StackBuilder"));
