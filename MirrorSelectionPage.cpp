@@ -3,7 +3,7 @@
 // Purpose:     Mirror selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.7 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: MirrorSelectionPage.cpp,v 1.8 2008/08/26 08:10:51 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -55,6 +55,12 @@ MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, AppList *applist, Mir
 
 void MirrorSelectionPage::OnWizardPageChanging(wxWizardEvent& event)
 {
+    // If we're going backwards, just bail out
+    if (!event.GetDirection())
+    {
+        return;
+    }
+
     wxTreeItemId id = m_mirrortree->GetSelection();
     if (!id || m_mirrortree->GetItemImage(id) != 1)
     {
