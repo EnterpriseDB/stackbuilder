@@ -112,43 +112,49 @@ FIND_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
 # Add a custom output for each po file we need to compile
 IF(MSGFMT_EXECUTABLE)
 
-    FILE(GLOB_RECURSE _pofiles i18n/??_??/StackBuilder.po)
+    FILE(GLOB_RECURSE _pofiles ${CMAKE_CURRENT_SOURCE_DIR}/i18n/??_??/StackBuilder.po)
 
     FOREACH(_pofile ${_pofiles})
         GET_FILENAME_COMPONENT(_dir ${_pofile} PATH)
         GET_FILENAME_COMPONENT(_lang ${_dir} NAME)
 
-        SET(_out "CMakeFiles/stackbuilder.dir/StackBuilder.${_lang}.mo")
+        SET(_out "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/stackbuilder.dir/StackBuilder.${_lang}.mo")
 
         IF(APPLE)
+
+            # Install the translations into the app bundle
             ADD_CUSTOM_COMMAND(
                 OUTPUT ${_out}
                 COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
-                COMMAND mkdir -p stackbuilder.app/Contents/Resources/i18n/${_lang}
-                COMMAND cp ${_out} stackbuilder.app/Contents/Resources/i18n/${_lang}/StackBuilder.mo
-                COMMAND cp ${_dir}/wxstd.mo stackbuilder.app/Contents/Resources/i18n/${_lang}/wxstd.mo 
+                COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}
+                COMMAND cp ${_out} ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/StackBuilder.mo
+                COMMAND cp ${_dir}/wxstd.mo ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/wxstd.mo 
                 DEPENDS ${_pofile}
             )
+
         ELSE(APPLE)
+
+            # Install everything the 'normal' way
             ADD_CUSTOM_COMMAND(
                 OUTPUT ${_out}
                 COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
                 DEPENDS ${_pofile}
             )
-        ENDIF(APPLE)
 
-        INSTALL(
-            FILES ${_out}
-            DESTINATION share/i18n/${_lang}/
-            RENAME StackBuilder.mo
-        )
-
-        IF(EXISTS "${_dir}/wxstd.mo")
             INSTALL(
-                FILES "${_dir}/wxstd.mo"
+                FILES ${_out}
                 DESTINATION share/i18n/${_lang}/
-            )
-        ENDIF(EXISTS "${_dir}/wxstd.mo")
+                RENAME StackBuilder.mo
+            )   
+
+            IF(EXISTS "${_dir}/wxstd.mo")
+                INSTALL(
+                    FILES "${_dir}/wxstd.mo"
+                    DESTINATION share/i18n/${_lang}/
+                )
+            ENDIF(EXISTS "${_dir}/wxstd.mo")
+
+        ENDIF(APPLE)
 
         SET(_translations ${_translations} ${_out})
 
