@@ -117,7 +117,7 @@ IF(MSGFMT_EXECUTABLE)
         GET_FILENAME_COMPONENT(_dir ${_pofile} PATH)
         GET_FILENAME_COMPONENT(_lang ${_dir} NAME)
 
-        SET(_out "${_dir}/StackBuilder.${_lang}.mo")
+        SET(_out "CMakeFiles/stackbuilder.dir/StackBuilder.${_lang}.mo")
 
         IF(APPLE)
             ADD_CUSTOM_COMMAND(
