@@ -10,8 +10,6 @@ ENDIF(COMMAND cmake_policy)
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 
-INCLUDE(CPack)
-
 ################################################################################
 # Apple stuff
 ################################################################################
@@ -53,6 +51,9 @@ SET(CPACK_GENERATOR TGZ)
 SET(CPACK_SOURCE_GENERATOR TGZ)
 SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${VERSION}")
 SET(CPACK_SOURCE_IGNORE_FILES "${PROJECT_NAME}-${VERSION}.tar.gz" "_CPack_Packages")
+
+# This must come after we set the CPACK variables!!
+INCLUDE(CPACK)
 
 # OS X bundle stuff
 SET(MACOSX_BUNDLE_INFO_STRING "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
