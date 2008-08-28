@@ -49,8 +49,7 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "PostgreSQL StackBuilder")
 SET(CPACK_PACKAGE_VENDOR "EnterpriseDB UK")
 SET(CPACK_GENERATOR TGZ)
 SET(CPACK_SOURCE_GENERATOR TGZ)
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${VERSION}")
-SET(CPACK_SOURCE_IGNORE_FILES "${PROJECT_NAME}-${VERSION}.tar.gz" "_CPack_Packages")
+SET(CPACK_SOURCE_IGNORE_FILES "\\\\.DS_Store;/CVS/;/\\\\.svn/;\\\\.swp$;\\\\.#;/#;.*~;cscope.*")
 
 # This must come after we set the CPACK variables!!
 INCLUDE(CPACK)
@@ -209,7 +208,7 @@ ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
 TARGET_LINK_LIBRARIES(stackbuilder ${wxWidgets_LIBRARIES} )
 
 IF(APPLE)
-    CONFIGURE_FILE(include/images/StackBuilder.icns stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
+    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/include/images/StackBuilder.icns ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
 ENDIF(APPLE)
 
 INSTALL(TARGETS stackbuilder DESTINATION bin)
