@@ -111,13 +111,13 @@ FIND_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
 # Add a custom output for each po file we need to compile
 IF(MSGFMT_EXECUTABLE)
 
-    FILE(GLOB_RECURSE _pofiles ${CMAKE_CURRENT_SOURCE_DIR}/i18n/??_??/StackBuilder.po)
+    FILE(GLOB_RECURSE _pofiles ${stackbuilder_SOURCE_DIR}/i18n/??_??/StackBuilder.po)
 
     FOREACH(_pofile ${_pofiles})
         GET_FILENAME_COMPONENT(_dir ${_pofile} PATH)
         GET_FILENAME_COMPONENT(_lang ${_dir} NAME)
 
-        SET(_out "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/stackbuilder.dir/StackBuilder.${_lang}.mo")
+        SET(_out "${stackbuilder_BINARY_DIR}/CMakeFiles/stackbuilder.dir/StackBuilder.${_lang}.mo")
 
         IF(APPLE)
 
@@ -125,9 +125,9 @@ IF(MSGFMT_EXECUTABLE)
             ADD_CUSTOM_COMMAND(
                 OUTPUT ${_out}
                 COMMAND ${MSGFMT_EXECUTABLE} -o ${_out} ${_pofile}
-                COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}
-                COMMAND cp ${_out} ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/StackBuilder.mo
-                COMMAND cp ${_dir}/wxstd.mo ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/wxstd.mo 
+                COMMAND mkdir -p ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}
+                COMMAND cp ${_out} ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/StackBuilder.mo
+                COMMAND cp ${_dir}/wxstd.mo ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/i18n/${_lang}/wxstd.mo 
                 DEPENDS ${_pofile}
             )
 
@@ -208,7 +208,7 @@ ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
 TARGET_LINK_LIBRARIES(stackbuilder ${wxWidgets_LIBRARIES} )
 
 IF(APPLE)
-    CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/include/images/StackBuilder.icns ${CMAKE_CURRENT_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
+    CONFIGURE_FILE(${stackbuilder_SOURCE_DIR}/include/images/StackBuilder.icns ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
 ENDIF(APPLE)
 
 INSTALL(TARGETS stackbuilder DESTINATION bin)
