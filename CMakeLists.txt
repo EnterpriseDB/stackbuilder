@@ -54,7 +54,7 @@ SET(CPACK_SOURCE_GENERATOR TGZ)
 SET(CPACK_SOURCE_IGNORE_FILES "\\\\.DS_Store;/CVS/;/\\\\.svn/;\\\\.swp$;\\\\.#;/#;.*~;cscope.*")
 
 # This must come after we set the CPACK variables!!
-INCLUDE(CPACK)
+INCLUDE(CPack)
 
 # OS X bundle stuff
 SET(MACOSX_BUNDLE_INFO_STRING "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
