@@ -7,6 +7,8 @@ IF(COMMAND cmake_policy)
     CMAKE_POLICY(SET CMP0003 NEW)
 ENDIF(COMMAND cmake_policy)
 
+SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
 SET(CMAKE_FIND_LIBRARY_PREFIXES "")
 SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
 
@@ -67,41 +69,18 @@ SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2007 - 2008, EnterpriseDB UK")
 ################################################################################
 # Find wxWidgets
 ################################################################################
-IF(NOT HAVE_CACHED_VALUES)
-    SET(wxWidgets_USE_UNICODE ON CACHE BOOL "Use unicode build?" FORCE)
-    SET(wxWidgets_USE_DEBUG OFF CACHE BOOL "Use debug build?" FORCE)
-    SET(wxWidgets_USE_STATIC ON CACHE BOOL "Link libraries statically?" FORCE)
-ENDIF(NOT HAVE_CACHED_VALUES)
+SET(WX_DEBUG NO CACHE BOOL "Use the debug build of wxWidgets?")
+SET(WX_STATIC YES CACHE BOOL "Use the statically linked build of wxWidgets?")
+SET(WX_VERSION "2.8")
+SET(WX_UNICODE YES)
+SET(WX_MODULES "adv;base;core;expat;net;xml;")
 
-SET(wxWidgets_USE_LIBS adv base core net xml)
-FIND_PACKAGE(wxWidgets)
+FIND_PACKAGE(WX)
 
-IF(NOT wxWidgets_FOUND)
-    MESSAGE(FATAL_ERROR "wxWidgets could not be found!")
-ENDIF(NOT wxWidgets_FOUND)
-
-INCLUDE(${wxWidgets_USE_FILE})
-
-IF(NOT WIN32)
-    # Get the wxWidgets version
-    EXECUTE_PROCESS(
-        COMMAND sh "${wxWidgets_CONFIG_EXECUTABLE}" --version
-        OUTPUT_VARIABLE wxWidgets_VERSION
-        RESULT_VARIABLE RET
-        ERROR_QUIET
-    )
-    STRING(STRIP ${wxWidgets_VERSION} wxWidgets_VERSION)
-
-    IF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
-        MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x (${wxWidgets_VERSION} found)")
-    ENDIF(NOT ${wxWidgets_VERSION} MATCHES "^2.8.")
-ELSE(NOT WIN32)
-    IF(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
-        MESSAGE(FATAL_ERROR "wxWidgets must be version 2.8.x")
-    ELSE(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
-        SET(wxWidgets_VERSION "2.8.x")
-    ENDIF(NOT wxWidgets_LIBRARIES MATCHES "wxmsw28")
-ENDIF(NOT WIN32)
+INCLUDE_DIRECTORIES(${WX_INCLUDE_DIRS})
+ADD_DEFINITIONS(${WX_DEFINITIONS})
+LINK_DIRECTORIES(${WX_LIBRARY_DIRS})
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WX_CXX_FLAGS}")
 
 ################################################################################
 # Compile translations
@@ -190,9 +169,7 @@ ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=wxT(\"${_platform}\")")
 ################################################################################
 # Let's rock!
 ################################################################################
-INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR}
-                    ${stackbuilder_SOURCE_DIR}/include
-                    ${wxWidgets_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR} ${stackbuilder_SOURCE_DIR}/include)
 
 FILE(GLOB _cpp_files *.cpp)
 FILE(GLOB _h_files include/*.h)
@@ -205,7 +182,7 @@ IF(WIN32)
 ENDIF(WIN32)
  
 ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
-TARGET_LINK_LIBRARIES(stackbuilder ${wxWidgets_LIBRARIES} )
+TARGET_LINK_LIBRARIES(stackbuilder ${WX_LIBRARIES})
 
 IF(APPLE)
     CONFIGURE_FILE(${stackbuilder_SOURCE_DIR}/include/images/StackBuilder.icns ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
@@ -230,11 +207,11 @@ MESSAGE(STATUS "  Version                     : ${VERSION}")
 MESSAGE(STATUS " ")
 MESSAGE(STATUS "  Installer platform          : ${_platform}")
 MESSAGE(STATUS " ")
-MESSAGE(STATUS "  wxWidgets version           : ${wxWidgets_VERSION}")
-MESSAGE(STATUS "  wxWidgets config binary     : ${wxWidgets_CONFIG_EXECUTABLE}")
-MESSAGE(STATUS "  wxWidgets Static linking    : ${wxWidgets_USE_STATIC}")
-MESSAGE(STATUS "  wxWidgets Unicode?          : ${wxWidgets_USE_UNICODE}")
-MESSAGE(STATUS "  wxWidgets Debug?            : ${wxWidgets_USE_DEBUG}")
+MESSAGE(STATUS "  wxWidgets version           : ${WX_VERSION}")
+MESSAGE(STATUS "  wxWidgets directory         : ${WX_ROOT_DIR}")
+MESSAGE(STATUS "  wxWidgets static linking    : ${WX_STATIC}")
+MESSAGE(STATUS "  wxWidgets unicode?          : ${WX_UNICODE}")
+MESSAGE(STATUS "  wxWidgets debug?            : ${WX_DEBUG}")
 MESSAGE(STATUS "================================================================================")
 MESSAGE(STATUS " ")
 
