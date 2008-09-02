@@ -48,7 +48,7 @@ MACRO(WIN32_CHECK_LIB M_LIB_NAME M_LIB_REL_FILENAME M_LIB_DBG_FILENAME M_LIB_PAT
     LIST(FIND WX_MODULES ${M_LIB_NAME} _pos)
     IF(NOT _pos EQUAL -1)
 
-        SET(_tmp "_tmp-NOTFOUND")
+        SET(_tmp CACHE INTERNAL "_tmp-NOTFOUND")
         FIND_FILE(_tmp NAMES ${M_LIB_REL_FILENAME} PATHS ${M_LIB_PATH} NO_DEFAULT_PATH)
         IF(_tmp STREQUAL "_tmp-NOTFOUND")
             SET(_error TRUE)
@@ -56,7 +56,7 @@ MACRO(WIN32_CHECK_LIB M_LIB_NAME M_LIB_REL_FILENAME M_LIB_DBG_FILENAME M_LIB_PAT
             LIST(APPEND WX_LIBRARIES "optimized;${M_LIB_REL_FILENAME}")
         ENDIF(_tmp STREQUAL "_tmp-NOTFOUND")
         
-        SET(_tmp "_tmp-NOTFOUND")
+        SET(_tmp CACHE INTERNAL "_tmp-NOTFOUND")
         FIND_FILE(_tmp NAMES ${M_LIB_DBG_FILENAME} PATHS ${M_LIB_PATH} NO_DEFAULT_PATH)
         IF(_tmp STREQUAL "_tmp-NOTFOUND")
             SET(_error TRUE)
@@ -127,8 +127,7 @@ IF(WIN32 AND NOT CYGWIN AND NOT MSYS)
     
     # Figure out the build suffix
     SET(_suffix "")    # Possibly-unicode libraries
-    SET(_suffix_nu "") # Non-unicode libraries
-    
+
     IF(_unicode)
         SET(_suffix "${_suffix}u")
     ENDIF(_unicode)
