@@ -30,6 +30,7 @@
 #
 # Unix only:
 # WX_CONFIG_PATH - The wx-config executable path
+# WX_CXXFLAGS - Compiler flags
 #
 # Unix & Win32:
 # WX_INCLUDE_DIRS - The wxWidgets header directories.
@@ -278,21 +279,21 @@ ELSE(WIN32 AND NOT CYGWIN AND NOT MSYS)
         GET_FILENAME_COMPONENT(WX_ROOT_DIR ${WX_CONFIG_PATH} PATH)
         GET_FILENAME_COMPONENT(WX_ROOT_DIR ${WX_ROOT_DIR} PATH)
 
-        EXEC_PROGRAM(${WX_CONFIG_PATH} ARGS ${_args} --cppflags OUTPUT_VARIABLE _cppflags)
+        EXEC_PROGRAM(${WX_CONFIG_PATH} ARGS ${_args} --cxxflags OUTPUT_VARIABLE _cxxflags)
         EXEC_PROGRAM(${WX_CONFIG_PATH} ARGS ${_args} --libs OUTPUT_VARIABLE _ldflags)
 
         # Parse the compiler options
-        STRING(STRIP "${_cppflags}" WX_CPPFLAGS)
-        SEPARATE_ARGUMENTS(WX_CPPFLAGS)
+        STRING(STRIP "${_cxxflags}" WX_CXXFLAGS)
+        SEPARATE_ARGUMENTS(WX_CXXFLAGS)
 
         # Get the definitions, and drop them from the flags
-        STRING(REGEX MATCHALL "-D[^;]+" WX_DEFINITIONS  "${WX_CPPFLAGS}")
-        STRING(REGEX REPLACE "-D[^;]+(;|$)" "" WX_CPPFLAGS "${WX_CPPFLAGS}")
+        STRING(REGEX MATCHALL "-D[^;]+" WX_DEFINITIONS  "${WX_CXXFLAGS}")
+        STRING(REGEX REPLACE "-D[^;]+(;|$)" "" WX_CXXFLAGS "${WX_CXXFLAGS}")
 
         # Get the include dirs. 
-        STRING(REGEX MATCHALL "-I[^;]+" WX_INCLUDE_DIRS "${WX_CPPFLAGS}")
+        STRING(REGEX MATCHALL "-I[^;]+" WX_INCLUDE_DIRS "${WX_CXXFLAGS}")
         STRING(REPLACE "-I" "" WX_INCLUDE_DIRS "${WX_INCLUDE_DIRS}")
-        STRING(REGEX REPLACE "-I[^;]+(;|$)" "" WX_CPPFLAGS "${WX_CPPFLAGS}")
+        STRING(REGEX REPLACE "-I[^;]+(;|$)" "" WX_CXXFLAGS "${WX_CXXFLAGS}")
 
         # Parse the libraries
         STRING(STRIP "${_ldflags}" WX_LIBRARIES)
