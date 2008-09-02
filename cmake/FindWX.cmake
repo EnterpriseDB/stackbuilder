@@ -183,12 +183,6 @@ IF(WIN32 AND NOT CYGWIN AND NOT MSYS)
         WIN32_CHECK_LIB("odbc" wxbase${_shortver}${_suffix}_odbc.lib wxbase${_shortver}${_suffix}d_odbc.lib ${_libpath})
         WIN32_CHECK_LIB("qa" wxmsw${_shortver}${_suffix}_qa.lib wxmsw${_shortver}${_suffix}d_qa.lib ${_libpath})
         WIN32_CHECK_LIB("richtext" wxmsw${_shortver}${_suffix}_richtext.lib wxmsw${_shortver}${_suffix}d_richtext.lib ${_libpath})
-        WIN32_CHECK_LIB("expat" wxexpat.lib wxexpatd.lib ${_libpath})
-        WIN32_CHECK_LIB("jpeg" wxjpeg.lib wxjpegd.lib ${_libpath})
-        WIN32_CHECK_LIB("png" wxpng.lib wxpngd.lib ${_libpath})
-        WIN32_CHECK_LIB("regex" wxregex.lib wxregexd.lib ${_libpath})
-        WIN32_CHECK_LIB("tiff" wxtiff.lib wxtiffd.lib ${_libpath})
-        WIN32_CHECK_LIB("zlib" wxzlib.lib wxzlibd.lib ${_libpath})
         WIN32_CHECK_LIB("xml" wxbase${_shortver}${_suffix}_xml.lib wxbase${_shortver}${_suffix}d_xml.lib ${_libpath})
         WIN32_CHECK_LIB("xrc" wxmsw${_shortver}${_suffix}_xrc.lib wxmsw${_shortver}${_suffix}d_xrc.lib ${_libpath})
         
@@ -205,6 +199,12 @@ IF(WIN32 AND NOT CYGWIN AND NOT MSYS)
         WIN32_CHECK_LIB("svg" wxmsw${_shortver}${_suffix}_svg.lib wxmsw${_shortver}${_suffix}d_svg.lib ${_libpath})
 
         # Add some default libraries we'll need
+        LIST(APPEND WX_LIBRARIES "debug;wxexpatd.lib" "optimized;wxexpat.lib"
+                                 "debug;wxjpegd.lib" "optimized;wxjpeg.lib"
+                                 "debug;wxpngd.lib" "optimized;wxpng.lib"
+                                 "debug;wxregex${_suffix}d.lib" "optimized;wxregex${_suffix}.lib"
+                                 "debug;wxtiffd.lib" "optimized;wxtiff.lib"
+                                 "debug;wxzlibd.lib" "optimized;wxzlib.lib")
         LIST(APPEND WX_LIBRARIES winmm comctl32 rpcrt4 wsock32)
 
         # Preprocessor definitions

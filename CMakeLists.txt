@@ -73,7 +73,7 @@ SET(WX_DEBUG NO CACHE BOOL "Use the debug build of wxWidgets?")
 SET(WX_STATIC YES CACHE BOOL "Use the statically linked build of wxWidgets?")
 SET(WX_VERSION "2.8")
 SET(WX_UNICODE YES)
-SET(WX_MODULES "adv;base;core;expat;net;xml;")
+SET(WX_MODULES "adv;base;core;net;xml;")
 
 FIND_PACKAGE(WX)
 
