@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.31 2008/08/18 09:42:53 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.32 2008/09/04 10:40:58 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -390,7 +390,25 @@ tryDownload:
                 msg = _("A connection error occurred.");
                 break;
             case wxURL_PROTOERR:
-                msg = _("A protocol error occurred.");
+				wxProtocolError perr = url.GetProtocol().GetError();
+				switch(perr)
+				{
+					case wxPROTO_NETERR:
+						msg = _("A network error occured.");
+						break;
+					case wxPROTO_PROTERR:
+						msg = _("An error occured during negotiation.");
+						break;
+					case wxPROTO_CONNERR:
+						msg = _("A connection to the server could not be established.");
+						break;
+					case wxPROTO_NOFILE:
+						msg = _("The file does not exist.");
+						break;
+					default:
+						msg = _("An unknown error occured.");
+						break;
+				}
                 break;
         }
         wxLogError(_("Failed to open %s\n\nError: %s"), url.BuildURI().c_str(), msg.c_str());
