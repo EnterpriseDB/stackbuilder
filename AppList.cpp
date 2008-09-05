@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.18 2008/09/05 13:25:15 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.19 2008/09/05 14:49:15 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -198,8 +198,10 @@ bool AppList::PopulateTreeCtrl()
         if (!found)
             category = m_treectrl->AppendItem(root, m_apps[i].category, 3);
 
+        // We used to disable installed apps here (by using image #2), but that
+        // may not be the best strategy as it prevents us from reinstalling apps.
         if (m_apps[i].IsVersionInstalled())
-            application = m_treectrl->AppendItem(category, wxString::Format(_("%s v%s (installed)"), m_apps[i].name.c_str(), m_apps[i].version.c_str()), 2, -1, &m_apps[i]);
+            application = m_treectrl->AppendItem(category, wxString::Format(_("%s v%s (installed)"), m_apps[i].name.c_str(), m_apps[i].version.c_str()), 0, -1, &m_apps[i]);
         else if (m_apps[i].IsInstalled())
             application = m_treectrl->AppendItem(category, wxString::Format(_("%s v%s (v%s installed)"), m_apps[i].name.c_str(), m_apps[i].version.c_str(), m_apps[i].GetInstalledVersion().c_str()), 0, -1, &m_apps[i]);
         else
