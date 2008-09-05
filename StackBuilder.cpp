@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.10 2008/08/26 09:42:37 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.11 2008/09/05 10:00:31 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -79,6 +79,17 @@ bool StackBuilder::OnInit()
 
     // Initialize our locale and load the language catalog...
     initializeLocale(argv[0], language);
+
+    // We need to run as root on Unix in order to ensure that
+    // the instalers will run with appropriate privileges. On
+    // Mac and Windows, installers can elevate themselves.
+#ifdef __WXGTK__
+    if(geteuid() != 0)
+    {
+        wxLogError(_("This application must be run as the superuser."));
+        return false;
+    }
+#endif
 
     // Create and run the wizard
     wxBitmap bitmap = wxBitmap(background_xpm);
