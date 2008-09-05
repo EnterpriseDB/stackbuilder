@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.17 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.18 2008/09/05 13:25:15 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,25 @@ bool AppList::LoadAppList()
                 msg = _("A connection error occurred.");
                 break;
             case wxURL_PROTOERR:
-                msg = _("A protocol error occurred.");
+                wxProtocolError perr = url.GetProtocol().GetError();
+                switch(perr)    
+                {               
+                    case wxPROTO_NETERR:
+                        msg = _("A network error occured.");
+                        break;                  
+                    case wxPROTO_PROTERR:
+                        msg = _("An error occured during negotiation.");
+                        break;                  
+                    case wxPROTO_CONNERR:
+                        msg = _("A connection to the server could not be established.");
+                        break;                  
+                    case wxPROTO_NOFILE:
+                        msg = _("The file does not exist.");
+                        break;                  
+                    default:            
+                        msg = _("An unknown error occured.");
+                        break;                  
+                }
                 break;
         }
         wxLogError(wxString::Format(_("Failed to open the application list: %s\n\nError: %s"), m_applicationListUrl.c_str(), msg.c_str()));
