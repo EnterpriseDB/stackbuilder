@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-01 12:03+0100\n"
-"PO-Revision-Date: 2007-05-07 10:58+0100\n"
-"Last-Translator: Harald Armin Massa <haraldarminmassa@gmail.com>\n"
+"PO-Revision-Date: 2008-09-08 14:49+0100\n"
+"Last-Translator: Andreas 'ads' Scherbaum <ads@pgug.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: CompletionPage.cpp:58
 #, c-format
 msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
-msgstr "%d Instalaltionen wurden übersprungen. Sie können diese manuell anhand der heruntergeladenen Pakete installieren"
+msgstr "%d Installationen wurden übersprungen. Sie können diese manuell anhand der heruntergeladenen Pakete installieren."
 
 #: IntroductionPage.cpp:151
 #: IntroductionPage.cpp:211
@@ -60,7 +60,7 @@ msgstr "<remote server>"
 #: AppList.cpp:54
 #: MirrorList.cpp:51
 msgid "A connection error occurred."
-msgstr "Eine Verbindungsfehler ist aufgetreten."
+msgstr "Ein Verbindungsfehler ist aufgetreten."
 
 #: App.cpp:242
 #: AppList.cpp:55
@@ -73,17 +73,17 @@ msgstr "Ein Protokollfehler ist aufgetreten."
 
 #: InstallationPage.cpp:35
 msgid "All the installation files have now been successfully downloaded."
-msgstr "Alle Installations-Dateien wurden erfoglreich heruntergeladen."
+msgstr "Alle Installations-Dateien wurden erfolgreich heruntergeladen."
 
 #: StackBuilder.cpp:75
 #: StackBuilder.cpp:79
 msgid "Are you sure you want to close the Stack Builder wizard?"
-msgstr "Sind Sie sicher, daß Sie den Stack Builder Wizard verlassen wollen?"
+msgstr "Sind Sie sicher, dass Sie den Stack Builder Wizard verlassen wollen?"
 
 #: ProxyDialog.cpp:101
 #: ProxyDialog.cpp:108
 msgid "Both the proxy server and port must be specified."
-msgstr "Proxy Server Hostadresse und Port müssen angegeben werden."
+msgstr "Hostadresse und Port für den Proxy-Server müssen angegeben werden."
 
 #: MD5.cpp:271
 #, c-format
@@ -105,7 +105,7 @@ msgstr "Prüfe bestehende Datei: %s"
 #: App.cpp:338
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
-msgstr "Prüfsummen-prüfung scheiterte für: %s! Die Datei wird gelöscht..."
+msgstr "Prüfsummen-Prüfung scheiterte für: %s! Die Datei wird gelöscht..."
 
 #: App.cpp:207
 #: App.cpp:208
@@ -169,7 +169,7 @@ msgstr "Wizard verlassen?"
 
 #: ProxyDialog.cpp:62
 msgid "FTP proxy"
-msgstr "FTP proxy"
+msgstr "FTP Proxy"
 
 #: App.cpp:245
 #: App.cpp:248
@@ -257,7 +257,7 @@ msgstr "Konnte die Mirror-Liste nicht parsen: %s"
 
 #: ProxyDialog.cpp:53
 msgid "HTTP proxy"
-msgstr "HTTP proxy"
+msgstr "HTTP Proxy"
 
 #: CompletionPage.cpp:27
 msgid "Installation complete!"
@@ -266,7 +266,7 @@ msgstr "Installation vollständig!"
 #: App.cpp:413
 #: App.cpp:416
 msgid "Installation error"
-msgstr "Installationsfehler"
+msgstr "Fehler bei der Installation"
 
 #: CompletionPage.cpp:33
 msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
@@ -274,11 +274,11 @@ msgstr "Die Installation der gewählten Pakete ist vollstänstig. Die herunterge
 
 #: ProxyDialog.cpp:93
 msgid "Invalid FTP port specified."
-msgstr "ungültiger FTP Port angegeben"
+msgstr "Ungültiger FTP Port angegeben."
 
 #: ProxyDialog.cpp:86
 msgid "Invalid HTTP port specified."
-msgstr "ungültiger HTTP Port angegeben"
+msgstr "Ungültiger HTTP Port angegeben."
 
 #: App.cpp:233
 #: AppList.cpp:46
@@ -304,7 +304,7 @@ msgstr "Anmerkung: Es müssen alle Installationen bis zum Schluß durchgefürt w
 
 #: InstallationPage.cpp:41
 msgid "Please click the \"Next\" button to start the installations."
-msgstr "Bitte \"Weitern\" zum Start der Installationen drücken."
+msgstr "Bitte \"Weiter\" zum Start der Installationen drücken."
 
 #: MirrorSelectionPage.cpp:40
 msgid "Please select a mirror site to download from."
@@ -373,9 +373,9 @@ msgid ""
 "Are you sure you wish to continue?"
 msgstr ""
 "Diese Anwendung wurde automatisch gewählt, weil eine andere Auswahl sie bedingt.\n"
-"Wenn Sie diese Anwendung nicht installieren, kann die Installation oder der Betrieb andere Anwendungen scheitern.\n"
+"Wenn Sie diese Anwendung nicht installieren, kann die Installation oder der Betrieb anderer Anwendungen scheitern.\n"
 "\n"
-"Sind Sie sicher, daß Sie dies tun wollen?"
+"Sind Sie sicher, dass Sie dies tun wollen?"
 
 #: IntroductionPage.cpp:45
 #: IntroductionPage.cpp:49
@@ -385,7 +385,7 @@ msgstr "Dieser Wizart unterstützt sie bei der Installation zusätzlicher Softwa
 #: IntroductionPage.cpp:51
 #: IntroductionPage.cpp:55
 msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
-msgstr "Bitte die Installation für die Sie Software installierenm aus der Liste wählen. Wenn die Software für die Verwendung mit einem Remote-Server installiert wird, bitte die <remote server> Option wählen."
+msgstr "Bitte die Installation für die Sie Software installieren aus der Liste wählen. Wenn die Software für die Verwendung mit einem Remote-Server installiert wird, bitte die <remote server> Option wählen."
 
 #: App.cpp:230
 #: AppList.cpp:43
@@ -394,13 +394,13 @@ msgstr "Bitte die Installation für die Sie Software installierenm aus der Liste
 #: AppList.cpp:45
 #: MirrorList.cpp:42
 msgid "Unsupported protocol specified."
-msgstr "Nicht unsterstütztes Protokoll gewählt"
+msgstr "Nicht unsterstütztes Protokoll gewählt."
 
 #: App.cpp:323
 #: App.cpp:326
 #, c-format
 msgid "Verifying checksum for: %s"
-msgstr "Prüfe die Prüfsumme für: %s"
+msgstr "Vergleiche die Prüfsumme für: %s"
 
 #: IntroductionPage.cpp:39
 #: IntroductionPage.cpp:43
@@ -409,20 +409,20 @@ msgstr "Wilkommen zum PostgreSQL && EnterpriseDB Stack Builder!"
 
 #: CompletionPage.cpp:44
 msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
-msgstr "Dieser Wizard kann jederzeit neu gestartet werden, um Software im Stack hinzuzüfügen oder zu aktualiseren. Zum Entfernen der Software bitte das Software-Appplet in der Systemsteuerung verwenden"
+msgstr "Dieser Wizard kann jederzeit neu gestartet werden, um Software im Stack hinzuzufügen oder zu aktualiseren. Zum Entfernen der Software bitte das Software-Appplet in der Systemsteuerung verwenden"
 
 #: MirrorSelectionPage.cpp:68
 msgid "You must select a mirror before you continue."
-msgstr "Es muß ein Mirror vor dem Weitermachen gewählt sein"
+msgstr "Es muß ein Mirror vor dem Fortfahren ausgewählt sein."
 
 #: IntroductionPage.cpp:73
 #: IntroductionPage.cpp:83
 msgid "You must select an installation option before you continue."
-msgstr "Vor dem Weitermachen muß eine Installations-Option gewählt sein"
+msgstr "Vor dem Fortfahren muss eine Installations-Option gewählt sein."
 
 #: AppSelectionPage.cpp:123
 msgid "You must select at least one package to install before you continue."
-msgstr "Vor dem Weitermachen muß mindest ein Paket zum installieren gewählt sein"
+msgstr "Vor dem Fortfahren muß mindestens ein Paket zum Installieren ausgewählt sein."
 
 #: StackBuilder.cpp:44
 msgid "download the application list from the specified URL"
@@ -430,7 +430,7 @@ msgstr "Die Anwendung von der angegebenen URL herunterladen"
 
 #: StackBuilder.cpp:43
 msgid "download the mirror list from the specified URL"
-msgstr "Die Liste der Mirrors von der angegebenen URL herunterladen"
+msgstr "Die Liste der Mirror von der angegebenen URL herunterladen"
 
 #: StackBuilder.cpp:42
 msgid "show this help message"
