@@ -1,11 +1,11 @@
 #!/bin/sh
-set -x
+
 ##########################################################################
 # Name:        stringmerge
 # Purpose:     Merge translations
 # Author:      Dave Page
 # Created:     2007-02-13
-# RCS-ID:      $Id: stringmerge,v 1.1 2008/09/08 13:39:42 dpage Exp $
+# RCS-ID:      $Id: stringmerge,v 1.2 2008/09/08 13:41:45 dpage Exp $
 # Copyright:   (c) EnterpriseDB
 # Licence:     BSD Licence
 ##########################################################################
@@ -25,5 +25,5 @@ if test -f StackBuilder.pot; then
 
   cd i18n
   echo "Committing changes to CVS."
-#  svn commit -m "Automatic merge using stringmerge script." 
+  cvs commit -m "Automatic merge using stringmerge script." 
 fi
