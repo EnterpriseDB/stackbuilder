@@ -1,70 +1,70 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Stackbuilder\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-08 13:36+0100\n"
 "PO-Revision-Date: 2007-05-02 16:12+0100\n"
 "Last-Translator: Magnus Hagander <magnus@hagander.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Swedish\n"
 "X-Poedit-Country: SWEDEN\n"
 "X-Poedit-Basepath: c:\\prog\\stackbuilder\n"
 "X-Poedit-SearchPath-0: c:\\prog\\stackbuilder\n"
 
-#: CompletionPage.cpp:58
+#: CompletionPage.cpp:58 CompletionPage.cpp:56
 #, c-format
-msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
-msgstr "%d installationer inte genomförda - du kan prova att installera dessa manuellt med de nedladdade filerna."
+msgid ""
+"%d installations were skipped - you may attempt to manually install those "
+"packages using the downloaded files."
+msgstr ""
+"%d installationer inte genomförda - du kan prova att installera dessa "
+"manuellt med de nedladdade filerna."
 
-#: IntroductionPage.cpp:151
-#: IntroductionPage.cpp:211
-#: IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221
+#: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:259
+#: IntroductionPage.cpp:350 IntroductionPage.cpp:408
 #, c-format
 msgid "%s on port %d"
 msgstr "%s på port %d"
 
-#: AppList.cpp:171
-#: AppList.cpp:173
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:208
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167
-#: AppList.cpp:169
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:204
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (installerad)"
 
-#: AppList.cpp:169
-#: AppList.cpp:171
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:206
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s installerad)"
 
-#: IntroductionPage.cpp:57
-#: IntroductionPage.cpp:58
-#: IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62
+#: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62 IntroductionPage.cpp:65 IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr "<fjärrserver>"
 
-#: App.cpp:239
-#: AppList.cpp:52
-#: MirrorList.cpp:49
-#: App.cpp:242
-#: AppList.cpp:54
-#: MirrorList.cpp:51
+#: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
+#: MirrorList.cpp:51 App.cpp:390
 msgid "A connection error occurred."
 msgstr "Ett anslutningsproblem uppstod."
 
-#: App.cpp:242
-#: AppList.cpp:55
-#: MirrorList.cpp:52
-#: App.cpp:245
-#: AppList.cpp:57
+#: App.cpp:403 AppList.cpp:67 MirrorList.cpp:64
+msgid "A connection to the server could not be established."
+msgstr ""
+
+#: App.cpp:397 AppList.cpp:61 MirrorList.cpp:58
+#, fuzzy
+msgid "A network error occured."
+msgstr "Ett anslutningsproblem uppstod."
+
+#: App.cpp:242 AppList.cpp:55 MirrorList.cpp:52 App.cpp:245 AppList.cpp:57
 #: MirrorList.cpp:54
 msgid "A protocol error occurred."
 msgstr "Ett protokollfel uppstod."
@@ -73,104 +73,102 @@ msgstr "Ett protokollfel uppstod."
 msgid "All the installation files have now been successfully downloaded."
 msgstr "Alla installationsfilerna har nu laddats ned."
 
-#: StackBuilder.cpp:75
-#: StackBuilder.cpp:79
+#: App.cpp:400 AppList.cpp:64 MirrorList.cpp:61
+msgid "An error occured during negotiation."
+msgstr ""
+
+#: App.cpp:409 AppList.cpp:73 MirrorList.cpp:70
+#, fuzzy
+msgid "An unknown error occured."
+msgstr "Ett anslutningsproblem uppstod."
+
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "Är du säker på att du vill stänga Stackbuilder?"
 
-#: ProxyDialog.cpp:101
-#: ProxyDialog.cpp:108
+#: ProxyDialog.cpp:101 ProxyDialog.cpp:108 ProxyDialog.cpp:116
+#: ProxyDialog.cpp:123
 msgid "Both the proxy server and port must be specified."
 msgstr "Både proxyserver och port måste anges."
 
-#: MD5.cpp:271
+#: MD5.cpp:271 MD5.cpp:270
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Kan inte öppna filen %s för att skapa hash!"
 
-#: AppList.cpp:144
-#: AppList.cpp:146
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:179
 msgid "Categories"
 msgstr "Kategorier"
 
-#: App.cpp:358
-#: App.cpp:361
+#: App.cpp:358 App.cpp:361 App.cpp:567
 #, c-format
 msgid "Checking existing file: %s"
 msgstr "Kontrollerar existerande fil: %s"
 
-#: App.cpp:335
-#: App.cpp:338
+#: App.cpp:335 App.cpp:338 App.cpp:530
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
 msgstr "Verifiering av checksumma misslyckades för: %s! Raderar filen..."
 
-#: App.cpp:207
-#: App.cpp:208
+#: App.cpp:207 App.cpp:208 App.cpp:317
 msgid "Connecting to server..."
 msgstr "Ansluter till server..."
 
-#: App.cpp:227
-#: AppList.cpp:40
-#: MirrorList.cpp:37
-#: App.cpp:230
-#: AppList.cpp:42
-#: MirrorList.cpp:39
+#: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
+#: MirrorList.cpp:39 App.cpp:351 App.cpp:378
 msgid "Could not parse the URL."
 msgstr "Kunde inte tolka URL."
 
-#: MirrorList.cpp:125
-#: MirrorList.cpp:127
+#: MirrorList.cpp:125 MirrorList.cpp:127 MirrorList.cpp:151
 msgid "Countries"
 msgstr "Länder"
 
-#: AppSelectionPage.cpp:66
-#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:210
 msgid "Deselect application"
 msgstr "Avmarkera applikation"
 
-#: DownloadPage.cpp:61
+#: DownloadPage.cpp:61 DownloadPage.cpp:65
 msgid "Download directory:"
 msgstr "Nedladdningskatalog:"
 
-#: App.cpp:297
-#: App.cpp:300
+#: App.cpp:297 App.cpp:300 App.cpp:492
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr "Laddat ned %d KB (%d KB/sek)"
 
-#: App.cpp:295
-#: App.cpp:298
+#: App.cpp:295 App.cpp:298 App.cpp:490
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr "Laddat ned %d av %d KB (%d KB/sek)"
 
-#: App.cpp:206
-#: App.cpp:207
+#: App.cpp:206 App.cpp:207 App.cpp:316
 #, c-format
 msgid "Downloading %s"
 msgstr "Laddar ned %s"
 
-#: IntroductionPage.cpp:85
-#: IntroductionPage.cpp:95
+#: IntroductionPage.cpp:85 IntroductionPage.cpp:95 IntroductionPage.cpp:99
 msgid "Downloading application list..."
 msgstr "Laddar ned applikationslista..."
 
-#: AppSelectionPage.cpp:135
+#: AppSelectionPage.cpp:135 AppSelectionPage.cpp:152
 msgid "Downloading mirror list..."
 msgstr "Laddar ned spegellista..."
 
-#: StackBuilder.cpp:75
-#: StackBuilder.cpp:79
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
 msgid "Exit wizard?"
 msgstr "Avsluta?"
 
-#: ProxyDialog.cpp:62
+#: ProxyDialog.cpp:62 ProxyDialog.cpp:77
 msgid "FTP proxy"
 msgstr "FTP-proxy"
 
-#: App.cpp:245
-#: App.cpp:248
+#: App.cpp:642
+#, c-format
+msgid "Failed to create the installer appbundle directory: %s/%s"
+msgstr ""
+
+#: App.cpp:245 App.cpp:248 App.cpp:363 App.cpp:414
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -181,8 +179,7 @@ msgstr ""
 "\n"
 "Fel: %s"
 
-#: App.cpp:255
-#: App.cpp:258
+#: App.cpp:255 App.cpp:258 App.cpp:450
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -193,8 +190,7 @@ msgstr ""
 "\n"
 "Fel: Angiven URL kunde inte öppnas."
 
-#: AppList.cpp:58
-#: AppList.cpp:60
+#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:78
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -205,8 +201,7 @@ msgstr ""
 "\n"
 "Fel: %s"
 
-#: AppList.cpp:66
-#: AppList.cpp:68
+#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:86
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -217,8 +212,7 @@ msgstr ""
 "\n"
 "Fel: Angiven URL kunde inte öppnas."
 
-#: MirrorList.cpp:55
-#: MirrorList.cpp:57
+#: MirrorList.cpp:55 MirrorList.cpp:57 MirrorList.cpp:75
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -229,8 +223,7 @@ msgstr ""
 "\n"
 "Fel: %s"
 
-#: MirrorList.cpp:63
-#: MirrorList.cpp:65
+#: MirrorList.cpp:63 MirrorList.cpp:65 MirrorList.cpp:83
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -241,19 +234,41 @@ msgstr ""
 "\n"
 "Fel: Angiven URL kunde inte öppnas."
 
-#: AppList.cpp:73
-#: AppList.cpp:75
+#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:93
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "Misslyckades med att tolka applikationslistan: %s"
 
-#: MirrorList.cpp:70
-#: MirrorList.cpp:72
+#: MirrorList.cpp:70 MirrorList.cpp:72 MirrorList.cpp:90
 #, c-format
 msgid "Failed to parse the mirror list: %s"
 msgstr "Misslyckades med att tolka spegellistan: %s"
 
-#: ProxyDialog.cpp:53
+#: App.cpp:677
+#, c-format
+msgid ""
+"Failed to read the CFBundleExecutable value from the appbundle description: %"
+"s/Contents/Info.plist"
+msgstr ""
+
+#: App.cpp:581
+#, fuzzy, c-format
+msgid ""
+"Failed to rename the file\n"
+"\n"
+"%s\n"
+"\n"
+"to\n"
+"\n"
+"%s-%s"
+msgstr "Misslyckades med att tolka spegellistan: %s"
+
+#: App.cpp:652
+#, fuzzy, c-format
+msgid "Failed to write the installer appbundle file: %s/%s"
+msgstr "Misslyckades med att tolka spegellistan: %s"
+
+#: ProxyDialog.cpp:53 ProxyDialog.cpp:68
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
@@ -261,180 +276,231 @@ msgstr "HTTP-proxy"
 msgid "Installation complete!"
 msgstr "Installationen komplett!"
 
-#: App.cpp:413
-#: App.cpp:416
+#: App.cpp:413 App.cpp:416 App.cpp:715
 msgid "Installation error"
 msgstr "Installationsfel"
 
-#: CompletionPage.cpp:33
-msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
-msgstr "Installation av valda paket är slutförd. De nedladdade filerna finns kvar för att möjliggöra vidare installationer eller uppgraderingar (vissa paket kräver originalfilerna för att kunna uppdateras)."
+#: CompletionPage.cpp:33 CompletionPage.cpp:31
+msgid ""
+"Installation of the packages you selected has finished. The downloaded files "
+"have been retained to allow future installations or upgrades (some packages "
+"require the original installation files when being upgraded)."
+msgstr ""
+"Installation av valda paket är slutförd. De nedladdade filerna finns kvar "
+"för att möjliggöra vidare installationer eller uppgraderingar (vissa paket "
+"kräver originalfilerna för att kunna uppdateras)."
 
-#: ProxyDialog.cpp:93
+#: ProxyDialog.cpp:93 ProxyDialog.cpp:108
 msgid "Invalid FTP port specified."
 msgstr "Felaktig FTP-port angiven."
 
-#: ProxyDialog.cpp:86
+#: ProxyDialog.cpp:86 ProxyDialog.cpp:101
 msgid "Invalid HTTP port specified."
 msgstr "Felaktig HTTP-port angiven."
 
-#: App.cpp:233
-#: AppList.cpp:46
-#: MirrorList.cpp:43
-#: App.cpp:236
-#: AppList.cpp:48
-#: MirrorList.cpp:45
+#: App.cpp:384
+#, fuzzy
+msgid "Invalid hostname specified in URL."
+msgstr "Inget servernamn angivet i URL."
+
+#: App.cpp:387
+#, fuzzy
+msgid "Invalid path specified in URL."
+msgstr "Ingen sökväg angiven i URL."
+
+#: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
+#: MirrorList.cpp:45 App.cpp:357
 msgid "No hostname specified in URL."
 msgstr "Inget servernamn angivet i URL."
 
-#: App.cpp:236
-#: AppList.cpp:49
-#: MirrorList.cpp:46
-#: App.cpp:239
-#: AppList.cpp:51
-#: MirrorList.cpp:48
+#: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
+#: MirrorList.cpp:48 App.cpp:360
 msgid "No path specified in URL."
 msgstr "Ingen sökväg angiven i URL."
 
 #: InstallationPage.cpp:47
-msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
-msgstr "Notera: Du måste låte alla installationer gå färdigt. Om du får frågan om att starta om datorn, välj \"Nej\" eller \"Starta om senare\" och starta manuellt om datorn när alla installationer är avslutade."
+msgid ""
+"Note: You must allow all installations to run to completion. If you are "
+"prompted to restart the computer, click \"No\" or \"Restart Later\" and "
+"manually restart your computer when all the installation have finished."
+msgstr ""
+"Notera: Du måste låte alla installationer gå färdigt. Om du får frågan om "
+"att starta om datorn, välj \"Nej\" eller \"Starta om senare\" och starta "
+"manuellt om datorn när alla installationer är avslutade."
 
 #: InstallationPage.cpp:41
 msgid "Please click the \"Next\" button to start the installations."
 msgstr "Klicka \"Nästa\" för att starta installationerna."
 
-#: MirrorSelectionPage.cpp:40
+#: MirrorSelectionPage.cpp:40 MirrorSelectionPage.cpp:41
 msgid "Please select a mirror site to download from."
 msgstr "Välj spegelsite att ladda ned från."
 
-#: AppSelectionPage.cpp:88
+#: AppSelectionPage.cpp:88 AppSelectionPage.cpp:95
 msgid "Please select the applications you would like to install."
 msgstr "Välj applikationer att installera."
 
-#: ProxyDialog.cpp:57
-#: ProxyDialog.cpp:66
+#: ProxyDialog.cpp:57 ProxyDialog.cpp:66 ProxyDialog.cpp:72 ProxyDialog.cpp:81
 msgid "Port"
 msgstr "Port"
 
-#: Wizard.cpp:29
+#: Wizard.cpp:29 Wizard.cpp:31
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
 
-#: IntroductionPage.cpp:72
-#: IntroductionPage.cpp:237
+#: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
+#: IntroductionPage.cpp:427
 msgid "Proxy servers"
 msgstr "Proxyservrar"
 
-#: DownloadPage.cpp:45
-msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
-msgstr "Kontrollera dina val och välj en katalog att ladda ned till, och klicka sedan Nästa för att börja ladda ned de valda paketen."
+#: DownloadPage.cpp:45 DownloadPage.cpp:49
+msgid ""
+"Review your selections and choose a download directory if required, and then "
+"click the Next button to begin downloading the packages you have selected."
+msgstr ""
+"Kontrollera dina val och välj en katalog att ladda ned till, och klicka "
+"sedan Nästa för att börja ladda ned de valda paketen."
 
-#: DownloadPage.cpp:95
+#: DownloadPage.cpp:95 DownloadPage.cpp:105
 msgid "Select a download directory"
 msgstr "Välj nedladdningskatalog"
 
-#: DownloadPage.cpp:51
+#: DownloadPage.cpp:51 DownloadPage.cpp:55
 msgid "Selected packages:"
 msgstr "Valda paket:"
 
-#: StackBuilder.cpp:37
+#: StackBuilder.cpp:37 StackBuilder.cpp:40
 msgid "Stack Builder"
 msgstr "Stack Builder"
 
-#: DownloadPage.cpp:111
+#: DownloadPage.cpp:111 DownloadPage.cpp:121
 msgid "The download directory does not exist. Please select a valid directory."
 msgstr "Nedladdningskatalogen existerar inte. Välj en giltig katalog."
 
-#: App.cpp:412
-#: App.cpp:415
+#: App.cpp:406 AppList.cpp:70 MirrorList.cpp:67
+msgid "The file does not exist."
+msgstr ""
+
+#: App.cpp:412 App.cpp:415 App.cpp:714
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
 "\n"
-" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
+" Click on the OK button to ignore this error and continue with any remaining "
+"installations, or click Cancel to abort the remaining installations.\n"
 "\n"
-"Note that ignoring this error may result in failure of any later installations that depend on this one."
+"Note that ignoring this error may result in failure of any later "
+"installations that depend on this one."
 msgstr ""
 "Installation av %s returnerade ett fel.\n"
 "\n"
-"Klicka på OK-knappen för att ignorera detta fel och fortsätta med övriga installationer, eller klicka Avbryt för att avbryta övriga installationer.\n"
+"Klicka på OK-knappen för att ignorera detta fel och fortsätta med övriga "
+"installationer, eller klicka Avbryt för att avbryta övriga installationer.\n"
 "\n"
-"Notera att om du ignorera detta fel kan det bli problem med senare installationer som är beroende av denna."
+"Notera att om du ignorera detta fel kan det bli problem med senare "
+"installationer som är beroende av denna."
 
-#: AppSelectionPage.cpp:66
-#: AppSelectionPage.cpp:189
+#: IntroductionPage.cpp:112
+msgid "There are currently no applications available for your platform."
+msgstr ""
+
+#: StackBuilder.cpp:89
+msgid "This application must be run as the superuser."
+msgstr ""
+
+#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:210
 msgid ""
-"This application was automatically selected because another selection is dependent upon it.\n"
-"If you do not install this application others may not install or work correctly.\n"
+"This application was automatically selected because another selection is "
+"dependent upon it.\n"
+"If you do not install this application others may not install or work "
+"correctly.\n"
 "\n"
 "Are you sure you wish to continue?"
 msgstr ""
-"Denna applikation markerades automatiskt eftersom en annan markerad applikation är beroende av den.\n"
-"Om du inte installerar denna applikation finns det en risk att andra applikationer inte går att installera eller inte fungerar.\n"
+"Denna applikation markerades automatiskt eftersom en annan markerad "
+"applikation är beroende av den.\n"
+"Om du inte installerar denna applikation finns det en risk att andra "
+"applikationer inte går att installera eller inte fungerar.\n"
 "\n"
 "Är du säker på att du vill fortsätta?"
 
-#: IntroductionPage.cpp:45
-#: IntroductionPage.cpp:49
-msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
-msgstr "Denna guide hjälper dig att installera extra programvara för att komplettera din installation av PostgreSQL eller EnterpriseDB."
+#: IntroductionPage.cpp:45 IntroductionPage.cpp:49 IntroductionPage.cpp:53
+msgid ""
+"This wizard will help you install additional software to complement your "
+"PostgreSQL or EnterpriseDB installation."
+msgstr ""
+"Denna guide hjälper dig att installera extra programvara för att komplettera "
+"din installation av PostgreSQL eller EnterpriseDB."
 
-#: IntroductionPage.cpp:51
-#: IntroductionPage.cpp:55
-msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
-msgstr "För att börja, välj den installation som du vill installera för i listan nedan. Om du installerar programvara som skall användas på en annan server, välj <fjärrserver>."
+#: IntroductionPage.cpp:51 IntroductionPage.cpp:55 IntroductionPage.cpp:59
+msgid ""
+"To begin, please select the installation you are installing software for "
+"from the list below. If you are installing software to use with a remote "
+"server, please select the <remote server> option."
+msgstr ""
+"För att börja, välj den installation som du vill installera för i listan "
+"nedan. Om du installerar programvara som skall användas på en annan server, "
+"välj <fjärrserver>."
 
-#: App.cpp:230
-#: AppList.cpp:43
-#: MirrorList.cpp:40
-#: App.cpp:233
-#: AppList.cpp:45
-#: MirrorList.cpp:42
+#: IntroductionPage.cpp:161 IntroductionPage.cpp:238 IntroductionPage.cpp:310
+#: IntroductionPage.cpp:387
+msgid "Unknown server"
+msgstr ""
+
+#: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
+#: MirrorList.cpp:42 App.cpp:354 App.cpp:381
 msgid "Unsupported protocol specified."
 msgstr "Osupportat protokoll valt."
 
-#: App.cpp:323
-#: App.cpp:326
+#: App.cpp:323 App.cpp:326 App.cpp:518
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr "Verifierar checksumma för: %s"
 
-#: IntroductionPage.cpp:39
-#: IntroductionPage.cpp:43
+#: IntroductionPage.cpp:39 IntroductionPage.cpp:43 IntroductionPage.cpp:49
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr "Välkommen till PostgreSQL && EnterpriseDB Stack Builder!"
 
-#: CompletionPage.cpp:44
-msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
-msgstr "Du kan köra denna guide igen när som helst för att lägga till eller uppgradera programvaran i din stack. Om du vill avinstallera programvara, använd Lägg till/Ta bort program i kontrollpanelen."
+#: CompletionPage.cpp:44 CompletionPage.cpp:42
+msgid ""
+"You may run this wizard again at any time to add to or upgrade the software "
+"in your stack. If you wish to remove any software, please use the Add/Remove "
+"Programs Control Panel applet."
+msgstr ""
+"Du kan köra denna guide igen när som helst för att lägga till eller "
+"uppgradera programvaran i din stack. Om du vill avinstallera programvara, "
+"använd Lägg till/Ta bort program i kontrollpanelen."
 
-#: MirrorSelectionPage.cpp:68
+#: MirrorSelectionPage.cpp:68 MirrorSelectionPage.cpp:67
 msgid "You must select a mirror before you continue."
 msgstr "Du måste välja en spegelserver innan du kan fortsätta."
 
-#: IntroductionPage.cpp:73
-#: IntroductionPage.cpp:83
+#: IntroductionPage.cpp:73 IntroductionPage.cpp:83 IntroductionPage.cpp:87
 msgid "You must select an installation option before you continue."
 msgstr "Du måste välja en instalation innan du kan fortsätta."
 
-#: AppSelectionPage.cpp:123
+#: AppSelectionPage.cpp:123 AppSelectionPage.cpp:130
 msgid "You must select at least one package to install before you continue."
 msgstr "Du måste välja minst ett paket att installera innan du kan fortsätta."
 
-#: StackBuilder.cpp:44
+#: StackBuilder.cpp:44 StackBuilder.cpp:47
 msgid "download the application list from the specified URL"
 msgstr "ladda ner applikationslistan från angiven URL"
 
-#: StackBuilder.cpp:43
+#: StackBuilder.cpp:43 StackBuilder.cpp:46
 msgid "download the mirror list from the specified URL"
 msgstr "ladda ner spegellistan från angiven URL"
 
-#: StackBuilder.cpp:42
+#: StackBuilder.cpp:42 StackBuilder.cpp:45
 msgid "show this help message"
 msgstr "visa detta hjälpmeddelande"
 
-#: StackBuilder.cpp:45
+#: StackBuilder.cpp:48
+#, fuzzy
+msgid "use the download counter at the specified URL"
+msgstr "ladda ner spegellistan från angiven URL"
+
+#: StackBuilder.cpp:45 StackBuilder.cpp:49
 msgid "use the specified language in the UI"
 msgstr "använd specificerat språk i användargränssnittet"
-
