@@ -1,0 +1,29 @@
+#!/bin/sh
+set -x
+##########################################################################
+# Name:        stringmerge
+# Purpose:     Merge translations
+# Author:      Dave Page
+# Created:     2007-02-13
+# RCS-ID:      $Id: stringmerge,v 1.1 2008/09/08 13:39:42 dpage Exp $
+# Copyright:   (c) EnterpriseDB
+# Licence:     BSD Licence
+##########################################################################
+
+if test -f StackBuilder.pot; then
+
+  echo "Updating from CVS."
+  cvs update -dP
+
+  for GETTEXTDIR in i18n/??_?? ; do
+    echo "Entering $GETTEXTDIR."
+    cd $GETTEXTDIR
+    echo "Merging StackBuilder.pot into StackBuilder.po"
+    msgmerge --backup=none --update StackBuilder.po ../../StackBuilder.pot
+    cd ../..
+  done
+
+  cd i18n
+  echo "Committing changes to CVS."
+#  svn commit -m "Automatic merge using stringmerge script." 
+fi
