@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-08 13:36+0100\n"
-"PO-Revision-Date: 2007-05-15 17:41+0900\n"
+"PO-Revision-Date: 2008-09-09 22:46+0900\n"
 "Last-Translator: Hiroshi Saito <z-saito@guitar.ocn.ne.jp>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -12,57 +12,81 @@ msgstr ""
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-Country: JAPAN\n"
 
-#: CompletionPage.cpp:58 CompletionPage.cpp:56
+#: CompletionPage.cpp:58
+#: CompletionPage.cpp:56
 #, c-format
-msgid ""
-"%d installations were skipped - you may attempt to manually install those "
-"packages using the downloaded files."
-msgstr ""
-"%d はインストールされませんでした - ダウンロードされたファイルを使用して、再"
-"度それらのパッケージのインストールをすることができます。"
+msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
+msgstr "%d はインストールされませんでした - ダウンロードされたファイルを使用して、再度それらのパッケージのインストールをすることができます。"
 
-#: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:259
-#: IntroductionPage.cpp:350 IntroductionPage.cpp:408
+#: IntroductionPage.cpp:151
+#: IntroductionPage.cpp:211
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
+#: IntroductionPage.cpp:201
+#: IntroductionPage.cpp:259
+#: IntroductionPage.cpp:350
+#: IntroductionPage.cpp:408
 #, c-format
 msgid "%s on port %d"
 msgstr "%s 選択(%d から)"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:208
+#: AppList.cpp:171
+#: AppList.cpp:173
+#: AppList.cpp:208
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:204
+#: AppList.cpp:167
+#: AppList.cpp:169
+#: AppList.cpp:204
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (インストール)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:206
+#: AppList.cpp:169
+#: AppList.cpp:171
+#: AppList.cpp:206
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s インストール)"
 
-#: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62 IntroductionPage.cpp:65 IntroductionPage.cpp:66
+#: IntroductionPage.cpp:57
+#: IntroductionPage.cpp:58
+#: IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
+#: IntroductionPage.cpp:65
+#: IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr "<リモートサーバ>"
 
-#: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:390
+#: App.cpp:239
+#: AppList.cpp:52
+#: MirrorList.cpp:49
+#: App.cpp:242
+#: AppList.cpp:54
+#: MirrorList.cpp:51
+#: App.cpp:390
 msgid "A connection error occurred."
 msgstr "接続は失敗しました。"
 
-#: App.cpp:403 AppList.cpp:67 MirrorList.cpp:64
+#: App.cpp:403
+#: AppList.cpp:67
+#: MirrorList.cpp:64
 msgid "A connection to the server could not be established."
-msgstr ""
+msgstr "サーバへの接続を確立することができませんでした。"
 
-#: App.cpp:397 AppList.cpp:61 MirrorList.cpp:58
-#, fuzzy
+#: App.cpp:397
+#: AppList.cpp:61
+#: MirrorList.cpp:58
 msgid "A network error occured."
-msgstr "接続は失敗しました。"
+msgstr "ネットワーク接続は失敗しました。"
 
-#: App.cpp:242 AppList.cpp:55 MirrorList.cpp:52 App.cpp:245 AppList.cpp:57
+#: App.cpp:242
+#: AppList.cpp:55
+#: MirrorList.cpp:52
+#: App.cpp:245
+#: AppList.cpp:57
 #: MirrorList.cpp:54
 msgid "A protocol error occurred."
 msgstr "プロトコルの誤りを検出しました。"
@@ -71,102 +95,144 @@ msgstr "プロトコルの誤りを検出しました。"
 msgid "All the installation files have now been successfully downloaded."
 msgstr "すべてのインストールファイルは正常にダウンロードされました。"
 
-#: App.cpp:400 AppList.cpp:64 MirrorList.cpp:61
+#: App.cpp:400
+#: AppList.cpp:64
+#: MirrorList.cpp:61
 msgid "An error occured during negotiation."
-msgstr ""
+msgstr "エラーはネゴシエーションの間に起きました。"
 
-#: App.cpp:409 AppList.cpp:73 MirrorList.cpp:70
-#, fuzzy
+#: App.cpp:409
+#: AppList.cpp:73
+#: MirrorList.cpp:70
 msgid "An unknown error occured."
-msgstr "接続は失敗しました。"
+msgstr "不明なエラーが起こりました。"
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:104
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "スタックビルダーのウイザードを閉じますか?"
 
-#: ProxyDialog.cpp:101 ProxyDialog.cpp:108 ProxyDialog.cpp:116
+#: ProxyDialog.cpp:101
+#: ProxyDialog.cpp:108
+#: ProxyDialog.cpp:116
 #: ProxyDialog.cpp:123
 msgid "Both the proxy server and port must be specified."
 msgstr "プロキシサーバとポートの両方を指定しなければなりません。"
 
-#: MD5.cpp:271 MD5.cpp:270
+#: MD5.cpp:271
+#: MD5.cpp:270
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "ハッシュを生成するための入力ファイル %s を開くことができません!"
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:179
+#: AppList.cpp:144
+#: AppList.cpp:146
+#: AppList.cpp:179
 msgid "Categories"
 msgstr "カテゴリ"
 
-#: App.cpp:358 App.cpp:361 App.cpp:567
+#: App.cpp:358
+#: App.cpp:361
+#: App.cpp:567
 #, c-format
 msgid "Checking existing file: %s"
 msgstr "ファイルの存在チェック: %s"
 
-#: App.cpp:335 App.cpp:338 App.cpp:530
+#: App.cpp:335
+#: App.cpp:338
+#: App.cpp:530
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
 msgstr "%s　は、チェックサムの検証エラーです! ファイルは削除します..."
 
-#: App.cpp:207 App.cpp:208 App.cpp:317
+#: App.cpp:207
+#: App.cpp:208
+#: App.cpp:317
 msgid "Connecting to server..."
 msgstr "サーバへの接続..."
 
-#: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:351 App.cpp:378
+#: App.cpp:227
+#: AppList.cpp:40
+#: MirrorList.cpp:37
+#: App.cpp:230
+#: AppList.cpp:42
+#: MirrorList.cpp:39
+#: App.cpp:351
+#: App.cpp:378
 msgid "Could not parse the URL."
 msgstr "URLを解析できませんでした。"
 
-#: MirrorList.cpp:125 MirrorList.cpp:127 MirrorList.cpp:151
+#: MirrorList.cpp:125
+#: MirrorList.cpp:127
+#: MirrorList.cpp:151
 msgid "Countries"
-msgstr "国"
+msgstr "国の選択"
 
-#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
 #: AppSelectionPage.cpp:210
 msgid "Deselect application"
 msgstr "アプリケーションの選択解除"
 
-#: DownloadPage.cpp:61 DownloadPage.cpp:65
+#: DownloadPage.cpp:61
+#: DownloadPage.cpp:65
 msgid "Download directory:"
 msgstr "ダウンロードディレクトリ:"
 
-#: App.cpp:297 App.cpp:300 App.cpp:492
+#: App.cpp:297
+#: App.cpp:300
+#: App.cpp:492
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr "ダウンロード完了 %d KB (%d KB/秒)"
 
-#: App.cpp:295 App.cpp:298 App.cpp:490
+#: App.cpp:295
+#: App.cpp:298
+#: App.cpp:490
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr "ダウンロード完了 %d / %d KB (%d KB/秒)"
 
-#: App.cpp:206 App.cpp:207 App.cpp:316
+#: App.cpp:206
+#: App.cpp:207
+#: App.cpp:316
 #, c-format
 msgid "Downloading %s"
 msgstr "ダウンロード %s"
 
-#: IntroductionPage.cpp:85 IntroductionPage.cpp:95 IntroductionPage.cpp:99
+#: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:95
+#: IntroductionPage.cpp:99
 msgid "Downloading application list..."
 msgstr "ダウンロードアプリケーションリスト..."
 
-#: AppSelectionPage.cpp:135 AppSelectionPage.cpp:152
+#: AppSelectionPage.cpp:135
+#: AppSelectionPage.cpp:152
 msgid "Downloading mirror list..."
 msgstr "ダウンロードミラーサイトリスト..."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:104
 msgid "Exit wizard?"
 msgstr "ウイザードを終了しますか?"
 
-#: ProxyDialog.cpp:62 ProxyDialog.cpp:77
+#: ProxyDialog.cpp:62
+#: ProxyDialog.cpp:77
 msgid "FTP proxy"
 msgstr "FTP proxy"
 
 #: App.cpp:642
 #, c-format
 msgid "Failed to create the installer appbundle directory: %s/%s"
-msgstr ""
+msgstr "インストーラー用のアプリケーションバンドル・ディレクトリーの作成に失敗しました: %s/%s"
 
-#: App.cpp:245 App.cpp:248 App.cpp:363 App.cpp:414
+#: App.cpp:245
+#: App.cpp:248
+#: App.cpp:363
+#: App.cpp:414
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -177,7 +243,9 @@ msgstr ""
 "\n"
 "エラー: %s"
 
-#: App.cpp:255 App.cpp:258 App.cpp:450
+#: App.cpp:255
+#: App.cpp:258
+#: App.cpp:450
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -188,7 +256,9 @@ msgstr ""
 "\n"
 "エラー: 指定されたURLを開くことができませんでした。"
 
-#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:78
+#: AppList.cpp:58
+#: AppList.cpp:60
+#: AppList.cpp:78
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -199,7 +269,9 @@ msgstr ""
 "\n"
 "エラー: %s"
 
-#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:86
+#: AppList.cpp:66
+#: AppList.cpp:68
+#: AppList.cpp:86
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -210,7 +282,9 @@ msgstr ""
 "\n"
 "エラー: 指定されたURLを開くことができませんでした。"
 
-#: MirrorList.cpp:55 MirrorList.cpp:57 MirrorList.cpp:75
+#: MirrorList.cpp:55
+#: MirrorList.cpp:57
+#: MirrorList.cpp:75
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -221,7 +295,9 @@ msgstr ""
 "\n"
 "エラー: %s"
 
-#: MirrorList.cpp:63 MirrorList.cpp:65 MirrorList.cpp:83
+#: MirrorList.cpp:63
+#: MirrorList.cpp:65
+#: MirrorList.cpp:83
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -232,25 +308,27 @@ msgstr ""
 "\n"
 "エラー: 指定されたURLを開くことができませんでした。"
 
-#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:93
+#: AppList.cpp:73
+#: AppList.cpp:75
+#: AppList.cpp:93
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "アプリケーションリストの解析に失敗しました: %s"
 
-#: MirrorList.cpp:70 MirrorList.cpp:72 MirrorList.cpp:90
+#: MirrorList.cpp:70
+#: MirrorList.cpp:72
+#: MirrorList.cpp:90
 #, c-format
 msgid "Failed to parse the mirror list: %s"
 msgstr "ミラーサイトの解析に失敗しました: %s"
 
 #: App.cpp:677
 #, c-format
-msgid ""
-"Failed to read the CFBundleExecutable value from the appbundle description: %"
-"s/Contents/Info.plist"
-msgstr ""
+msgid "Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"
+msgstr "アプリケーションバンドル記述からCFBundleExecutable値の読み込みに失敗しました: %s/Contents/Info.plist"
 
 #: App.cpp:581
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Failed to rename the file\n"
 "\n"
@@ -259,14 +337,22 @@ msgid ""
 "to\n"
 "\n"
 "%s-%s"
-msgstr "ミラーサイトの解析に失敗しました: %s"
+msgstr ""
+"ファイルに新しい名前を付けるのに失敗しました\n"
+"\n"
+"%s\n"
+"\n"
+"から\n"
+"\n"
+"%s-%s"
 
 #: App.cpp:652
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to write the installer appbundle file: %s/%s"
-msgstr "ミラーサイトの解析に失敗しました: %s"
+msgstr "インストーラ・アプリケーションバンドル・ファイルを書くのに失敗しました: %s/%s"
 
-#: ProxyDialog.cpp:53 ProxyDialog.cpp:68
+#: ProxyDialog.cpp:53
+#: ProxyDialog.cpp:68
 msgid "HTTP proxy"
 msgstr "HTTP proxy"
 
@@ -274,237 +360,248 @@ msgstr "HTTP proxy"
 msgid "Installation complete!"
 msgstr "インストールは完了しました!"
 
-#: App.cpp:413 App.cpp:416 App.cpp:715
+#: App.cpp:413
+#: App.cpp:416
+#: App.cpp:715
 msgid "Installation error"
 msgstr "インストールエラー"
 
-#: CompletionPage.cpp:33 CompletionPage.cpp:31
-msgid ""
-"Installation of the packages you selected has finished. The downloaded files "
-"have been retained to allow future installations or upgrades (some packages "
-"require the original installation files when being upgraded)."
-msgstr ""
-"選択されたパッケージのインストールは終わりました。 ダウンロードされたファイル"
-"は、今後のインストールかアップグレードのために保存されます(アップグレードする"
-"と、いくつかのパッケージはオリジナルのインストールファイルを必要とします)。"
+#: CompletionPage.cpp:33
+#: CompletionPage.cpp:31
+msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
+msgstr "選択されたパッケージのインストールは終わりました。 ダウンロードされたファイルは、今後のインストールかアップグレードのために保存されます(アップグレードすると、いくつかのパッケージはオリジナルのインストールファイルを必要とします)。"
 
-#: ProxyDialog.cpp:93 ProxyDialog.cpp:108
+#: ProxyDialog.cpp:93
+#: ProxyDialog.cpp:108
 msgid "Invalid FTP port specified."
 msgstr "FTPポートは無効です。"
 
-#: ProxyDialog.cpp:86 ProxyDialog.cpp:101
+#: ProxyDialog.cpp:86
+#: ProxyDialog.cpp:101
 msgid "Invalid HTTP port specified."
 msgstr "HTTPポートは無効です。"
 
 #: App.cpp:384
-#, fuzzy
 msgid "Invalid hostname specified in URL."
-msgstr "指定したURLのホスト名がありません。"
+msgstr "URLで指定したホスト名は違っています。"
 
 #: App.cpp:387
-#, fuzzy
 msgid "Invalid path specified in URL."
-msgstr "指定したURLのパスがありません。"
+msgstr "URLで指定したPATH名は違っています。"
 
-#: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:357
+#: App.cpp:233
+#: AppList.cpp:46
+#: MirrorList.cpp:43
+#: App.cpp:236
+#: AppList.cpp:48
+#: MirrorList.cpp:45
+#: App.cpp:357
 msgid "No hostname specified in URL."
 msgstr "指定したURLのホスト名がありません。"
 
-#: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:360
+#: App.cpp:236
+#: AppList.cpp:49
+#: MirrorList.cpp:46
+#: App.cpp:239
+#: AppList.cpp:51
+#: MirrorList.cpp:48
+#: App.cpp:360
 msgid "No path specified in URL."
 msgstr "指定したURLのパスがありません。"
 
 #: InstallationPage.cpp:47
-msgid ""
-"Note: You must allow all installations to run to completion. If you are "
-"prompted to restart the computer, click \"No\" or \"Restart Later\" and "
-"manually restart your computer when all the installation have finished."
-msgstr ""
-"注意: あなたはインストール手順によってすべてを完成させる必要があります。イン"
-"ストールが完了したときに、\"すぐにリスタート\"または\"あとでリスタート\"のい"
-"づれかを選択するか、手動でコンピュータのリスタートをしてください。"
+msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
+msgstr "注意: あなたはインストール手順によってすべてを完成させる必要があります。インストールが完了したときに、\"すぐにリスタート\"または\"あとでリスタート\"のいづれかを選択するか、手動でコンピュータのリスタートをしてください。"
 
 #: InstallationPage.cpp:41
 msgid "Please click the \"Next\" button to start the installations."
 msgstr "［次へ］を選択してインストールを開始してください。"
 
-#: MirrorSelectionPage.cpp:40 MirrorSelectionPage.cpp:41
+#: MirrorSelectionPage.cpp:40
+#: MirrorSelectionPage.cpp:41
 msgid "Please select a mirror site to download from."
 msgstr "ダウンロードするミラーサイトを選択してください。"
 
-#: AppSelectionPage.cpp:88 AppSelectionPage.cpp:95
+#: AppSelectionPage.cpp:88
+#: AppSelectionPage.cpp:95
 msgid "Please select the applications you would like to install."
 msgstr "インストールしたいアプリケーションを選択してください。"
 
-#: ProxyDialog.cpp:57 ProxyDialog.cpp:66 ProxyDialog.cpp:72 ProxyDialog.cpp:81
+#: ProxyDialog.cpp:57
+#: ProxyDialog.cpp:66
+#: ProxyDialog.cpp:72
+#: ProxyDialog.cpp:81
 msgid "Port"
 msgstr "ポート"
 
-#: Wizard.cpp:29 Wizard.cpp:31
+#: Wizard.cpp:29
+#: Wizard.cpp:31
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB スタックビルダ"
 
-#: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
+#: IntroductionPage.cpp:72
+#: IntroductionPage.cpp:237
+#: IntroductionPage.cpp:76
 #: IntroductionPage.cpp:427
 msgid "Proxy servers"
 msgstr "Proxyサーバ"
 
-#: DownloadPage.cpp:45 DownloadPage.cpp:49
-msgid ""
-"Review your selections and choose a download directory if required, and then "
-"click the Next button to begin downloading the packages you have selected."
-msgstr ""
-"選択を見直します、そして、必要なら、ダウンロードディレクトリを選びます、そし"
-"て、次に、［Next］ボタンをクリックして、あなたが選択したパッケージをダウン"
-"ロードし始めてください。"
+#: DownloadPage.cpp:45
+#: DownloadPage.cpp:49
+msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
+msgstr "選択を見直します、そして、必要なら、ダウンロードディレクトリを選びます、そして、次に、［Next］ボタンをクリックして、あなたが選択したパッケージをダウンロードし始めてください。"
 
-#: DownloadPage.cpp:95 DownloadPage.cpp:105
+#: DownloadPage.cpp:95
+#: DownloadPage.cpp:105
 msgid "Select a download directory"
 msgstr "ダウンロードディレクトリを指定してください"
 
-#: DownloadPage.cpp:51 DownloadPage.cpp:55
+#: DownloadPage.cpp:51
+#: DownloadPage.cpp:55
 msgid "Selected packages:"
 msgstr "選択されたパッケージ:"
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40
+#: StackBuilder.cpp:37
+#: StackBuilder.cpp:40
 msgid "Stack Builder"
 msgstr "スタックビルダ"
 
-#: DownloadPage.cpp:111 DownloadPage.cpp:121
+#: DownloadPage.cpp:111
+#: DownloadPage.cpp:121
 msgid "The download directory does not exist. Please select a valid directory."
-msgstr ""
-"ダウンロードディレクトリは存在しません。 有効なディレクトリを選択してくださ"
-"い。"
+msgstr "ダウンロードディレクトリは存在しません。 有効なディレクトリを選択してください。"
 
-#: App.cpp:406 AppList.cpp:70 MirrorList.cpp:67
+#: App.cpp:406
+#: AppList.cpp:70
+#: MirrorList.cpp:67
 msgid "The file does not exist."
-msgstr ""
+msgstr "ファイルは存在しません。"
 
-#: App.cpp:412 App.cpp:415 App.cpp:714
+#: App.cpp:412
+#: App.cpp:415
+#: App.cpp:714
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
 "\n"
-" Click on the OK button to ignore this error and continue with any remaining "
-"installations, or click Cancel to abort the remaining installations.\n"
+" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
 "\n"
-"Note that ignoring this error may result in failure of any later "
-"installations that depend on this one."
+"Note that ignoring this error may result in failure of any later installations that depend on this one."
 msgstr ""
 "%s のインストールでエラーが発生しました。\n"
 "\n"
-"この誤りを無視して、残りのインストールを続行するためには［OK］ボタンをクリッ"
-"クするか、または［キャンセル］をクリックして、インストールを中止してくださ"
-"い。\n"
+"この誤りを無視して、残りのインストールを続行するためには［OK］ボタンをクリックするか、または［キャンセル］をクリックして、インストールを中止してください。\n"
 "\n"
-"この誤りを無視すると後のインストールは失敗するかもしれないことに注意してくだ"
-"さい。"
+"この誤りを無視すると後のインストールは失敗するかもしれないことに注意してください。"
 
 #: IntroductionPage.cpp:112
 msgid "There are currently no applications available for your platform."
-msgstr ""
+msgstr "あなたのプラットホームで利用できるいかなるアプリケーションも現在ありません。"
 
 #: StackBuilder.cpp:89
 msgid "This application must be run as the superuser."
-msgstr ""
+msgstr "このアプリケーションは、スーパーユーザーとして行われなくてはいけません。"
 
-#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
 #: AppSelectionPage.cpp:210
 msgid ""
-"This application was automatically selected because another selection is "
-"dependent upon it.\n"
-"If you do not install this application others may not install or work "
-"correctly.\n"
+"This application was automatically selected because another selection is dependent upon it.\n"
+"If you do not install this application others may not install or work correctly.\n"
 "\n"
 "Are you sure you wish to continue?"
 msgstr ""
-"別の選択がそれに依存しているので、このアプリケーションは自動的に選択されまし"
-"た。\n"
-"あなたがこのアプリケーションをインストールしなければ、関連のインストールはさ"
-"れず正しく働かないかもしれません。\n"
+"別の選択がそれに依存しているので、このアプリケーションは自動的に選択されました。\n"
+"あなたがこのアプリケーションをインストールしなければ、関連のインストールはされず正しく働かないかもしれません。\n"
 "\n"
 "続けますか?"
 
-#: IntroductionPage.cpp:45 IntroductionPage.cpp:49 IntroductionPage.cpp:53
-msgid ""
-"This wizard will help you install additional software to complement your "
-"PostgreSQL or EnterpriseDB installation."
-msgstr ""
-"このウィザードは、PostgreSQLかEnterpriseDBインストールの補助となるように追加"
-"ソフトウェアのインストールを助けるでしょう。"
+#: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:49
+#: IntroductionPage.cpp:53
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
+msgstr "このウィザードは、PostgreSQLかEnterpriseDBインストールの補助となるように追加ソフトウェアのインストールを助けるでしょう。"
 
-#: IntroductionPage.cpp:51 IntroductionPage.cpp:55 IntroductionPage.cpp:59
-msgid ""
-"To begin, please select the installation you are installing software for "
-"from the list below. If you are installing software to use with a remote "
-"server, please select the <remote server> option."
-msgstr ""
-"始めに、以下のリストからインストールしたいソフトウエアを選択してください。も"
-"し、インストーラでリモートサーバを使う場合には、どうぞ<リモートサーバ>オプ"
-"ションを選択してください。"
+#: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:55
+#: IntroductionPage.cpp:59
+msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
+msgstr "始めに、以下のリストからインストールしたいソフトウエアを選択してください。もし、インストーラでリモートサーバを使う場合には、どうぞ<リモートサーバ>オプションを選択してください。"
 
-#: IntroductionPage.cpp:161 IntroductionPage.cpp:238 IntroductionPage.cpp:310
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:238
+#: IntroductionPage.cpp:310
 #: IntroductionPage.cpp:387
 msgid "Unknown server"
-msgstr ""
+msgstr "未知のサーバー"
 
-#: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:354 App.cpp:381
+#: App.cpp:230
+#: AppList.cpp:43
+#: MirrorList.cpp:40
+#: App.cpp:233
+#: AppList.cpp:45
+#: MirrorList.cpp:42
+#: App.cpp:354
+#: App.cpp:381
 msgid "Unsupported protocol specified."
 msgstr "サポートされないプロトコルが指定されました。"
 
-#: App.cpp:323 App.cpp:326 App.cpp:518
+#: App.cpp:323
+#: App.cpp:326
+#: App.cpp:518
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr "チェックサムの検査: %s"
 
-#: IntroductionPage.cpp:39 IntroductionPage.cpp:43 IntroductionPage.cpp:49
+#: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:43
+#: IntroductionPage.cpp:49
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr "ようこそ PostgreSQL && EnterpriseDB スタックビルダへ !"
 
-#: CompletionPage.cpp:44 CompletionPage.cpp:42
-msgid ""
-"You may run this wizard again at any time to add to or upgrade the software "
-"in your stack. If you wish to remove any software, please use the Add/Remove "
-"Programs Control Panel applet."
-msgstr ""
-"あなたは、いつでも、スタックからソフトウェアの追加、またはアップグレードさせ"
-"るように再びこのウィザードを走らせることができます。 ソフトウェアを取り除きた"
-"いときには、コントロールパネルアプレットの追加・削除を使用してください。"
+#: CompletionPage.cpp:44
+#: CompletionPage.cpp:42
+msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
+msgstr "あなたは、いつでも、スタックからソフトウェアの追加、またはアップグレードさせるように再びこのウィザードを走らせることができます。 ソフトウェアを取り除きたいときには、コントロールパネルアプレットの追加・削除を使用してください。"
 
-#: MirrorSelectionPage.cpp:68 MirrorSelectionPage.cpp:67
+#: MirrorSelectionPage.cpp:68
+#: MirrorSelectionPage.cpp:67
 msgid "You must select a mirror before you continue."
 msgstr "続けるためにミラーサイトを選択しなければなりません。"
 
-#: IntroductionPage.cpp:73 IntroductionPage.cpp:83 IntroductionPage.cpp:87
+#: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:83
+#: IntroductionPage.cpp:87
 msgid "You must select an installation option before you continue."
 msgstr "続けるためにインストールオプションを選択しなければなりません。"
 
-#: AppSelectionPage.cpp:123 AppSelectionPage.cpp:130
+#: AppSelectionPage.cpp:123
+#: AppSelectionPage.cpp:130
 msgid "You must select at least one package to install before you continue."
-msgstr ""
-"インストールを続けるためには少なくとも1個のパッケージを選択しなければなりませ"
-"ん。"
+msgstr "インストールを続けるためには少なくとも1個のパッケージを選択しなければなりません。"
 
-#: StackBuilder.cpp:44 StackBuilder.cpp:47
+#: StackBuilder.cpp:44
+#: StackBuilder.cpp:47
 msgid "download the application list from the specified URL"
 msgstr "指定されたURLからアプリケーションリストをダウンロードしてください。"
 
-#: StackBuilder.cpp:43 StackBuilder.cpp:46
+#: StackBuilder.cpp:43
+#: StackBuilder.cpp:46
 msgid "download the mirror list from the specified URL"
 msgstr "指定されたURLからミラーリストをダウンロードしてください。"
 
-#: StackBuilder.cpp:42 StackBuilder.cpp:45
+#: StackBuilder.cpp:42
+#: StackBuilder.cpp:45
 msgid "show this help message"
 msgstr "ヘルプメッセージを表示"
 
 #: StackBuilder.cpp:48
-#, fuzzy
 msgid "use the download counter at the specified URL"
-msgstr "指定されたURLからミラーリストをダウンロードしてください。"
+msgstr "指定されたURLのダウンロード・カウンターを使って下さい"
 
-#: StackBuilder.cpp:45 StackBuilder.cpp:49
+#: StackBuilder.cpp:45
+#: StackBuilder.cpp:49
 msgid "use the specified language in the UI"
 msgstr "UIの指定された言語を使用してください。"
+
