@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.33 2008/09/05 13:25:15 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.34 2008/09/11 09:07:20 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -21,6 +21,7 @@ using namespace std;
 // wxWindows headers
 #include <wx/wx.h>
 #include <wx/busyinfo.h>
+#include <wx/dir.h>
 #include <wx/fileconf.h>
 #include <wx/progdlg.h>
 #include <wx/stream.h>
@@ -659,9 +660,23 @@ bool App::Install()
 
     }
     
+	// Find the bundle. This will be the first .app, .pkg or .mpkg found in the temp dir
+	wxString bundle, filespec;
+	wxDir(dir);
+	
+	if (format.Lower() == wxT("app"))
+		filespec = wxT("*.app");
+	else if (format.Lower() == wxT("pkg"))
+		filespec = wxT("*.pkg");
+	else if (format.Lower() == wxT("mpkg"))
+		filespec = wxT("*.mpkg");
+	
+	dir.Open(macTmpPath);
+	dir.GetFirst(&bundle, filespec, wxDIR_DIRS);
+
     // If this is a pkg or mpkg, just throw it at open. Note that you cannot pass arguments
     // to this type of installer
-    wxString installer = macTmpPath + wxT("/") + file.GetFullPath().AfterLast('/').BeforeLast('.');
+    wxString installer = macTmpPath + wxT("/") + bundle;
     
     if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
         cmd = wxT("open -W \"") + installer + wxT("\"");    
