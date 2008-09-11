@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.18 2008/08/26 09:42:37 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.19 2008/09/11 15:54:19 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -46,11 +46,11 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 
     mainSizer->Add(0, 10);
 
-    wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"));
+    wxStaticText *st = new wxStaticText(this, wxID_ANY, _("Welcome to Stack Builder!"));
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxALIGN_CENTER | wxFIXED_MINSIZE, 5);
 
-    st = new wxStaticText(this, wxID_ANY, _("This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."));
+    st = new wxStaticText(this, wxID_ANY, _("This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB Postgres Plus installation."));
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 

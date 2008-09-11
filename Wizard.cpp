@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.cpp,v 1.11 2008/08/18 20:18:22 dpage Exp $
+// RCS-ID:      $Id: Wizard.cpp,v 1.12 2008/09/11 15:54:20 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -28,7 +28,7 @@
 #include "images/StackBuilder.xpm"
 
 Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListUrl, const wxString &mirrorListUrl)
-    : wxWizard(frame, wxID_ANY, _("PostgreSQL & EnterpriseDB Stack Builder"),
+    : wxWizard(frame, wxID_ANY, _("Stack Builder"),
     bitmap, wxDefaultPosition,
       wxDEFAULT_DIALOG_STYLE)
 {
