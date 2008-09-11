@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-08 13:36+0100\n"
+"POT-Creation-Date: 2008-09-11 16:53+0100\n"
 "PO-Revision-Date: 2008-09-08 14:49+0100\n"
 "Last-Translator: Andreas 'ads' Scherbaum <ads@pgug.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,15 +52,15 @@ msgid "<remote server>"
 msgstr "<remote server>"
 
 #: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:390
+#: MirrorList.cpp:51 App.cpp:391
 msgid "A connection error occurred."
 msgstr "Ein Verbindungsfehler ist aufgetreten."
 
-#: App.cpp:403 AppList.cpp:67 MirrorList.cpp:64
+#: App.cpp:404 AppList.cpp:67 MirrorList.cpp:64
 msgid "A connection to the server could not be established."
 msgstr ""
 
-#: App.cpp:397 AppList.cpp:61 MirrorList.cpp:58
+#: App.cpp:398 AppList.cpp:61 MirrorList.cpp:58
 #, fuzzy
 msgid "A network error occured."
 msgstr "Ein Verbindungsfehler ist aufgetreten."
@@ -74,11 +74,11 @@ msgstr "Ein Protokollfehler ist aufgetreten."
 msgid "All the installation files have now been successfully downloaded."
 msgstr "Alle Installations-Dateien wurden erfolgreich heruntergeladen."
 
-#: App.cpp:400 AppList.cpp:64 MirrorList.cpp:61
+#: App.cpp:401 AppList.cpp:64 MirrorList.cpp:61
 msgid "An error occured during negotiation."
 msgstr ""
 
-#: App.cpp:409 AppList.cpp:73 MirrorList.cpp:70
+#: App.cpp:410 AppList.cpp:73 MirrorList.cpp:70
 #, fuzzy
 msgid "An unknown error occured."
 msgstr "Ein Verbindungsfehler ist aufgetreten."
@@ -101,22 +101,22 @@ msgstr "Kann die Eingabedatei %s nicht öffnen, um einen Hash zu erzeugen!"
 msgid "Categories"
 msgstr "Kategorien"
 
-#: App.cpp:358 App.cpp:361 App.cpp:567
+#: App.cpp:358 App.cpp:361 App.cpp:568
 #, c-format
 msgid "Checking existing file: %s"
 msgstr "Prüfe bestehende Datei: %s"
 
-#: App.cpp:335 App.cpp:338 App.cpp:530
+#: App.cpp:335 App.cpp:338 App.cpp:531
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
 msgstr "Prüfsummen-Prüfung scheiterte für: %s! Die Datei wird gelöscht..."
 
-#: App.cpp:207 App.cpp:208 App.cpp:317
+#: App.cpp:207 App.cpp:208 App.cpp:318
 msgid "Connecting to server..."
 msgstr "Verbinde mit Server..."
 
 #: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:351 App.cpp:378
+#: MirrorList.cpp:39 App.cpp:352 App.cpp:379
 msgid "Could not parse the URL."
 msgstr "Konnte die URL nicht parsen."
 
@@ -133,17 +133,17 @@ msgstr "Anwendung abwählen"
 msgid "Download directory:"
 msgstr "Verzeichnis für heruntergeladene Dateien:"
 
-#: App.cpp:297 App.cpp:300 App.cpp:492
+#: App.cpp:297 App.cpp:300 App.cpp:493
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr "%d KB heruntergeladen (%d KB/Sec) "
 
-#: App.cpp:295 App.cpp:298 App.cpp:490
+#: App.cpp:295 App.cpp:298 App.cpp:491
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr "%d von %d KB heruntergeladen (%d KB/Sec)"
 
-#: App.cpp:206 App.cpp:207 App.cpp:316
+#: App.cpp:206 App.cpp:207 App.cpp:317
 #, c-format
 msgid "Downloading %s"
 msgstr "Lade %s herunter"
@@ -164,12 +164,12 @@ msgstr "Wizard verlassen?"
 msgid "FTP proxy"
 msgstr "FTP Proxy"
 
-#: App.cpp:642
+#: App.cpp:643
 #, c-format
 msgid "Failed to create the installer appbundle directory: %s/%s"
 msgstr ""
 
-#: App.cpp:245 App.cpp:248 App.cpp:363 App.cpp:414
+#: App.cpp:245 App.cpp:248 App.cpp:364 App.cpp:415
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -180,7 +180,7 @@ msgstr ""
 "\n"
 "Fehler: %s"
 
-#: App.cpp:255 App.cpp:258 App.cpp:450
+#: App.cpp:255 App.cpp:258 App.cpp:451
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -245,14 +245,14 @@ msgstr "Konnte die Anwendungsliste nicht parsen: %s"
 msgid "Failed to parse the mirror list: %s"
 msgstr "Konnte die Mirror-Liste nicht parsen: %s"
 
-#: App.cpp:677
+#: App.cpp:692
 #, c-format
 msgid ""
 "Failed to read the CFBundleExecutable value from the appbundle description: %"
 "s/Contents/Info.plist"
 msgstr ""
 
-#: App.cpp:581
+#: App.cpp:582
 #, fuzzy, c-format
 msgid ""
 "Failed to rename the file\n"
@@ -264,7 +264,7 @@ msgid ""
 "%s-%s"
 msgstr "Konnte die Mirror-Liste nicht parsen: %s"
 
-#: App.cpp:652
+#: App.cpp:653
 #, fuzzy, c-format
 msgid "Failed to write the installer appbundle file: %s/%s"
 msgstr "Konnte die Mirror-Liste nicht parsen: %s"
@@ -277,7 +277,7 @@ msgstr "HTTP Proxy"
 msgid "Installation complete!"
 msgstr "Installation vollständig!"
 
-#: App.cpp:413 App.cpp:416 App.cpp:715
+#: App.cpp:413 App.cpp:416 App.cpp:730
 msgid "Installation error"
 msgstr "Fehler bei der Installation"
 
@@ -300,23 +300,23 @@ msgstr "Ungültiger FTP Port angegeben."
 msgid "Invalid HTTP port specified."
 msgstr "Ungültiger HTTP Port angegeben."
 
-#: App.cpp:384
+#: App.cpp:385
 #, fuzzy
 msgid "Invalid hostname specified in URL."
 msgstr "Kein Hostname in der URL angegeben."
 
-#: App.cpp:387
+#: App.cpp:388
 #, fuzzy
 msgid "Invalid path specified in URL."
 msgstr "Kein Pfad in der URL angegeben."
 
 #: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:357
+#: MirrorList.cpp:45 App.cpp:358
 msgid "No hostname specified in URL."
 msgstr "Kein Hostname in der URL angegeben."
 
 #: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:360
+#: MirrorList.cpp:48 App.cpp:361
 msgid "No path specified in URL."
 msgstr "Kein Pfad in der URL angegeben."
 
@@ -347,7 +347,7 @@ msgstr "Bitte die zu installierenden Anwendungen auswählen."
 msgid "Port"
 msgstr "Port"
 
-#: Wizard.cpp:29 Wizard.cpp:31
+#: Wizard.cpp:29
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
 
@@ -373,7 +373,7 @@ msgstr "Ein Verzeichnis für die herunterzuladenden Dateien angeben"
 msgid "Selected packages:"
 msgstr "Ausgewählte Pakete:"
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40
+#: StackBuilder.cpp:37 StackBuilder.cpp:40 Wizard.cpp:31
 msgid "Stack Builder"
 msgstr "Stack Builder"
 
@@ -383,11 +383,11 @@ msgstr ""
 "Das Download-Verzeichnis exisitert nicht. Bitte ein gültiges Verzeichnis "
 "wählen."
 
-#: App.cpp:406 AppList.cpp:70 MirrorList.cpp:67
+#: App.cpp:407 AppList.cpp:70 MirrorList.cpp:67
 msgid "The file does not exist."
 msgstr ""
 
-#: App.cpp:412 App.cpp:415 App.cpp:714
+#: App.cpp:412 App.cpp:415 App.cpp:729
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
@@ -431,7 +431,16 @@ msgstr ""
 "\n"
 "Sind Sie sicher, dass Sie dies tun wollen?"
 
-#: IntroductionPage.cpp:45 IntroductionPage.cpp:49 IntroductionPage.cpp:53
+#: IntroductionPage.cpp:53
+#, fuzzy
+msgid ""
+"This wizard will help you install additional software to complement your "
+"PostgreSQL or EnterpriseDB Postgres Plus installation."
+msgstr ""
+"Dieser Wizart unterstützt sie bei der Installation zusätzlicher Software zur "
+"Ergänzung Ihrer PostgreSQL oder EnterpriseDB Installation."
+
+#: IntroductionPage.cpp:45 IntroductionPage.cpp:49
 msgid ""
 "This wizard will help you install additional software to complement your "
 "PostgreSQL or EnterpriseDB installation."
@@ -455,16 +464,21 @@ msgid "Unknown server"
 msgstr ""
 
 #: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:354 App.cpp:381
+#: MirrorList.cpp:42 App.cpp:355 App.cpp:382
 msgid "Unsupported protocol specified."
 msgstr "Nicht unsterstütztes Protokoll gewählt."
 
-#: App.cpp:323 App.cpp:326 App.cpp:518
+#: App.cpp:323 App.cpp:326 App.cpp:519
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr "Vergleiche die Prüfsumme für: %s"
 
-#: IntroductionPage.cpp:39 IntroductionPage.cpp:43 IntroductionPage.cpp:49
+#: IntroductionPage.cpp:49
+#, fuzzy
+msgid "Welcome to Stack Builder!"
+msgstr "Stack Builder"
+
+#: IntroductionPage.cpp:39 IntroductionPage.cpp:43
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr "Wilkommen zum PostgreSQL && EnterpriseDB Stack Builder!"
 
