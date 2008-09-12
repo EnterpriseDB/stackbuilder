@@ -3,7 +3,7 @@
 // Purpose:     The StackBuilder Wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Wizard.h,v 1.4 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: Wizard.h,v 1.5 2008/09/12 10:47:00 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ class MirrorList;
 class Wizard : public wxWizard
 {
 public:
-    Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationlisturl, const wxString &mirrorlisturl);
+    Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationlisturl, const wxString &mirrorlisturl, const wxString &title);
     wxWizardPage *GetFirstPage() const { return m_page1; }
 
 private:

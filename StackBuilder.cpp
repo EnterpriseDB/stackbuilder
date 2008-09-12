@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.11 2008/09/05 10:00:31 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.12 2008/09/12 10:47:00 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,8 @@ bool StackBuilder::OnInit()
 
     // Create and run the wizard
     wxBitmap bitmap = wxBitmap(background_xpm);
-    wizard = new Wizard(NULL, bitmap, applicationListUrl, mirrorListUrl);
+	wxString title = wxString::Format(wxT("%s %s"), _("Stack Builder"), STACKBUILDER_VERSION);
+    wizard = new Wizard(NULL, bitmap, applicationListUrl, mirrorListUrl, title);
     bool retval = wizard->RunWizard(wizard->GetFirstPage()); 
 
     return retval;

@@ -169,6 +169,7 @@ ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=wxT(\"${_platform}\")")
 ################################################################################
 # Let's rock!
 ################################################################################
+ADD_DEFINITIONS("-DSTACKBUILDER_VERSION=wxT(\"${VERSION}\")")
 INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR} ${stackbuilder_SOURCE_DIR}/include)
 
 FILE(GLOB _cpp_files *.cpp)
