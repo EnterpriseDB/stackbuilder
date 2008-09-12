@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.19 2008/09/05 14:49:15 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.20 2008/09/12 10:26:11 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,10 @@ wxString AppList::DeHTMLise(const wxString &string)
 
     ret.Replace(wxT("&quot;"), wxT("\""));
     ret.Replace(wxT("&lt;"), wxT("<"));
-    ret.Replace(wxT("&gt"), wxT(">"));
+    ret.Replace(wxT("&gt;"), wxT(">"));
+    ret.Replace(wxT("&ldquo;"), wxT("\""));
+    ret.Replace(wxT("&rdquo;"), wxT("\""));
+	ret.Replace(wxT("&#039;"), wxT("'"));
 
     return ret;
 }
