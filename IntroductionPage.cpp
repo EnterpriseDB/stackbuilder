@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.19 2008/09/11 15:54:19 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.20 2008/09/12 09:55:02 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
 
     mainSizer->SetItemMinSize(st, 400, 70);
 
-    m_installation = new wxComboBox(this, wxID_ANY, _("<remote server>"), wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN | wxCB_READONLY);
+    m_installation = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN | wxCB_READONLY);
     unsigned int item = m_installation->Append(_("<remote server>"));
     m_installation->SetClientObject(item, (wxClientData *)NULL);
     FindPgServers();
