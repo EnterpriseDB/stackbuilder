@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.20 2008/09/12 09:55:02 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.21 2008/09/12 10:19:33 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
 
-    mainSizer->SetItemMinSize(st, 400, 50);
+    mainSizer->SetItemMinSize(st, 400, 60);
 
     st = new wxStaticText(this, wxID_ANY, _("To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."));
     st->Wrap(400);
@@ -200,9 +200,12 @@ bool IntroductionPage::FindPgServers()
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
  
-            // Add the item
-            m_installation->Append(temp, data);
-            success = true;
+			// Add the item, if it looks sane
+			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
+			{
+				m_installation->Append(temp, data);
+				success = true;
+			}
 
             // Get the next one...
             flag = rootKey->GetNextKey(svcName, cookie);
@@ -258,9 +261,12 @@ bool IntroductionPage::FindPgServers()
                 // Build the user description
                 temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
                 
-                // Add the item
-                m_installation->Append(temp, data);
-                success = true;
+                // Add the item, if it looks sane
+				if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
+				{
+                    m_installation->Append(temp, data);
+                    success = true;
+				}
             }
             
             flag = cnf->GetNextGroup(version, cookie);
@@ -349,9 +355,12 @@ bool IntroductionPage::FindEdbServers()
             // Build the user description
             temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
  
-            // Add the item
-            m_installation->Append(temp, data);
-            success = true;
+			// Add the item, if it looks sane
+			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
+			{
+				m_installation->Append(temp, data);
+				success = true;
+			}
 
             // Get the next one...
             flag = rootKey->GetNextKey(svcName, cookie);
@@ -407,9 +416,12 @@ bool IntroductionPage::FindEdbServers()
                 // Build the user description
                 temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
                 
-                // Add the item
-                m_installation->Append(temp, data);
-                success = true;
+                // Add the item, if it looks sane
+				if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
+				{
+                    m_installation->Append(temp, data);
+                    success = true;
+				}
             }
             
             flag = cnf->GetNextGroup(version, cookie);
