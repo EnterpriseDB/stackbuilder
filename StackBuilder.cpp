@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.12 2008/09/12 10:47:00 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.13 2008/09/18 09:39:39 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -131,8 +131,12 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
         i18nPath = appPath + wxT("/i18n");
     else if(wxDir::Exists(appPath + wxT("/../StackBuilder/i18n")))
         i18nPath = appPath + wxT("/../StackBuilder/i18n");
+    else if(wxDir::Exists(appPath + wxT("/../StackBuilder/share/i18n")))
+        i18nPath = appPath + wxT("/../StackBuilder/share/i18n");
     else if(wxDir::Exists(appPath + wxT("/../i18n")))
         i18nPath = appPath + wxT("/../i18n");
+    else if(wxDir::Exists(appPath + wxT("/../share/i18n")))
+        i18nPath = appPath + wxT("/../share/i18n");
     else if(wxDir::Exists(appPath + wxT("/../Resources/i18n")))
         i18nPath = appPath + wxT("/../Resources/i18n");
 
