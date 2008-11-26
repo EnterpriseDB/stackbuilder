@@ -3,7 +3,7 @@
 // Purpose:     MD5 functions
 // Author:      Colin Plumb, adapted/stolen by Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: MD5.cpp,v 1.3 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: MD5.cpp,v 1.4 2008/11/26 13:05:28 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 //
@@ -28,6 +28,10 @@
 #endif
 
 #ifdef sun
+#define HIGHFIRST
+#endif
+
+#ifdef __BIG_ENDIAN__
 #define HIGHFIRST
 #endif
 
