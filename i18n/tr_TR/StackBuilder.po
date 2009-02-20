@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 16:53+0100\n"
+"POT-Creation-Date: 2009-02-20 11:55+0000\n"
 "PO-Revision-Date: 2007-05-02 22:16+0200\n"
 "Last-Translator: Nicolai Tufar <ntufar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,29 +25,29 @@ msgstr ""
 "elle çalıştırabilirisiniz."
 
 #: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:259
-#: IntroductionPage.cpp:350 IntroductionPage.cpp:408
+#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:262
+#: IntroductionPage.cpp:356 IntroductionPage.cpp:417
 #, c-format
 msgid "%s on port %d"
 msgstr "%2$d portu üzerinde %1$s"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:208
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:211
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:204
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:207
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (kurulu)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:206
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:209
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s kurulu)"
 
 #: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62 IntroductionPage.cpp:65 IntroductionPage.cpp:66
+#: IntroductionPage.cpp:62 IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr "<uzaktaki sunucu>"
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "An unknown error occured."
 msgstr "Bağlantı hatası."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "Stack Builder sihirbazı kapatmak istediğinizden emin misiniz?"
 
@@ -92,12 +92,12 @@ msgstr "Stack Builder sihirbazı kapatmak istediğinizden emin misiniz?"
 msgid "Both the proxy server and port must be specified."
 msgstr "Hem proxy sunucusu hem de port belirtilmelidir."
 
-#: MD5.cpp:271 MD5.cpp:270
+#: MD5.cpp:271 MD5.cpp:274
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Endeks oluşturmak için %s giriş dosyası açılamadı."
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:179
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:182
 msgid "Categories"
 msgstr "Kategoriler"
 
@@ -156,7 +156,7 @@ msgstr "Uygulamaların listesi okunuyor..."
 msgid "Downloading mirror list..."
 msgstr "Yansıların listesi indiriliyor"
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Exit wizard?"
 msgstr "Sihirbazsan çık?"
 
@@ -351,7 +351,7 @@ msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
 
 #: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
-#: IntroductionPage.cpp:427
+#: IntroductionPage.cpp:439
 msgid "Proxy servers"
 msgstr "Proxy sunucuları"
 
@@ -371,7 +371,7 @@ msgstr "İndirilecek dosyaların saklanacağı dizin seçin."
 msgid "Selected packages:"
 msgstr "Paketleri seçin:"
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40 Wizard.cpp:31
+#: StackBuilder.cpp:37 StackBuilder.cpp:40 StackBuilder.cpp:96
 msgid "Stack Builder"
 msgstr "Stack Builder"
 
@@ -444,7 +444,7 @@ msgstr ""
 "Bu sihirbaz PostegreSQL veya EnterprıseDB kurulumunuzu tamamlamak için ek "
 "yazılım kurmanıza yarım edecek."
 
-#: IntroductionPage.cpp:51 IntroductionPage.cpp:55 IntroductionPage.cpp:59
+#: IntroductionPage.cpp:51 IntroductionPage.cpp:55
 msgid ""
 "To begin, please select the installation you are installing software for "
 "from the list below. If you are installing software to use with a remote "
@@ -453,8 +453,18 @@ msgstr ""
 "Başlamak için lütfen üzerinde çalışacağınız kurulumu seçin. Uzaktaki sisteme "
 "kurulum yapılacak ise <uzaktaki sunucu> seçeneği seçin."
 
-#: IntroductionPage.cpp:161 IntroductionPage.cpp:238 IntroductionPage.cpp:310
-#: IntroductionPage.cpp:387
+#: IntroductionPage.cpp:59
+#, fuzzy
+msgid ""
+"To begin, please select the installation you are installing software for "
+"from the list below. Your computer must be connected to the Internet before "
+"proceeding."
+msgstr ""
+"Başlamak için lütfen üzerinde çalışacağınız kurulumu seçin. Uzaktaki sisteme "
+"kurulum yapılacak ise <uzaktaki sunucu> seçeneği seçin."
+
+#: IntroductionPage.cpp:161 IntroductionPage.cpp:241 IntroductionPage.cpp:316
+#: IntroductionPage.cpp:396
 msgid "Unknown server"
 msgstr ""
 

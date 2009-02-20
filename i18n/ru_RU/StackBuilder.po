@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 16:53+0100\n"
+"POT-Creation-Date: 2009-02-20 11:55+0000\n"
 "PO-Revision-Date: 2007-05-05 11:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,29 +20,29 @@ msgstr ""
 "вручную используя выкачанные файлы."
 
 #: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:259
-#: IntroductionPage.cpp:350 IntroductionPage.cpp:408
+#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:262
+#: IntroductionPage.cpp:356 IntroductionPage.cpp:417
 #, c-format
 msgid "%s on port %d"
 msgstr "%s на порту %d"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:208
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:211
 #, fuzzy, c-format
 msgid "%s v%s"
 msgstr "%s из%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:204
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:207
 #, fuzzy, c-format
 msgid "%s v%s (installed)"
 msgstr "%s из%s (установленно)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:206
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:209
 #, fuzzy, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s из%s (из%s установленно)"
 
 #: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62 IntroductionPage.cpp:65 IntroductionPage.cpp:66
+#: IntroductionPage.cpp:62 IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr "<удаленный сервер>"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "An unknown error occured."
 msgstr "Возникла ошибка подсоединения."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "Вы уверены, что хотите закрыть мастер Stack Builder?"
 
@@ -87,12 +87,12 @@ msgstr "Вы уверены, что хотите закрыть мастер Sta
 msgid "Both the proxy server and port must be specified."
 msgstr "Должны быть указаны адрес и порт прокси сервера."
 
-#: MD5.cpp:271 MD5.cpp:270
+#: MD5.cpp:271 MD5.cpp:274
 #, fuzzy, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Невозможно открыть файл %s для генерации хеша!"
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:179
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:182
 msgid "Categories"
 msgstr "Категории"
 
@@ -151,7 +151,7 @@ msgstr "Загрузка списка приложений..."
 msgid "Downloading mirror list..."
 msgstr "Загрузка списка зеркал..."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Exit wizard?"
 msgstr "Покинуть мастер?"
 
@@ -346,7 +346,7 @@ msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
 
 #: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
-#: IntroductionPage.cpp:427
+#: IntroductionPage.cpp:439
 msgid "Proxy servers"
 msgstr "Прокси сервера"
 
@@ -367,7 +367,7 @@ msgstr "Выберете директорию загрузки"
 msgid "Selected packages:"
 msgstr "Выбранные пакеты:"
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40 Wizard.cpp:31
+#: StackBuilder.cpp:37 StackBuilder.cpp:40 StackBuilder.cpp:96
 msgid "Stack Builder"
 msgstr "Stack Builder"
 
@@ -443,7 +443,7 @@ msgstr ""
 "Этот мастер поможет установить дополнительные приложения для установленных "
 "СУБД PostgreSQL или  EnterpriseDB."
 
-#: IntroductionPage.cpp:51 IntroductionPage.cpp:55 IntroductionPage.cpp:59
+#: IntroductionPage.cpp:51 IntroductionPage.cpp:55
 msgid ""
 "To begin, please select the installation you are installing software for "
 "from the list below. If you are installing software to use with a remote "
@@ -453,8 +453,19 @@ msgstr ""
 "дополнительные приложения. Если вы хотите устанавить приложения на удаленный "
 "сервер, выберете опцию <удаленный сервер>."
 
-#: IntroductionPage.cpp:161 IntroductionPage.cpp:238 IntroductionPage.cpp:310
-#: IntroductionPage.cpp:387
+#: IntroductionPage.cpp:59
+#, fuzzy
+msgid ""
+"To begin, please select the installation you are installing software for "
+"from the list below. Your computer must be connected to the Internet before "
+"proceeding."
+msgstr ""
+"Для начала, выберете СУБД из списка ниже, для которой будут установленны "
+"дополнительные приложения. Если вы хотите устанавить приложения на удаленный "
+"сервер, выберете опцию <удаленный сервер>."
+
+#: IntroductionPage.cpp:161 IntroductionPage.cpp:241 IntroductionPage.cpp:316
+#: IntroductionPage.cpp:396
 msgid "Unknown server"
 msgstr ""
 
