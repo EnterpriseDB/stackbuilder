@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.20 2008/09/12 10:26:11 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.21 2009/02/26 16:03:18 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,7 @@
 #include <wx/treectrl.h>
 #include <wx/url.h>
 #include <wx/xml/xml.h>
+#include <wx/tokenzr.h>
 
 // Application headers
 #include "App.h"
@@ -173,33 +174,44 @@ wxString AppList::DeHTMLise(const wxString &string)
     return ret;
 }
 
-bool AppList::PopulateTreeCtrl()
+wxTreeItemId AppList::FindCategory(wxTreeItemId parent, wxString &category)
 {
     wxTreeItemIdValue cookie;
-    wxTreeItemId node, root, category, application;
+    wxTreeItemId node;
+
+    node = m_treectrl->GetFirstChild(parent, cookie); 
+
+    while (node)
+    {
+	if (m_treectrl->GetItemText(node) == category)
+	    return node;
+        node = m_treectrl->GetNextChild(parent, cookie);
+    }
+    return node;
+} 
+     
+
+bool AppList::PopulateTreeCtrl()
+{
+    wxTreeItemId node, root, category, application, parentNode;
     bool found;
 
     root = m_treectrl->AddRoot(_("Categories"), 3);
 
     for (unsigned int i=0; i<m_apps.GetCount(); i++)
     {
-        found = false;
+        parentNode = root;
 
-        node = m_treectrl->GetFirstChild(root, cookie);
-
-        while (node)
+        wxStringTokenizer tokens(m_apps[i].category, wxT("\\"));
+        while (tokens.HasMoreTokens())
         {
-            if (m_treectrl->GetItemText(node) == m_apps[i].category)
-            {
-                category = node;
-                found = true;
-                break;
-            }
-            node = m_treectrl->GetNextChild(root, cookie);
-        }
-
-        if (!found)
-            category = m_treectrl->AppendItem(root, m_apps[i].category, 3);
+            wxString ctg = tokens.GetNextToken();
+            node = FindCategory(parentNode, ctg); 
+            if (!node) 
+                node =  m_treectrl->AppendItem(parentNode, ctg, 3);
+            parentNode = node;
+        }       
+        category = node;
 
         // We used to disable installed apps here (by using image #2), but that
         // may not be the best strategy as it prevents us from reinstalling apps.

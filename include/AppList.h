@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.h,v 1.10 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: AppList.h,v 1.11 2009/02/26 16:03:18 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -48,6 +48,7 @@ public:
 
 private:
     wxString DeHTMLise(const wxString &string);
+    wxTreeItemId FindCategory(wxTreeItemId root, wxString &category);
 
     AppArray m_apps;
     wxString m_applicationListUrl;
