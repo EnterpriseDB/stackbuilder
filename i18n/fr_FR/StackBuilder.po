@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-05 15:24+0000\n"
-"PO-Revision-Date: 2008-09-11 22:00+0100\n"
+"PO-Revision-Date: 2009-03-05 19:35+0100\n"
 "Last-Translator: Guillaume Lelarge <guillaume@lelarge.info>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,56 +17,81 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: CompletionPage.cpp:58 CompletionPage.cpp:56
+#: CompletionPage.cpp:58
+#: CompletionPage.cpp:56
 #, c-format
-msgid ""
-"%d installations were skipped - you may attempt to manually install those "
-"packages using the downloaded files."
-msgstr ""
-"%d installations ont été laissées de côté - vous pouvez essayer d'installer "
-"manuellement les paquets en utilisant les fichiers téléchargés."
+msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
+msgstr "%d installations ont été laissées de côté - vous pouvez essayer d'installer manuellement les paquets en utilisant les fichiers téléchargés."
 
-#: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:262
-#: IntroductionPage.cpp:356 IntroductionPage.cpp:417
+#: IntroductionPage.cpp:151
+#: IntroductionPage.cpp:211
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
+#: IntroductionPage.cpp:201
+#: IntroductionPage.cpp:262
+#: IntroductionPage.cpp:356
+#: IntroductionPage.cpp:417
 #, c-format
 msgid "%s on port %d"
 msgstr "%s sur le port %d"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:223
+#: AppList.cpp:171
+#: AppList.cpp:173
+#: AppList.cpp:223
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:219
+#: AppList.cpp:167
+#: AppList.cpp:169
+#: AppList.cpp:219
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (installé)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:221
+#: AppList.cpp:169
+#: AppList.cpp:171
+#: AppList.cpp:221
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s installé)"
 
-#: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62 IntroductionPage.cpp:66
+#: IntroductionPage.cpp:57
+#: IntroductionPage.cpp:58
+#: IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
+#: IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr "<serveur distant>"
 
-#: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:391 AppList.cpp:55
+#: App.cpp:239
+#: AppList.cpp:52
+#: MirrorList.cpp:49
+#: App.cpp:242
+#: AppList.cpp:54
+#: MirrorList.cpp:51
+#: App.cpp:391
+#: AppList.cpp:55
 msgid "A connection error occurred."
 msgstr "Une erreur de connexion est survenue."
 
-#: App.cpp:404 AppList.cpp:68 MirrorList.cpp:64
+#: App.cpp:404
+#: AppList.cpp:68
+#: MirrorList.cpp:64
 msgid "A connection to the server could not be established."
 msgstr "Une connexion au serveur n'a pas pu être établie."
 
-#: App.cpp:398 AppList.cpp:62 MirrorList.cpp:58
+#: App.cpp:398
+#: AppList.cpp:62
+#: MirrorList.cpp:58
 msgid "A network error occured."
 msgstr "Une erreur réseau est survenue."
 
-#: App.cpp:242 AppList.cpp:55 MirrorList.cpp:52 App.cpp:245 AppList.cpp:57
+#: App.cpp:242
+#: AppList.cpp:55
+#: MirrorList.cpp:52
+#: App.cpp:245
+#: AppList.cpp:57
 #: MirrorList.cpp:54
 msgid "A protocol error occurred."
 msgstr "Une erreur de protocole est survenue."
@@ -75,104 +100,145 @@ msgstr "Une erreur de protocole est survenue."
 msgid "All the installation files have now been successfully downloaded."
 msgstr "Tous les fichiers d'installation ont bien été téléchargés."
 
-#: App.cpp:401 AppList.cpp:65 MirrorList.cpp:61
+#: App.cpp:401
+#: AppList.cpp:65
+#: MirrorList.cpp:61
 msgid "An error occured during negotiation."
 msgstr "Une erreur est survenu lors de la négociation."
 
-#: App.cpp:410 AppList.cpp:74 MirrorList.cpp:70
+#: App.cpp:410
+#: AppList.cpp:74
+#: MirrorList.cpp:70
 msgid "An unknown error occured."
 msgstr "Une erreur inconnue est survenue."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:105
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr "Êtes-vous sûr de vouloir quitter l'assistant Stack Builder ?"
 
-#: ProxyDialog.cpp:101 ProxyDialog.cpp:108 ProxyDialog.cpp:116
+#: ProxyDialog.cpp:101
+#: ProxyDialog.cpp:108
+#: ProxyDialog.cpp:116
 #: ProxyDialog.cpp:123
 msgid "Both the proxy server and port must be specified."
 msgstr "Le serveur et le port du proxy doivent être spécifiés."
 
-#: MD5.cpp:271 MD5.cpp:274
+#: MD5.cpp:271
+#: MD5.cpp:274
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Impossible d'ouvrir le fichier %s en entrée pour générer le hachage."
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:199
+#: AppList.cpp:144
+#: AppList.cpp:146
+#: AppList.cpp:199
 msgid "Categories"
 msgstr "Catégories"
 
-#: App.cpp:358 App.cpp:361 App.cpp:568
+#: App.cpp:358
+#: App.cpp:361
+#: App.cpp:568
 #, c-format
 msgid "Checking existing file: %s"
 msgstr "Vérification du fichier existant : %s"
 
-#: App.cpp:335 App.cpp:338 App.cpp:531
+#: App.cpp:335
+#: App.cpp:338
+#: App.cpp:531
 #, c-format
 msgid "Checksum verification failed for: %s! Deleting file..."
-msgstr ""
-"Échec lors de la vérification de la somme de contrôle pour %s ! Suppression "
-"du fichier..."
+msgstr "Échec lors de la vérification de la somme de contrôle pour %s ! Suppression du fichier..."
 
-#: App.cpp:207 App.cpp:208 App.cpp:318
+#: App.cpp:207
+#: App.cpp:208
+#: App.cpp:318
 msgid "Connecting to server..."
 msgstr "Connexion au serveur..."
 
-#: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:352 App.cpp:379 AppList.cpp:43
+#: App.cpp:227
+#: AppList.cpp:40
+#: MirrorList.cpp:37
+#: App.cpp:230
+#: AppList.cpp:42
+#: MirrorList.cpp:39
+#: App.cpp:352
+#: App.cpp:379
+#: AppList.cpp:43
 msgid "Could not parse the URL."
 msgstr "Impossible d'analyser l'URL."
 
-#: MirrorList.cpp:125 MirrorList.cpp:127 MirrorList.cpp:151
+#: MirrorList.cpp:125
+#: MirrorList.cpp:127
+#: MirrorList.cpp:151
 msgid "Countries"
 msgstr "Pays"
 
-#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
 #: AppSelectionPage.cpp:210
 msgid "Deselect application"
 msgstr "Désélectionner l'application"
 
-#: DownloadPage.cpp:61 DownloadPage.cpp:65
+#: DownloadPage.cpp:61
+#: DownloadPage.cpp:65
 msgid "Download directory:"
 msgstr "Répertoire de téléchargement :"
 
-#: App.cpp:297 App.cpp:300 App.cpp:493
+#: App.cpp:297
+#: App.cpp:300
+#: App.cpp:493
 #, c-format
 msgid "Downloaded %d KB (%d KB/Sec)"
 msgstr "%d Ko téléchargés (%d Ko/sec)"
 
-#: App.cpp:295 App.cpp:298 App.cpp:491
+#: App.cpp:295
+#: App.cpp:298
+#: App.cpp:491
 #, c-format
 msgid "Downloaded %d of %d KB (%d KB/Sec)"
 msgstr "%d Ko téléchargés sur %d (%d Ko/sec)"
 
-#: App.cpp:206 App.cpp:207 App.cpp:317
+#: App.cpp:206
+#: App.cpp:207
+#: App.cpp:317
 #, c-format
 msgid "Downloading %s"
 msgstr "Téléchargement de %s"
 
-#: IntroductionPage.cpp:85 IntroductionPage.cpp:95 IntroductionPage.cpp:99
+#: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:95
+#: IntroductionPage.cpp:99
 msgid "Downloading application list..."
 msgstr "Téléchargement de la liste des applications..."
 
-#: AppSelectionPage.cpp:135 AppSelectionPage.cpp:152
+#: AppSelectionPage.cpp:135
+#: AppSelectionPage.cpp:152
 msgid "Downloading mirror list..."
 msgstr "Téléchargement de la liste des miroirs..."
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:105
 msgid "Exit wizard?"
 msgstr "Quitter l'assistant ?"
 
-#: ProxyDialog.cpp:62 ProxyDialog.cpp:77
+#: ProxyDialog.cpp:62
+#: ProxyDialog.cpp:77
 msgid "FTP proxy"
 msgstr "Proxy FTP"
 
 #: App.cpp:643
 #, c-format
 msgid "Failed to create the installer appbundle directory: %s/%s"
-msgstr ""
-"Échec lors de la création du répertoire de l'installeur appbundle : %s/%s"
+msgstr "Échec lors de la création du répertoire de l'installeur appbundle : %s/%s"
 
-#: App.cpp:245 App.cpp:248 App.cpp:364 App.cpp:415
+#: App.cpp:245
+#: App.cpp:248
+#: App.cpp:364
+#: App.cpp:415
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -183,7 +249,9 @@ msgstr ""
 "\n"
 "Erreur : %s"
 
-#: App.cpp:255 App.cpp:258 App.cpp:451
+#: App.cpp:255
+#: App.cpp:258
+#: App.cpp:451
 #, c-format
 msgid ""
 "Failed to open %s\n"
@@ -194,7 +262,9 @@ msgstr ""
 "\n"
 "Erreur : l'URL spécifiée n'a pas pu être ouverte."
 
-#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:79
+#: AppList.cpp:58
+#: AppList.cpp:60
+#: AppList.cpp:79
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -205,7 +275,9 @@ msgstr ""
 "\n"
 "Erreur : %s"
 
-#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:87
+#: AppList.cpp:66
+#: AppList.cpp:68
+#: AppList.cpp:87
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -216,7 +288,9 @@ msgstr ""
 "\n"
 "Erreur : l'URL indiquée n'a pas pu être ouverte."
 
-#: MirrorList.cpp:55 MirrorList.cpp:57 MirrorList.cpp:75
+#: MirrorList.cpp:55
+#: MirrorList.cpp:57
+#: MirrorList.cpp:75
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -227,7 +301,9 @@ msgstr ""
 "\n"
 "Erreur : %s"
 
-#: MirrorList.cpp:63 MirrorList.cpp:65 MirrorList.cpp:83
+#: MirrorList.cpp:63
+#: MirrorList.cpp:65
+#: MirrorList.cpp:83
 #, c-format
 msgid ""
 "Failed to open the mirror list: %s\n"
@@ -238,24 +314,24 @@ msgstr ""
 "\n"
 "Erreur : l'URL indiquée n'a pas pu être ouverte."
 
-#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:94
+#: AppList.cpp:73
+#: AppList.cpp:75
+#: AppList.cpp:94
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "Échec lors de l'analyse de la liste des applications : %s"
 
-#: MirrorList.cpp:70 MirrorList.cpp:72 MirrorList.cpp:90
+#: MirrorList.cpp:70
+#: MirrorList.cpp:72
+#: MirrorList.cpp:90
 #, c-format
 msgid "Failed to parse the mirror list: %s"
 msgstr "Échec lors de l'analyse de la liste des miroirs : %s"
 
 #: App.cpp:692
 #, c-format
-msgid ""
-"Failed to read the CFBundleExecutable value from the appbundle description: %"
-"s/Contents/Info.plist"
-msgstr ""
-"Échec lors de la lecture de la valeur CFBundleExecutable à partir de la "
-"description appbundle : %s/Contents/Info.plist"
+msgid "Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"
+msgstr "Échec lors de la lecture de la valeur CFBundleExecutable à partir de la description appbundle : %s/Contents/Info.plist"
 
 #: App.cpp:582
 #, c-format
@@ -281,7 +357,8 @@ msgstr ""
 msgid "Failed to write the installer appbundle file: %s/%s"
 msgstr "Échec lors de l'écriture du fichier appbundle de l'installeur : %s/%s"
 
-#: ProxyDialog.cpp:53 ProxyDialog.cpp:68
+#: ProxyDialog.cpp:53
+#: ProxyDialog.cpp:68
 msgid "HTTP proxy"
 msgstr "Proxy HTTP"
 
@@ -289,26 +366,24 @@ msgstr "Proxy HTTP"
 msgid "Installation complete!"
 msgstr "Installation terminée !"
 
-#: App.cpp:413 App.cpp:416 App.cpp:730
+#: App.cpp:413
+#: App.cpp:416
+#: App.cpp:730
 msgid "Installation error"
 msgstr "Erreur d'installation"
 
-#: CompletionPage.cpp:33 CompletionPage.cpp:31
-msgid ""
-"Installation of the packages you selected has finished. The downloaded files "
-"have been retained to allow future installations or upgrades (some packages "
-"require the original installation files when being upgraded)."
-msgstr ""
-"L'installation des paquets sélectionnés est terminée. Les fichiers "
-"téléchargés ont été conservés pour permettre de futures installations ou "
-"mises à jour (certains paquets demandent les fichiers d'installation "
-"originaux lors de leur mise à jour)."
+#: CompletionPage.cpp:33
+#: CompletionPage.cpp:31
+msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
+msgstr "L'installation des paquets sélectionnés est terminée. Les fichiers téléchargés ont été conservés pour permettre de futures installations ou mises à jour (certains paquets demandent les fichiers d'installation originaux lors de leur mise à jour)."
 
-#: ProxyDialog.cpp:93 ProxyDialog.cpp:108
+#: ProxyDialog.cpp:93
+#: ProxyDialog.cpp:108
 msgid "Invalid FTP port specified."
 msgstr "Port FTP spécifié invalide."
 
-#: ProxyDialog.cpp:86 ProxyDialog.cpp:101
+#: ProxyDialog.cpp:86
+#: ProxyDialog.cpp:101
 msgid "Invalid HTTP port specified."
 msgstr "Port HTTP spécifié invalide."
 
@@ -320,40 +395,50 @@ msgstr "Nom d'hôte invalide spécifié dans l'URL."
 msgid "Invalid path specified in URL."
 msgstr "Chemin invalide spécifié dans l'URL."
 
-#: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:358 AppList.cpp:49
+#: App.cpp:233
+#: AppList.cpp:46
+#: MirrorList.cpp:43
+#: App.cpp:236
+#: AppList.cpp:48
+#: MirrorList.cpp:45
+#: App.cpp:358
+#: AppList.cpp:49
 msgid "No hostname specified in URL."
 msgstr "Pas d'hôte dans l'URL."
 
-#: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:361 AppList.cpp:52
+#: App.cpp:236
+#: AppList.cpp:49
+#: MirrorList.cpp:46
+#: App.cpp:239
+#: AppList.cpp:51
+#: MirrorList.cpp:48
+#: App.cpp:361
+#: AppList.cpp:52
 msgid "No path specified in URL."
 msgstr "Pas de chemin dans l'URL."
 
 #: InstallationPage.cpp:47
-msgid ""
-"Note: You must allow all installations to run to completion. If you are "
-"prompted to restart the computer, click \"No\" or \"Restart Later\" and "
-"manually restart your computer when all the installation have finished."
-msgstr ""
-"Note : vous devez permettre l'exécution complète des toutes les "
-"installations. S'il vous est demandé de redémarrer l'ordinateur, cliquez sur "
-"« Non » ou sur « Redémarrer plus tard ». Vous redémarrerez manuellement votre "
-"ordinateur quand toutes les installations seront terminées."
+msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
+msgstr "Note : vous devez permettre l'exécution complète des toutes les installations. S'il vous est demandé de redémarrer l'ordinateur, cliquez sur « Non » ou sur « Redémarrer plus tard ». Vous redémarrerez manuellement votre ordinateur quand toutes les installations seront terminées."
 
 #: InstallationPage.cpp:41
 msgid "Please click the \"Next\" button to start the installations."
 msgstr "Cliquer sur le bouton « Suivant » pour commencer les installations."
 
-#: MirrorSelectionPage.cpp:40 MirrorSelectionPage.cpp:41
+#: MirrorSelectionPage.cpp:40
+#: MirrorSelectionPage.cpp:41
 msgid "Please select a mirror site to download from."
 msgstr "Sélectionner un site miroir de téléchargement."
 
-#: AppSelectionPage.cpp:88 AppSelectionPage.cpp:95
+#: AppSelectionPage.cpp:88
+#: AppSelectionPage.cpp:95
 msgid "Please select the applications you would like to install."
 msgstr "Sélectionner les applications que vous souhaitez installer."
 
-#: ProxyDialog.cpp:57 ProxyDialog.cpp:66 ProxyDialog.cpp:72 ProxyDialog.cpp:81
+#: ProxyDialog.cpp:57
+#: ProxyDialog.cpp:66
+#: ProxyDialog.cpp:72
+#: ProxyDialog.cpp:81
 msgid "Port"
 msgstr "Port"
 
@@ -361,60 +446,61 @@ msgstr "Port"
 msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr "PostgreSQL & EnterpriseDB Stack Builder"
 
-#: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
+#: IntroductionPage.cpp:72
+#: IntroductionPage.cpp:237
+#: IntroductionPage.cpp:76
 #: IntroductionPage.cpp:439
 msgid "Proxy servers"
 msgstr "Serveurs proxy"
 
-#: DownloadPage.cpp:45 DownloadPage.cpp:49
-msgid ""
-"Review your selections and choose a download directory if required, and then "
-"click the Next button to begin downloading the packages you have selected."
-msgstr ""
-"Vérifiez vos sélections et choisissez un répertoire de téléchargement si "
-"nécessaire. Puis, cliquez sur le bouton « Suivant » pour commencer le "
-"téléchargement des paquets sélectionnés."
+#: DownloadPage.cpp:45
+#: DownloadPage.cpp:49
+msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
+msgstr "Vérifiez vos sélections et choisissez un répertoire de téléchargement si nécessaire. Puis, cliquez sur le bouton « Suivant » pour commencer le téléchargement des paquets sélectionnés."
 
-#: DownloadPage.cpp:95 DownloadPage.cpp:105
+#: DownloadPage.cpp:95
+#: DownloadPage.cpp:105
 msgid "Select a download directory"
 msgstr "Sélectionner un répertoire de téléchargement"
 
-#: DownloadPage.cpp:51 DownloadPage.cpp:55
+#: DownloadPage.cpp:51
+#: DownloadPage.cpp:55
 msgid "Selected packages:"
 msgstr "Paquets sélectionnés :"
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40 StackBuilder.cpp:96
+#: StackBuilder.cpp:37
+#: StackBuilder.cpp:40
+#: StackBuilder.cpp:96
 msgid "Stack Builder"
 msgstr "Stack Builder"
 
-#: DownloadPage.cpp:111 DownloadPage.cpp:121
+#: DownloadPage.cpp:111
+#: DownloadPage.cpp:121
 msgid "The download directory does not exist. Please select a valid directory."
-msgstr ""
-"Le répertoire de téléchargement n'existe pas. Merci de sélectionner un "
-"répertoire valide."
+msgstr "Le répertoire de téléchargement n'existe pas. Merci de sélectionner un répertoire valide."
 
-#: App.cpp:407 AppList.cpp:71 MirrorList.cpp:67
+#: App.cpp:407
+#: AppList.cpp:71
+#: MirrorList.cpp:67
 msgid "The file does not exist."
 msgstr "Le fichier n'existe pas."
 
-#: App.cpp:412 App.cpp:415 App.cpp:729
+#: App.cpp:412
+#: App.cpp:415
+#: App.cpp:729
 #, c-format
 msgid ""
 "The installation of %s returned an error.\n"
 "\n"
-" Click on the OK button to ignore this error and continue with any remaining "
-"installations, or click Cancel to abort the remaining installations.\n"
+" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
 "\n"
-"Note that ignoring this error may result in failure of any later "
-"installations that depend on this one."
+"Note that ignoring this error may result in failure of any later installations that depend on this one."
 msgstr ""
 "L'installation de %s a renvoyé une erreur.\n"
 "\n"
-" Cliquer sur le bouton « OK » pour ignorer cette erreur et continuer avec le "
-"reste des installations. Cliquer sur « Annuler » pour annuler le reste.\n"
+" Cliquer sur le bouton « OK » pour ignorer cette erreur et continuer avec le reste des installations. Cliquer sur « Annuler » pour annuler le reste.\n"
 "\n"
-"Notez qu'ignorer cette erreur pourrait résulter en des échecs des "
-"installations suivantes qui pourraient dépendre de ce paquet."
+"Notez qu'ignorer cette erreur pourrait résulter en des échecs des installations suivantes qui pourraient dépendre de ce paquet."
 
 #: IntroductionPage.cpp:112
 msgid "There are currently no applications available for your platform."
@@ -424,71 +510,61 @@ msgstr "Il n'existe aucune application disponible pour votre plateforme."
 msgid "This application must be run as the superuser."
 msgstr "Cette application doit être exécutée en tant que super-utilisateur."
 
-#: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
 #: AppSelectionPage.cpp:210
 msgid ""
-"This application was automatically selected because another selection is "
-"dependent upon it.\n"
-"If you do not install this application others may not install or work "
-"correctly.\n"
+"This application was automatically selected because another selection is dependent upon it.\n"
+"If you do not install this application others may not install or work correctly.\n"
 "\n"
 "Are you sure you wish to continue?"
 msgstr ""
-"Cette application a été automatiquement sélectionnée parce qu'un autre "
-"paquet en dépend.\n"
-"Si vous ne voulez pas installer cette application, d'autres paquets "
-"pourraient ne pas s'installer ou fonctionner correctement.\n"
+"Cette application a été automatiquement sélectionnée parce qu'un autre paquet en dépend.\n"
+"Si vous ne voulez pas installer cette application, d'autres paquets pourraient ne pas s'installer ou fonctionner correctement.\n"
 "\n"
 "Êtes-vous sûr de vouloir continuer ?"
 
 #: IntroductionPage.cpp:53
-msgid ""
-"This wizard will help you install additional software to complement your "
-"PostgreSQL or EnterpriseDB Postgres Plus installation."
-msgstr ""
-"Cet assistant vous aide à installer des logiciels complémentaires à votre "
-"installation de PostgreSQL ou d'EnterpriseDB Postgres Plus."
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB Postgres Plus installation."
+msgstr "Cet assistant vous aide à installer des logiciels complémentaires à votre installation de PostgreSQL ou d'EnterpriseDB Postgres Plus."
 
-#: IntroductionPage.cpp:45 IntroductionPage.cpp:49
-msgid ""
-"This wizard will help you install additional software to complement your "
-"PostgreSQL or EnterpriseDB installation."
-msgstr ""
-"Cet assistant vous aide à installer des logiciels complémentaires à votre "
-"installation de PostgreSQL ou d'EnterpriseDB."
+#: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:49
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
+msgstr "Cet assistant vous aide à installer des logiciels complémentaires à votre installation de PostgreSQL ou d'EnterpriseDB."
 
-#: IntroductionPage.cpp:51 IntroductionPage.cpp:55
-msgid ""
-"To begin, please select the installation you are installing software for "
-"from the list below. If you are installing software to use with a remote "
-"server, please select the <remote server> option."
-msgstr ""
-"Pour commencer, sélectionner l'installation pour laquelle vous installez les "
-"logiciels de cette liste. Si vous installez du logiciel à utiliser avec un "
-"serveur distant, sélectionner l'option <serveur distant>."
+#: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:55
+msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
+msgstr "Pour commencer, sélectionner l'installation pour laquelle vous installez les logiciels de cette liste. Si vous installez du logiciel à utiliser avec un serveur distant, sélectionner l'option <serveur distant>."
 
 #: IntroductionPage.cpp:59
-#, fuzzy
-msgid ""
-"To begin, please select the installation you are installing software for "
-"from the list below. Your computer must be connected to the Internet before "
-"proceeding."
-msgstr ""
-"Pour commencer, sélectionner l'installation pour laquelle vous installez les "
-"logiciels de cette liste. Si vous installez du logiciel à utiliser avec un "
-"serveur distant, sélectionner l'option <serveur distant>."
+msgid "To begin, please select the installation you are installing software for from the list below. Your computer must be connected to the Internet before proceeding."
+msgstr "Pour commencer, sélectionnez l'installation pour laquelle vous installez les logiciels de la liste ci-dessous. Votre ordinateur doit être connecté à Internet avant de continuer."
 
-#: IntroductionPage.cpp:161 IntroductionPage.cpp:241 IntroductionPage.cpp:316
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:241
+#: IntroductionPage.cpp:316
 #: IntroductionPage.cpp:396
 msgid "Unknown server"
 msgstr "Serveur inconnu"
 
-#: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:355 App.cpp:382 AppList.cpp:46
+#: App.cpp:230
+#: AppList.cpp:43
+#: MirrorList.cpp:40
+#: App.cpp:233
+#: AppList.cpp:45
+#: MirrorList.cpp:42
+#: App.cpp:355
+#: App.cpp:382
+#: AppList.cpp:46
 msgid "Unsupported protocol specified."
 msgstr "Protocole spécifié non supporté."
 
-#: App.cpp:323 App.cpp:326 App.cpp:519
+#: App.cpp:323
+#: App.cpp:326
+#: App.cpp:519
 #, c-format
 msgid "Verifying checksum for: %s"
 msgstr "Vérification de la somme de contrôle pour %s"
@@ -497,43 +573,44 @@ msgstr "Vérification de la somme de contrôle pour %s"
 msgid "Welcome to Stack Builder!"
 msgstr "Bienvenue dans Stack Builder !"
 
-#: IntroductionPage.cpp:39 IntroductionPage.cpp:43
+#: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:43
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
 msgstr "Bienvenue dans le PostgreSQL && EnterpriseDB Stack Builder !"
 
-#: CompletionPage.cpp:44 CompletionPage.cpp:42
-msgid ""
-"You may run this wizard again at any time to add to or upgrade the software "
-"in your stack. If you wish to remove any software, please use the Add/Remove "
-"Programs Control Panel applet."
-msgstr ""
-"Vous pouvez exécuter cet assistant à tout moment pour ajouter ou mettre à "
-"jour les logiciels installés. Si vous souhaitez supprimer un logiciel, merci "
-"d'utiliser l'outil « Ajouter/Supprimer des programmes » du panneau de "
-"configuration."
+#: CompletionPage.cpp:44
+#: CompletionPage.cpp:42
+msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
+msgstr "Vous pouvez exécuter cet assistant à tout moment pour ajouter ou mettre à jour les logiciels installés. Si vous souhaitez supprimer un logiciel, merci d'utiliser l'outil « Ajouter/Supprimer des programmes » du panneau de configuration."
 
-#: MirrorSelectionPage.cpp:68 MirrorSelectionPage.cpp:67
+#: MirrorSelectionPage.cpp:68
+#: MirrorSelectionPage.cpp:67
 msgid "You must select a mirror before you continue."
 msgstr "Vous devez sélectionner un miroir avant de continuer."
 
-#: IntroductionPage.cpp:73 IntroductionPage.cpp:83 IntroductionPage.cpp:87
+#: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:83
+#: IntroductionPage.cpp:87
 msgid "You must select an installation option before you continue."
 msgstr "Vous devez sélectionner une option d'installation avant de continuer."
 
-#: AppSelectionPage.cpp:123 AppSelectionPage.cpp:130
+#: AppSelectionPage.cpp:123
+#: AppSelectionPage.cpp:130
 msgid "You must select at least one package to install before you continue."
-msgstr ""
-"Vous devez sélectionner au moins un paquet à installer avant de continuer."
+msgstr "Vous devez sélectionner au moins un paquet à installer avant de continuer."
 
-#: StackBuilder.cpp:44 StackBuilder.cpp:47
+#: StackBuilder.cpp:44
+#: StackBuilder.cpp:47
 msgid "download the application list from the specified URL"
 msgstr "télécharger la liste d'applications à partir de l'URL indiquée"
 
-#: StackBuilder.cpp:43 StackBuilder.cpp:46
+#: StackBuilder.cpp:43
+#: StackBuilder.cpp:46
 msgid "download the mirror list from the specified URL"
 msgstr "télécharger la liste de miroirs à partir de l'URL indiquée"
 
-#: StackBuilder.cpp:42 StackBuilder.cpp:45
+#: StackBuilder.cpp:42
+#: StackBuilder.cpp:45
 msgid "show this help message"
 msgstr "affiche ce message d'aide"
 
@@ -541,6 +618,8 @@ msgstr "affiche ce message d'aide"
 msgid "use the download counter at the specified URL"
 msgstr "utiliser le compteur de téléchargement à l'URL indiquée"
 
-#: StackBuilder.cpp:45 StackBuilder.cpp:49
+#: StackBuilder.cpp:45
+#: StackBuilder.cpp:49
 msgid "use the specified language in the UI"
 msgstr "utilise la langue précisée dans l'interface"
+
