@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-11 16:53+0100\n"
+"POT-Creation-Date: 2009-03-05 15:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,42 +24,42 @@ msgid ""
 msgstr ""
 
 #: IntroductionPage.cpp:151 IntroductionPage.cpp:211 IntroductionPage.cpp:161
-#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:259
-#: IntroductionPage.cpp:350 IntroductionPage.cpp:408
+#: IntroductionPage.cpp:221 IntroductionPage.cpp:201 IntroductionPage.cpp:262
+#: IntroductionPage.cpp:356 IntroductionPage.cpp:417
 #, c-format
 msgid "%s on port %d"
 msgstr ""
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:208
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:223
 #, c-format
 msgid "%s v%s"
 msgstr ""
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:204
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:219
 #, c-format
 msgid "%s v%s (installed)"
 msgstr ""
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:206
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:221
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr ""
 
 #: IntroductionPage.cpp:57 IntroductionPage.cpp:58 IntroductionPage.cpp:61
-#: IntroductionPage.cpp:62 IntroductionPage.cpp:65 IntroductionPage.cpp:66
+#: IntroductionPage.cpp:62 IntroductionPage.cpp:66
 msgid "<remote server>"
 msgstr ""
 
 #: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:391
+#: MirrorList.cpp:51 App.cpp:391 AppList.cpp:55
 msgid "A connection error occurred."
 msgstr ""
 
-#: App.cpp:404 AppList.cpp:67 MirrorList.cpp:64
+#: App.cpp:404 AppList.cpp:68 MirrorList.cpp:64
 msgid "A connection to the server could not be established."
 msgstr ""
 
-#: App.cpp:398 AppList.cpp:61 MirrorList.cpp:58
+#: App.cpp:398 AppList.cpp:62 MirrorList.cpp:58
 msgid "A network error occured."
 msgstr ""
 
@@ -72,15 +72,15 @@ msgstr ""
 msgid "All the installation files have now been successfully downloaded."
 msgstr ""
 
-#: App.cpp:401 AppList.cpp:64 MirrorList.cpp:61
+#: App.cpp:401 AppList.cpp:65 MirrorList.cpp:61
 msgid "An error occured during negotiation."
 msgstr ""
 
-#: App.cpp:410 AppList.cpp:73 MirrorList.cpp:70
+#: App.cpp:410 AppList.cpp:74 MirrorList.cpp:70
 msgid "An unknown error occured."
 msgstr ""
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Are you sure you want to close the Stack Builder wizard?"
 msgstr ""
 
@@ -89,12 +89,12 @@ msgstr ""
 msgid "Both the proxy server and port must be specified."
 msgstr ""
 
-#: MD5.cpp:271 MD5.cpp:270
+#: MD5.cpp:271 MD5.cpp:274
 #, c-format
 msgid "Cannot open input file %s to generate hash!"
 msgstr ""
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:179
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:199
 msgid "Categories"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgid "Connecting to server..."
 msgstr ""
 
 #: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:352 App.cpp:379
+#: MirrorList.cpp:39 App.cpp:352 App.cpp:379 AppList.cpp:43
 msgid "Could not parse the URL."
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Downloading mirror list..."
 msgstr ""
 
-#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:104
+#: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Exit wizard?"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgid ""
 "Error: The URL specified could not be opened."
 msgstr ""
 
-#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:78
+#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:79
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -190,7 +190,7 @@ msgid ""
 "Error: %s"
 msgstr ""
 
-#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:86
+#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:87
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -214,7 +214,7 @@ msgid ""
 "Error: The URL specified could not be opened."
 msgstr ""
 
-#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:93
+#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:94
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr ""
@@ -284,12 +284,12 @@ msgid "Invalid path specified in URL."
 msgstr ""
 
 #: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:358
+#: MirrorList.cpp:45 App.cpp:358 AppList.cpp:49
 msgid "No hostname specified in URL."
 msgstr ""
 
 #: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:361
+#: MirrorList.cpp:48 App.cpp:361 AppList.cpp:52
 msgid "No path specified in URL."
 msgstr ""
 
@@ -321,7 +321,7 @@ msgid "PostgreSQL & EnterpriseDB Stack Builder"
 msgstr ""
 
 #: IntroductionPage.cpp:72 IntroductionPage.cpp:237 IntroductionPage.cpp:76
-#: IntroductionPage.cpp:427
+#: IntroductionPage.cpp:439
 msgid "Proxy servers"
 msgstr ""
 
@@ -339,7 +339,7 @@ msgstr ""
 msgid "Selected packages:"
 msgstr ""
 
-#: StackBuilder.cpp:37 StackBuilder.cpp:40 Wizard.cpp:31
+#: StackBuilder.cpp:37 StackBuilder.cpp:40 StackBuilder.cpp:96
 msgid "Stack Builder"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "The download directory does not exist. Please select a valid directory."
 msgstr ""
 
-#: App.cpp:407 AppList.cpp:70 MirrorList.cpp:67
+#: App.cpp:407 AppList.cpp:71 MirrorList.cpp:67
 msgid "The file does not exist."
 msgstr ""
 
@@ -394,20 +394,27 @@ msgid ""
 "PostgreSQL or EnterpriseDB installation."
 msgstr ""
 
-#: IntroductionPage.cpp:51 IntroductionPage.cpp:55 IntroductionPage.cpp:59
+#: IntroductionPage.cpp:51 IntroductionPage.cpp:55
 msgid ""
 "To begin, please select the installation you are installing software for "
 "from the list below. If you are installing software to use with a remote "
 "server, please select the <remote server> option."
 msgstr ""
 
-#: IntroductionPage.cpp:161 IntroductionPage.cpp:238 IntroductionPage.cpp:310
-#: IntroductionPage.cpp:387
+#: IntroductionPage.cpp:59
+msgid ""
+"To begin, please select the installation you are installing software for "
+"from the list below. Your computer must be connected to the Internet before "
+"proceeding."
+msgstr ""
+
+#: IntroductionPage.cpp:161 IntroductionPage.cpp:241 IntroductionPage.cpp:316
+#: IntroductionPage.cpp:396
 msgid "Unknown server"
 msgstr ""
 
 #: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:355 App.cpp:382
+#: MirrorList.cpp:42 App.cpp:355 App.cpp:382 AppList.cpp:46
 msgid "Unsupported protocol specified."
 msgstr ""
 
