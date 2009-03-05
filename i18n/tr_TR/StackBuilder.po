@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-20 11:55+0000\n"
+"POT-Creation-Date: 2009-03-05 15:24+0000\n"
 "PO-Revision-Date: 2007-05-02 22:16+0200\n"
 "Last-Translator: Nicolai Tufar <ntufar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,17 +31,17 @@ msgstr ""
 msgid "%s on port %d"
 msgstr "%2$d portu üzerinde %1$s"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:211
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:223
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:207
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:219
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (kurulu)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:209
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:221
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s kurulu)"
@@ -52,15 +52,15 @@ msgid "<remote server>"
 msgstr "<uzaktaki sunucu>"
 
 #: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:391
+#: MirrorList.cpp:51 App.cpp:391 AppList.cpp:55
 msgid "A connection error occurred."
 msgstr "Bağlantı hatası."
 
-#: App.cpp:404 AppList.cpp:67 MirrorList.cpp:64
+#: App.cpp:404 AppList.cpp:68 MirrorList.cpp:64
 msgid "A connection to the server could not be established."
 msgstr ""
 
-#: App.cpp:398 AppList.cpp:61 MirrorList.cpp:58
+#: App.cpp:398 AppList.cpp:62 MirrorList.cpp:58
 #, fuzzy
 msgid "A network error occured."
 msgstr "Bağlantı hatası."
@@ -74,11 +74,11 @@ msgstr "Protokol hatası."
 msgid "All the installation files have now been successfully downloaded."
 msgstr "Tüm kurulum dosyaları başarı ile indirildi."
 
-#: App.cpp:401 AppList.cpp:64 MirrorList.cpp:61
+#: App.cpp:401 AppList.cpp:65 MirrorList.cpp:61
 msgid "An error occured during negotiation."
 msgstr ""
 
-#: App.cpp:410 AppList.cpp:73 MirrorList.cpp:70
+#: App.cpp:410 AppList.cpp:74 MirrorList.cpp:70
 #, fuzzy
 msgid "An unknown error occured."
 msgstr "Bağlantı hatası."
@@ -97,7 +97,7 @@ msgstr "Hem proxy sunucusu hem de port belirtilmelidir."
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Endeks oluşturmak için %s giriş dosyası açılamadı."
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:182
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:199
 msgid "Categories"
 msgstr "Kategoriler"
 
@@ -116,7 +116,7 @@ msgid "Connecting to server..."
 msgstr "Sunucuya bağlanılıyor..."
 
 #: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:352 App.cpp:379
+#: MirrorList.cpp:39 App.cpp:352 App.cpp:379 AppList.cpp:43
 msgid "Could not parse the URL."
 msgstr "URL ayrıştırılamadı."
 
@@ -191,7 +191,7 @@ msgstr ""
 "\n"
 "Hata: Belirtilen URL açılamadı."
 
-#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:78
+#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:79
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -202,7 +202,7 @@ msgstr ""
 "\n"
 "Hata: %s"
 
-#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:86
+#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:87
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -235,7 +235,7 @@ msgstr ""
 "\n"
 "Error: Belirtilen URL açılamadı."
 
-#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:93
+#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:94
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "Uygulama listesi ayrıştırma hatası: %s"
@@ -310,12 +310,12 @@ msgid "Invalid path specified in URL."
 msgstr "URL içinde yol belirtilmedi."
 
 #: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:358
+#: MirrorList.cpp:45 App.cpp:358 AppList.cpp:49
 msgid "No hostname specified in URL."
 msgstr "URL içinde bilgisayar adı belirtilmedi."
 
 #: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:361
+#: MirrorList.cpp:48 App.cpp:361 AppList.cpp:52
 msgid "No path specified in URL."
 msgstr "URL içinde yol belirtilmedi."
 
@@ -379,7 +379,7 @@ msgstr "Stack Builder"
 msgid "The download directory does not exist. Please select a valid directory."
 msgstr "İndirme dizini mevcut değil. Lütfen geçerli bir dizin seçin."
 
-#: App.cpp:407 AppList.cpp:70 MirrorList.cpp:67
+#: App.cpp:407 AppList.cpp:71 MirrorList.cpp:67
 msgid "The file does not exist."
 msgstr ""
 
@@ -469,7 +469,7 @@ msgid "Unknown server"
 msgstr ""
 
 #: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:355 App.cpp:382
+#: MirrorList.cpp:42 App.cpp:355 App.cpp:382 AppList.cpp:46
 msgid "Unsupported protocol specified."
 msgstr "Desteklenmeyen protokol."
 

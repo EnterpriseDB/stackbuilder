@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-20 11:55+0000\n"
+"POT-Creation-Date: 2009-03-05 15:24+0000\n"
 "PO-Revision-Date: 2008-09-11 22:00+0100\n"
 "Last-Translator: Guillaume Lelarge <guillaume@lelarge.info>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -33,17 +33,17 @@ msgstr ""
 msgid "%s on port %d"
 msgstr "%s sur le port %d"
 
-#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:211
+#: AppList.cpp:171 AppList.cpp:173 AppList.cpp:223
 #, c-format
 msgid "%s v%s"
 msgstr "%s v%s"
 
-#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:207
+#: AppList.cpp:167 AppList.cpp:169 AppList.cpp:219
 #, c-format
 msgid "%s v%s (installed)"
 msgstr "%s v%s (installé)"
 
-#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:209
+#: AppList.cpp:169 AppList.cpp:171 AppList.cpp:221
 #, c-format
 msgid "%s v%s (v%s installed)"
 msgstr "%s v%s (v%s installé)"
@@ -54,15 +54,15 @@ msgid "<remote server>"
 msgstr "<serveur distant>"
 
 #: App.cpp:239 AppList.cpp:52 MirrorList.cpp:49 App.cpp:242 AppList.cpp:54
-#: MirrorList.cpp:51 App.cpp:391
+#: MirrorList.cpp:51 App.cpp:391 AppList.cpp:55
 msgid "A connection error occurred."
 msgstr "Une erreur de connexion est survenue."
 
-#: App.cpp:404 AppList.cpp:67 MirrorList.cpp:64
+#: App.cpp:404 AppList.cpp:68 MirrorList.cpp:64
 msgid "A connection to the server could not be established."
 msgstr "Une connexion au serveur n'a pas pu être établie."
 
-#: App.cpp:398 AppList.cpp:61 MirrorList.cpp:58
+#: App.cpp:398 AppList.cpp:62 MirrorList.cpp:58
 msgid "A network error occured."
 msgstr "Une erreur réseau est survenue."
 
@@ -75,11 +75,11 @@ msgstr "Une erreur de protocole est survenue."
 msgid "All the installation files have now been successfully downloaded."
 msgstr "Tous les fichiers d'installation ont bien été téléchargés."
 
-#: App.cpp:401 AppList.cpp:64 MirrorList.cpp:61
+#: App.cpp:401 AppList.cpp:65 MirrorList.cpp:61
 msgid "An error occured during negotiation."
 msgstr "Une erreur est survenu lors de la négociation."
 
-#: App.cpp:410 AppList.cpp:73 MirrorList.cpp:70
+#: App.cpp:410 AppList.cpp:74 MirrorList.cpp:70
 msgid "An unknown error occured."
 msgstr "Une erreur inconnue est survenue."
 
@@ -97,7 +97,7 @@ msgstr "Le serveur et le port du proxy doivent être spécifiés."
 msgid "Cannot open input file %s to generate hash!"
 msgstr "Impossible d'ouvrir le fichier %s en entrée pour générer le hachage."
 
-#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:182
+#: AppList.cpp:144 AppList.cpp:146 AppList.cpp:199
 msgid "Categories"
 msgstr "Catégories"
 
@@ -118,7 +118,7 @@ msgid "Connecting to server..."
 msgstr "Connexion au serveur..."
 
 #: App.cpp:227 AppList.cpp:40 MirrorList.cpp:37 App.cpp:230 AppList.cpp:42
-#: MirrorList.cpp:39 App.cpp:352 App.cpp:379
+#: MirrorList.cpp:39 App.cpp:352 App.cpp:379 AppList.cpp:43
 msgid "Could not parse the URL."
 msgstr "Impossible d'analyser l'URL."
 
@@ -194,7 +194,7 @@ msgstr ""
 "\n"
 "Erreur : l'URL spécifiée n'a pas pu être ouverte."
 
-#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:78
+#: AppList.cpp:58 AppList.cpp:60 AppList.cpp:79
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -205,7 +205,7 @@ msgstr ""
 "\n"
 "Erreur : %s"
 
-#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:86
+#: AppList.cpp:66 AppList.cpp:68 AppList.cpp:87
 #, c-format
 msgid ""
 "Failed to open the application list: %s\n"
@@ -238,7 +238,7 @@ msgstr ""
 "\n"
 "Erreur : l'URL indiquée n'a pas pu être ouverte."
 
-#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:93
+#: AppList.cpp:73 AppList.cpp:75 AppList.cpp:94
 #, c-format
 msgid "Failed to parse the application list: %s"
 msgstr "Échec lors de l'analyse de la liste des applications : %s"
@@ -321,12 +321,12 @@ msgid "Invalid path specified in URL."
 msgstr "Chemin invalide spécifié dans l'URL."
 
 #: App.cpp:233 AppList.cpp:46 MirrorList.cpp:43 App.cpp:236 AppList.cpp:48
-#: MirrorList.cpp:45 App.cpp:358
+#: MirrorList.cpp:45 App.cpp:358 AppList.cpp:49
 msgid "No hostname specified in URL."
 msgstr "Pas d'hôte dans l'URL."
 
 #: App.cpp:236 AppList.cpp:49 MirrorList.cpp:46 App.cpp:239 AppList.cpp:51
-#: MirrorList.cpp:48 App.cpp:361
+#: MirrorList.cpp:48 App.cpp:361 AppList.cpp:52
 msgid "No path specified in URL."
 msgstr "Pas de chemin dans l'URL."
 
@@ -393,7 +393,7 @@ msgstr ""
 "Le répertoire de téléchargement n'existe pas. Merci de sélectionner un "
 "répertoire valide."
 
-#: App.cpp:407 AppList.cpp:70 MirrorList.cpp:67
+#: App.cpp:407 AppList.cpp:71 MirrorList.cpp:67
 msgid "The file does not exist."
 msgstr "Le fichier n'existe pas."
 
@@ -484,7 +484,7 @@ msgid "Unknown server"
 msgstr "Serveur inconnu"
 
 #: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
-#: MirrorList.cpp:42 App.cpp:355 App.cpp:382
+#: MirrorList.cpp:42 App.cpp:355 App.cpp:382 AppList.cpp:46
 msgid "Unsupported protocol specified."
 msgstr "Protocole spécifié non supporté."
 
