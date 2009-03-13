@@ -40,7 +40,7 @@ ENDIF(APPLE)
 ################################################################################
 PROJECT(stackbuilder)
 
-SET(VERSION 2.0.0)
+SET(VERSION 2.1.0)
 
 # CPack stuff
 SET(CPACK_PACKAGE_VERSION_MAJOR 2)
