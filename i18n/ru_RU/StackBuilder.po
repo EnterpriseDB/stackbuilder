@@ -53,7 +53,7 @@ msgstr "Возникла ошибка подсоединения."
 
 #: App.cpp:404 AppList.cpp:68 MirrorList.cpp:64
 msgid "A connection to the server could not be established."
-msgstr ""
+msgstr "Не удаётся установить соедниение с сервером."
 
 #: App.cpp:398 AppList.cpp:62 MirrorList.cpp:58
 #, fuzzy
@@ -71,12 +71,12 @@ msgstr "Все файлы для установки успешно закача�
 
 #: App.cpp:401 AppList.cpp:65 MirrorList.cpp:61
 msgid "An error occured during negotiation."
-msgstr ""
+msgstr "Возникла ошибка при переговорах(negotiation)"
 
 #: App.cpp:410 AppList.cpp:74 MirrorList.cpp:70
 #, fuzzy
 msgid "An unknown error occured."
-msgstr "Возникла ошибка подсоединения."
+msgstr "Возникла неизвестная ошибка."
 
 #: StackBuilder.cpp:75 StackBuilder.cpp:79 StackBuilder.cpp:105
 msgid "Are you sure you want to close the Stack Builder wizard?"
@@ -162,7 +162,7 @@ msgstr "FTP прокси"
 #: App.cpp:643
 #, c-format
 msgid "Failed to create the installer appbundle directory: %s/%s"
-msgstr ""
+msgstr "Неудаётся создать директорию для пакета программ: %s/%s"
 
 #: App.cpp:245 App.cpp:248 App.cpp:364 App.cpp:415
 #, c-format
@@ -246,6 +246,9 @@ msgid ""
 "Failed to read the CFBundleExecutable value from the appbundle description: %"
 "s/Contents/Info.plist"
 msgstr ""
+"Невозможно прочитать значение CFBundleExecutable из описания пакета программ: %"
+"s/Contents/Info.plist"
+
 
 #: App.cpp:582
 #, fuzzy, c-format
@@ -257,12 +260,20 @@ msgid ""
 "to\n"
 "\n"
 "%s-%s"
-msgstr "Невозможно разобрать список зеркал: %s"
+msgstr  ""
+"Невозможно переименовать файл\n"
+"\n"
+"%s\n"
+"\n"
+"в\n"
+"\n"
+"%s-%s"
+
 
 #: App.cpp:653
 #, fuzzy, c-format
 msgid "Failed to write the installer appbundle file: %s/%s"
-msgstr "Невозможно разобрать список зеркал: %s"
+msgstr "Невозможно записать файл из пакета программ:  %s/%s"
 
 #: ProxyDialog.cpp:53 ProxyDialog.cpp:68
 msgid "HTTP proxy"
@@ -283,7 +294,7 @@ msgid ""
 "require the original installation files when being upgraded)."
 msgstr ""
 "Установка выбранных пакетов завершена. Загруженные файлы были сохранены для "
-"будующих установок или обновлений (некоторые пакеты требуют изначальных "
+"будущих установок или обновлений (некоторые пакеты требуют изначальных "
 "файлов установки для обновления)."
 
 #: ProxyDialog.cpp:93 ProxyDialog.cpp:108
@@ -373,13 +384,11 @@ msgstr "Stack Builder"
 
 #: DownloadPage.cpp:111 DownloadPage.cpp:121
 msgid "The download directory does not exist. Please select a valid directory."
-msgstr ""
-"Директория загрузки не существует. Пожалуйста, выберете правильную "
-"директорию."
+msgstr "Директория загрузки не существует. Пожалуйста, выберете правильную директорию."
 
 #: App.cpp:407 AppList.cpp:71 MirrorList.cpp:67
 msgid "The file does not exist."
-msgstr ""
+msgstr "Файл не существует."
 
 #: App.cpp:412 App.cpp:415 App.cpp:729
 #, c-format
@@ -403,11 +412,11 @@ msgstr ""
 
 #: IntroductionPage.cpp:112
 msgid "There are currently no applications available for your platform."
-msgstr ""
+msgstr "Сейчас нет доступных приложений для Вашей платформы."
 
 #: StackBuilder.cpp:89
 msgid "This application must be run as the superuser."
-msgstr ""
+msgstr "Это приложение должно быть запущено от Администратора (суперюзера)"
 
 #: AppSelectionPage.cpp:66 AppSelectionPage.cpp:189 AppSelectionPage.cpp:67
 #: AppSelectionPage.cpp:210
@@ -461,13 +470,13 @@ msgid ""
 "proceeding."
 msgstr ""
 "Для начала, выберете СУБД из списка ниже, для которой будут установленны "
-"дополнительные приложения. Если вы хотите устанавить приложения на удаленный "
-"сервер, выберете опцию <удаленный сервер>."
+"дополнительные приложения. Ваш компьютер должен быть подключен к сети Интернет перед "
+"началом установки."
 
 #: IntroductionPage.cpp:161 IntroductionPage.cpp:241 IntroductionPage.cpp:316
 #: IntroductionPage.cpp:396
 msgid "Unknown server"
-msgstr ""
+msgstr "Неизвестный сервер"
 
 #: App.cpp:230 AppList.cpp:43 MirrorList.cpp:40 App.cpp:233 AppList.cpp:45
 #: MirrorList.cpp:42 App.cpp:355 App.cpp:382 AppList.cpp:46
@@ -482,7 +491,7 @@ msgstr "Ошибка контрольной суммы для: %s"
 #: IntroductionPage.cpp:49
 #, fuzzy
 msgid "Welcome to Stack Builder!"
-msgstr "Stack Builder"
+msgstr "Добро пожаловать в Stack Builder"
 
 #: IntroductionPage.cpp:39 IntroductionPage.cpp:43
 msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
@@ -495,7 +504,7 @@ msgid ""
 "Programs Control Panel applet."
 msgstr ""
 "Вы можете запускать этот мастер всегда, когда хотите установить новые или "
-"обновить старые приложения для PostgreSQL или EnterpriseDB на Вашем ПК. Если "
+"обновить старые приложения для PostgreSQL. Если "
 "Вы хотите удалить любое приложение, используйте Добавить/Удалить Программы "
 "из Панели управления."
 
