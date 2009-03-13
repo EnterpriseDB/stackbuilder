@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.21 2009/02/26 16:03:18 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.22 2009/03/13 08:38:22 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,6 @@ wxTreeItemId AppList::FindCategory(wxTreeItemId parent, wxString &category)
 bool AppList::PopulateTreeCtrl()
 {
     wxTreeItemId node, root, category, application, parentNode;
-    bool found;
 
     root = m_treectrl->AddRoot(_("Categories"), 3);
 
