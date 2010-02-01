@@ -1,5 +1,5 @@
 /* XPM */
-static char *bullet_xpm[] = {
+static const char *bullet_xpm[] = {
 "16 16 2 1",
 "0 c None",
 "1 c #800000",

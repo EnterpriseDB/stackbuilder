@@ -1,5 +1,5 @@
 /* XPM */
-static char *StackBuilder_xpm[] = {
+static const char *StackBuilder_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "32 32 56 1",
 ". c #1E9DBF",
