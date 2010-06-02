@@ -3,7 +3,7 @@
 // Purpose:     Download page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: DownloadPage.cpp,v 1.17 2008/08/26 09:42:37 dpage Exp $
+// RCS-ID:      $Id: DownloadPage.cpp,v 1.18 2010/06/02 10:42:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@
 #include <wx/stdpaths.h>
 
 #ifdef __WXMSW__
-#include <wx/msw/registry.h>
+#include "Registry.h"
 #endif
 
 // Application headers
@@ -71,14 +71,13 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     wxStandardPaths sp;
 
 #ifdef __WXMSW__
-    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
-    if (!key->Exists() || !key->HasValue(wxT("Download Path")))
+    if (key == NULL || key->QueryValue(wxT("Download Path"), path) == false)
         path = sp.GetTempDir();
-    else
-        key->QueryValue(wxT("Download Path"), path);
 
-    delete key;
+    if (key != NULL)
+        delete key;
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
     path = cnf->Read(wxT("DownloadPath"), sp.GetTempDir());
@@ -125,12 +124,13 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
 
     // Store the download location for next time
 #ifdef __WXMSW__
-    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
-    if (!key->Exists())
-        key->Create();
+    pgRegKey *key = pgRegKey::CreateRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
-    key->SetValue(wxT("Download Path"), m_path->GetValue());
-    delete key;
+    if (key != NULL)
+    {
+        key->SetValue(wxT("Download Path"), m_path->GetValue());
+        delete key;
+    }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
     cnf->Write(wxT("DownloadPath"), m_path->GetValue()), 

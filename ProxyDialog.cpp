@@ -3,7 +3,7 @@
 // Purpose:     Proxy server configuration dialog
 // Author:      Dave Page
 // Created:     2007-05-02
-// RCS-ID:      $Id: ProxyDialog.cpp,v 1.6 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: ProxyDialog.cpp,v 1.7 2010/06/02 10:42:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@
 #include <wx/fileconf.h>
 
 #ifdef __WXMSW__
-#include <wx/msw/registry.h>
+#include "Registry.h"
 #endif
 
 // Application headers
@@ -36,21 +36,17 @@ ProxyDialog::ProxyDialog(wxWindow *parent, const wxString& title)
 
 #ifdef __WXMSW__
     // Get the proxy settings
-    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
-    if (key->Exists() && key->HasValue(wxT("HTTP proxy host")))
+    if (key != NULL)
+    {
         key->QueryValue(wxT("HTTP proxy host"), http_host);
-
-    if (key->Exists() && key->HasValue(wxT("HTTP proxy port")))
         key->QueryValue(wxT("HTTP proxy port"), http_port);
-
-    if (key->Exists() && key->HasValue(wxT("FTP proxy host")))
         key->QueryValue(wxT("FTP proxy host"), ftp_host);
-
-    if (key->Exists() && key->HasValue(wxT("FTP proxy port")))
         key->QueryValue(wxT("FTP proxy port"), ftp_port);
 
-    delete key;
+        delete key;
+    }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
     
@@ -127,16 +123,18 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
 
     // Store the settings
 #ifdef __WXMSW__
-    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
-    if (!key->Exists())
-        key->Create();
+    pgRegKey *key = pgRegKey::CreateRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
-    key->SetValue(wxT("HTTP proxy host"), m_http_host->GetValue());
-    key->SetValue(wxT("HTTP proxy port"), m_http_port->GetValue());
-    key->SetValue(wxT("FTP proxy host"), m_ftp_host->GetValue());
-    key->SetValue(wxT("FTP proxy port"), m_ftp_port->GetValue());
+    if (key != NULL)
+    {
+        key->SetValue(wxT("HTTP proxy host"), m_http_host->GetValue());
+        key->SetValue(wxT("HTTP proxy port"), m_http_port->GetValue());
+        key->SetValue(wxT("FTP proxy host"), m_ftp_host->GetValue());
+        key->SetValue(wxT("FTP proxy port"), m_ftp_port->GetValue());
 
-    delete key;
+        delete key;
+    }
+
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
     
@@ -162,24 +160,21 @@ wxString ProxyDialog::GetProxy(const wxString &protocol)
 
     // Get the proxy settings
 #ifdef __WXMSW__
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
-    wxRegKey *key = new wxRegKey(wxT("HKEY_CURRENT_USER\\Software\\PostgreSQL\\StackBuilder\\"));
-
-    if (protocol.Lower() == wxT("ftp"))
+    if (key != NULL)
     {
-        if (key->Exists() && key->HasValue(wxT("FTP proxy host")))
+        if (protocol.Lower() == wxT("ftp"))
+        {
             key->QueryValue(wxT("FTP proxy host"), host);
-
-        if (key->Exists() && key->HasValue(wxT("FTP proxy port")))
             key->QueryValue(wxT("FTP proxy port"), port);
-    }
-    else
-    {
-        if (key->Exists() && key->HasValue(wxT("HTTP proxy host")))
+        }
+        else
+        {
             key->QueryValue(wxT("HTTP proxy host"), host);
-
-        if (key->Exists() && key->HasValue(wxT("HTTP proxy port")))
             key->QueryValue(wxT("HTTP proxy port"), port);
+        }
+        delete key;
     }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));

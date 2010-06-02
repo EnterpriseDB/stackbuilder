@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.34 2008/09/11 09:07:20 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.35 2010/06/02 10:42:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ using namespace std;
 #endif
 
 #ifdef __WXMSW__
-#include <wx/msw/registry.h>
+#include "Registry.h"
 #endif
 
 // Application headers
@@ -77,14 +77,24 @@ bool App::IsInstalled()
     wxString ver;
     
 #ifdef __WXMSW__
-    // If the regkey for this app id exists, it's installed.
-    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+    pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
-    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+    if (::wxIsPlatform64Bit())
+    {
+        if (platform.IsSameAs(wxT("windows")))
+            wowMode = pgRegKey::PGREG_WOW32;
+        else if(platform.IsSameAs(wxT("windows-x64")))
+            wowMode = pgRegKey::PGREG_WOW64;
+    }
+
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, versionkey.BeforeLast('\\'), pgRegKey::PGREG_READ, wowMode);
+
+    if (key == NULL)
         return false;
     
     // Also consider the app not installed if the value exists but is empty
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+
     delete key;
 #else
     // Check for the registry
@@ -113,13 +123,23 @@ bool App::IsVersionInstalled()
     wxString ver;
     
 #ifdef __WXMSW__
-    // If the regkey for this app id exists AND it contains our version number, it's installed.
-    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+    pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
-    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+    if (::wxIsPlatform64Bit())
+    {
+        if (platform.IsSameAs(wxT("windows")))
+            wowMode = pgRegKey::PGREG_WOW32;
+        else if(platform.IsSameAs(wxT("windows-x64")))
+            wowMode = pgRegKey::PGREG_WOW64;
+    }
+
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, versionkey.BeforeLast('\\'), pgRegKey::PGREG_READ, wowMode);
+
+    if (key == NULL)
         return false;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);
+
     delete key;
 #else
     // Check for the registry
@@ -205,10 +225,19 @@ wxString App::GetInstalledVersion()
     wxString ver;
     
 #ifdef __WXMSW__
-    // If the regkey for this app id exists AND it contains our version number, it's installed.
-    wxRegKey *key = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\") + versionkey.BeforeLast('\\'));
+    pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
-    if (!key->Exists() || !key->HasValue(versionkey.AfterLast('\\')))
+    if (::wxIsPlatform64Bit())
+    {
+        if (platform.IsSameAs(wxT("windows")))
+            wowMode = pgRegKey::PGREG_WOW32;
+        else if(platform.IsSameAs(wxT("windows-x64")))
+            wowMode = pgRegKey::PGREG_WOW64;
+    }
+
+    pgRegKey *key = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, versionkey.BeforeLast('\\'), pgRegKey::PGREG_READ, wowMode);
+
+    if (key == NULL)
         return wxEmptyString;
 
     key->QueryValue(versionkey.AfterLast('\\'), ver);

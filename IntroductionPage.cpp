@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.22 2009/02/20 11:53:32 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.23 2010/06/02 10:42:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -29,6 +29,7 @@
 #include "AppList.h"
 #include "Server.h"
 #include "ProxyDialog.h"
+#include "Registry.h"
 
 const int BTN_PROXIES=1002;
 
@@ -134,71 +135,92 @@ bool IntroductionPage::FindPgServers()
     wxString temp;
     
 #ifdef __WXMSW__
-
-
     // Add local servers.
-    wxRegKey *rootKey = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Services"));
+    pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
+    wxString strPgArch;
 
-    if (rootKey->Exists())
+    if (::wxIsPlatform64Bit())
     {
-        wxString svcName;
+        strPgArch = wxT(" (x86)");
+        wowMode = pgRegKey::PGREG_WOW32;
+    }
+    pgRegKey *rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
 
-        flag = rootKey->GetFirstKey(svcName, cookie);
+    if (rootKey == NULL && ::wxIsPlatform64Bit())
+    {
+        wowMode = pgRegKey::PGREG_WOW64;
+        rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
+        strPgArch = wxT(" (x64)");
+    }
+
+    while (rootKey != NULL)
+    {
+        long cookie = 0;
+        wxString svcName;
+        pgRegKey *svcKey = NULL;
+
+        flag = rootKey->GetFirstKey(svcKey, cookie);
 
         while (flag != false)
         {
-            wxString keyName, guid;
+            wxString guid;
+            DWORD tmpPort = 0;
+
             Server *data = new Server();
             data->serverType = SVR_POSTGRESQL;
 
+            svcName = svcKey->GetKeyName();
+
             // Get the service data
             data->serviceId = svcName;
-            keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Services\\%s"), svcName.c_str());
-            wxRegKey *svcKey = new wxRegKey(keyName);
-            if (svcKey->HasValue(wxT("Display Name")))
-                svcKey->QueryValue(wxT("Display Name"), data->description);
-            else
-                data->description = _("Unknown server");
-            if (svcKey->HasValue(wxT("Port")))
-                svcKey->QueryValue(wxT("Port"), &data->port);
-            else
-                data->port = 0;
-            if (svcKey->HasValue(wxT("Data Directory")))
-                svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-            if (svcKey->HasValue(wxT("Database Superuser")))
-                svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-            if (svcKey->HasValue(wxT("Service Account")))
-                svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-            if (svcKey->HasValue(wxT("Encoding")))
-                svcKey->QueryValue(wxT("Encoding"), data->encoding);
-            if (svcKey->HasValue(wxT("Locale")))
-                svcKey->QueryValue(wxT("Locale"), data->locale);
+
+            data->description = _("Unknown server");
+            svcKey->QueryValue(wxT("Display Name"), data->description);
+            svcKey->QueryValue(wxT("Port"), &tmpPort);
+            data->port = (long)tmpPort;
+            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+            svcKey->QueryValue(wxT("Encoding"), data->encoding);
+            svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-            if (svcKey->HasValue(wxT("Product Code")))
-                svcKey->QueryValue(wxT("Product Code"), guid);
+            svcKey->QueryValue(wxT("Product Code"), guid);
 
             if (!guid.IsEmpty())
             {
-                keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\PostgreSQL\\Installations\\%s"), guid.c_str());
-                wxRegKey *instKey = new wxRegKey(keyName);
-                if (instKey->HasValue(wxT("Version")))
+                wxString keyName;
+                keyName.Printf(wxT("Software\\PostgreSQL\\Installations\\%s"), guid.c_str());
+
+                pgRegKey *instKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, keyName, pgRegKey::PGREG_READ, wowMode);
+
+                if (instKey != NULL)
                 {
-                    instKey->QueryValue(wxT("Version"), data->serverVersion);
-                    data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                    if (instKey->HasValue(wxT("Version")))
+                    {
+                        instKey->QueryValue(wxT("Version"), data->serverVersion);
+                        data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                        data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                    }
+                    else
+                    {
+                        data->majorVer = 0;
+                        data->minorVer = 0;
+                    }
+                    if (instKey->HasValue(wxT("Base Directory")))
+                        instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+
+                    delete instKey;
                 }
                 else
                 {
                     data->majorVer = 0;
                     data->minorVer = 0;
                 }
-                if (instKey->HasValue(wxT("Base Directory")))
-                    instKey->QueryValue(wxT("Base Directory"), data->installationPath);
             }
 
             // Build the user description
-            temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
+            temp.Printf(_("%s%s on port %d"), data->description.c_str(), strPgArch.c_str(), data->port);
  
 			// Add the item, if it looks sane
 			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
@@ -207,8 +229,20 @@ bool IntroductionPage::FindPgServers()
 				success = true;
 			}
 
+            delete svcKey;
+            svcKey = NULL;
             // Get the next one...
-            flag = rootKey->GetNextKey(svcName, cookie);
+            flag = rootKey->GetNextKey(svcKey, cookie);
+        }
+
+        delete rootKey;
+        rootKey = NULL;
+
+        if (strPgArch.IsSameAs(wxT(" (x86)")))
+        {
+            wowMode = pgRegKey::PGREG_WOW64;
+            rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
+            strPgArch = wxT(" (x64)");
         }
     }
 
@@ -236,7 +270,7 @@ bool IntroductionPage::FindPgServers()
                 data->serverVersion = version;
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
                 data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-            
+
                 // And the rest of the data
                 data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
                 data->port = cnf->Read(version + wxT("/Port"), 0L);
@@ -279,6 +313,7 @@ bool IntroductionPage::FindPgServers()
 #endif
 }
 
+
 // Note: The following function is currently the same as FindPgServers() just
 //       using different registry keys until the EDB installer starts writing 
 //       it's install data to the registry.
@@ -292,68 +327,91 @@ bool IntroductionPage::FindEdbServers()
     
 #ifdef __WXMSW__
     // Add local servers.
-    wxRegKey *rootKey = new wxRegKey(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services"));
+    pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
+    wxString strPgArch;
 
-    if (rootKey->Exists())
+    if (::wxIsPlatform64Bit())
     {
-        wxString svcName;
+        strPgArch = wxT(" (x86)");
+        wowMode = pgRegKey::PGREG_WOW32;
+    }
+    pgRegKey *rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\EnterpriseDB\\Services"), pgRegKey::PGREG_READ, wowMode);
 
-        flag = rootKey->GetFirstKey(svcName, cookie);
+    if (rootKey == NULL && wowMode == pgRegKey::PGREG_WOW32)
+    {
+        wowMode = pgRegKey::PGREG_WOW64;
+        rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\EnterpriseDB\\Services"), pgRegKey::PGREG_READ, wowMode);
+        strPgArch = wxT(" (x64)");
+    }
+
+    while (rootKey != NULL)
+    {
+        long cookie = 0;
+        wxString svcName;
+        pgRegKey *svcKey = NULL;
+
+        flag = rootKey->GetFirstKey(svcKey, cookie);
 
         while (flag != false)
         {
-            wxString keyName, guid;
+            wxString guid;
+            DWORD tmpPort = 0;
+
             Server *data = new Server();
             data->serverType = SVR_ENTERPRISEDB;
 
+            svcName = svcKey->GetKeyName();
+
             // Get the service data
             data->serviceId = svcName;
-            keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Services\\%s"), svcName.c_str());
-            wxRegKey *svcKey = new wxRegKey(keyName);
-            if (svcKey->HasValue(wxT("Display Name")))
-                svcKey->QueryValue(wxT("Display Name"), data->description);
-            else
-                data->description = _("Unknown server");
-            if (svcKey->HasValue(wxT("Port")))
-                svcKey->QueryValue(wxT("Port"), &data->port);
-            else
-                data->port = 0;
-            if (svcKey->HasValue(wxT("Data Directory")))
-                svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
-            if (svcKey->HasValue(wxT("Database Superuser")))
-                svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
-            if (svcKey->HasValue(wxT("Service Account")))
-                svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
-            if (svcKey->HasValue(wxT("Encoding")))
-                svcKey->QueryValue(wxT("Encoding"), data->encoding);
-            if (svcKey->HasValue(wxT("Locale")))
-                svcKey->QueryValue(wxT("Locale"), data->locale);
+
+            data->description = _("Unknown server");
+            svcKey->QueryValue(wxT("Display Name"), data->description);
+            svcKey->QueryValue(wxT("Port"), &tmpPort);
+            data->port = (long)tmpPort;
+            svcKey->QueryValue(wxT("Data Directory"), data->dataDirectory);
+            svcKey->QueryValue(wxT("Database Superuser"), data->superuserName);
+            svcKey->QueryValue(wxT("Service Account"), data->serviceAccount);
+            svcKey->QueryValue(wxT("Encoding"), data->encoding);
+            svcKey->QueryValue(wxT("Locale"), data->locale);
 
             // Get the version number from installation record
-            if (svcKey->HasValue(wxT("Product Code")))
-                svcKey->QueryValue(wxT("Product Code"), guid);
+            svcKey->QueryValue(wxT("Product Code"), guid);
 
             if (!guid.IsEmpty())
             {
-                keyName.Printf(wxT("HKEY_LOCAL_MACHINE\\Software\\EnterpriseDB\\Installations\\%s"), guid.c_str());
-                wxRegKey *instKey = new wxRegKey(keyName);
-                if (instKey->HasValue(wxT("Version")))
+                wxString keyName;
+                keyName.Printf(wxT("Software\\EnterpriseDB\\Installations\\%s"), guid.c_str());
+
+                pgRegKey *instKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, keyName, pgRegKey::PGREG_READ, wowMode);
+
+                if (instKey != NULL)
                 {
-                    instKey->QueryValue(wxT("Version"), data->serverVersion);
-                    data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                    if (instKey->HasValue(wxT("Version")))
+                    {
+                        instKey->QueryValue(wxT("Version"), data->serverVersion);
+                        data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
+                        data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                    }
+                    else
+                    {
+                        data->majorVer = 0;
+                        data->minorVer = 0;
+                    }
+                    if (instKey->HasValue(wxT("Base Directory")))
+                        instKey->QueryValue(wxT("Base Directory"), data->installationPath);
+
+                    delete instKey;
                 }
                 else
                 {
                     data->majorVer = 0;
                     data->minorVer = 0;
                 }
-                if (instKey->HasValue(wxT("Base Directory")))
-                    instKey->QueryValue(wxT("Base Directory"), data->installationPath);
             }
 
             // Build the user description
-            temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
+            temp.Printf(_("%s%s on port %d"), data->description.c_str(), strPgArch.c_str(), data->port);
  
 			// Add the item, if it looks sane
 			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
@@ -362,8 +420,20 @@ bool IntroductionPage::FindEdbServers()
 				success = true;
 			}
 
+            delete svcKey;
+            svcKey = NULL;
             // Get the next one...
-            flag = rootKey->GetNextKey(svcName, cookie);
+            flag = rootKey->GetNextKey(svcKey, cookie);
+        }
+
+        delete rootKey;
+        rootKey = NULL;
+
+        if (wowMode == pgRegKey::PGREG_WOW32)
+        {
+            wowMode = pgRegKey::PGREG_WOW64;
+            rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
+            strPgArch = wxT(" (x64)");
         }
     }
 
