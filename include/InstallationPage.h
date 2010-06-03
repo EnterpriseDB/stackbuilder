@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.h,v 1.4 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.h,v 1.5 2010/06/03 10:45:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -24,9 +24,12 @@ class InstallationPage : public wxWizardPageSimple
 public:
     InstallationPage(wxWizard *parent, AppList *applist);
     void OnWizardPageChanging(wxWizardEvent& event);
+    void OnSkipInstallationPressed(wxCommandEvent& WXUNUSED(event));
 
 private:
     AppList *m_applist;
+    wxCheckBox *m_skipInstallation;
+    bool skipInstallation;
 
     DECLARE_EVENT_TABLE()
 };

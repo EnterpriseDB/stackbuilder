@@ -3,7 +3,7 @@
 // Purpose:     Completion page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: CompletionPage.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: CompletionPage.h,v 1.3 2010/06/03 10:45:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,8 +22,12 @@ class CompletionPage : public wxWizardPageSimple
 public:
     CompletionPage(wxWizard *parent);
     void ShowErrorWarning(const int errors);
+    void SetPageText(bool installationSkipped);
+    void DisableBackButton();
 
 private:
+    wxStaticText *stTitle;
+    wxStaticText *stBody;
     wxStaticText *stStatus;
 };
 

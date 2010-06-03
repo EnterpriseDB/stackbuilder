@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.15 2010/06/03 09:07:11 sachin Exp $
+// RCS-ID:      $Id: App.h,v 1.16 2010/06/03 10:45:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -31,6 +31,7 @@ public:
     bool IsValid();
     bool IsInstalled();
     bool IsVersionInstalled();
+    bool IsDownloaded() { return downloaded; }
     bool WorksWithDB();
     bool WorksWithPlatform();
     wxString GetInstalledVersion();

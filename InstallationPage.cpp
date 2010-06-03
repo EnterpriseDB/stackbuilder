@@ -3,7 +3,7 @@
 // Purpose:     Installation page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: InstallationPage.cpp,v 1.11 2008/08/26 09:42:37 dpage Exp $
+// RCS-ID:      $Id: InstallationPage.cpp,v 1.12 2010/06/03 10:45:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -20,12 +20,15 @@
 #include "AppList.h"
 
 BEGIN_EVENT_TABLE(InstallationPage, wxWizardPageSimple)
+    EVT_CHECKBOX(wxID_ANY,          InstallationPage::OnSkipInstallationPressed)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,        InstallationPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
 InstallationPage::InstallationPage(wxWizard *parent, AppList *applist) 
     : wxWizardPageSimple(parent)
 {
+    skipInstallation = false;
+
     m_applist = applist;
 
     wxBoxSizer *mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -50,8 +53,25 @@ InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
 
     mainSizer->SetItemMinSize(st, 400, 80);
 
+    m_skipInstallation = new wxCheckBox(this, -1, _("Skip Installation"), wxDefaultPosition, wxDefaultSize);     
+    mainSizer->Add(m_skipInstallation, 0, wxALL | wxALIGN_LEFT, 5);
+
     SetSizer(mainSizer);
     mainSizer->Fit(this);
+}
+
+void InstallationPage::OnSkipInstallationPressed(wxCommandEvent& WXUNUSED(event))
+{
+    if (m_skipInstallation->IsChecked())
+    {
+       //Skip the installation
+        skipInstallation = true;
+    }
+    else
+    {
+       //Continue with the installation
+       skipInstallation = false;
+    }
 }
 
 void InstallationPage::OnWizardPageChanging(wxWizardEvent& event)
@@ -60,12 +80,18 @@ void InstallationPage::OnWizardPageChanging(wxWizardEvent& event)
     if (!event.GetDirection())
         return;
 
-    if (!m_applist->InstallApps())
+    ((CompletionPage *)GetNext())->SetPageText(skipInstallation);
+
+    if (!skipInstallation)
     {
-        event.Veto();
-        return;
+        if (!m_applist->InstallApps())
+        {
+            event.Veto();
+            return;
+        }
+        ((CompletionPage *)GetNext())->ShowErrorWarning(m_applist->GetErrorCount());
     }
 
-    ((CompletionPage *)GetNext())->ShowErrorWarning(m_applist->GetErrorCount());
+    ((CompletionPage *)GetNext())->DisableBackButton();
 }
 
