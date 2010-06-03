@@ -3,7 +3,7 @@
 // Purpose:     Configurable macros
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Config.h,v 1.7 2009/03/13 08:42:57 dpage Exp $
+// RCS-ID:      $Id: Config.h,v 1.8 2010/06/03 19:43:35 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -12,8 +12,8 @@
 #define _CONFIG_H
 
 // The version number
-#define VERSION_NUM 2,1,0
-#define VERSION_STR "2.1.0"
+#define VERSION_NUM 3,0,0
+#define VERSION_STR "3.0.0"
 
 // Download locations
 #define DEFAULT_MIRROR_LIST_URL wxT("http://www.postgresql.org/mirrors.xml")

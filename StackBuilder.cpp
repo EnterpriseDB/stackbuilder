@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.14 2010/06/03 09:07:11 sachin Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.15 2010/06/03 19:43:35 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -156,26 +156,3 @@ void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
     if(locale->Init(langInfo->Language), wxLOCALE_LOAD_DEFAULT)
         locale->AddCatalog(wxT("StackBuilder"));
 }
-
-#ifdef __WXMSW__
-bool StackBuilder::isRunningOn64bitWindows()
-{
-#if defined(_WIN64)
-     return true; //64 bit application running on 64 bit windows.
-#elif defined(_WIN32)
-     typedef BOOL (WINAPI *IW64PFP)(HANDLE, BOOL *);
-
-     BOOL res = false;
-
-     IW64PFP IW64P = (IW64PFP)GetProcAddress(GetModuleHandle(L"kernel32"), "IsWow64Process");
-
-     if(IW64P != NULL)
-         IW64P(GetCurrentProcess(), &res);
-
-     return res;  // 32 bit application running on 64 bit windows.
-#else
-     return false; //Dont support WIN16
-#endif
-}
-#endif
-

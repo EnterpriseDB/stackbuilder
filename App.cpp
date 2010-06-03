@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.36 2010/06/03 09:07:11 sachin Exp $
+// RCS-ID:      $Id: App.cpp,v 1.37 2010/06/03 19:43:35 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -217,8 +217,8 @@ bool App::WorksWithPlatform()
     if (platform != STACKBUILDER_PLATFORM)
     {
 #ifdef __WXMSW__
-        // Check if a 32 bit SBP is running on 64 bit platform.
-        if (StackBuilder::isRunningOn64bitWindows())
+        // Check if SB is running on 64 bit platform.
+        if (::wxIsPlatform64Bit())
         {
             if (secondaryplatform != STACKBUILDER_PLATFORM)
                 return false;

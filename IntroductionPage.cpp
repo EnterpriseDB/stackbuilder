@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.23 2010/06/02 10:42:12 sachin Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.24 2010/06/03 19:43:35 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -140,10 +140,8 @@ bool IntroductionPage::FindPgServers()
     wxString strPgArch;
 
     if (::wxIsPlatform64Bit())
-    {
-        strPgArch = wxT(" (x86)");
         wowMode = pgRegKey::PGREG_WOW32;
-    }
+
     pgRegKey *rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
 
     if (rootKey == NULL && ::wxIsPlatform64Bit())
@@ -238,7 +236,7 @@ bool IntroductionPage::FindPgServers()
         delete rootKey;
         rootKey = NULL;
 
-        if (strPgArch.IsSameAs(wxT(" (x86)")))
+        if (strPgArch == wxEmptyString && ::wxIsPlatform64Bit())
         {
             wowMode = pgRegKey::PGREG_WOW64;
             rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
