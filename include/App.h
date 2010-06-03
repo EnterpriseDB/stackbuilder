@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.h,v 1.14 2008/08/14 16:04:29 dpage Exp $
+// RCS-ID:      $Id: App.h,v 1.15 2010/06/03 09:07:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -43,6 +43,7 @@ public:
 
     wxString id;
     wxString platform;
+    wxString secondaryplatform;
     wxString name;
     wxString description;
     wxString version;

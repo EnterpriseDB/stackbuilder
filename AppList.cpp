@@ -3,7 +3,7 @@
 // Purpose:     Maintains the list of applications
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppList.cpp,v 1.22 2009/03/13 08:38:22 dpage Exp $
+// RCS-ID:      $Id: AppList.cpp,v 1.23 2010/06/03 09:07:11 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -115,6 +115,8 @@ bool AppList::LoadAppList()
                     newApplication->id = properties->GetNodeContent();
                 else if (properties->GetName() == wxT("platform"))
                     newApplication->platform = DeHTMLise(properties->GetNodeContent());
+                else if (properties->GetName() == wxT("secondaryplatform"))
+                    newApplication->secondaryplatform = DeHTMLise(properties->GetNodeContent());
                 else if (properties->GetName() == wxT("name"))
                     newApplication->name = DeHTMLise(properties->GetNodeContent());
                 else if (properties->GetName() == wxT("description"))
