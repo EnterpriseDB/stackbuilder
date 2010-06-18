@@ -3,7 +3,7 @@
 // Purpose:     Application selection page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.10 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: AppSelectionPage.cpp,v 1.11 2010/06/18 09:21:15 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,8 @@ void AppTreeCtrl::OnLeftClick(wxMouseEvent &evt)
             }
             else if (GetItemImage(node) == 1)
             {
-                if (app->IsSelectedAsDependency())
+                //Check if any other app is dependent on the current app
+                if (app->IsRequired())
                 {
                     if (wxMessageBox(_("This application was automatically selected because another selection is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
                         return;
@@ -205,7 +206,8 @@ void AppSelectionPage::OnTreeItemActivated(wxTreeEvent &evt)
         }
         else if (m_apptree->GetItemImage(node) == 1)
         {
-            if (app->IsSelectedAsDependency())
+            //Check if any other app is dependent on the current app
+            if (app->IsRequired())
             {
                 if (wxMessageBox(_("This application was automatically selected because another selection is dependent upon it.\nIf you do not install this application others may not install or work correctly.\n\nAre you sure you wish to continue?"), _("Deselect application"), wxYES_NO | wxICON_EXCLAMATION) == wxNO)
                     return;

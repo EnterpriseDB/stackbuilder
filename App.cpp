@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.37 2010/06/03 19:43:35 sachin Exp $
+// RCS-ID:      $Id: App.cpp,v 1.38 2010/06/18 09:21:15 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -302,7 +302,7 @@ void App::SelectForDownload(bool select, bool isdep)
         {
             for (unsigned int y=0; y < m_applist->Count(); y++)
             {
-                if (m_applist->GetItem(y)->id == dependencies[x])
+                if (m_applist->GetItem(y)->id == dependencies[x] && !m_applist->GetItem(y)->IsInstalled())
                     m_applist->GetItem(y)->SelectForDownload(true, true);
             }
         }
@@ -889,3 +889,14 @@ int App::ExecProcess(const wxString &cmd)
     return -1;
 }
 #endif
+
+bool App::IsRequired()
+{
+    for (unsigned int y=0; y < m_applist->Count(); y++)
+    {
+        App *app = (App *) m_applist->GetItem(y); 
+        if (app->IsSelectedForDownload() && app->dependencies.Index(id) != wxNOT_FOUND)
+             return true;
+    }
+    return false;  
+} 
