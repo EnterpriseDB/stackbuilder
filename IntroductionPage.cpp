@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.24 2010/06/03 19:43:35 sachin Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.25 2010/06/18 08:31:16 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -64,8 +64,15 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     mainSizer->SetItemMinSize(st, 400, 65);
 
     m_installation = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN | wxCB_READONLY);
+
+    // Add a dummy server to the remote server selection item.
+    Server *dummyServer = new Server();
+    dummyServer->port = 5432;
+    dummyServer->superuserName = wxT("postgres");
+    dummyServer->serverType = SVR_POSTGRESQL; 
+
     unsigned int item = m_installation->Append(_("<remote server>"));
-    m_installation->SetClientObject(item, (wxClientData *)NULL);
+    m_installation->SetClientObject(item, dummyServer);
     FindPgServers();
     FindEdbServers();
 
