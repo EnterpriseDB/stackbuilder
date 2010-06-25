@@ -1,0 +1,626 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Stack Builder\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-05 15:24+0000\n"
+"PO-Revision-Date: 2010-06-23 19:33+0800\n"
+"Last-Translator: kurticezhang <kurtice@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: CompletionPage.cpp:58
+#: CompletionPage.cpp:56
+#, c-format
+msgid "%d installations were skipped - you may attempt to manually install those packages using the downloaded files."
+msgstr "%d个安装被跳过 - 您可以尝试使用下载的文件以手动安装这些包。"
+
+#: IntroductionPage.cpp:151
+#: IntroductionPage.cpp:211
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:221
+#: IntroductionPage.cpp:201
+#: IntroductionPage.cpp:262
+#: IntroductionPage.cpp:356
+#: IntroductionPage.cpp:417
+#, c-format
+msgid "%s on port %d"
+msgstr "%s 在端口 %d"
+
+#: AppList.cpp:171
+#: AppList.cpp:173
+#: AppList.cpp:223
+#, c-format
+msgid "%s v%s"
+msgstr "%s v%s"
+
+#: AppList.cpp:167
+#: AppList.cpp:169
+#: AppList.cpp:219
+#, c-format
+msgid "%s v%s (installed)"
+msgstr "%s v%s(已安装)"
+
+#: AppList.cpp:169
+#: AppList.cpp:171
+#: AppList.cpp:221
+#, c-format
+msgid "%s v%s (v%s installed)"
+msgstr "%s v%s (v%s 已安装)"
+
+#: IntroductionPage.cpp:57
+#: IntroductionPage.cpp:58
+#: IntroductionPage.cpp:61
+#: IntroductionPage.cpp:62
+#: IntroductionPage.cpp:66
+msgid "<remote server>"
+msgstr "<远程服务器>"
+
+#: App.cpp:239
+#: AppList.cpp:52
+#: MirrorList.cpp:49
+#: App.cpp:242
+#: AppList.cpp:54
+#: MirrorList.cpp:51
+#: App.cpp:391
+#: AppList.cpp:55
+msgid "A connection error occurred."
+msgstr "发生连接错误。"
+
+#: App.cpp:404
+#: AppList.cpp:68
+#: MirrorList.cpp:64
+msgid "A connection to the server could not be established."
+msgstr "无法连接到服务器。"
+
+#: App.cpp:398
+#: AppList.cpp:62
+#: MirrorList.cpp:58
+msgid "A network error occured."
+msgstr "发生网络错误。"
+
+#: App.cpp:242
+#: AppList.cpp:55
+#: MirrorList.cpp:52
+#: App.cpp:245
+#: AppList.cpp:57
+#: MirrorList.cpp:54
+msgid "A protocol error occurred."
+msgstr "发生协议错误。"
+
+#: InstallationPage.cpp:35
+msgid "All the installation files have now been successfully downloaded."
+msgstr "所有的安装文件已经成功下载。"
+
+#: App.cpp:401
+#: AppList.cpp:65
+#: MirrorList.cpp:61
+msgid "An error occured during negotiation."
+msgstr "在会话期间发生了一个错误。"
+
+#: App.cpp:410
+#: AppList.cpp:74
+#: MirrorList.cpp:70
+msgid "An unknown error occured."
+msgstr "发生未知错误。"
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:105
+msgid "Are you sure you want to close the Stack Builder wizard?"
+msgstr "您确定要关闭Stack Builder向导吗？"
+
+#: ProxyDialog.cpp:101
+#: ProxyDialog.cpp:108
+#: ProxyDialog.cpp:116
+#: ProxyDialog.cpp:123
+msgid "Both the proxy server and port must be specified."
+msgstr "必须同时指定代理服务器和端口"
+
+#: MD5.cpp:271
+#: MD5.cpp:274
+#, c-format
+msgid "Cannot open input file %s to generate hash!"
+msgstr "无法打开输入文件 %s 来产生哈希编码"
+
+#: AppList.cpp:144
+#: AppList.cpp:146
+#: AppList.cpp:199
+msgid "Categories"
+msgstr "类别"
+
+#: App.cpp:358
+#: App.cpp:361
+#: App.cpp:568
+#, c-format
+msgid "Checking existing file: %s"
+msgstr "正在检查存在的文件：%s"
+
+#: App.cpp:335
+#: App.cpp:338
+#: App.cpp:531
+#, c-format
+msgid "Checksum verification failed for: %s! Deleting file..."
+msgstr "验证校验码失败：%s！正在删除文件……"
+
+#: App.cpp:207
+#: App.cpp:208
+#: App.cpp:318
+msgid "Connecting to server..."
+msgstr "正在连接服务器……"
+
+#: App.cpp:227
+#: AppList.cpp:40
+#: MirrorList.cpp:37
+#: App.cpp:230
+#: AppList.cpp:42
+#: MirrorList.cpp:39
+#: App.cpp:352
+#: App.cpp:379
+#: AppList.cpp:43
+msgid "Could not parse the URL."
+msgstr "无法解析URL。"
+
+#: MirrorList.cpp:125
+#: MirrorList.cpp:127
+#: MirrorList.cpp:151
+msgid "Countries"
+msgstr "国家"
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:210
+msgid "Deselect application"
+msgstr "取消选择应用程序"
+
+#: DownloadPage.cpp:61
+#: DownloadPage.cpp:65
+msgid "Download directory:"
+msgstr "下载目录："
+
+#: App.cpp:297
+#: App.cpp:300
+#: App.cpp:493
+#, c-format
+msgid "Downloaded %d KB (%d KB/Sec)"
+msgstr "已下载 %d KB（%d KB/秒）"
+
+#: App.cpp:295
+#: App.cpp:298
+#: App.cpp:491
+#, c-format
+msgid "Downloaded %d of %d KB (%d KB/Sec)"
+msgstr "已下载 %2$d 中的 %1$d KB（%3$d KB/秒）"
+
+#: App.cpp:206
+#: App.cpp:207
+#: App.cpp:317
+#, c-format
+msgid "Downloading %s"
+msgstr "正在下载 %s"
+
+#: IntroductionPage.cpp:85
+#: IntroductionPage.cpp:95
+#: IntroductionPage.cpp:99
+msgid "Downloading application list..."
+msgstr "正在下载应用程序列表……"
+
+#: AppSelectionPage.cpp:135
+#: AppSelectionPage.cpp:152
+msgid "Downloading mirror list..."
+msgstr "正在下载镜像列表……"
+
+#: StackBuilder.cpp:75
+#: StackBuilder.cpp:79
+#: StackBuilder.cpp:105
+msgid "Exit wizard?"
+msgstr "退出向导？"
+
+#: ProxyDialog.cpp:62
+#: ProxyDialog.cpp:77
+msgid "FTP proxy"
+msgstr "FTP代理"
+
+#: App.cpp:643
+#, c-format
+msgid "Failed to create the installer appbundle directory: %s/%s"
+msgstr "无法创建安装程序appbundle目录：%s/%s"
+
+#: App.cpp:245
+#: App.cpp:248
+#: App.cpp:364
+#: App.cpp:415
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"无法打开 %s\n"
+"\n"
+"错误：%s"
+
+#: App.cpp:255
+#: App.cpp:258
+#: App.cpp:451
+#, c-format
+msgid ""
+"Failed to open %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"无法打开 %s\n"
+"\n"
+"错误：无法打开指定的URL。"
+
+#: AppList.cpp:58
+#: AppList.cpp:60
+#: AppList.cpp:79
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"无法打开应用程序列表：%s\n"
+"\n"
+"错误：%s"
+
+#: AppList.cpp:66
+#: AppList.cpp:68
+#: AppList.cpp:87
+#, c-format
+msgid ""
+"Failed to open the application list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"无法打开应用程序列表：%s\n"
+"\n"
+"错误：无法打开指定的URL。"
+
+#: MirrorList.cpp:55
+#: MirrorList.cpp:57
+#: MirrorList.cpp:75
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: %s"
+msgstr ""
+"打开镜像列表失败：%s\n"
+"\n"
+"错误：%s"
+
+#: MirrorList.cpp:63
+#: MirrorList.cpp:65
+#: MirrorList.cpp:83
+#, c-format
+msgid ""
+"Failed to open the mirror list: %s\n"
+"\n"
+"Error: The URL specified could not be opened."
+msgstr ""
+"无法打开镜像列表：%s\n"
+"\n"
+"错误：无法打开指定的URL。"
+
+#: AppList.cpp:73
+#: AppList.cpp:75
+#: AppList.cpp:94
+#, c-format
+msgid "Failed to parse the application list: %s"
+msgstr "无法分析应用程序列表：%s"
+
+#: MirrorList.cpp:70
+#: MirrorList.cpp:72
+#: MirrorList.cpp:90
+#, c-format
+msgid "Failed to parse the mirror list: %s"
+msgstr "无法分析镜像列表：%s"
+
+#: App.cpp:692
+#, c-format
+msgid "Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"
+msgstr "无法从appbundle描述：%s/Contents/Info.plist中读取CFBundleExecutable的值。"
+
+#: App.cpp:582
+#, c-format
+msgid ""
+"Failed to rename the file\n"
+"\n"
+"%s\n"
+"\n"
+"to\n"
+"\n"
+"%s-%s"
+msgstr ""
+"无法更名文件\n"
+"\n"
+"%s\n"
+"\n"
+"为\n"
+"\n"
+"%s-%s"
+
+#: App.cpp:653
+#, c-format
+msgid "Failed to write the installer appbundle file: %s/%s"
+msgstr "无法写入安装程序appbundle文件：%s/%s"
+
+#: ProxyDialog.cpp:53
+#: ProxyDialog.cpp:68
+msgid "HTTP proxy"
+msgstr "HTTP代理"
+
+#: CompletionPage.cpp:27
+msgid "Installation complete!"
+msgstr "安装完成！"
+
+#: App.cpp:413
+#: App.cpp:416
+#: App.cpp:730
+msgid "Installation error"
+msgstr "安装错误"
+
+#: CompletionPage.cpp:33
+#: CompletionPage.cpp:31
+msgid "Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded)."
+msgstr "您选择的包安装已完成，并为将来的安装或升级保留已下载文件（升级时，某些包需要原始的安装文件）。"
+
+#: ProxyDialog.cpp:93
+#: ProxyDialog.cpp:108
+msgid "Invalid FTP port specified."
+msgstr "指定的FTP端口无效。"
+
+#: ProxyDialog.cpp:86
+#: ProxyDialog.cpp:101
+msgid "Invalid HTTP port specified."
+msgstr "指定的HTTP端口无效。"
+
+#: App.cpp:385
+msgid "Invalid hostname specified in URL."
+msgstr "URL中指定的主机名无效。"
+
+#: App.cpp:388
+msgid "Invalid path specified in URL."
+msgstr "URL中指定的路径无效。"
+
+#: App.cpp:233
+#: AppList.cpp:46
+#: MirrorList.cpp:43
+#: App.cpp:236
+#: AppList.cpp:48
+#: MirrorList.cpp:45
+#: App.cpp:358
+#: AppList.cpp:49
+msgid "No hostname specified in URL."
+msgstr "URL中没有指定主机名。"
+
+#: App.cpp:236
+#: AppList.cpp:49
+#: MirrorList.cpp:46
+#: App.cpp:239
+#: AppList.cpp:51
+#: MirrorList.cpp:48
+#: App.cpp:361
+#: AppList.cpp:52
+msgid "No path specified in URL."
+msgstr "URL中没有指定路径。"
+
+#: InstallationPage.cpp:47
+msgid "Note: You must allow all installations to run to completion. If you are prompted to restart the computer, click \"No\" or \"Restart Later\" and manually restart your computer when all the installation have finished."
+msgstr "注释：您必须允许所有的安装直到完成，如果提示需要重新启动计算机，点击“否”或“稍后重新启动”（在所有的安装完成之后，手工重新启动您的计算机）。 "
+
+#: InstallationPage.cpp:41
+msgid "Please click the \"Next\" button to start the installations."
+msgstr "请点击“下一步”按钮开始安装。"
+
+#: MirrorSelectionPage.cpp:40
+#: MirrorSelectionPage.cpp:41
+msgid "Please select a mirror site to download from."
+msgstr "请选择从哪个镜像下载。"
+
+#: AppSelectionPage.cpp:88
+#: AppSelectionPage.cpp:95
+msgid "Please select the applications you would like to install."
+msgstr "请选择您想要安装的应用程序。"
+
+#: ProxyDialog.cpp:57
+#: ProxyDialog.cpp:66
+#: ProxyDialog.cpp:72
+#: ProxyDialog.cpp:81
+msgid "Port"
+msgstr "端口"
+
+#: Wizard.cpp:29
+msgid "PostgreSQL & EnterpriseDB Stack Builder"
+msgstr "PostgreSQL & EnterpriseDB Stack Builder"
+
+#: IntroductionPage.cpp:72
+#: IntroductionPage.cpp:237
+#: IntroductionPage.cpp:76
+#: IntroductionPage.cpp:439
+msgid "Proxy servers"
+msgstr "代理服务器"
+
+#: DownloadPage.cpp:45
+#: DownloadPage.cpp:49
+msgid "Review your selections and choose a download directory if required, and then click the Next button to begin downloading the packages you have selected."
+msgstr "再次检查你的所选，如果需要的话请指定下载目录，然后按下“下一步”按钮开始下载所选的包。"
+
+#: DownloadPage.cpp:95
+#: DownloadPage.cpp:105
+msgid "Select a download directory"
+msgstr "选择下载目录"
+
+#: DownloadPage.cpp:51
+#: DownloadPage.cpp:55
+msgid "Selected packages:"
+msgstr "选中的包："
+
+#: StackBuilder.cpp:37
+#: StackBuilder.cpp:40
+#: StackBuilder.cpp:96
+msgid "Stack Builder"
+msgstr "Stack Builder"
+
+#: DownloadPage.cpp:111
+#: DownloadPage.cpp:121
+msgid "The download directory does not exist. Please select a valid directory."
+msgstr "下载目录不存在，请选择一个可用目录。"
+
+#: App.cpp:407
+#: AppList.cpp:71
+#: MirrorList.cpp:67
+msgid "The file does not exist."
+msgstr "文件不存在。"
+
+#: App.cpp:412
+#: App.cpp:415
+#: App.cpp:729
+#, c-format
+msgid ""
+"The installation of %s returned an error.\n"
+"\n"
+" Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n"
+"\n"
+"Note that ignoring this error may result in failure of any later installations that depend on this one."
+msgstr ""
+"%s 的安装返回一个错误。\n"
+"\n"
+"点击“确定”按钮忽略这个错误并继续其他尚未完成的安装，或点击“取消”按钮放弃其他尚未完成的安装。\n"
+"\n"
+"注意，如果忽略这个错误可能导致在接下来依赖于此程序的其他安装程序安装失败。"
+
+#: IntroductionPage.cpp:112
+msgid "There are currently no applications available for your platform."
+msgstr "在您的平台上，目前没有可用的应用程序。"
+
+#: StackBuilder.cpp:89
+msgid "This application must be run as the superuser."
+msgstr "必须用超级用户运行这个应用程序。"
+
+#: AppSelectionPage.cpp:66
+#: AppSelectionPage.cpp:189
+#: AppSelectionPage.cpp:67
+#: AppSelectionPage.cpp:210
+msgid ""
+"This application was automatically selected because another selection is dependent upon it.\n"
+"If you do not install this application others may not install or work correctly.\n"
+"\n"
+"Are you sure you wish to continue?"
+msgstr ""
+"由于其他的选择依赖于此应用程序，故此自动选中该应用程序。\n"
+"如果不安装此应用程序，其他应用程序可能无法安装或不能正常运行。\n"
+"\n"
+"您确定要继续吗？"
+
+#: IntroductionPage.cpp:53
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB Postgres Plus installation."
+msgstr "本向导将帮助您安装附加软件到已安装的PostgreSQL或EnterpriseDB Postgres Plus中。"
+
+#: IntroductionPage.cpp:45
+#: IntroductionPage.cpp:49
+msgid "This wizard will help you install additional software to complement your PostgreSQL or EnterpriseDB installation."
+msgstr "本向导将帮助您安装附加软件到已安装的PostgreSQL或EnterpriseDB中。"
+
+#: IntroductionPage.cpp:51
+#: IntroductionPage.cpp:55
+msgid "To begin, please select the installation you are installing software for from the list below. If you are installing software to use with a remote server, please select the <remote server> option."
+msgstr "开始安装之前，请从下边的列表中选择想要安装软件的目标。如果你希望使用远程服务器安装，请选择<远程服务器>选项。"
+
+#: IntroductionPage.cpp:59
+msgid "To begin, please select the installation you are installing software for from the list below. Your computer must be connected to the Internet before proceeding."
+msgstr "开始安装之前，请从下边的列表中选择想要安装软件的目标，您的电脑必须已经连接到互联网才能够继续。"
+
+#: IntroductionPage.cpp:161
+#: IntroductionPage.cpp:241
+#: IntroductionPage.cpp:316
+#: IntroductionPage.cpp:396
+msgid "Unknown server"
+msgstr "未知服务器"
+
+#: App.cpp:230
+#: AppList.cpp:43
+#: MirrorList.cpp:40
+#: App.cpp:233
+#: AppList.cpp:45
+#: MirrorList.cpp:42
+#: App.cpp:355
+#: App.cpp:382
+#: AppList.cpp:46
+msgid "Unsupported protocol specified."
+msgstr "无法支持指定协议。"
+
+#: App.cpp:323
+#: App.cpp:326
+#: App.cpp:519
+#, c-format
+msgid "Verifying checksum for: %s"
+msgstr "验证校验码：%s"
+
+#: IntroductionPage.cpp:49
+msgid "Welcome to Stack Builder!"
+msgstr "欢迎使用Stack Builder！"
+
+#: IntroductionPage.cpp:39
+#: IntroductionPage.cpp:43
+msgid "Welcome to the PostgreSQL && EnterpriseDB Stack Builder!"
+msgstr "欢迎使用PostgreSQL && EnterpriseDB Stack Builder！"
+
+#: CompletionPage.cpp:44
+#: CompletionPage.cpp:42
+msgid "You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."
+msgstr "您可以在任何时间运行此向导，来增加或升级您堆栈内的软件。如果您希望卸载任何软件，请使用控制面板中的增加/卸载程序功能。"
+
+#: MirrorSelectionPage.cpp:68
+#: MirrorSelectionPage.cpp:67
+msgid "You must select a mirror before you continue."
+msgstr "在继续之前您必须选择一个镜像。"
+
+#: IntroductionPage.cpp:73
+#: IntroductionPage.cpp:83
+#: IntroductionPage.cpp:87
+msgid "You must select an installation option before you continue."
+msgstr "在继续之前您必须选择一个安装选项。"
+
+#: AppSelectionPage.cpp:123
+#: AppSelectionPage.cpp:130
+msgid "You must select at least one package to install before you continue."
+msgstr "在继续之前您必须至少选择一个想要安装的包。"
+
+#: StackBuilder.cpp:44
+#: StackBuilder.cpp:47
+msgid "download the application list from the specified URL"
+msgstr "从指定的URL中下载应用程序列表"
+
+#: StackBuilder.cpp:43
+#: StackBuilder.cpp:46
+msgid "download the mirror list from the specified URL"
+msgstr "从指定的URL中下载镜像列表"
+
+#: StackBuilder.cpp:42
+#: StackBuilder.cpp:45
+msgid "show this help message"
+msgstr "显示此帮助信息"
+
+#: StackBuilder.cpp:48
+msgid "use the download counter at the specified URL"
+msgstr "在指定的URL中使用下载计数器"
+
+#: StackBuilder.cpp:45
+#: StackBuilder.cpp:49
+msgid "use the specified language in the UI"
+msgstr "在用户界面中使用指定的语言"
+
