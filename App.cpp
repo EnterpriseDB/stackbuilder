@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.38 2010/06/18 09:21:15 sachin Exp $
+// RCS-ID:      $Id: App.cpp,v 1.39 2010/08/23 13:19:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -214,20 +214,19 @@ bool App::WorksWithDB()
 
 bool App::WorksWithPlatform()
 {
+#ifndef __WXMSW__
     if (platform != STACKBUILDER_PLATFORM)
-    {
-#ifdef __WXMSW__
-        // Check if SB is running on 64 bit platform.
-        if (::wxIsPlatform64Bit())
-        {
-            if (secondaryplatform != STACKBUILDER_PLATFORM)
-                return false;
-            else
-                return true;
-        }
-#endif
         return false;
+#else
+    if (m_server && m_server->platform != platform)
+    {
+        // Check if SBP is running on 64 bit platform and
+        // server's architecture (platform - windows/windows-x64) can match with the secondaryplatform.
+        // StackBuilder - itself can be 32/64 bit and will works for both 32 bit and 64 bit PostgreSQL server.
+        if (!::wxIsPlatform64Bit() || secondaryplatform != m_server->platform)
+           return false;
     }
+#endif
     return true;
 }
 

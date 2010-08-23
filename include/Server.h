@@ -3,7 +3,7 @@
 // Purpose:     A server object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: Server.h,v 1.2 2008/08/14 15:54:08 dpage Exp $
+// RCS-ID:      $Id: Server.h,v 1.3 2010/08/23 13:19:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -39,6 +39,7 @@ public:
     wxString serviceAccount;
     wxString encoding;
     wxString locale;
+    wxString platform;
 };
 
 #endif

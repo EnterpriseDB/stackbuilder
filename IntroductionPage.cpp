@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.25 2010/06/18 08:31:16 sachin Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.26 2010/08/23 13:19:12 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -172,6 +172,11 @@ bool IntroductionPage::FindPgServers()
             DWORD tmpPort = 0;
 
             Server *data = new Server();
+
+            if (wowMode == pgRegKey::PGREG_WOW64)
+                data->platform = wxT("windows-x64");
+            else
+                data->platform = wxT("window");
             data->serverType = SVR_POSTGRESQL;
 
             svcName = svcKey->GetKeyName();
@@ -270,7 +275,8 @@ bool IntroductionPage::FindPgServers()
             {
                 Server *data = new Server();
                 data->serverType = SVR_POSTGRESQL;
-                
+                data->platform = STACKBUILDER_PLATFORM;
+
                 // Server version
                 data->serverVersion = version;
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
@@ -363,6 +369,11 @@ bool IntroductionPage::FindEdbServers()
             DWORD tmpPort = 0;
 
             Server *data = new Server();
+
+            if (wowMode == pgRegKey::PGREG_WOW64)
+                data->platform = wxT("windows-x64");
+            else
+                data->platform = wxT("window");
             data->serverType = SVR_ENTERPRISEDB;
 
             svcName = svcKey->GetKeyName();
@@ -437,7 +448,7 @@ bool IntroductionPage::FindEdbServers()
         if (wowMode == pgRegKey::PGREG_WOW32)
         {
             wowMode = pgRegKey::PGREG_WOW64;
-            rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\PostgreSQL\\Services"), pgRegKey::PGREG_READ, wowMode);
+            rootKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, wxT("Software\\EnterpriseDB\\Services"), pgRegKey::PGREG_READ, wowMode);
             strPgArch = wxT(" (x64)");
         }
     }
@@ -461,7 +472,8 @@ bool IntroductionPage::FindEdbServers()
             {
                 Server *data = new Server();
                 data->serverType = SVR_ENTERPRISEDB;
-                
+                data->platform = STACKBUILDER_PLATFORM;
+
                 // Server version
                 data->serverVersion = version;
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
