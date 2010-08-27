@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.26 2010/08/23 13:19:12 sachin Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.27 2010/08/27 18:14:25 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -176,7 +176,7 @@ bool IntroductionPage::FindPgServers()
             if (wowMode == pgRegKey::PGREG_WOW64)
                 data->platform = wxT("windows-x64");
             else
-                data->platform = wxT("window");
+                data->platform = wxT("windows");
             data->serverType = SVR_POSTGRESQL;
 
             svcName = svcKey->GetKeyName();
@@ -373,7 +373,7 @@ bool IntroductionPage::FindEdbServers()
             if (wowMode == pgRegKey::PGREG_WOW64)
                 data->platform = wxT("windows-x64");
             else
-                data->platform = wxT("window");
+                data->platform = wxT("windows");
             data->serverType = SVR_ENTERPRISEDB;
 
             svcName = svcKey->GetKeyName();
