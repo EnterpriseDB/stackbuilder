@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.39 2010/08/23 13:19:12 sachin Exp $
+// RCS-ID:      $Id: App.cpp,v 1.40 2010/09/08 09:37:06 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -218,6 +218,16 @@ bool App::WorksWithPlatform()
     if (platform != STACKBUILDER_PLATFORM)
         return false;
 #else
+    // For remote server - we will have empty string for the platform in the dummyServer
+    // We will allow 32 bit and 64 bit applications to be downloaded and installed on 64 bit windows
+    // But, 64 bit applications will be allowed to get installed/downloaded on 32 bit windows.
+    if (m_server && m_server->platform == wxEmptyString)
+    {
+        if (platform == wxT("windows") || (::wxIsPlatform64Bit() && platform == wxT("windows-x64")))
+            return true;
+        return false;
+    }
+
     if (m_server && m_server->platform != platform)
     {
         // Check if SBP is running on 64 bit platform and
