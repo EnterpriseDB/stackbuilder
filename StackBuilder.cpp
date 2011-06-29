@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.16 2011/06/29 09:05:20 sachin Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.17 2011/06/29 09:16:52 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ bool StackBuilder::OnInit()
 #ifdef __WXGTK__
     if(geteuid() != 0)
     {
-	wxLogError(_("StackBuilder requires superuser privileges.Please become superuser before executing StackBuilder"));
+	wxLogError(_("Stack Builder requires superuser privileges. Please execute Stack Builder using sudo, or from the root user account."));
         return false;
     }
 #endif
@@ -112,7 +112,7 @@ bool StackBuilder::OnInit()
 
     if(!isAdmin)
     {
-	wxLogError(_("StackBuilder requires superuser privileges.Please become superuser before executing StackBuilder"));
+	wxLogError(_("Stack Builder requires administrator privileges. Please execute Stack Builder by right-clicking the shortcut and using the 'Run as Administrator' option, or from an Administrator account on Windows XP or 2003."));
 	return false;
     }
 #endif
