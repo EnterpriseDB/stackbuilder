@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.15 2010/06/03 19:43:35 sachin Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.16 2011/06/29 09:05:20 sachin Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -86,8 +86,34 @@ bool StackBuilder::OnInit()
 #ifdef __WXGTK__
     if(geteuid() != 0)
     {
-        wxLogError(_("This application must be run as the superuser."));
+	wxLogError(_("StackBuilder requires superuser privileges.Please become superuser before executing StackBuilder"));
         return false;
+    }
+#endif
+#ifdef __WXMSW__
+    BOOL isAdmin;
+    SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+    PSID AdministratorsGroup; 
+    isAdmin = AllocateAndInitializeSid(
+            &NtAuthority,
+            2,
+            SECURITY_BUILTIN_DOMAIN_RID,
+            DOMAIN_ALIAS_RID_ADMINS,
+            0, 0, 0, 0, 0, 0,
+            &AdministratorsGroup); 
+    if(isAdmin) 
+    {
+        if (!CheckTokenMembership( NULL, AdministratorsGroup, &isAdmin)) 
+        {
+            isAdmin = FALSE;
+        } 
+        FreeSid(AdministratorsGroup); 
+    }
+
+    if(!isAdmin)
+    {
+	wxLogError(_("StackBuilder requires superuser privileges.Please become superuser before executing StackBuilder"));
+	return false;
     }
 #endif
 

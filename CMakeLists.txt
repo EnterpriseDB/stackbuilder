@@ -189,6 +189,10 @@ ENDIF(WIN32)
 ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
 TARGET_LINK_LIBRARIES(stackbuilder ${WX_LIBRARIES})
 
+IF(WIN32)
+    SET_TARGET_PROPERTIES(stackbuilder PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\"")
+ENDIF(WIN32)
+
 IF(APPLE)
     CONFIGURE_FILE(${stackbuilder_SOURCE_DIR}/include/images/StackBuilder.icns ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
 ENDIF(APPLE)
