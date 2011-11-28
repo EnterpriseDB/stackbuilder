@@ -3,7 +3,7 @@
 // Purpose:     PostgreSQL/EnterpriseDB Application Stack Builder
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: StackBuilder.cpp,v 1.17 2011/06/29 09:16:52 dpage Exp $
+// RCS-ID:      $Id: StackBuilder.cpp,v 1.18 2011/11/28 19:09:57 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -59,16 +59,11 @@ bool StackBuilder::OnInit()
 
     if (!cmdParser.Found(wxT("a"), &applicationListUrl))
         applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
-    
-    // If we're using an alternate application list, we don't want to log anything
-    // unless an alternate download counter is specified as well
+   
+    // postgresql.org no longer uses the counter, so we default to not trying
+    // to use any, unless the user overrides on the command line. 
     if (!cmdParser.Found(wxT("d"), &downloadCounterUrl))
-    {
-        if (applicationListUrl == DEFAULT_APPLICATION_LIST_URL)
-            downloadCounterUrl = DEFAULT_DOWNLOAD_COUNTER_URL;
-        else
-            downloadCounterUrl = wxEmptyString;
-    }
+        downloadCounterUrl = wxEmptyString;
 
     if (!cmdParser.Found(wxT("l"), &language))
         language = wxEmptyString;

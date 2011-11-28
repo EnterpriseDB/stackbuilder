@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.41 2011/11/28 18:53:48 dpage Exp $
+// RCS-ID:      $Id: App.cpp,v 1.42 2011/11/28 19:09:57 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -468,7 +468,7 @@ tryDownload:
     }
     
     // Log the download
-    if (!haveLogged)
+    if (!haveLogged && !downloadCounterUrl.IsEmpty())
     {
         wxString theCounterUrl = downloadCounterUrl + wxT("?sb=1&url=") + url.BuildURI();
         
