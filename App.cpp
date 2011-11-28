@@ -3,7 +3,7 @@
 // Purpose:     An application object
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: App.cpp,v 1.40 2010/09/08 09:37:06 sachin Exp $
+// RCS-ID:      $Id: App.cpp,v 1.41 2011/11/28 18:53:48 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ bool App::IsInstalled()
     if (!wxFile::Exists(REGISTRY_FILE))
         return false;
     
-    wxFileStream fst(REGISTRY_FILE);
+    wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
         
     if (!cnf->HasEntry(versionkey))
@@ -146,7 +146,7 @@ bool App::IsVersionInstalled()
     if (!wxFile::Exists(REGISTRY_FILE))
         return false;
     
-    wxFileStream fst(REGISTRY_FILE);
+    wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
     
     if (!cnf->HasEntry(versionkey))
@@ -267,7 +267,7 @@ wxString App::GetInstalledVersion()
     if (!wxFile::Exists(REGISTRY_FILE))
         return wxEmptyString;
     
-    wxFileStream fst(REGISTRY_FILE);
+    wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
     
     if (!cnf->HasEntry(versionkey))

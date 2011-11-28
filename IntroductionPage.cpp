@@ -3,7 +3,7 @@
 // Purpose:     Introduction page of the wizard
 // Author:      Dave Page
 // Created:     2007-02-13
-// RCS-ID:      $Id: IntroductionPage.cpp,v 1.27 2010/08/27 18:14:25 dpage Exp $
+// RCS-ID:      $Id: IntroductionPage.cpp,v 1.28 2011/11/28 18:53:49 dpage Exp $
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 /////////////////////////////////////////////////////////////////////////////
@@ -263,7 +263,7 @@ bool IntroductionPage::FindPgServers()
         wxString version, locale;
         long cookie;
         
-        wxFileStream fst(REGISTRY_FILE);
+        wxFileInputStream fst(REGISTRY_FILE);
         wxFileConfig *cnf = new wxFileConfig(fst);
         
         cnf->SetPath(wxT("/PostgreSQL"));
@@ -460,7 +460,7 @@ bool IntroductionPage::FindEdbServers()
         wxString version, locale;
         long cookie;
         
-        wxFileStream fst(REGISTRY_FILE);
+        wxFileInputStream fst(REGISTRY_FILE);
         wxFileConfig *cnf = new wxFileConfig(fst);
         
         cnf->SetPath(wxT("/EnterpriseDB"));
