@@ -1,8 +1,12 @@
 ################################################################################
 # Initial setup
 ################################################################################
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
-
+IF(APPLE)
+    CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
+ELSE()
+    CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+ENDIF(APPLE)
+    
 IF(COMMAND cmake_policy)
     CMAKE_POLICY(SET CMP0003 NEW)
 ENDIF(COMMAND cmake_policy)
