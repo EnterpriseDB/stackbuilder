@@ -889,11 +889,22 @@ int App::ExecProcess(const wxString &cmd)
     {
         char buffer[1024];
         int cnt;
+	int rc;
+
         while ((cnt = fread(buffer, 1, 1024, f)) > 0)
         {
+            buffer[cnt] = 0;
             res += wxString::FromAscii(buffer);
         }
-        return pclose(f);
+
+	rc = pclose(f);
+
+        // Check for a non-zero return code, or an error string. BitRock
+        // installers don't always exit with a non-zero when they error.
+        if (rc || res.Lower().Matches(wxT("*error*")))
+            wxLogError(res);
+
+        return rc;
     }
     return -1;
 }
