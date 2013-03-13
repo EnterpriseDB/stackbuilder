@@ -68,7 +68,6 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
 
     // Get the download path
     wxString path;
-    wxStandardPaths sp;
 
 #ifdef __WXMSW__
     pgRegKey *key = pgRegKey::OpenRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
