@@ -74,13 +74,13 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     pgRegKey *key = pgRegKey::OpenRegKey(HKEY_CURRENT_USER, wxT("Software\\PostgreSQL\\StackBuilder"));
 
     if (key == NULL || key->QueryValue(wxT("Download Path"), path) == false)
-        path = sp.GetTempDir();
+        path = wxGetHomeDir();
 
     if (key != NULL)
         delete key;
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-    path = cnf->Read(wxT("DownloadPath"), sp.GetTempDir());
+    path = cnf->Read(wxT("DownloadPath"), wxGetHomeDir());
     delete cnf;
 #endif
 
