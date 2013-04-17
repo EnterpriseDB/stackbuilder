@@ -32,7 +32,7 @@ BEGIN
             VALUE "FileVersion",     VERSION_STR, "\0"
             VALUE "File Version",    VERSION_STR, "\0"
             VALUE "FileDescription", "Stack Builder for PostgreSQL and EnterpriseDB Postgres Plus", "\0"
-            VALUE "LegalCopyright",  "Copyright 2007-2011, EnterpriseDB", "\0"
+            VALUE "LegalCopyright",  "Copyright 2007-2013, EnterpriseDB", "\0"
             VALUE "LegalTrademarks", "This software is released under the BSD licence", "\0"
             VALUE "InternalName",    "StackBuilder", "\0"
             VALUE "OriginalFilename","StackBuilder.exe", "\0"
