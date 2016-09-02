@@ -20,6 +20,7 @@
 
 // Keep this as a global, rather than passing it through lots of places
 extern wxString downloadCounterUrl;
+extern wxString g_certificateBundle;
 
 class Wizard;
 

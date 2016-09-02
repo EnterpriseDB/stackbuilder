@@ -10,6 +10,7 @@
 
 #ifndef _APP_H
 #define _APP_H
+#define KBSIZE 1024
 
 #include "StackBuilder.h"
 

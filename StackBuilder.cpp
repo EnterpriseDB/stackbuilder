@@ -28,7 +28,8 @@ BEGIN_EVENT_TABLE(StackBuilder, wxApp)
 END_EVENT_TABLE()
 
 // This is declared an extern in StackBuilder.h
-wxString downloadCounterUrl; 
+wxString downloadCounterUrl;
+wxString g_certificateBundle;
 
 // The Application!
 bool StackBuilder::OnInit()
@@ -47,6 +48,9 @@ bool StackBuilder::OnInit()
         {wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("d"), wxT("download-counter"), _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("l"), wxT("language"), _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
+#ifndef __WIN32__
+        {wxCMD_LINE_OPTION, wxT("c"), wxT("ca-bundle"), _("user certificate for https support from the specified URL"), wxCMD_LINE_VAL_STRING},
+#endif
         {wxCMD_LINE_NONE}
     };
 
@@ -67,6 +71,11 @@ bool StackBuilder::OnInit()
 
     if (!cmdParser.Found(wxT("l"), &language))
         language = wxEmptyString;
+
+#ifndef __WIN32__
+    if (!cmdParser.Found(wxT("c"), &g_certificateBundle))
+        g_certificateBundle = wxEmptyString;
+#endif
 
     // Hack for the PostgreSQL installer - it might ask for the default language
     if (language == wxT("DEFAULT"))

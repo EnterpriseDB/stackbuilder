@@ -16,8 +16,8 @@
 #define VERSION_STR "3.1.0"
 
 // Download locations
-#define DEFAULT_MIRROR_LIST_URL wxT("http://www.postgresql.org/mirrors.xml")
-#define DEFAULT_APPLICATION_LIST_URL wxT("http://www.postgresql.org/applications-v2.xml")
+#define DEFAULT_MIRROR_LIST_URL wxT("https://www.postgresql.org/mirrors.xml")
+#define DEFAULT_APPLICATION_LIST_URL wxT("https://www.postgresql.org/applications-v2.xml")
 
 // The registry file
 #ifndef __WXMSW__

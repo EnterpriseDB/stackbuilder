@@ -19,7 +19,7 @@
 
 bool Mirror::IsValid()
 {
-    if (protocol != wxT("ftp") && protocol != wxT("http"))
+    if (protocol != wxT("ftp") && protocol != wxT("http") && protocol != wxT("ftps") && protocol != wxT("https") )
         return false;
 
     if (country == wxEmptyString)

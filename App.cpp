@@ -47,8 +47,9 @@ using namespace std;
 #include "Mirror.h"
 #include "Server.h"
 #include "ProxyDialog.h"
+#include "CurlHandler.h"
 
-App::App(AppList *applist, Server *server) 
+App::App(AppList *applist, Server *server)
 { 
     m_applist = applist; 
     m_server = server;
@@ -60,7 +61,7 @@ App::App(AppList *applist, Server *server)
     m_tree = NULL; 
 };
 
-bool App::IsValid() 
+bool App::IsValid()
 { 
     return (!id.IsEmpty() && 
             !name.IsEmpty() && 
@@ -353,7 +354,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 {
     // Ensure we only log the download once
     bool haveLogged = false;
-    
+
     if (!CheckFilename(downloadPath))
         return false;
 
@@ -363,207 +364,117 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     if (downloaded)
         return true;
 
+    wxString downloadFilename = wxEmptyString;
+#ifndef __WIN32__
+    downloadFilename = downloadPath + wxT("/") + file.GetFullName();
+#else
+    downloadFilename = downloadPath + wxT("\\") + file.GetFullName();
+#endif
+
+    wxString theUrl;
+    if (alturl.IsEmpty())
+        theUrl = wxString::Format(wxT("%s://%s%s%s/%s"),
+        mirror->protocol.c_str(),
+        mirror->hostname.c_str(),
+        (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port).c_str()),
+        mirror->rootpath.c_str(),
+        mirrorpath.c_str());
+    else
+        theUrl = alturl;
+
+
+    DownloadThread *dt = new DownloadThread();
+    if (dt == NULL)
+    {
+        wxLogError(wxString::Format(_("Failed to create new DownloadThread")));
+        return false;
+    }
+
+    wxString packageName = file.GetFullName();
+    wxString newURL = dt->GetDownloadPackageUrl(theUrl, packageName);
+    if (newURL == wxEmptyString)
+        return false;
+
+    dt->SetDownloadUrl(newURL);
+    dt->SetDownloadFileName(downloadFilename);
+
     wxProgressDialog *pd = new wxProgressDialog(wxString::Format(_("Downloading %s"), wxFileName(mirrorpath).GetFullName().c_str()),
-                                                _("Connecting to server..."),
-                                                100,
-                                                NULL, 
-                                                wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
+        _("Connecting to server..."),
+        100,
+        NULL,
+        wxPD_APP_MODAL | wxPD_SMOOTH | wxPD_CAN_ABORT | wxPD_ELAPSED_TIME);
     pd->SetSize(500, -1);
     pd->CentreOnParent();
     pd->Show();
 
-    wxString theUrl;
-    if (alturl.IsEmpty())
-        theUrl = wxString::Format(wxT("%s://%s%s%s/%s"), 
-                                  mirror->protocol.c_str(), 
-                                  mirror->hostname.c_str(), 
-                                  (mirror->port == 0 ? wxEmptyString : wxString::Format(wxT(":%d"), mirror->port).c_str()), 
-                                  mirror->rootpath.c_str(), 
-                                  mirrorpath.c_str());
-    else
-        theUrl = alturl;
-
-// If the download fails becuase of a redirect (HTTP/30x), we
-// reset theUrl and try again from here.
-tryDownload:
-
-    wxURL url(theUrl);
-
-    url.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
-
-    wxURLError err = url.GetError();
-    if (err != wxURL_NOERR)
+    if (dt->Create() != wxTHREAD_NO_ERROR)
     {
-        wxString msg;
-        switch (err)
-        {
-            case wxURL_SNTXERR:
-                msg = _("Could not parse the URL.");
-                break;
-            case wxURL_NOPROTO:
-                msg = _("Unsupported protocol specified.");
-                break;
-            case wxURL_NOHOST:
-                msg = _("No hostname specified in URL.");
-                break;
-            case wxURL_NOPATH:
-                msg = _("No path specified in URL.");
-                break;
-        }
-        wxLogError(_("Failed to open %s\n\nError: %s"), url.BuildURI().c_str(), msg.c_str());
-        pd->Show(false);
-        delete pd;
+        wxLogError(wxString::Format(_("Failed to create Download Thread ")));
         return false;
     }
-    
-    wxInputStream *ip = url.GetInputStream();
-    
-    err = url.GetError();
-    if (err != wxURL_NOERR)
+    if (dt->Run() != wxTHREAD_NO_ERROR)
     {
-        wxString msg;
-        switch (err)
-        {
-            case wxURL_SNTXERR:
-                msg = _("Could not parse the URL.");
-                break;
-            case wxURL_NOPROTO:
-                msg = _("Unsupported protocol specified.");
-                break;
-            case wxURL_NOHOST:
-                msg = _("Invalid hostname specified in URL.");
-                break;
-            case wxURL_NOPATH:
-                msg = _("Invalid path specified in URL.");
-                break;
-            case wxURL_CONNERR:
-                msg = _("A connection error occurred.");
-                break;
-            case wxURL_PROTOERR:
-                wxProtocolError perr = url.GetProtocol().GetError();
-                switch(perr)
-                {
-                    case wxPROTO_NETERR:
-                        msg = _("A network error occured.");
-                        break;
-                    case wxPROTO_PROTERR:
-                        msg = _("An error occured during negotiation.");
-                        break;
-                    case wxPROTO_CONNERR:
-                        msg = _("A connection to the server could not be established.");
-                        break;
-                    case wxPROTO_NOFILE:
-                        msg = _("The file does not exist.");
-                        break;
-                    default:
-                        msg = _("An unknown error occured.");
-                        break;
-                }
-                break;
-        }
-        wxLogError(_("Failed to open %s\n\nError: %s"), url.BuildURI().c_str(), msg.c_str());
-        pd->Show(false);
-        delete pd;
+        wxLogError(wxString::Format(_("Couldn't initalise the downloading process")));
         return false;
     }
-    
-    // Log the download
-    if (!haveLogged && !downloadCounterUrl.IsEmpty())
-    {
-        wxString theCounterUrl = downloadCounterUrl + wxT("?sb=1&url=") + url.BuildURI();
-        
-        wxURL counterUrl(theCounterUrl);
-        counterUrl.SetProxy(ProxyDialog::GetProxy(url.GetScheme()));
-        wxInputStream *dummy = counterUrl.GetInputStream();
-        if (dummy)
-            delete dummy;
-        
-        haveLogged = true;
-    }
-
-    // Handle http redirects if required
-    if (url.GetScheme() == wxT("http"))
-    {
-        wxHTTP *http = (wxHTTP *)&url.GetProtocol();
-
-        if (http->GetResponse() == 301 || http->GetResponse() == 302)
-        {
-            theUrl = http->GetHeader(wxT("Location"));
-
-            // Try again
-            goto tryDownload;
-        }
-    }
-
-    if (!ip || !ip->IsOk())
-    {
-        wxLogError(_("Failed to open %s\n\nError: The URL specified could not be opened."), url.BuildURI().c_str());
-        pd->Show(false);
-        if (ip)
-            delete ip;
-        delete pd;
-        return false;
-    }
-
-    wxFFileOutputStream *op = new wxFFileOutputStream(file.GetFullPath());
-
-    size_t total = ip->GetSize();
-    size_t downloaded = 0, chunk = 0;
-    long count = 0;
-    unsigned short buffer[4097];
 
     bool abort = false;
-    wxString msg;
-
     wxStopWatch sw;
     long updateTime = 100;
     long speed = 0;
+    int kbDownloaded;
+    int kbFileSize;
+    wxString msg;
 
     do
     {
-        ip->Read(buffer, 4096);
-        chunk = ip->LastRead();
-        op->Write(buffer, chunk);
-        downloaded += chunk;
-        count++;
-
         if (sw.Time() >= updateTime)
         {
-            // Calculate the download speed
+            /* Calculate the download speed */
             if (updateTime >= 1000)
-                speed = round((downloaded/1024) / (updateTime/1000));
+                speed = round((dt->GetTotalFileSize() / KBSIZE) / (updateTime / 1000));
 
-            // Set the next time to update the progress dialog
+            /* Set the next time to update the progress dialog */
             updateTime += 100;
 
-            if (total)
-                msg = wxString::Format(_("Downloaded %d of %d KB (%d KB/Sec)"), downloaded/1024, total/1024, speed);
+            kbFileSize = (int)dt->GetTotalFileSize() / KBSIZE;
+            kbDownloaded = (int)dt->GetTotalDownloadSize() / KBSIZE;
+
+            // To ignore initial few 0 values which is not updated
+            if ((kbFileSize == 0) || (kbDownloaded == 0))
+                continue;
+
+            if (kbFileSize > kbDownloaded)
+                msg = wxString::Format(_("Downloaded %d KB of  %d KB (%d KB/Sec)"), kbDownloaded, kbFileSize, speed);
             else
-                msg = wxString::Format(_("Downloaded %d KB (%d KB/Sec)"), downloaded/1024, speed);
+            {
+                msg = wxString::Format(_("Downloaded %6.0lf KB (%d KB/Sec)"), kbDownloaded, speed);
+                break;
+            }
 
             if (!pd->Pulse(msg, &abort))
             {
-                op->Close();
                 wxRemoveFile(file.GetFullPath());
-                delete ip;
-                delete op;
                 pd->Show(false);
                 delete pd;
+                if (dt && dt->TestDestroy())
+                {
+                    delete dt;
+                    dt = NULL;
+                    return false;
+                }
                 return false;
-            }
-        count = 0;
-        }
-    } while (!ip->Eof() && ip->LastRead() != 0);
 
-    op->Close();
-    delete ip;
-    delete op;
+            }
+        }
+    } while (1);
+
     pd->Show(false);
     delete pd;
 
     // Having downloaded the file, now verify the checksum
     wxString tmpsum;
-    
+
     {
         wxBusyInfo wait(wxString::Format(_("Verifying checksum for: %s"), file.GetFullName().c_str()));
         tmpsum = md5sum(file.GetFullPath());
@@ -887,11 +798,11 @@ int App::ExecProcess(const wxString &cmd)
 
     if (f)
     {
-        char buffer[1024];
+        char buffer[KBSIZE];
         int cnt;
 	int rc;
 
-        while ((cnt = fread(buffer, 1, 1024, f)) > 0)
+        while ((cnt = fread(buffer, 1, KBSIZE, f)) > 0)
         {
             buffer[cnt] = 0;
             res += wxString::FromAscii(buffer);

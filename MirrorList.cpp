@@ -21,73 +21,35 @@
 #include "Mirror.h"
 #include "MirrorList.h"
 #include "ProxyDialog.h"
+#include "CurlHandler.h"
 
 // Define the MirrorArray type
 WX_DEFINE_OBJARRAY(MirrorArray);
 
 bool MirrorList::LoadMirrorList()
 {
-    wxURL url(m_mirrorListUrl);
-    url.SetProxy(ProxyDialog::GetProxy(wxT("http")));
-    wxURLError err = url.GetError();
-    if (err != wxURL_NOERR)
-    {
-        wxString msg;
-        switch (err)
-        {
-            case wxURL_SNTXERR:
-                msg = _("Could not parse the URL.");
-                break;
-            case wxURL_NOPROTO:
-                msg = _("Unsupported protocol specified.");
-                break;
-            case wxURL_NOHOST:
-                msg = _("No hostname specified in URL.");
-                break;
-            case wxURL_NOPATH:
-                msg = _("No path specified in URL.");
-                break;
-            case wxURL_CONNERR:
-                msg = _("A connection error occurred.");
-                break;
-            case wxURL_PROTOERR:
-                wxProtocolError perr = url.GetProtocol().GetError();
-                switch(perr)    
-                {               
-                    case wxPROTO_NETERR:
-                        msg = _("A network error occured.");
-                        break;                  
-                    case wxPROTO_PROTERR:
-                        msg = _("An error occured during negotiation.");
-                        break;                  
-                    case wxPROTO_CONNERR:
-                        msg = _("A connection to the server could not be established.");
-                        break;                  
-                    case wxPROTO_NOFILE:
-                        msg = _("The file does not exist.");
-                        break;                  
-                    default:            
-                        msg = _("An unknown error occured.");
-                        break;                  
-                }
-                break;
-        }
-        wxLogError(wxString::Format(_("Failed to open the mirror list: %s\n\nError: %s"), m_mirrorListUrl.c_str(), msg.c_str()));
+    wxString readBuffer = wxEmptyString;
+
+    // Fetch the mirror list using libcurl
+    CurlHandler obj;
+    obj.SetApplicationUrl(m_mirrorListUrl);
+    bool bIsSuccess = obj.ParseApplicationList();
+    if (!bIsSuccess)
         return false;
-    }
 
-    wxInputStream *ip = url.GetInputStream();
+    readBuffer = obj.GetApplicationList();
 
-    if (!ip || !ip->IsOk())
-    {
-        wxLogError(wxString::Format(_("Failed to open the mirror list: %s\n\nError: The URL specified could not be opened."), m_mirrorListUrl.c_str()));
-        return false;
-    }
-
+    wxStringInputStream ip(readBuffer);
     wxXmlDocument xml;
-    if (!xml.Load(*ip))
+    bool xmlLoaded = false;
     {
-        wxLogError(wxString::Format(_("Failed to parse the mirror list: %s"), m_mirrorListUrl.c_str()));
+        wxLogNull noLog;
+        xmlLoaded = xml.Load(ip);
+    }
+
+    if (!xmlLoaded)
+    {
+        wxLogError(wxString::Format(_("Failed to load mirror list: %s"), m_mirrorListUrl.c_str()));
         return false;
     }
 

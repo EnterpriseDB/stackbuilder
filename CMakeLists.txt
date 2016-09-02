@@ -87,6 +87,14 @@ LINK_DIRECTORIES(${WX_LIBRARY_DIRS})
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WX_CXX_FLAGS}")
 
 ################################################################################
+# Find CURL
+################################################################################
+FIND_PACKAGE(CURL REQUIRED)
+INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIRS})
+LINK_DIRECTORIES(${CURL_LIBRARY_DIRS})
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CURL_CXX_FLAGS}")
+
+################################################################################
 # Compile translations
 ################################################################################
 FIND_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
@@ -191,7 +199,7 @@ IF(WIN32)
 ENDIF(WIN32)
  
 ADD_EXECUTABLE(stackbuilder WIN32 MACOSX_BUNDLE ${_srcs})
-TARGET_LINK_LIBRARIES(stackbuilder ${WX_LIBRARIES})
+TARGET_LINK_LIBRARIES(stackbuilder ${WX_LIBRARIES} ${CURL_LIBRARIES})
 
 IF(WIN32)
     IF (MS_VS_10)
@@ -226,6 +234,9 @@ MESSAGE(STATUS "  wxWidgets directory         : ${WX_ROOT_DIR}")
 MESSAGE(STATUS "  wxWidgets static linking    : ${WX_STATIC}")
 MESSAGE(STATUS "  wxWidgets unicode?          : ${WX_UNICODE}")
 MESSAGE(STATUS "  wxWidgets debug?            : ${WX_DEBUG}")
+MESSAGE(STATUS " ")
+MESSAGE(STATUS "  Curl IncludeDir             : ${CURL_INCLUDE_DIRS}")
+MESSAGE(STATUS "  Curl Library                : ${CURL_LIBRARIES}")
 MESSAGE(STATUS "================================================================================")
 MESSAGE(STATUS " ")
 
