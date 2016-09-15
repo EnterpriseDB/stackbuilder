@@ -60,6 +60,9 @@ SET(CPACK_SOURCE_IGNORE_FILES "\\\\.DS_Store;/CVS/;/\\\\.svn/;\\\\.swp$;\\\\.#;/
 # This must come after we set the CPACK variables!!
 INCLUDE(CPack)
 
+# This must be the first include search path with all other paths appended to it
+INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR} ${stackbuilder_SOURCE_DIR}/include)
+
 # OS X bundle stuff
 SET(MACOSX_BUNDLE_INFO_STRING "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
 SET(MACOSX_BUNDLE_ICON_FILE "StackBuilder.icns")
@@ -186,7 +189,6 @@ ADD_DEFINITIONS("-DSTACKBUILDER_PLATFORM=wxT(\"${_platform}\")")
 # Let's rock!
 ################################################################################
 ADD_DEFINITIONS("-DSTACKBUILDER_VERSION=wxT(\"${VERSION}\")")
-INCLUDE_DIRECTORIES(${stackbuilder_SOURCE_DIR} ${stackbuilder_SOURCE_DIR}/include)
 
 FILE(GLOB _cpp_files *.cpp)
 FILE(GLOB _h_files include/*.h)
