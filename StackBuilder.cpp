@@ -82,7 +82,8 @@ bool StackBuilder::OnInit()
         language = wxEmptyString;
 
     // Initialize our locale and load the language catalog...
-    initializeLocale(argv[0], language);
+    wxString executablePath = wxPathOnly(wxStandardPaths::Get().GetExecutablePath());
+    initializeLocale(executablePath, language);
 
     // We need to run as root on Unix in order to ensure that
     // the instalers will run with appropriate privileges. On
@@ -148,14 +149,9 @@ void StackBuilder::OnWizardFinished(wxWizardEvent &evt)
     this->Exit();
 }
 
-void StackBuilder::initializeLocale(wxChar *argv0, const wxString &lang)
+void StackBuilder::initializeLocale(const wxString &appPath, const wxString &lang)
 {
-    wxString appPath = wxPathOnly(argv0);
     wxString i18nPath;
-
-    // Figure out where the pgadmin3 language catalog is located
-    if( appPath.IsEmpty())
-        appPath = wxT(".");
 
     if(wxDir::Exists(appPath + wxT("/i18n")))
         i18nPath = appPath + wxT("/i18n");

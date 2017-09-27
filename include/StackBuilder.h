@@ -14,6 +14,7 @@
 // wxWindows headers
 #include <wx/wx.h>
 #include <wx/wizard.h>
+#include <wx/stdpaths.h>
 
 // App headers
 #include "Config.h"
@@ -31,7 +32,7 @@ public:
 private:
     void OnWizardCancelled(wxWizardEvent &evt);
     void OnWizardFinished(wxWizardEvent &evt);
-    void initializeLocale(wxChar *argv0, const wxString &lang);
+    void initializeLocale(const wxString &appPath, const wxString &lang);
 
     Wizard *wizard;
 
