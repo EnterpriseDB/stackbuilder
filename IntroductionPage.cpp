@@ -204,28 +204,24 @@ bool IntroductionPage::FindPgServers()
 
                 pgRegKey *instKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, keyName, pgRegKey::PGREG_READ, wowMode);
 
+                data->majorVer = 0;
+                data->minorVer = 0;
+
                 if (instKey != NULL)
                 {
                     if (instKey->HasValue(wxT("Version")))
                     {
                         instKey->QueryValue(wxT("Version"), data->serverVersion);
                         data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                        data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+
+                        if (data->majorVer < 10)
+                            data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
                     }
-                    else
-                    {
-                        data->majorVer = 0;
-                        data->minorVer = 0;
-                    }
+
                     if (instKey->HasValue(wxT("Base Directory")))
                         instKey->QueryValue(wxT("Base Directory"), data->installationPath);
 
                     delete instKey;
-                }
-                else
-                {
-                    data->majorVer = 0;
-                    data->minorVer = 0;
                 }
             }
 
@@ -280,7 +276,11 @@ bool IntroductionPage::FindPgServers()
                 // Server version
                 data->serverVersion = version;
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+
+                if (data->majorVer < 10)
+                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                else
+                    data->minorVer = 0;
 
                 // And the rest of the data
                 data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
@@ -401,28 +401,24 @@ bool IntroductionPage::FindEdbServers()
 
                 pgRegKey *instKey = pgRegKey::OpenRegKey(HKEY_LOCAL_MACHINE, keyName, pgRegKey::PGREG_READ, wowMode);
 
+                data->majorVer = 0;
+                data->minorVer = 0;
+
                 if (instKey != NULL)
                 {
                     if (instKey->HasValue(wxT("Version")))
                     {
                         instKey->QueryValue(wxT("Version"), data->serverVersion);
                         data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                        data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+
+                        if (data->majorVer < 10)
+                            data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
                     }
-                    else
-                    {
-                        data->majorVer = 0;
-                        data->minorVer = 0;
-                    }
+
                     if (instKey->HasValue(wxT("Base Directory")))
                         instKey->QueryValue(wxT("Base Directory"), data->installationPath);
 
                     delete instKey;
-                }
-                else
-                {
-                    data->majorVer = 0;
-                    data->minorVer = 0;
                 }
             }
 
@@ -475,9 +471,12 @@ bool IntroductionPage::FindEdbServers()
                 data->platform = STACKBUILDER_PLATFORM;
 
                 // Server version
+                data->majorVer = 0;
+                data->minorVer = 0;
                 data->serverVersion = version;
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
-                data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
+                if ( data->majorVer < 10 )
+                    data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
                 
                 // And the rest of the data
                 data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));

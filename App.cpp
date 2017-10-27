@@ -188,27 +188,15 @@ bool App::WorksWithDB()
     if (tmpversion == wxEmptyString)
         return true;
 
-    if (tmpversion.EndsWith(wxT("+")))
-    {
-        // Apps may specify 8.3+ to denote they require server version 8.3 or above.
-        long appMajor = 0, appMinor = 0;
-
-        tmpversion = tmpversion.RemoveLast();
-        tmpversion.BeforeFirst('.').ToLong(&appMajor);
-
-        if (m_server->majorVer > appMajor)
-            return true;
-
+    long appMajor = 0, appMinor = 0;
+    tmpversion.BeforeFirst('.').ToLong(&appMajor);
+    if (appMajor < 10)
         tmpversion.AfterFirst('.').ToLong(&appMinor);
 
-        if (m_server->majorVer == appMajor && m_server->minorVer >= appMinor)
-            return true;
-    }
+    if (tmpversion.EndsWith(wxT("+")))
+        return (m_server->majorVer > appMajor || (m_server->majorVer == appMajor && m_server->minorVer >= appMinor));
     else
-    {
-        if (tmpversion == wxString::Format(wxT("%d.%d"), m_server->majorVer, m_server->minorVer))
-            return true;
-    }
+        return (m_server->majorVer == appMajor && m_server->minorVer == appMinor);
 
     return false;
 }
