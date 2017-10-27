@@ -3,7 +3,7 @@
 // Purpose:     Read winows registry
 // Author:      Ashesh Vashi
 // Created:     2010-05-25
-// RCS-ID:      
+// RCS-ID:
 // Copyright:   (c) EnterpriseDB
 // Licence:     BSD Licence
 ////////////////////////////////////////////////////////////////////////////
@@ -274,7 +274,7 @@ bool pgRegKey::QueryValue(const wxString& strVal, wxString& sVal) const
         sVal = wxT("");
         if (dwSize == 0)
             return true;
-        
+
         wxChar *pBuf = (wxChar *)calloc(dwSize, sizeof(wxChar));
         nError = ::RegQueryValueEx(m_hKey, (LPCTSTR)strVal, RESERVED, &dwType, (LPBYTE)pBuf, &dwSize);
 
@@ -419,7 +419,7 @@ DWORD pgRegKey::GetValueType(const wxString& key) const
     DWORD dwType;
     long nError = RegQueryValueEx((HKEY) m_hKey, (LPCTSTR)key, RESERVED,
                                                                 &dwType, NULL, NULL);
-    
+
     if (nError != ERROR_SUCCESS)
         return REG_NONE;
     return dwType;

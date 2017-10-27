@@ -60,9 +60,9 @@ bool MirrorList::LoadMirrorList()
     wxXmlNode *mirror, *properties;
     mirror = xml.GetRoot()->GetChildren();
 
-    while (mirror) 
+    while (mirror)
     {
-        if (mirror->GetName() == wxT("mirror")) 
+        if (mirror->GetName() == wxT("mirror"))
         {
             Mirror *newMirror = new Mirror();
             properties = mirror->GetChildren();

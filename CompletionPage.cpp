@@ -27,7 +27,7 @@ CompletionPage::CompletionPage(wxWizard *parent)
     stTitle = new wxStaticText(this, wxID_ANY, wxEmptyString);
     mainSizer->Add(stTitle, 0, wxALL | wxALIGN_CENTER, 5);
 
-    stBody = new wxStaticText(this, wxID_ANY, wxEmptyString); 
+    stBody = new wxStaticText(this, wxID_ANY, wxEmptyString);
     mainSizer->Add(stBody, 0, wxALL | wxFIXED_MINSIZE, 5);
 
     mainSizer->SetItemMinSize(stBody, 400, 80);
@@ -36,7 +36,7 @@ CompletionPage::CompletionPage(wxWizard *parent)
     mainSizer->Add(stStatus, 0, wxALL | wxFIXED_MINSIZE, 5);
 
     mainSizer->SetItemMinSize(stStatus, 400, 35);
-    
+
     wxStaticText *st = new wxStaticText(this, wxID_ANY, _("You may run this wizard again at any time to add to or upgrade the software in your stack. If you wish to remove any software, please use the Add/Remove Programs Control Panel applet."));
     st->Wrap(400);
     mainSizer->Add(st, 0, wxALL | wxFIXED_MINSIZE, 5);
@@ -62,7 +62,7 @@ void CompletionPage::SetPageText(bool installationSkipped)
         titleText = _("Installation Skipped");
         bodyText = _("Installation of the packages you selected has been skipped. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded).");
     }
-    else 
+    else
     {
         titleText = _("Installation Completed");
         bodyText = _("Installation of the packages you selected has finished. The downloaded files have been retained to allow future installations or upgrades (some packages require the original installation files when being upgraded).");
@@ -70,10 +70,10 @@ void CompletionPage::SetPageText(bool installationSkipped)
 
     stTitle->SetLabel(titleText);
     stTitle->Wrap(350);
-    
+
     stBody->SetLabel(bodyText);
     stBody->Wrap(400);
-} 
+}
 
 void CompletionPage::ShowErrorWarning(const int errors)
 {

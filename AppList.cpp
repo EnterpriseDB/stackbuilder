@@ -64,9 +64,9 @@ bool AppList::LoadAppList()
     wxXmlNode *application, *properties;
     application = xml.GetRoot()->GetChildren();
 
-    while (application) 
+    while (application)
     {
-        if (application->GetName() == wxT("application")) 
+        if (application->GetName() == wxT("application"))
         {
             App *newApplication = new App(this, m_server);
             properties = application->GetChildren();
@@ -143,7 +143,7 @@ wxTreeItemId AppList::FindCategory(wxTreeItemId parent, wxString &category)
     wxTreeItemIdValue cookie;
     wxTreeItemId node;
 
-    node = m_treectrl->GetFirstChild(parent, cookie); 
+    node = m_treectrl->GetFirstChild(parent, cookie);
 
     while (node)
     {
@@ -152,8 +152,8 @@ wxTreeItemId AppList::FindCategory(wxTreeItemId parent, wxString &category)
         node = m_treectrl->GetNextChild(parent, cookie);
     }
     return node;
-} 
-     
+}
+
 
 bool AppList::PopulateTreeCtrl()
 {
@@ -169,11 +169,11 @@ bool AppList::PopulateTreeCtrl()
         while (tokens.HasMoreTokens())
         {
             wxString ctg = tokens.GetNextToken();
-            node = FindCategory(parentNode, ctg); 
-            if (!node) 
+            node = FindCategory(parentNode, ctg);
+            if (!node)
                 node =  m_treectrl->AppendItem(parentNode, ctg, 3);
             parentNode = node;
-        }       
+        }
         category = node;
 
         // We used to disable installed apps here (by using image #2), but that
@@ -230,9 +230,9 @@ void AppList::RankDownloads()
         m_apps[i].sequence = 0;
 
     // For each app in the list, if it's selected for download,
-    // scan to the bottom of the dependency tree and rank the 
+    // scan to the bottom of the dependency tree and rank the
     // downloads from the bottom level back up. If a package has
-    // already been ranked, we can ignore it as we must have 
+    // already been ranked, we can ignore it as we must have
     // ranked it and it's dependencies already.
     for (unsigned int i=0; i<m_apps.GetCount(); i++)
     {
@@ -241,7 +241,7 @@ void AppList::RankDownloads()
         if (!m_apps[i].IsSelectedForDownload() || m_apps[i].sequence > 0)
             continue;
 
-        rank = m_apps[i].RankDependencies(rank, 0);    
+        rank = m_apps[i].RankDependencies(rank, 0);
     }
 }
 
@@ -271,7 +271,7 @@ bool AppList::DownloadFiles(const wxString& downloadPath, const Mirror *mirror)
 {
     unsigned int x = 1;
 
-    // Loop round once for every app. For each loop, search the 
+    // Loop round once for every app. For each loop, search the
     // applist for a matching download.
     while(x <= m_apps.GetCount())
     {
@@ -293,7 +293,7 @@ bool AppList::InstallApps()
 {
     unsigned int x = 1;
 
-    // Loop round once for every app. For each loop, search the 
+    // Loop round once for every app. For each loop, search the
     // applist for a matching download.
     while(x <= m_apps.GetCount())
     {
@@ -316,7 +316,7 @@ wxArrayString AppList::GetSummary()
     wxArrayString summary;
     unsigned int x = 1;
 
-    // Loop round once for every app. For each loop, search the 
+    // Loop round once for every app. For each loop, search the
     // applist for a matching download.
     while(x <= m_apps.GetCount())
     {

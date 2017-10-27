@@ -49,12 +49,12 @@ ProxyDialog::ProxyDialog(wxWindow *parent, const wxString& title)
     }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-    
+
     http_host = cnf->Read(wxT("HttpProxyHost"), wxEmptyString);
     http_port = cnf->Read(wxT("HttpProxyPort"), wxEmptyString);
     ftp_host = cnf->Read(wxT("FtpProxyHost"), wxEmptyString);
     ftp_port = cnf->Read(wxT("FtpProxyPort"), wxEmptyString);
-    
+
     delete cnf;
 #endif
 
@@ -137,12 +137,12 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
 
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-    
-    cnf->Write(wxT("HttpProxyHost"), m_http_host->GetValue()), 
-    cnf->Write(wxT("HttpProxyPort"), m_http_port->GetValue()), 
-    cnf->Write(wxT("FtpProxyHost"), m_ftp_host->GetValue()), 
-    cnf->Write(wxT("FtpProxyPort"), m_ftp_port->GetValue()), 
-    
+
+    cnf->Write(wxT("HttpProxyHost"), m_http_host->GetValue()),
+    cnf->Write(wxT("HttpProxyPort"), m_http_port->GetValue()),
+    cnf->Write(wxT("FtpProxyHost"), m_ftp_host->GetValue()),
+    cnf->Write(wxT("FtpProxyPort"), m_ftp_port->GetValue()),
+
     delete cnf;
 #endif
 
@@ -178,7 +178,7 @@ wxString ProxyDialog::GetProxy(const wxString &protocol)
     }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-    
+
     if (protocol.Lower() == wxT("ftp"))
     {
         host = cnf->Read(wxT("FtpProxyHost"), wxEmptyString);
@@ -189,7 +189,7 @@ wxString ProxyDialog::GetProxy(const wxString &protocol)
         host = cnf->Read(wxT("HttpProxyHost"), wxEmptyString);
         port = cnf->Read(wxT("HttpProxyPort"), wxEmptyString);
     }
-    
+
     delete cnf;
 #endif
 

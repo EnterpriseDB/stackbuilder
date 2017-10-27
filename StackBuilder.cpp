@@ -41,7 +41,7 @@ bool StackBuilder::OnInit()
     SetAppName(_("Stack Builder"));
 
     // Command line options
-    static const wxCmdLineEntryDesc cmdLineDesc[] = 
+    static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
         {wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
         {wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
@@ -55,7 +55,7 @@ bool StackBuilder::OnInit()
     };
 
     wxCmdLineParser cmdParser(cmdLineDesc, argc, argv);
-    if (cmdParser.Parse() != 0) 
+    if (cmdParser.Parse() != 0)
         return false;
 
     if (!cmdParser.Found(wxT("m"), &mirrorListUrl))
@@ -63,9 +63,9 @@ bool StackBuilder::OnInit()
 
     if (!cmdParser.Found(wxT("a"), &applicationListUrl))
         applicationListUrl = DEFAULT_APPLICATION_LIST_URL;
-   
+
     // postgresql.org no longer uses the counter, so we default to not trying
-    // to use any, unless the user overrides on the command line. 
+    // to use any, unless the user overrides on the command line.
     if (!cmdParser.Found(wxT("d"), &downloadCounterUrl))
         downloadCounterUrl = wxEmptyString;
 
@@ -98,21 +98,21 @@ bool StackBuilder::OnInit()
 #ifdef __WXMSW__
     BOOL isAdmin;
     SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
-    PSID AdministratorsGroup; 
+    PSID AdministratorsGroup;
     isAdmin = AllocateAndInitializeSid(
             &NtAuthority,
             2,
             SECURITY_BUILTIN_DOMAIN_RID,
             DOMAIN_ALIAS_RID_ADMINS,
             0, 0, 0, 0, 0, 0,
-            &AdministratorsGroup); 
-    if(isAdmin) 
+            &AdministratorsGroup);
+    if(isAdmin)
     {
-        if (!CheckTokenMembership( NULL, AdministratorsGroup, &isAdmin)) 
+        if (!CheckTokenMembership( NULL, AdministratorsGroup, &isAdmin))
         {
             isAdmin = FALSE;
-        } 
-        FreeSid(AdministratorsGroup); 
+        }
+        FreeSid(AdministratorsGroup);
     }
 
     if(!isAdmin)
@@ -126,7 +126,7 @@ bool StackBuilder::OnInit()
     wxBitmap bitmap = wxBitmap(background_xpm);
 	wxString title = wxString::Format(wxT("%s %s"), _("Stack Builder"), STACKBUILDER_VERSION);
     wizard = new Wizard(NULL, bitmap, applicationListUrl, mirrorListUrl, title);
-    bool retval = wizard->RunWizard(wizard->GetFirstPage()); 
+    bool retval = wizard->RunWizard(wizard->GetFirstPage());
 
     return retval;
 }

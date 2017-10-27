@@ -24,7 +24,7 @@ BEGIN_EVENT_TABLE(InstallationPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,        InstallationPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
-InstallationPage::InstallationPage(wxWizard *parent, AppList *applist) 
+InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
     : wxWizardPageSimple(parent)
 {
     skipInstallation = false;
@@ -53,7 +53,7 @@ InstallationPage::InstallationPage(wxWizard *parent, AppList *applist)
 
     mainSizer->SetItemMinSize(st, 400, 80);
 
-    m_skipInstallation = new wxCheckBox(this, -1, _("Skip Installation"), wxDefaultPosition, wxDefaultSize);     
+    m_skipInstallation = new wxCheckBox(this, -1, _("Skip Installation"), wxDefaultPosition, wxDefaultSize);
     mainSizer->Add(m_skipInstallation, 0, wxALL | wxALIGN_LEFT, 5);
 
     SetSizer(mainSizer);

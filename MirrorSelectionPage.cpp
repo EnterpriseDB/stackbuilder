@@ -28,7 +28,7 @@ BEGIN_EVENT_TABLE(MirrorSelectionPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,        MirrorSelectionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
-MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist) 
+MirrorSelectionPage::MirrorSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist)
     : wxWizardPageSimple(parent)
 {
     m_applist = applist;

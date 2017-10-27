@@ -23,7 +23,7 @@ class ProxyDialog : public wxDialog
 public:
     ProxyDialog(wxWindow *parent, const wxString& title);
     static wxString GetProxy(const wxString &protocol);
-  
+
 private:
     void OnOK(wxCommandEvent& event);
     void OnCancel(wxCommandEvent& event);

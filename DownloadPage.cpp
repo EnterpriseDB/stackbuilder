@@ -36,7 +36,7 @@ BEGIN_EVENT_TABLE(DownloadPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY,        DownloadPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
-DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist) 
+DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist)
     : wxWizardPageSimple(parent)
 {
     m_applist = applist;
@@ -132,7 +132,7 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
     }
 #else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
-    cnf->Write(wxT("DownloadPath"), m_path->GetValue()), 
+    cnf->Write(wxT("DownloadPath"), m_path->GetValue()),
     delete cnf;
 #endif
 

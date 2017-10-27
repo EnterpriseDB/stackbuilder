@@ -50,33 +50,33 @@ using namespace std;
 #include "CurlHandler.h"
 
 App::App(AppList *applist, Server *server)
-{ 
-    m_applist = applist; 
+{
+    m_applist = applist;
     m_server = server;
-    sequence = 0; 
-    download = false; 
+    sequence = 0;
+    download = false;
     isDependency = false;
     downloaded = false;
     installed = false;
-    m_tree = NULL; 
+    m_tree = NULL;
 };
 
 bool App::IsValid()
-{ 
-    return (!id.IsEmpty() && 
-            !name.IsEmpty() && 
-            !version.IsEmpty() && 
-            !category.IsEmpty() && 
-            !format.IsEmpty() && 
-            !checksum.IsEmpty() && 
+{
+    return (!id.IsEmpty() &&
+            !name.IsEmpty() &&
+            !version.IsEmpty() &&
+            !category.IsEmpty() &&
+            !format.IsEmpty() &&
+            !checksum.IsEmpty() &&
             !(mirrorpath.IsEmpty() && alturl.IsEmpty()) &&
-            !versionkey.IsEmpty()); 
+            !versionkey.IsEmpty());
 }
 
 bool App::IsInstalled()
 {
     wxString ver;
-    
+
 #ifdef __WXMSW__
     pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
@@ -92,7 +92,7 @@ bool App::IsInstalled()
 
     if (key == NULL)
         return false;
-    
+
     // Also consider the app not installed if the value exists but is empty
     key->QueryValue(versionkey.AfterLast('\\'), ver);
 
@@ -101,13 +101,13 @@ bool App::IsInstalled()
     // Check for the registry
     if (!wxFile::Exists(REGISTRY_FILE))
         return false;
-    
+
     wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
-        
+
     if (!cnf->HasEntry(versionkey))
         return false;
-    
+
     // Also consider the app not installed if the value exists but is empty
     ver = cnf->Read(versionkey, wxEmptyString);
     delete cnf;
@@ -115,14 +115,14 @@ bool App::IsInstalled()
 
     if (ver == wxEmptyString)
         return false;
-        
+
     return true;
 }
 
 bool App::IsVersionInstalled()
 {
     wxString ver;
-    
+
 #ifdef __WXMSW__
     pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
@@ -146,21 +146,21 @@ bool App::IsVersionInstalled()
     // Check for the registry
     if (!wxFile::Exists(REGISTRY_FILE))
         return false;
-    
+
     wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
-    
+
     if (!cnf->HasEntry(versionkey))
         return false;
-    
+
     // Also consider the app not installed if the value exists but is empty
     ver = cnf->Read(versionkey, wxEmptyString);
     delete cnf;
 #endif
-    
+
     if (ver != version)
         return false;
-    
+
     return true;
 }
 
@@ -232,7 +232,7 @@ bool App::WorksWithPlatform()
 wxString App::GetInstalledVersion()
 {
     wxString ver;
-    
+
 #ifdef __WXMSW__
     pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
 
@@ -255,13 +255,13 @@ wxString App::GetInstalledVersion()
     // Check for the registry
     if (!wxFile::Exists(REGISTRY_FILE))
         return wxEmptyString;
-    
+
     wxFileInputStream fst(REGISTRY_FILE);
     wxFileConfig *cnf = new wxFileConfig(fst);
-    
+
     if (!cnf->HasEntry(versionkey))
         return wxEmptyString;
-    
+
     ver = cnf->Read(versionkey, wxEmptyString);
     delete cnf;
 #endif
@@ -316,7 +316,7 @@ int App::RankDependencies(int rank, unsigned int depth)
         // Iterate through the dependencies, setting the sequence as required
         for (unsigned int i=0; i<dependencies.GetCount(); i++)
         {
-            App *dep = m_applist->GetItem(dependencies[i]); 
+            App *dep = m_applist->GetItem(dependencies[i]);
             if (!dep->IsSelectedForDownload() || dep->sequence > 0)
                 continue;
 
@@ -327,7 +327,7 @@ int App::RankDependencies(int rank, unsigned int depth)
 
     depth--;
 
-    // The sequence might already be set if we've gone through a 
+    // The sequence might already be set if we've gone through a
     // circular dependency. In that case, don't reset it.
     if (!sequence)
     {
@@ -503,15 +503,15 @@ bool App::CheckFilename(const wxString& downloadPath)
     file = downloadPath + wxT("/") + id + wxT(".") + format;
 #else
     // On Mac, installers are always bundles, so they must be zipped for transport
-    file = downloadPath + wxT("/") + id + wxT(".") + format + wxT(".zip");    
+    file = downloadPath + wxT("/") + id + wxT(".") + format + wxT(".zip");
 #endif
-    
+
     if (file.FileExists())
     {
         // Check the file to see if it's checksum matches ours. If
         // if does, keep the filename and set the 'Downloaded' flag
         wxString tmpsum;
-        
+
         {
             wxBusyInfo wait(wxString::Format(_("Checking existing file: %s"), file.GetFullName().c_str()));
             tmpsum = md5sum(file.GetFullPath());
@@ -559,31 +559,31 @@ bool App::Install()
 #ifdef __WXMSW__
     // MSI or EXE?
     if (format.Lower() == wxT("msi"))
-        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;    
+        cmd = wxT("msiexec /i \"") + file.GetFullPath() + wxT("\" ") + args;
     else
         cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
 #else
 #ifdef __WXMAC__
     // Unpack the downloaded file
-    
-    // Create a directory to put it in. This is a little ugly, but 
+
+    // Create a directory to put it in. This is a little ugly, but
     // wxWidgets only allows us to create a temp file
     wxString macTmpPath = wxFileName::CreateTempFileName(wxT("/tmp/"));
     wxRemoveFile(macTmpPath);
     wxMkdir(macTmpPath);
-    
+
     // Prepare to extract
     auto_ptr<wxZipEntry> entry;
-    
+
     wxFFileInputStream in(file.GetFullPath());
     wxZipInputStream zip(in);
-    
+
     while (entry.reset(zip.GetNextEntry()), entry.get() != NULL)
     {
         // Get the filename
         if (entry->GetName().StartsWith(wxT("__MACOSX")))
             continue;
-            
+
         if (entry->GetName().EndsWith(wxT("/")))
         {
             if (!wxMkdir(macTmpPath + wxT("/") + entry->GetName()))
@@ -607,45 +607,45 @@ bool App::Install()
         }
 
     }
-    
+
 	// Find the bundle. This will be the first .app, .pkg or .mpkg found in the temp dir
 	wxString bundle, filespec;
 	wxDir(dir);
-	
+
 	if (format.Lower() == wxT("app"))
 		filespec = wxT("*.app");
 	else if (format.Lower() == wxT("pkg"))
 		filespec = wxT("*.pkg");
 	else if (format.Lower() == wxT("mpkg"))
 		filespec = wxT("*.mpkg");
-	
+
 	dir.Open(macTmpPath);
 	dir.GetFirst(&bundle, filespec, wxDIR_DIRS);
 
     // If this is a pkg or mpkg, just throw it at open. Note that you cannot pass arguments
     // to this type of installer
     wxString installer = macTmpPath + wxT("/") + bundle;
-    
+
     if (format.Lower() == wxT("pkg") || format.Lower() == wxT("mpkg"))
-        cmd = wxT("open -W \"") + installer + wxT("\"");    
+        cmd = wxT("open -W \"") + installer + wxT("\"");
     else
     {
-        // On the Mac, having unpacked an appbundle, we must read the 
+        // On the Mac, having unpacked an appbundle, we must read the
         // CFBundleExecutable value from installer.app/Contents/Info.plist
         // and then execute that.
         wxString exe = GetBundleExecutable(installer);
-        
+
         if (exe.IsEmpty())
         {
             wxLogError(_("Failed to read the CFBundleExecutable value from the appbundle description: %s/Contents/Info.plist"), installer.c_str());
             return false;
         }
-        
+
         cmd = wxT("\"") + installer + wxT("/Contents/MacOS/") + exe + wxT("\" ") + args;
     }
-    
+
 #else
-    // Everything is executed directly on *nix, as we cannot support RPM/DEB in any 
+    // Everything is executed directly on *nix, as we cannot support RPM/DEB in any
     // non-distro specific way.
     chmod(file.GetFullPath().ToAscii(), S_IRUSR | S_IWUSR | S_IXUSR);
     cmd = wxT("\"") + file.GetFullPath() + wxT("\" ") + args;
@@ -655,8 +655,8 @@ bool App::Install()
     // Now run the installation
     if (cmd.IsEmpty())
         return false;
-  
-#ifdef __WXMSW__ 
+
+#ifdef __WXMSW__
     long retval = wxExecute(cmd.Trim(), wxEXEC_SYNC);
 #else
     // wxExecute can sometime fail to call wait() for some reason, leading to zombies
@@ -674,8 +674,8 @@ bool App::Install()
     }
     else
     {
-        int response = wxMessageBox(wxString::Format(_("The installation of %s returned an error.\n\n Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n\nNote that ignoring this error may result in failure of any later installations that depend on this one."), this->name.c_str()), 
-                                                     _("Installation error"), 
+        int response = wxMessageBox(wxString::Format(_("The installation of %s returned an error.\n\n Click on the OK button to ignore this error and continue with any remaining installations, or click Cancel to abort the remaining installations.\n\nNote that ignoring this error may result in failure of any later installations that depend on this one."), this->name.c_str()),
+                                                     _("Installation error"),
                                                      wxOK | wxCANCEL | wxICON_EXCLAMATION);
 
         if (response == wxCANCEL) // User cancelled the installations
@@ -728,25 +728,25 @@ wxString App::SubstituteFlags(const wxString &options)
 wxString App::GetBundleExecutable(const wxString &bundle)
 {
     wxFileInputStream ip(bundle + wxT("/Contents/Info.plist"));
-    
+
     if (!ip || !ip.IsOk())
         return wxEmptyString;
-    
+
     wxXmlDocument xml;
     if (!xml.Load(ip))
         return wxEmptyString;
-    
+
     // Iterate through the applications and build the list
     wxXmlNode *dict, *properties;
     dict = xml.GetRoot()->GetChildren();
     bool next = false;
-    
-    while (dict) 
+
+    while (dict)
     {
-        if (dict->GetName() == wxT("dict")) 
+        if (dict->GetName() == wxT("dict"))
         {
             properties = dict->GetChildren();
-            
+
             while (properties)
             {
                 // Look for the key with the value CFBundleExecutable
@@ -764,16 +764,16 @@ wxString App::GetBundleExecutable(const wxString &bundle)
                     if (properties->GetName() == wxT("string"))
                     {
                         return properties->GetNodeContent();
-                    }                    
+                    }
                 }
-                        
+
                 properties = properties->GetNext();
             }
         }
-        
+
         dict = dict->GetNext();
     }
-    
+
     return wxEmptyString;
 }
 #endif
@@ -813,9 +813,9 @@ bool App::IsRequired()
 {
     for (unsigned int y=0; y < m_applist->Count(); y++)
     {
-        App *app = (App *) m_applist->GetItem(y); 
+        App *app = (App *) m_applist->GetItem(y);
         if (app->IsSelectedForDownload() && app->dependencies.Index(id) != wxNOT_FOUND)
              return true;
     }
-    return false;  
-} 
+    return false;
+}

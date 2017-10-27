@@ -39,7 +39,7 @@ Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListU
     m_applist = new AppList(applicationListUrl);
     m_mirrorlist = new MirrorList(mirrorListUrl);
 
-    // Add the pages. Do this in reverse order, so we can 
+    // Add the pages. Do this in reverse order, so we can
     // pass pointers to later pages to earlier ones.
     m_page6 = new CompletionPage(this);
     m_page5 = new InstallationPage(this, m_applist);
@@ -57,8 +57,8 @@ Wizard::Wizard(wxFrame *frame, wxBitmap bitmap, const wxString &applicationListU
 
     // Allow the wizard to size itself around the pages
     /*
-     * Since a problem is in correspondence of Japanese font size, it is made fixed 
-     * size. However, in the future version of wxWidgets, an original code is desirable. 
+     * Since a problem is in correspondence of Japanese font size, it is made fixed
+     * size. However, in the future version of wxWidgets, an original code is desirable.
      * GetPageAreaSizer()->Add(m_page1);
      */
     GetPageAreaSizer()->Add(420, 0);

@@ -33,7 +33,7 @@ private:
 
     wxTextCtrl *m_path;
     wxListBox *m_summary;
-    wxButton *m_browse; 
+    wxButton *m_browse;
     AppList *m_applist;
     MirrorList *m_mirrorlist;
 

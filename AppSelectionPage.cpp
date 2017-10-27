@@ -81,7 +81,7 @@ void AppTreeCtrl::OnLeftClick(wxMouseEvent &evt)
 }
 
 
-AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist, wxWizardPageSimple *mirrorpage, wxWizardPageSimple *downloadpage) 
+AppSelectionPage::AppSelectionPage(wxWizard *parent, AppList *applist, MirrorList *mirrorlist, wxWizardPageSimple *mirrorpage, wxWizardPageSimple *downloadpage)
     : wxWizardPageSimple(parent)
 {
     m_applist = applist;

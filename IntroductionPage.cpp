@@ -38,7 +38,7 @@ BEGIN_EVENT_TABLE(IntroductionPage, wxWizardPageSimple)
     EVT_WIZARD_PAGE_CHANGING(wxID_ANY, IntroductionPage::OnWizardPageChanging)
 END_EVENT_TABLE()
 
-IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist) 
+IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     : wxWizardPageSimple(parent)
 {
     m_applist = applist;
@@ -69,7 +69,7 @@ IntroductionPage::IntroductionPage(wxWizard *parent, AppList *applist)
     Server *dummyServer = new Server();
     dummyServer->port = 5432;
     dummyServer->superuserName = wxT("postgres");
-    dummyServer->serverType = SVR_POSTGRESQL; 
+    dummyServer->serverType = SVR_POSTGRESQL;
 
     unsigned int item = m_installation->Append(_("<remote server>"));
     m_installation->SetClientObject(item, dummyServer);
@@ -138,9 +138,9 @@ bool IntroductionPage::FindPgServers()
     bool success = false;
     bool flag = false;
     long cookie = 0;
-    long port = 0;    
+    long port = 0;
     wxString temp;
-    
+
 #ifdef __WXMSW__
     // Add local servers.
     pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
@@ -227,7 +227,7 @@ bool IntroductionPage::FindPgServers()
 
             // Build the user description
             temp.Printf(_("%s%s on port %d"), data->description.c_str(), strPgArch.c_str(), data->port);
- 
+
 			// Add the item, if it looks sane
 			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
 			{
@@ -258,10 +258,10 @@ bool IntroductionPage::FindPgServers()
     {
         wxString version, locale;
         long cookie;
-        
+
         wxFileInputStream fst(REGISTRY_FILE);
         wxFileConfig *cnf = new wxFileConfig(fst);
-        
+
         cnf->SetPath(wxT("/PostgreSQL"));
         flag = cnf->GetFirstGroup(version, cookie);
         while (flag)
@@ -289,10 +289,10 @@ bool IntroductionPage::FindPgServers()
                 data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
                 data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
                 data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
-                
+
                 // Separate the locale and encoding if possible
                 locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
-                
+
                 if (locale.Find('.') == wxNOT_FOUND)
                 {
                     data->locale = locale;
@@ -302,10 +302,10 @@ bool IntroductionPage::FindPgServers()
                     data->locale = locale.BeforeFirst('.');
                     data->encoding = locale.AfterFirst('.');
                 }
-                
+
                 // Build the user description
                 temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
-                
+
                 // Add the item, if it looks sane
 				if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
 				{
@@ -313,10 +313,10 @@ bool IntroductionPage::FindPgServers()
                     success = true;
 				}
             }
-            
+
             flag = cnf->GetNextGroup(version, cookie);
         }
-        
+
         delete cnf;
     }
 
@@ -326,16 +326,16 @@ bool IntroductionPage::FindPgServers()
 
 
 // Note: The following function is currently the same as FindPgServers() just
-//       using different registry keys until the EDB installer starts writing 
+//       using different registry keys until the EDB installer starts writing
 //       it's install data to the registry.
 bool IntroductionPage::FindEdbServers()
 {
     bool success = false;
     bool flag = false;
     long cookie = 0;
-    long port = 0;    
+    long port = 0;
     wxString temp;
-    
+
 #ifdef __WXMSW__
     // Add local servers.
     pgRegKey::PGREGWOWMODE wowMode = pgRegKey::PGREG_WOW_DEFAULT;
@@ -424,7 +424,7 @@ bool IntroductionPage::FindEdbServers()
 
             // Build the user description
             temp.Printf(_("%s%s on port %d"), data->description.c_str(), strPgArch.c_str(), data->port);
- 
+
 			// Add the item, if it looks sane
 			if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
 			{
@@ -455,10 +455,10 @@ bool IntroductionPage::FindEdbServers()
     {
         wxString version, locale;
         long cookie;
-        
+
         wxFileInputStream fst(REGISTRY_FILE);
         wxFileConfig *cnf = new wxFileConfig(fst);
-        
+
         cnf->SetPath(wxT("/EnterpriseDB"));
         flag = cnf->GetFirstGroup(version, cookie);
         while (flag)
@@ -477,7 +477,7 @@ bool IntroductionPage::FindEdbServers()
                 data->serverVersion.BeforeFirst('.').ToLong(&data->majorVer);
                 if ( data->majorVer < 10 )
                     data->serverVersion.AfterFirst('.').ToLong(&data->minorVer);
-                
+
                 // And the rest of the data
                 data->description = cnf->Read(version + wxT("/Description"), _("Unknown server"));
                 data->port = cnf->Read(version + wxT("/Port"), 0L);
@@ -485,10 +485,10 @@ bool IntroductionPage::FindEdbServers()
                 data->installationPath = cnf->Read(version + wxT("/InstallationDirectory"), wxEmptyString);
                 data->superuserName = cnf->Read(version + wxT("/Superuser"), wxEmptyString);
                 data->serviceAccount = cnf->Read(version + wxT("/Superuser"), wxEmptyString); // We use the Superuser entry for both on *nix
-                
+
                 // Separate the locale and encoding if possible
                 locale = cnf->Read(version + wxT("/Locale"), wxEmptyString);
-                
+
                 if (locale.Find('.') == wxNOT_FOUND)
                 {
                     data->locale = locale;
@@ -498,10 +498,10 @@ bool IntroductionPage::FindEdbServers()
                     data->locale = locale.BeforeFirst('.');
                     data->encoding = locale.AfterFirst('.');
                 }
-                
+
                 // Build the user description
                 temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
-                
+
                 // Add the item, if it looks sane
 				if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
 				{
@@ -509,13 +509,13 @@ bool IntroductionPage::FindEdbServers()
                     success = true;
 				}
             }
-            
+
             flag = cnf->GetNextGroup(version, cookie);
         }
-        
+
         delete cnf;
     }
-    
+
     return success;
 #endif
 }

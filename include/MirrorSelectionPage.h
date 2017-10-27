@@ -33,7 +33,7 @@ private:
     wxImageList *m_treeimages;
     AppList *m_applist;
     MirrorList *m_mirrorlist;
-    
+
     DECLARE_EVENT_TABLE()
 };
 
