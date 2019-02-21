@@ -237,7 +237,7 @@ bool pgRegKey::SetValue(const wxString& strVal, const wxString& val)
     if (m_accessMode == PGREG_READ)
         return false;
 
-    long nError = ::RegSetValueEx(m_hKey, (LPCTSTR)strVal, RESERVED, REG_DWORD,
+    long nError = ::RegSetValueEx(m_hKey, (LPCTSTR)strVal, RESERVED, REG_SZ,
                                     (const BYTE*)((LPCTSTR)val), sizeof(TCHAR) * (val.Len() + 1));
 	  if ( nError == ERROR_SUCCESS )
         return true;
