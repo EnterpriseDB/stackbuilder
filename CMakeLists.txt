@@ -36,7 +36,7 @@ IF(APPLE)
     ENDIF(NOT HAVE_CACHED_VALUES)
  
    # Target Tiger
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.4")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.7")
 ENDIF(APPLE)
 
 ################################################################################
@@ -44,11 +44,11 @@ ENDIF(APPLE)
 ################################################################################
 PROJECT(stackbuilder)
 
-SET(VERSION 4.1.0)
+SET(VERSION 4.2.0)
 
 # CPack stuff
 SET(CPACK_PACKAGE_VERSION_MAJOR 4)
-SET(CPACK_PACKAGE_VERSION_MINOR 1)
+SET(CPACK_PACKAGE_VERSION_MINOR 2)
 SET(CPACK_PACKAGE_VERSION_PATCH 0)
 SET(CPACK_PACKAGE_NAME "StackBuilder")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "PostgreSQL StackBuilder")
@@ -78,7 +78,7 @@ SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2007 - 2017, EnterpriseDB")
 ################################################################################
 SET(WX_DEBUG NO CACHE BOOL "Use the debug build of wxWidgets?")
 SET(WX_STATIC YES CACHE BOOL "Use the statically linked build of wxWidgets?")
-SET(WX_VERSION "2.8")
+
 SET(WX_UNICODE YES)
 SET(WX_MODULES "adv;core;base;net;xml;")
 

@@ -49,7 +49,13 @@ static int GetSSLSupportStatus(wxString url)
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
     if (userp != NULL)
+    {
+#if wxCHECK_VERSION(3, 0, 0)
+        ((wxString *)userp)->Append((const char*)contents, size * nmemb);
+#else
         ((wxString *)userp)->Append(wxString::FromUTF8((const char*)contents), size * nmemb);
+#endif
+    }
 
     return size * nmemb;
 }

@@ -78,7 +78,12 @@ DownloadPage::DownloadPage(wxWizard *parent, AppList *applist, MirrorList *mirro
     if (key != NULL)
         delete key;
 #else
+#if wxCHECK_VERSION(3, 0, 0)
+    wxFileConfig *cnf = new wxFileConfig(wxT("stackbuilder"));
+#else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+#endif
+
     path = cnf->Read(wxT("DownloadPath"), wxGetHomeDir());
     delete cnf;
 #endif
@@ -131,7 +136,12 @@ void DownloadPage::OnWizardPageChanging(wxWizardEvent& event)
         delete key;
     }
 #else
+#if wxCHECK_VERSION(3, 0, 0)
+    wxFileConfig *cnf = new wxFileConfig(wxT("stackbuilder"));
+#else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+#endif
+
     cnf->Write(wxT("DownloadPath"), m_path->GetValue()),
     delete cnf;
 #endif

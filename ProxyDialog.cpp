@@ -48,7 +48,11 @@ ProxyDialog::ProxyDialog(wxWindow *parent, const wxString& title)
         delete key;
     }
 #else
+#if wxCHECK_VERSION(3, 0, 0)
+    wxFileConfig *cnf = new wxFileConfig(wxT("stackbuilder"));
+#else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+#endif
 
     http_host = cnf->Read(wxT("HttpProxyHost"), wxEmptyString);
     http_port = cnf->Read(wxT("HttpProxyPort"), wxEmptyString);
@@ -136,7 +140,11 @@ void ProxyDialog::OnOK(wxCommandEvent& event)
     }
 
 #else
+#if wxCHECK_VERSION(3, 0, 0)
+    wxFileConfig *cnf = new wxFileConfig(wxT("stackbuilder"));
+#else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+#endif
 
     cnf->Write(wxT("HttpProxyHost"), m_http_host->GetValue()),
     cnf->Write(wxT("HttpProxyPort"), m_http_port->GetValue()),
@@ -177,7 +185,11 @@ wxString ProxyDialog::GetProxy(const wxString &protocol)
         delete key;
     }
 #else
+#if wxCHECK_VERSION(3, 0, 0)
+    wxFileConfig *cnf = new wxFileConfig(wxT("stackbuilder"));
+#else
     wxFileConfig *cnf = new wxConfig(wxT("stackbuilder"));
+#endif
 
     if (protocol.Lower() == wxT("ftp"))
     {

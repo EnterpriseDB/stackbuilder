@@ -43,13 +43,26 @@ bool StackBuilder::OnInit()
     // Command line options
     static const wxCmdLineEntryDesc cmdLineDesc[] =
     {
+#if wxCHECK_VERSION(3, 0, 0)
+        {wxCMD_LINE_SWITCH, "h", "help", _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
+        {wxCMD_LINE_OPTION, "m", "mirror-list", _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
+        {wxCMD_LINE_OPTION, "a", "application-list", _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
+        {wxCMD_LINE_OPTION, "d", "download-counter", _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
+        {wxCMD_LINE_OPTION, "l", "language", _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
+#else
         {wxCMD_LINE_SWITCH, wxT("h"), wxT("help"), _("show this help message"), wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
         {wxCMD_LINE_OPTION, wxT("m"), wxT("mirror-list"), _("download the mirror list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("a"), wxT("application-list"), _("download the application list from the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("d"), wxT("download-counter"), _("use the download counter at the specified URL"), wxCMD_LINE_VAL_STRING},
         {wxCMD_LINE_OPTION, wxT("l"), wxT("language"), _("use the specified language in the UI"), wxCMD_LINE_VAL_STRING},
+#endif
+
 #ifndef __WIN32__
+#if wxCHECK_VERSION(3, 0, 0)
+        {wxCMD_LINE_OPTION, "c", "ca-bundle", _("user certificate for https support from the specified URL"), wxCMD_LINE_VAL_STRING},
+#else
         {wxCMD_LINE_OPTION, wxT("c"), wxT("ca-bundle"), _("user certificate for https support from the specified URL"), wxCMD_LINE_VAL_STRING},
+#endif
 #endif
         {wxCMD_LINE_NONE}
     };
