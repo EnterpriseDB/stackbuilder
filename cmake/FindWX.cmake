@@ -133,11 +133,16 @@ IF(WIN32 AND NOT CYGWIN AND NOT MSYS)
         SET(_suffix "${_suffix}u")
     ENDIF(_unicode)
 
+    SET(_arch "")     # Set architecture
+    IF(WX_VERSION GREATER_EQUAL 3.0 AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(_arch _x64)
+    ENDIF(WX_VERSION GREATER_EQUAL 3.0 AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+
     # Figure out the build prefix directory
     IF(_static)
         SET(_prefix "vc_lib")
     ELSE(_static)
-        SET(_prefix "vc_dll")
+        SET(_prefix "vc${_arch}_dll")
     ENDIF(_static)
     
     # Find the Unix configure script. We'll attempt to extract a version number from it.
