@@ -71,7 +71,7 @@ SET(MACOSX_BUNDLE_VERSION "${VERSION}")
 SET(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION}")
 SET(MACOSX_BUNDLE_LONG_VERSION_STRING "${VERSION}")
 SET(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
-SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2007 - 2017, EnterpriseDB")
+SET(MACOSX_BUNDLE_COPYRIGHT "Copyright 2007 - 2020, EnterpriseDB")
 
 ################################################################################
 # Find wxWidgets

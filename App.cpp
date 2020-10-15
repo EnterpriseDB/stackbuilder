@@ -413,6 +413,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     int kbDownloaded;
     int kbFileSize;
     wxString msg;
+    bool isDownloadInProgress = false;
 
     do
     {
@@ -428,9 +429,22 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
             kbFileSize = (int)dt->GetTotalFileSize() / KBSIZE;
             kbDownloaded = (int)dt->GetTotalDownloadSize() / KBSIZE;
 
+            if (isDownloadInProgress)
+            {
+                if ((kbFileSize == 0) && (kbDownloaded == 0))
+                {
+                    // Sometime kbDownloaded does not add the last few bytes which causes
+                    // an infinite loop event though the file has completely downloaded
+                    isDownloadInProgress=false;
+                    break;
+                }
+            }
+
             // To ignore initial few 0 values which is not updated
             if ((kbFileSize == 0) || (kbDownloaded == 0))
                 continue;
+
+            isDownloadInProgress = true;
 
             if (kbFileSize > kbDownloaded)
                 msg = wxString::Format(_("Downloaded %d KB of  %d KB (%d KB/Sec)"), kbDownloaded, kbFileSize, speed);
