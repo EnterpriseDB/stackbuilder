@@ -44,12 +44,12 @@ ENDIF(APPLE)
 ################################################################################
 PROJECT(stackbuilder)
 
-SET(VERSION 4.2.0)
+SET(VERSION 4.2.1)
 
 # CPack stuff
 SET(CPACK_PACKAGE_VERSION_MAJOR 4)
 SET(CPACK_PACKAGE_VERSION_MINOR 2)
-SET(CPACK_PACKAGE_VERSION_PATCH 0)
+SET(CPACK_PACKAGE_VERSION_PATCH 1)
 SET(CPACK_PACKAGE_NAME "StackBuilder")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "PostgreSQL StackBuilder")
 SET(CPACK_PACKAGE_VENDOR "EnterpriseDB")
@@ -210,6 +210,10 @@ IF(WIN32)
         SET_TARGET_PROPERTIES(stackbuilder PROPERTIES LINK_FLAGS "/MANIFESTUAC:\"level='requireAdministrator' uiAccess='false'\"")
     ENDIF(MS_VS_10)
 ENDIF(WIN32)
+
+IF(APPLE)
+    SET_TARGET_PROPERTIES(stackbuilder PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${stackbuilder_SOURCE_DIR}/Info.plist.in)
+ENDIF(APPLE)
 
 IF(APPLE)
     CONFIGURE_FILE(${stackbuilder_SOURCE_DIR}/include/images/StackBuilder.icns ${stackbuilder_BINARY_DIR}/stackbuilder.app/Contents/Resources/StackBuilder.icns COPYONLY)
