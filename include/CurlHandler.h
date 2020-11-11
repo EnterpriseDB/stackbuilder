@@ -25,6 +25,9 @@
 #define WITH_OUT_SSL_SUPPORT  1
 #define INVALID_SSL_SUPPORT   2
 
+#define CURL_DOWNLOAD_TIMEOUT   60L // Seconds
+#define CURL_DOWNLOAD_MIN_BYTES 30L // Bytes
+
 class CurlHandler
 {
 public:
@@ -61,10 +64,12 @@ public:
         wxString GetDownloadPackageUrl(wxString downloadUrl, wxString packageName);
         void SetDownloadUrl(const wxString &url) { m_downloadUrl = url; }
         void SetDownloadFileName(const wxString &file) { m_downloadFileName = file; }
+        void SetDownloadInProgress(const bool &status) { m_isDownloadInProgress = status; }
 
         friend int DownloadInfo(void *p, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow);
         double GetTotalFileSize() const { return m_totalFileSize; }
         double GetTotalDownloadSize() const { return m_totalDownloadSize; }
+        bool GetDownloadInProgress() const { return m_isDownloadInProgress; }
 
 private:
         wxString m_downloadUrl;
@@ -72,6 +77,7 @@ private:
 
         double m_totalFileSize;
         double m_totalDownloadSize;
+        bool m_isDownloadInProgress;
 };
 
 #endif

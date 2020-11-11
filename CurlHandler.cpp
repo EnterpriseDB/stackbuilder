@@ -386,7 +386,7 @@ static size_t ReadFunctionFromFile(void *ptr, size_t size, size_t nmemb, FILE *s
 
 DownloadThread::DownloadThread():
 m_downloadUrl(wxEmptyString), m_downloadFileName(wxEmptyString),
-m_totalFileSize(0), m_totalDownloadSize(0)
+m_totalFileSize(0), m_totalDownloadSize(0), m_isDownloadInProgress(0)
 {
 }
 
@@ -473,6 +473,7 @@ void *DownloadThread::Entry()
 #endif
 
     CURL *curl;
+    CURLcode res;
     FILE *fP;
     curl = curl_easy_init();
     if (!curl)
@@ -517,11 +518,20 @@ void *DownloadThread::Entry()
     /* disable progress meter, set to 0L to enable and disable debug output */
     curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
 
+    /* abort if slower than CURL_DOWNLOAD_MIN_BYTES bytes received  after connection
+     * goes down during CURL_DOWNLOAD_TIMEOUT seconds */
+    curl_easy_setopt(curl, CURLOPT_LOW_SPEED_TIME, CURL_DOWNLOAD_TIMEOUT);
+    curl_easy_setopt(curl, CURLOPT_LOW_SPEED_LIMIT, CURL_DOWNLOAD_MIN_BYTES);
+
     /* write the page body to this file handle */
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fP);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteFunctionToFile);
     curl_easy_setopt(curl, CURLOPT_READFUNCTION, ReadFunctionFromFile);
-    curl_easy_perform(curl);
+    res=curl_easy_perform(curl);
+
+    if(CURLE_OPERATION_TIMEDOUT == res) {
+        SetDownloadInProgress(false);
+    }
 
     fclose(fP);
     curl_easy_cleanup(curl);

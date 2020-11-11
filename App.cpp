@@ -414,9 +414,22 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     int kbFileSize;
     wxString msg;
     bool isDownloadInProgress = false;
+    /* setting this value will ensure download is in progress. */
+    dt->SetDownloadInProgress(true);
 
     do
     {
+        /* This value will get be set from DownloadThread::Entry if internet connection goes off
+         *  then while loop needs to be terminated after CURL_DOWNLOAD_TIMEOUT is elapsed */
+        if(! dt->GetDownloadInProgress())
+        {
+            wxRemoveFile(file.GetFullPath());
+            pd->Show(false);
+            delete pd;
+            wxLogError(wxString::Format(_("Failed to download file, please check internet settings.")));
+            return false;
+        }
+
         if (sw.Time() >= updateTime)
         {
             /* Calculate the download speed */
