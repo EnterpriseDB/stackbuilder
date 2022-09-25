@@ -9,7 +9,7 @@
 
 # Look for the CURL header, first in the user-specified location and then in the system locations
 SET(CURL_INCLUDE_DOC "The directory containing the CURL header file curl/curl.h")
-FIND_PATH(CURL_INCLUDE_DIRS NAMES curl/curl.h PATHS ${CURL_ROOT} ${CURL_ROOT}/include DOC ${CURL_INCLUDE_DOC} NO_DEFAULT_PATH)
+FIND_PATH(CURL_INCLUDE_DIRS NAMES curl/curl.h PATHS ${CURL_ROOT} ${CURL_ROOT}/include $(CURL_ROOT)/include/curl DOC ${CURL_INCLUDE_DOC} NO_DEFAULT_PATH)
 
 SET(CURL_FOUND FALSE)
 
