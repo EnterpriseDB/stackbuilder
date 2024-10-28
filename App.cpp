@@ -460,7 +460,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
             isDownloadInProgress = true;
 
             if (kbFileSize > kbDownloaded)
-                msg = wxString::Format(_("Downloaded %d KB of  %d KB (%d KB/Sec)"), kbDownloaded, kbFileSize, speed);
+                msg = wxString::Format(_("Downloaded %d KB of  %d KB (%ld KB/Sec)"), kbDownloaded, kbFileSize, speed);
             else
             {
                 msg = wxString::Format(_("Downloaded %6.0lf KB (%d KB/Sec)"), kbDownloaded, speed);
