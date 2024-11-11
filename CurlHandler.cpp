@@ -385,6 +385,7 @@ static size_t ReadFunctionFromFile(void *ptr, size_t size, size_t nmemb, FILE *s
 
 
 DownloadThread::DownloadThread():
+wxThread(wxTHREAD_JOINABLE),
 m_downloadUrl(wxEmptyString), m_downloadFileName(wxEmptyString),
 m_totalFileSize(0), m_totalDownloadSize(0), m_isDownloadInProgress(0)
 {
