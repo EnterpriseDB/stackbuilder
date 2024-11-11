@@ -374,7 +374,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     DownloadThread *dt = new DownloadThread();
     if (dt == NULL)
     {
-        wxLogError(wxString::Format(_("Failed to create new DownloadThread")));
+        wxLogError(wxString::Format(_("Failed to create new Download thread")));
         return false;
     }
 
@@ -397,12 +397,12 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
 
     if (dt->Create() != wxTHREAD_NO_ERROR)
     {
-        wxLogError(wxString::Format(_("Failed to create Download Thread ")));
+        wxLogError(wxString::Format(_("Failed to create the Download thread")));
         return false;
     }
     if (dt->Run() != wxTHREAD_NO_ERROR)
     {
-        wxLogError(wxString::Format(_("Couldn't initalise the downloading process")));
+        wxLogError(wxString::Format(_("Failed to run the Download thread")));
         return false;
     }
 
@@ -413,7 +413,7 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
     int kbDownloaded;
     int kbFileSize;
     wxString msg;
-    bool isDownloadInProgress = false;
+
     /* setting this value will ensure download is in progress. */
     dt->SetDownloadInProgress(true);
 
@@ -442,28 +442,15 @@ bool App::Download(const wxString& downloadPath, const Mirror *mirror)
             kbFileSize = (int)dt->GetTotalFileSize() / KBSIZE;
             kbDownloaded = (int)dt->GetTotalDownloadSize() / KBSIZE;
 
-            if (isDownloadInProgress)
-            {
-                if ((kbFileSize == 0) && (kbDownloaded == 0))
-                {
-                    // Sometime kbDownloaded does not add the last few bytes which causes
-                    // an infinite loop event though the file has completely downloaded
-                    isDownloadInProgress=false;
-                    break;
-                }
-            }
-
             // To ignore initial few 0 values which is not updated
             if ((kbFileSize == 0) || (kbDownloaded == 0))
                 continue;
-
-            isDownloadInProgress = true;
 
             if (kbFileSize > kbDownloaded)
                 msg = wxString::Format(_("Downloaded %d KB of  %d KB (%ld KB/Sec)"), kbDownloaded, kbFileSize, speed);
             else
             {
-                msg = wxString::Format(_("Downloaded %6.0lf KB (%ld KB/Sec)"), kbDownloaded, speed);
+                dt->Kill();
                 break;
             }
 
