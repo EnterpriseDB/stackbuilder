@@ -304,7 +304,7 @@ bool IntroductionPage::FindPgServers()
                 }
 
                 // Build the user description
-                temp.Printf(_("%s on port %d"), data->description.c_str(), data->port);
+                temp.Printf(_("%s on port %ld"), data->description.c_str(), data->port);
 
                 // Add the item, if it looks sane
 				if (data->port != 0 && data->dataDirectory != wxEmptyString && data->superuserName != wxEmptyString)
