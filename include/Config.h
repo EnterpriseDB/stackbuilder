@@ -12,8 +12,8 @@
 #define _CONFIG_H
 
 // The version number
-#define VERSION_NUM 4,2,1
-#define VERSION_STR "4.2.1"
+#define VERSION_NUM 4,2,2
+#define VERSION_STR "4.2.2"
 
 // Download locations
 #define DEFAULT_MIRROR_LIST_URL wxT("https://www.postgresql.org/mirrors.xml")
